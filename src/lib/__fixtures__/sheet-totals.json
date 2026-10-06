@@ -1,0 +1,270 @@
+{
+ "easy-chicken-pie": {
+  "perMake": 281.3551,
+  "shop": 345.93
+ },
+ "bougie-up-your-veg-toppings": {
+  "perMake": 100.4148,
+  "shop": 339.93
+ },
+ "spinach-feta-filo-tart": {
+  "perMake": 101.482,
+  "shop": 501.82
+ },
+ "pampoen-tert-lower-sugar": {
+  "perMake": 102.5827,
+  "shop": 299.92
+ },
+ "sticky-glazed-meatloaf": {
+  "perMake": 233.8432,
+  "shop": 481.79
+ },
+ "fancy-fish-paste": {
+  "perMake": 57.216,
+  "shop": 261.94
+ },
+ "easy-yoghurt-dressing": {
+  "perMake": 34.3203,
+  "shop": 163.95
+ },
+ "hoisin-pork-fillet-with-noodles": {
+  "perMake": 299.9873,
+  "shop": 796.88
+ },
+ "crispy-chickpeas": {
+  "perMake": 49.6499,
+  "shop": 202.95
+ },
+ "homemade-hot-choccie": {
+  "perMake": 9.8497,
+  "shop": 141.97
+ },
+ "cottage-pie-with-crispy-potato-parmesan-crust": {
+  "perMake": 258.5281,
+  "shop": 499.76
+ },
+ "quick-easy-chicken-parmigiana": {
+  "perMake": 248.5015,
+  "shop": 387.94
+ },
+ "bovril-seed-crackers": {
+  "perMake": 73.8974,
+  "shop": 372.95
+ },
+ "super-easy-tuna-pasta-bake": {
+  "perMake": 200.9432,
+  "shop": 313.92
+ },
+ "cheat-s-hoisin-pork-bowls": {
+  "perMake": 347.1473,
+  "shop": 593.91
+ },
+ "slow-cooked-beef-shin-osso-buco-style": {
+  "perMake": 562.9658,
+  "shop": 809.73
+ },
+ "salted-caramel-date-squares": {
+  "perMake": 88.7879,
+  "shop": 209.95
+ },
+ "microwave-white-sauce": {
+  "perMake": 13.839,
+  "shop": 168.96
+ },
+ "easy-chicken-casserole-one-pot-chicken-bake": {
+  "perMake": 205.1538,
+  "shop": 426.8
+ },
+ "kids-sausage-roll": {
+  "perMake": 104.6824,
+  "shop": 264.94
+ },
+ "healthier-potato-bake": {
+  "perMake": 91.9964,
+  "shop": 256.84
+ },
+ "leftover-steak-beef-stroganoff": {
+  "perMake": 200.8911,
+  "shop": 459.85
+ },
+ "yoghurt-curry-chicken-thighs": {
+  "perMake": 186.481,
+  "shop": 275.46
+ },
+ "shortcut-butter-chicken-curry": {
+  "perMake": 202.9722,
+  "shop": 246.96
+ },
+ "moroccan-lamb-meatball-bake": {
+  "perMake": 241.963,
+  "shop": 289.95
+ },
+ "easy-slow-cooker-bolognese": {
+  "perMake": 251.5385,
+  "shop": 578.76
+ },
+ "baked-coconut-chicken-curry": {
+  "perMake": 232.5652,
+  "shop": 424.83
+ },
+ "hearty-chicken-pot-pies": {
+  "perMake": 254.1665,
+  "shop": 327.95
+ },
+ "singita-rusks": {
+  "perMake": 690.593,
+  "shop": 883.84
+ },
+ "preserved-lemons": {
+  "perMake": 93.3,
+  "shop": 111.96
+ },
+ "baked-apple-brekkie": {
+  "perMake": 75.1208,
+  "shop": 234.95
+ },
+ "green-pasta-salad-meal-prep-base": {
+  "perMake": 244.9304,
+  "shop": 393.78
+ },
+ "bacon-brussels-sprouts": {
+  "perMake": 72.6334,
+  "shop": 328.96
+ },
+ "butternut-spinach-bake": {
+  "perMake": 103.5708,
+  "shop": 148.89
+ },
+ "hearty-chicken-soup": {
+  "perMake": 111.0733,
+  "shop": 303.58
+ },
+ "banana-bread-baked-oats": {
+  "perMake": 88.0583,
+  "shop": 412.89
+ },
+ "loaded-avo-egg-bowl": {
+  "perMake": 73.2534,
+  "shop": 426.89
+ },
+ "loaded-mex-spuds": {
+  "perMake": 283.7864,
+  "shop": 643.74
+ },
+ "1-pot-porkies": {
+  "perMake": 207.0778,
+  "shop": 671.88
+ },
+ "roasted-beetroot-apple-goat-s-cheese-salad": {
+  "perMake": 248.1293,
+  "shop": 629.89
+ },
+ "tree-tomato-tamarillo-chutney": {
+  "perMake": 30.9081,
+  "shop": 258.94
+ },
+ "butternut-chickpea-curry": {
+  "perMake": 169.0648,
+  "shop": 429.74
+ },
+ "strawberries-cream-fro-yo": {
+  "perMake": 111.98,
+  "shop": 111.98
+ },
+ "one-pot-lemon-chicken-orzo": {
+  "perMake": 233.3913,
+  "shop": 544.69
+ },
+ "smashed-baked-potatoes": {
+  "perMake": 30.8924,
+  "shop": 264.97
+ },
+ "low-sugar-choc-crunchies": {
+  "perMake": 112.2456,
+  "shop": 447.92
+ },
+ "easy-baked-haddock-with-creamy-mozzarella": {
+  "perMake": 209.4023,
+  "shop": 335.95
+ },
+ "really-good-green-sauce": {
+  "perMake": 110.1023,
+  "shop": 271.9
+ },
+ "roasted-veg-jars": {
+  "perMake": 372.1301,
+  "shop": 598.86
+ },
+ "easy-easter-bark": {
+  "perMake": 103.6367,
+  "shop": 218.94
+ },
+ "baked-chocolate-oats": {
+  "perMake": 73.52,
+  "shop": 407.89
+ },
+ "hot-cross-bun-ice-cream": {
+  "perMake": 34.8718,
+  "shop": 226.95
+ },
+ "carrot-cake-ice-cream": {
+  "perMake": 66.9666,
+  "shop": 261.95
+ },
+ "egg-hunt-ice-cream": {
+  "perMake": 49.7147,
+  "shop": 215.95
+ },
+ "whole-roasted-butternut-with-feta-sage": {
+  "perMake": 66.9143,
+  "shop": 375.89
+ },
+ "egg-pancakes-with-fillings": {
+  "perMake": 227.723,
+  "shop": 425.91
+ },
+ "mediterranean-meatball-bake": {
+  "perMake": 237.0639,
+  "shop": 269.94
+ },
+ "spinach-feta-egg-muffins": {
+  "perMake": 118.3836,
+  "shop": 305.92
+ },
+ "chia-pear-overnight-oats": {
+  "perMake": 84.9808,
+  "shop": 229.96
+ },
+ "roast-veg-grains-bowl": {
+  "perMake": 272.0578,
+  "shop": 498.88
+ },
+ "5-veg-mince-freezer-base": {
+  "perMake": 251.1153,
+  "shop": 360.78
+ },
+ "mince-in-gems": {
+  "perMake": 310.1021,
+  "shop": 470.76
+ },
+ "mince-on-mushrooms": {
+  "perMake": 342.6016,
+  "shop": 607.75
+ },
+ "low-carb-cottage-pie-cauli-mash": {
+  "perMake": 314.7017,
+  "shop": 540.75
+ },
+ "melanzane-the-faster-way": {
+  "perMake": 219.9188,
+  "shop": 553.89
+ },
+ "reduced-sugar-peanut-butter-bites": {
+  "perMake": 79.8289,
+  "shop": 274.93
+ },
+ "biscoff-crumble-vanilla-ice-cream": {
+  "perMake": 108.1245,
+  "shop": 179.95
+ }
+}

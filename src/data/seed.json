@@ -1,0 +1,7419 @@
+{
+ "pricesCaptured": "2026-10-06",
+ "notes": [
+  {
+   "label": "Prices captured",
+   "text": "woolworths.co.za online prices, 6 October 2026 (Cape Town region). Prices change often and some items differ in store."
+  },
+  {
+   "label": "Product choice",
+   "text": "Cheapest Woolworths item that matches the ingredient. Where the recipe names a specific pack (e.g. 600 g fresh soup, 400 g punnet) that pack is used."
+  },
+  {
+   "label": "Two costs per recipe",
+   "text": "Cost per make = only the share of each pack the recipe uses. Shop-from-scratch = full packs you would have to buy (packs are rounded up per recipe)."
+  },
+  {
+   "label": "Left out",
+   "text": "Salt, pepper, water and \"seasoning of choice\" are not costed, as agreed."
+  },
+  {
+   "label": "Not at Woolworths",
+   "text": "Psyllium husk (Bovril Seed Crackers) and tamarillos (Tree Tomato Chutney) are not sold, so those recipes are understated. Sambals with the curry are not costed."
+  },
+  {
+   "label": "Substitutes",
+   "text": "Where Woolworths does not stock the named item a close match is used and flagged in yellow on the Ingredient Costing sheet (e.g. HP sauce, Knorr soups, Lancewood yoghurt, Woolworths butter chicken and Moroccan lamb soups, Dr. Oetker spinach & feta)."
+  },
+  {
+   "label": "Vague amounts",
+   "text": "Where the recipe gives no amount (e.g. \"Feta, crumbled\", \"Fresh thyme\") a sensible amount is assumed and written in the Note column. Change any blue Qty cell to update all totals."
+  },
+  {
+   "label": "Conversions",
+   "text": "1 cup = 250 ml; 1 Tbsp = 15 ml; 1 tsp = 5 ml. Flour 125 g/cup; sugar 200 g/cup; oats 90 g/cup; peas 140 g/cup; 1 onion 150 g; 1 potato 200 g; 1 carrot 80 g; 1 baby marrow 70 g; 1 feta round 100 g; 1 garlic clove from a 10-clove pack; fresh herbs costed as a share of a punnet."
+  },
+  {
+   "label": "Priced by weight",
+   "text": "Meat, butternut, broccoli and cauliflower are sold by average weight, so the till price can differ slightly."
+  },
+  {
+   "label": "5 Veg Mince recipes",
+   "text": "Mince in Gems, Mince on Mushrooms and Low-Carb Cottage Pie each include one full batch of 5 Veg Mince (pulled live from that recipe)."
+  },
+  {
+   "label": "Colour key",
+   "text": "Blue = numbers you can change. Yellow row = substitute or assumption worth checking. Red row = not available at Woolworths. Grey = basic left out."
+  }
+ ],
+ "excluded": [
+  {
+   "name": "Gran's Rustic Quiche",
+   "reason": "Recipe only sent by DM (comment \"recipe\") – not in the caption",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Da2B-sGu-0Z/"
+  },
+  {
+   "name": "BBQ Pulled Pork Pitas",
+   "reason": "Recipe only sent by DM (comment \"RECIPE\") – not in the caption",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DZ_qB70I2cw/"
+  },
+  {
+   "name": "Aroma-dough",
+   "reason": "Scented play-dough for kids – not food",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DcP2s_qu3Jp/"
+  },
+  {
+   "name": "Bulgur wheat swap",
+   "reason": "Cooking tip only (cover with boiling water, rest 5 min)",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DbU2L7UOQ3I/"
+  },
+  {
+   "name": "Rotisserie chicken meal prep",
+   "reason": "Meal-prep tip, no recipe",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DcL_eyyu37c/"
+  },
+  {
+   "name": "Healthier pizzas",
+   "reason": "No recipe in the caption",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYEYHaytl2_/"
+  },
+  {
+   "name": "Eggplant dip",
+   "reason": "Mentioned as 'coming soon' – not posted in this range",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXZRk1eiPM0/"
+  },
+  {
+   "name": "Bovril Seed Crackers (repost)",
+   "reason": "Duplicate – already listed",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXTW3kbiMa6/"
+  },
+  {
+   "name": "Aroma-dough (repost)",
+   "reason": "Duplicate, not food",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXJQBPmjdxB/"
+  },
+  {
+   "name": "Hoisin Pork Fillet (repost)",
+   "reason": "Duplicate – already listed",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVxZnYaCNw3/"
+  },
+  {
+   "name": "Toasted Chickpeas (repost)",
+   "reason": "Same as Crispy Chickpeas (this version: lemon zest, 1 garlic clove, 190°C)",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVK89ufiOMe/"
+  },
+  {
+   "name": "Green Pasta Salad (repost)",
+   "reason": "Duplicate – already listed",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DUzx8TYCBSN/"
+  },
+  {
+   "name": "Fancy Fish Paste (repost)",
+   "reason": "Duplicate – already listed",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DUZrvbyiFTV/"
+  },
+  {
+   "name": "Life lately photo post",
+   "reason": "Mentions egg muffins, peanut bites, cornflour play-goo and pretzels – no recipes",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/p/DVcs6QmCDyI/"
+  },
+  {
+   "name": "Scope: Jade's latest 104 Instagram posts (incl. pinned), captured 6 Oct 2026. Rows 1–29 from posts 1–52; rows 30+ from posts 53–104. Ingredients are as written in her captions; some posts give no quantities.",
+   "reason": null,
+   "link": ""
+  }
+ ],
+ "categories": [
+  "Baking & sweet treats",
+  "Breakfast",
+  "Desserts & ice cream",
+  "Drinks",
+  "Lunch & meal prep",
+  "Mains",
+  "Sauces & dressings",
+  "Sides & salads",
+  "Snacks",
+  "Soups"
+ ],
+ "products": [
+  {
+   "key": "choc_chips",
+   "name": "27 % Cocoa Milk Chocolate Drops 200 g",
+   "today": 119.99,
+   "regular": 119.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195030636",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomato_sauce",
+   "name": "All Gold Original Tomato Sauce 500 ml",
+   "today": 37.99,
+   "regular": 37.99,
+   "packSize": 500.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009522308407",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "artichokes",
+   "name": "Artichokes 350 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Closest match; check it is the tinned/brined type",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008758",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "hoisin",
+   "name": "Asian Hoisin Sauce 150 ml",
+   "today": 51.99,
+   "regular": 51.99,
+   "packSize": 150.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6007875331691",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "egg_noodles",
+   "name": "Asian Medium Wholewheat Noodles 340 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 6.0,
+   "unit": "nest",
+   "note": "~6 nests per 340 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009182678711",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rice_vinegar",
+   "name": "Asian Rice Vinegar 200 ml",
+   "today": 82.99,
+   "regular": 82.99,
+   "packSize": 200.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20175566",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pickled_ginger",
+   "name": "Asian Sliced Ginger 120 g",
+   "today": 64.99,
+   "regular": 64.99,
+   "packSize": 120.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226417207",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "avocado_oil",
+   "name": "Avocado Oil 250 ml",
+   "today": 86.99,
+   "regular": 86.99,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189785283",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "buttermilk",
+   "name": "Ayrshire Cultured Low Fat Buttermilk 500 ml",
+   "today": 18.99,
+   "regular": 18.99,
+   "packSize": 500.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195203504",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "plain_yoghurt",
+   "name": "Ayrshire Full Cream Plain Yoghurt 500 g",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009211593435",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "baby_marrows",
+   "name": "Baby Marrows 350 g",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 350.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20090876",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "baby_spinach",
+   "name": "Baby Spinach 200 g",
+   "today": 35.99,
+   "regular": 35.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008543",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cream_crackers",
+   "name": "Bakers Cream Crackers 200 g",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 24.0,
+   "unit": "ea",
+   "note": "~24 crackers per 200 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001056414296",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "baking_powder",
+   "name": "Baking Powder 100 g",
+   "today": 34.99,
+   "regular": 34.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173755322",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pesto",
+   "name": "Basil Pesto 140 g",
+   "today": 69.99,
+   "regular": 69.99,
+   "packSize": 140.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6008000249812",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "beef_shin",
+   "name": "Beef Shin Avg 600 g",
+   "today": 107.99,
+   "regular": 107.99,
+   "packSize": 600.0,
+   "unit": "g",
+   "note": "Priced by weight; 1 shin taken as 300 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-2029830000002",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "beef_stock_powder",
+   "name": "Beef Stock Powder 150 g",
+   "today": 60.99,
+   "regular": 60.99,
+   "packSize": 150.0,
+   "unit": "g",
+   "note": "No stock cubes listed; 1 cube taken as 10 g powder",
+   "link": "https://www.woolworths.co.za/prod/_/A-20081140",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "beetroot",
+   "name": "Beetroot Min 500 g",
+   "today": 26.99,
+   "regular": 26.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009178223987",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bicarb",
+   "name": "Bicarbonate Of Soda 200 g",
+   "today": 33.99,
+   "regular": 33.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173755315",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bovril",
+   "name": "Bovril Meat And Vegetable Extract Spread 125 g",
+   "today": 42.99,
+   "regular": 42.99,
+   "packSize": 125.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-60050151",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mixed_seeds",
+   "name": "Breakfast Seed Mix 250 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009013446",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "brinjals",
+   "name": "Brinjals 1 kg",
+   "today": 51.99,
+   "regular": 51.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009245423722",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "brown_onion_thickener",
+   "name": "Brown Onion Flavoured Thickener 40 g",
+   "today": 23.99,
+   "regular": 23.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "SUBSTITUTE: Knorr brown onion soup not sold",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009223344711",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "onions",
+   "name": "Brown Onions 1 kg",
+   "today": 39.9,
+   "regular": 39.9,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "1 onion taken as 150 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008215",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "brussels",
+   "name": "Brussels Sprouts 300 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008604",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bulgur",
+   "name": "Bulgur Wheat 500 g",
+   "today": 44.99,
+   "regular": 44.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20163082",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pumpkin",
+   "name": "Bulk Pumpkin 800 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 800.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009211207943",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "slaw",
+   "name": "Burger Slaw 250 g",
+   "today": 24.99,
+   "regular": 24.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009233585432",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "butter_chicken_sauce",
+   "name": "Butter Chicken Cook-in-Sauce 400 g",
+   "today": 60.99,
+   "regular": 69.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "SUBSTITUTE: Woolworths Butter Chicken Soup not currently listed",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009101217694",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "butternut",
+   "name": "Butternut Avg 900 g",
+   "today": 24.93,
+   "regular": 24.93,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2906818000004",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "milk_choc",
+   "name": "Cadbury Dairy Milk Chocolate Bar 80 g",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 80.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001065600048",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cadbury",
+   "name": "Cadbury Dairy Milk Chocolate Slab 150 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 150.0,
+   "unit": "g",
+   "note": "Woolworths sells 150 g slabs, not 180 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001065600031",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cake_flour",
+   "name": "Cake Wheat Flour 1 kg",
+   "today": 21.99,
+   "regular": 21.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217294336",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "canola_oil",
+   "name": "Canola Oil 750 ml",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 750.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009029096",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "carrot_muffin",
+   "name": "Carrot & Pecan Nut Muffins 4 pk",
+   "today": 54.99,
+   "regular": 54.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184419251",
+   "section": "Bakery",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "celery",
+   "name": "Celery",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 10.0,
+   "unit": "stick",
+   "note": "~10 sticks per head",
+   "link": "https://www.woolworths.co.za/prod/_/A-20004194",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "goats_cheese",
+   "name": "Chevin Goat's Full Fat Cheese 100 g",
+   "today": 62.99,
+   "regular": 62.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20180539",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chia",
+   "name": "Chia Seeds 250 g",
+   "today": 109.99,
+   "regular": 109.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184245638",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_sauce_powder",
+   "name": "Chicken A La King Cook In Sauce 37 g",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "SUBSTITUTE: no cream of chicken soup powder at Woolworths",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009182627580",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_thighs_drums",
+   "name": "Chicken Drumsticks & Thighs Avg 900 g",
+   "today": 105.79,
+   "regular": 105.79,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2084900000009",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_breast_fillets",
+   "name": "Chicken Mini Breast Fillets Avg 450 g",
+   "today": 69.75,
+   "regular": 69.75,
+   "packSize": 450.0,
+   "unit": "g",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2584810000002",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_stock_tubs",
+   "name": "Chicken Stock Concentrate Tubs 4 x 24 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009245611662",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "dried_chickpeas",
+   "name": "Chickpeas (dried) 500 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20163099",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chickpeas_tin",
+   "name": "Chickpeas in Brine 400 g",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20181673",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chilli_oil",
+   "name": "Chilli Crunch 120 g",
+   "today": 81.99,
+   "regular": 81.99,
+   "packSize": 120.0,
+   "unit": "g",
+   "note": "Closest match to chilli oil",
+   "link": "https://www.woolworths.co.za/prod/_/A-6007875735390",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chilli_powder",
+   "name": "Chilli Powder 45 g",
+   "today": 34.99,
+   "regular": 34.99,
+   "packSize": 45.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009175048637",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chopped_spinach",
+   "name": "Chopped Spinach 200 g",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20149123",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "capers",
+   "name": "Coelsanus Non Pareilles Capers in Wine Vinegar 100 g",
+   "today": 69.99,
+   "regular": 69.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-8002170558253",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "english_mustard",
+   "name": "Colman's Traditional Hot English Mustard 168 g",
+   "today": 54.99,
+   "regular": 54.99,
+   "packSize": 168.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001059943441",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mayonnaise",
+   "name": "Crosse and Blackwell Tangy Mayonnaise 750 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 750.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009522301262",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "desiccated_coconut",
+   "name": "Desiccated Coconut 200 g",
+   "today": 42.99,
+   "regular": 42.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184539386",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bacon",
+   "name": "Diced Wood Smoked Bacon 250 g",
+   "today": 48.99,
+   "regular": 48.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "1 rasher taken as 25 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009178802113",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "dijon",
+   "name": "Dijon Mustard 235 g",
+   "today": 51.99,
+   "regular": 61.99,
+   "packSize": 235.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009223733737",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "strawberry_yoghurt",
+   "name": "Double Cream Ayrshire Strawberry Yoghurt 1 kg",
+   "today": 65.99,
+   "regular": 65.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "SUBSTITUTE: Lancewood Strawberries & Cream not sold at Woolworths",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184605463",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "olive_oil_spray",
+   "name": "Extra Virgin Olive Oil Spray 250 ml",
+   "today": 199.99,
+   "regular": 199.99,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009182952736",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "easter_eggs",
+   "name": "FANTASTICAL Multi Coloured Eggs 50 g",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 50.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009204699267",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "fresh_chicken_soup",
+   "name": "Farmhouse Chicken Soup 600 g",
+   "today": 74.99,
+   "regular": 74.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189149276",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cinnamon",
+   "name": "Finely Ground Cinnamon Refill 30 g",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 30.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009214607368",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "meatballs",
+   "name": "Free Range Beef Frikkadels 12 pk",
+   "today": 99.99,
+   "regular": 99.99,
+   "packSize": 12.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20150952",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "beef_strips",
+   "name": "Free Range Beef Stroganoff Avg 500 g",
+   "today": 120.0,
+   "regular": 120.0,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2033640000008",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_portions",
+   "name": "Free Range Chicken Portions Avg 1.2 kg",
+   "today": 113.99,
+   "regular": 113.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2582760000004",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_thighs",
+   "name": "Free Range Chicken Thighs Avg 500 g",
+   "today": 82.5,
+   "regular": 82.5,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2585300000007",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "lamb_frikkadels",
+   "name": "Free Range Lamb Frikkadels 12 pk",
+   "today": 139.99,
+   "regular": 139.99,
+   "packSize": 12.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000069938",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "eggs",
+   "name": "Free Range Mixed Sizes Chilled Eggs 6 pk",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 6.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226497148",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chicken_thigh_fillets",
+   "name": "Free Range Skinless Thigh Mini Chicken Fillets Avg 800 g",
+   "today": 135.99,
+   "regular": 135.99,
+   "packSize": 800.0,
+   "unit": "g",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2585220000002",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "basil",
+   "name": "Fresh Basil 30 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20099251",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bay_leaves",
+   "name": "Fresh Bay Leaves 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217001262",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "roti",
+   "name": "Fresh Butter Rotis 6 x 75 g",
+   "today": 76.99,
+   "regular": 76.99,
+   "packSize": 6.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184330006",
+   "section": "Bakery",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chives",
+   "name": "Fresh Chives 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20021863",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "coriander",
+   "name": "Fresh Coriander 30 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20099268",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "ginger",
+   "name": "Fresh Crushed Ginger 50 g",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 50.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009101284269",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "beef_stock_liquid",
+   "name": "Fresh Free Range Liquid Beef Stock 500 ml",
+   "today": 54.99,
+   "regular": 54.99,
+   "packSize": 500.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195814557",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "veg_stock",
+   "name": "Fresh Liquid Vegetable Stock 500 ml",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 500.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195814564",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mint",
+   "name": "Fresh Mint 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20115982",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "parsley",
+   "name": "Fresh Parsley 30 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20004255",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "garlic",
+   "name": "Fresh Peeled Garlic 50 g",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 10.0,
+   "unit": "clove",
+   "note": "~10 cloves per 50 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008277",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rosemary",
+   "name": "Fresh Rosemary 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20082024",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sage",
+   "name": "Fresh Sage 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000551501",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "thyme",
+   "name": "Fresh Thyme 20 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "punnet",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20135225",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rocket",
+   "name": "Fresh Wild Rocket 30 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6008000281959",
+   "section": "Fresh herbs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "frozen_veg",
+   "name": "Freshly Frozen Peas & Sweetcorn Kernels 750 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 750.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009008237",
+   "section": "Frozen",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "haddock",
+   "name": "Frozen Lightly Smoked Haddock Portions 500 g",
+   "today": 179.99,
+   "regular": 179.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009245366357",
+   "section": "Frozen",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "peas",
+   "name": "Frozen Petits Pois Peas 500 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20038717",
+   "section": "Frozen",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "filo",
+   "name": "Frozen Phyllo Pastry 500 g",
+   "today": 67.99,
+   "regular": 67.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009178807309",
+   "section": "Frozen",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "puff_pastry",
+   "name": "Frozen Puff Pastry Roll 400 g",
+   "today": 42.99,
+   "regular": 42.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "1 roll = 1 sheet",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009000072486",
+   "section": "Frozen",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "hot_cross_buns",
+   "name": "Fruit Free Hot Cross Buns 6 pk",
+   "today": 42.99,
+   "regular": 42.99,
+   "packSize": 6.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189300264",
+   "section": "Bakery",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "grains_90s",
+   "name": "Fully Cooked Bulgur, Quinoa and Lentil 250 g",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226185014",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "coconut_rice",
+   "name": "Fully Cooked Coconut Jasmine Rice 250 g",
+   "today": 44.99,
+   "regular": 44.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009214555348",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "honey",
+   "name": "Fynbos Honey 250 g",
+   "today": 71.99,
+   "regular": 71.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226164576",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "garam_masala",
+   "name": "Garam Masala Blend 60 g",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 60.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009182309936",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "gem_squash",
+   "name": "Gem Squash Halves 6 pk",
+   "today": 34.99,
+   "regular": 34.99,
+   "packSize": 6.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20064112",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "german_mustard",
+   "name": "German Mustard 235 g",
+   "today": 51.99,
+   "regular": 61.99,
+   "packSize": 235.0,
+   "unit": "g",
+   "note": "SUBSTITUTE: no Wimpy/American mustard listed",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009223734116",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "apples",
+   "name": "Golden Delicious Apples 4 pk",
+   "today": 27.99,
+   "regular": 27.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20016371",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "green_apples",
+   "name": "Granny Smith Apples 4 pk",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20016432",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cheddar_grated",
+   "name": "Grated Mature Cheddar Cheese 250 g",
+   "today": 74.99,
+   "regular": 74.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20100209",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mozzarella",
+   "name": "Grated Mozzarella Cheese 250 g",
+   "today": 74.99,
+   "regular": 74.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20090104",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "allspice",
+   "name": "Ground Allspice 55 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 55.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009175048316",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cumin",
+   "name": "Ground Cumin Refill 50 g",
+   "today": 34.99,
+   "regular": 34.99,
+   "packSize": 50.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173963215",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "lean_mince",
+   "name": "Halaal Lean Beef Mince 500 g",
+   "today": 64.99,
+   "regular": 64.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009032447",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bread",
+   "name": "High Fibre Wholewheat Brown Bread 700 g",
+   "today": 27.99,
+   "regular": 27.99,
+   "packSize": 20.0,
+   "unit": "slice",
+   "note": "~20 slices per loaf",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009204921979",
+   "section": "Bakery",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chilli",
+   "name": "Hot Green Finger Chillies 50 g",
+   "today": 15.99,
+   "regular": 15.99,
+   "packSize": 8.0,
+   "unit": "ea",
+   "note": "~8 chillies per 50 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009000999349",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chardonnay",
+   "name": "House Chardonnay 750 ml",
+   "today": 69.99,
+   "regular": 69.99,
+   "packSize": 750.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20205256",
+   "section": "Wine",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "white_wine",
+   "name": "House Sauvignon Blanc 750 ml",
+   "today": 69.99,
+   "regular": 69.99,
+   "packSize": 750.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000300604",
+   "section": "Wine",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "italian_herbs",
+   "name": "Italian Herbs Refill 10 g",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 10.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173963208",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomato_puree",
+   "name": "Italian Tomato Puree 660 ml",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 660.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217900916",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "oats",
+   "name": "Jungle Oats 1 kg",
+   "today": 39.99,
+   "regular": 47.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001275000003",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "all_bran",
+   "name": "Kellogg's All Bran Flakes 500 g",
+   "today": 67.99,
+   "regular": 67.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001306105509",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "corn_flakes",
+   "name": "Kellogg's Corn Flakes 500 g",
+   "today": 58.99,
+   "regular": 58.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001306015501",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "soy_sauce",
+   "name": "Kikkoman Less Salt Soy Sauce 150 ml",
+   "today": 114.99,
+   "regular": 114.99,
+   "packSize": 150.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-8715035130104",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "corn_tin",
+   "name": "Koo Whole Kernel Corn in Brine 410 g",
+   "today": 23.99,
+   "regular": 23.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001024386655",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "potatoes",
+   "name": "Large Potatoes 2 kg",
+   "today": 48.99,
+   "regular": 48.99,
+   "packSize": 2000.0,
+   "unit": "g",
+   "note": "1 potato taken as 200 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20110994",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "lemons",
+   "name": "Lemons 3 pk",
+   "today": 27.99,
+   "regular": 27.99,
+   "packSize": 3.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20017880",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "lentils_tin",
+   "name": "Lentils in Tomato Brine 400 g",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20198855",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "brown_sugar",
+   "name": "Light Brown Sugar 1 kg",
+   "today": 35.99,
+   "regular": 35.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20104061",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tuna",
+   "name": "Light Meat Tuna Shredded in Brine 170 g",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195372286",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "milk",
+   "name": "Long Life Full Cream Milk 1 L",
+   "today": 22.99,
+   "regular": 22.99,
+   "packSize": 1000.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009171079987",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "low_fat_milk",
+   "name": "Long Life Low Fat Milk 1 L",
+   "today": 22.99,
+   "regular": 22.99,
+   "packSize": 1000.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009171079970",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "biscoff",
+   "name": "Lotus Biscoff Biscuits 6 x 2 pk",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 12.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-5410126486438",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "steak_sauce",
+   "name": "Luxury Steak Sauce 200 ml",
+   "today": 48.99,
+   "regular": 48.99,
+   "packSize": 200.0,
+   "unit": "ml",
+   "note": "SUBSTITUTE: HP Sauce not sold at Woolworths",
+   "link": "https://www.woolworths.co.za/prod/_/A-6007875219357",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "corn_starch",
+   "name": "Maizena Cornflour 500 g",
+   "today": 41.99,
+   "regular": 41.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001038101206",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "med_cook_in",
+   "name": "Mediterranean Tomato Cook-in-Sauce 400 g",
+   "today": 58.99,
+   "regular": 58.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20127442",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "carrots",
+   "name": "Medium Carrots 500 g",
+   "today": 14.99,
+   "regular": 14.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20008307",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rotisserie_chicken",
+   "name": "Medium Rotisserie Chicken",
+   "today": 119.99,
+   "regular": 119.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-2500470000008",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "salsa",
+   "name": "Mild Salsa 400 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 400.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009000771785",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "salad_leaves",
+   "name": "Mixed Leaf Salad 180 g",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20158392",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mixed_spice",
+   "name": "Mixed Spice 45 g",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 45.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009182325127",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "moroccan_soup",
+   "name": "Moroccan Style Chickpea and Chicken Soup 400 g",
+   "today": 38.99,
+   "regular": 38.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "SUBSTITUTE: Moroccan Style Lamb Soup not currently listed",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009171580025",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "chutney",
+   "name": "Mrs H.S.Ball's Original Recipe Chutney 470 g",
+   "today": 45.99,
+   "regular": 45.99,
+   "packSize": 470.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001092500052",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mushroom_soup",
+   "name": "Mushroom Soup 600 g",
+   "today": 84.99,
+   "regular": 84.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009178470015",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "evaporated_milk",
+   "name": "Nestle Ideal Unsweetened Evaporated Milk 380 g",
+   "today": 41.99,
+   "regular": 41.99,
+   "packSize": 380.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001068312504",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "smarties",
+   "name": "Nestle Smarties 70 g",
+   "today": 22.99,
+   "regular": 22.99,
+   "packSize": 70.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001068691500",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "peanut_butter",
+   "name": "No Added Salt and Sugar Peanut Butter 400 g",
+   "today": 52.99,
+   "regular": 52.99,
+   "packSize": 400.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009012685",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "smoked_salmon",
+   "name": "Oak Smoked Salmon Ribbons 50 g",
+   "today": 114.99,
+   "regular": 114.99,
+   "packSize": 50.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009204538160",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "oregano",
+   "name": "Oregano Refill 15 g",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 15.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173963109",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "bananas",
+   "name": "Organic Bananas Min 800 g",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 6.0,
+   "unit": "ea",
+   "note": "~6 bananas per 800 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009037152",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "berries",
+   "name": "Organic Blueberries 125 g",
+   "today": 45.99,
+   "regular": 45.99,
+   "packSize": 125.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009037398",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cottage_cheese",
+   "name": "Organic Full Cream Plain Smooth Cottage Cheese 250 g",
+   "today": 53.99,
+   "regular": 53.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20136789",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sesame_oil",
+   "name": "Organic Sesame Oil 250 ml",
+   "today": 130.0,
+   "regular": 130.0,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189786075",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "orzo",
+   "name": "Orzo Pasta 500 g",
+   "today": 22.99,
+   "regular": 22.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6007875598735",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "passata",
+   "name": "Passata Rustica Crushed Tomato with Basil 340 ml",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217888818",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pears_tin",
+   "name": "Pear Halves in Fruit Juice 420 g",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009204178830",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pecans",
+   "name": "Pecan Pieces 100 g",
+   "today": 62.99,
+   "regular": 62.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189953712",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tinned_tomatoes",
+   "name": "Peeled and Diced Tomatoes 400 g",
+   "today": 26.99,
+   "regular": 26.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009101984695",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "iceberg",
+   "name": "Pick & Mix Solo Leaf Iceberg Lettuce 135 g",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20040215",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pickled_onions",
+   "name": "Pickled Red Onion Petals 90 g",
+   "today": 23.99,
+   "regular": 23.99,
+   "packSize": 90.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195242305",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "green_olives",
+   "name": "Pitted Green Manzanilla Olives 180 g",
+   "today": 31.99,
+   "regular": 31.99,
+   "packSize": 180.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173574466",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "dates",
+   "name": "Pitted Medjool Dates 150 g",
+   "today": 32.99,
+   "regular": 32.99,
+   "packSize": 8.0,
+   "unit": "ea",
+   "note": "~8 dates per 150 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226123689",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "balsamic_glaze",
+   "name": "Plain Crema - Balsamic Vinegar Reduction 150 ml",
+   "today": 72.99,
+   "regular": 72.99,
+   "packSize": 150.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217632107",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cream_cheese",
+   "name": "Plain Medium Fat Cream Cheese 250 g",
+   "today": 62.99,
+   "regular": 62.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20130091",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "feta",
+   "name": "Plain South African Feta Cheese 100 g",
+   "today": 24.99,
+   "regular": 24.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "1 round taken as 100 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20187170",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pomegranate",
+   "name": "Pomegranate Rubies 175 g",
+   "today": 54.99,
+   "regular": 54.99,
+   "packSize": 175.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173374066",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pork_fillet",
+   "name": "Pork Fillet Avg 400 g",
+   "today": 65.0,
+   "regular": 65.0,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2004890000001",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pork_sausages",
+   "name": "Pork Sizzlers 6 pk",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217484898",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "portabello",
+   "name": "Portabello Mushrooms 4 pk",
+   "today": 61.99,
+   "regular": 61.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20176938",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "olive_oil",
+   "name": "Prince Albert Extra Virgin Olive Oil 250 ml",
+   "today": 109.99,
+   "regular": 109.99,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009900086583",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pumpkin_seeds",
+   "name": "Pumpkin Seeds 250 g",
+   "today": 104.99,
+   "regular": 104.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009013415",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "flaked_almonds",
+   "name": "Raw Flaked Almonds 100 g",
+   "today": 64.99,
+   "regular": 64.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009027924",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "mixed_nuts",
+   "name": "Raw Luxury Tree Nuts 100 g",
+   "today": 69.99,
+   "regular": 69.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20159320",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pistachios",
+   "name": "Raw Shelled Pistachios 100 g",
+   "today": 148.99,
+   "regular": 148.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009027962",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "kidney_beans",
+   "name": "Red Kidney Beans in Brine 400 g",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20138141",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "red_onions",
+   "name": "Red Onions 1 kg",
+   "today": 73.99,
+   "regular": 73.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "1 red onion taken as 150 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20127824",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "coconut_milk_lite",
+   "name": "Reduced Fat Coconut Milk 400 ml",
+   "today": 39.99,
+   "regular": 39.99,
+   "packSize": 400.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000946963",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "avocado",
+   "name": "Ripen at Home Loose Avocado",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20149994",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rosa_200",
+   "name": "Rosa Tomatoes 200 g",
+   "today": 28.99,
+   "regular": 28.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20115944",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rosa_400",
+   "name": "Rosa Tomatoes 400 g",
+   "today": 44.99,
+   "regular": 44.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20104894",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "rosa_600",
+   "name": "Rosa Tomatoes 600 g",
+   "today": 58.99,
+   "regular": 58.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20177874",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "butter",
+   "name": "Salted Butter 250 g",
+   "today": 68.99,
+   "regular": 68.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20011833",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "pretzels",
+   "name": "Salted Pretzel Thins 80 g",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 80.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009204748446",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sardines",
+   "name": "Sardines in Vegetable Oil 120 g",
+   "today": 33.99,
+   "regular": 33.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009217888757",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "popcorn",
+   "name": "Sea Salted Air Popped Corn 90 g",
+   "today": 27.99,
+   "regular": 27.99,
+   "packSize": 90.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189862717",
+   "section": "Snacks & treats",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "self_raising_flour",
+   "name": "Self-Raising Wheat Flour 1 kg",
+   "today": 24.99,
+   "regular": 24.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20082512",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "edamame",
+   "name": "Shelled Edamame Legumes 110 g",
+   "today": 54.99,
+   "regular": 54.99,
+   "packSize": 110.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009214779584",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "red_pepper",
+   "name": "Single Red Pepper",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009233581069",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "yellow_pepper",
+   "name": "Single Yellow Pepper",
+   "today": 19.99,
+   "regular": 19.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20191719",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cooked_chicken_breast",
+   "name": "Sliced Butter Basted Chicken Breast 300 g",
+   "today": 72.99,
+   "regular": 72.99,
+   "packSize": 300.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226815270",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sliced_mushrooms",
+   "name": "Sliced Button Mushrooms 250 g",
+   "today": 38.99,
+   "regular": 38.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20046637",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomatoes",
+   "name": "Slicing Tomatoes 4 pk",
+   "today": 26.99,
+   "regular": 26.99,
+   "packSize": 4.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20101480",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "salami",
+   "name": "Smoked Sliced Salami 100 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 100.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20171667",
+   "section": "Meat, chicken & fish",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "dried_fruit",
+   "name": "Soft Eating Orchard Fruit Mix 400 g",
+   "today": 104.99,
+   "regular": 104.99,
+   "packSize": 400.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20021658",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "parmesan",
+   "name": "South African Grated Medium Fat Hard Cheese 60 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 60.0,
+   "unit": "g",
+   "note": "Parmesan-style",
+   "link": "https://www.woolworths.co.za/prod/_/A-6007875483338",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "spring_onions",
+   "name": "Spring Onions 100 g",
+   "today": 24.99,
+   "regular": 24.99,
+   "packSize": 1.0,
+   "unit": "bunch",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20004231",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sunflower_seeds",
+   "name": "Sunflower Seeds 250 g",
+   "today": 49.99,
+   "regular": 49.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009013422",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "corn_cobs",
+   "name": "Sweetcorn 2 pk",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 2.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000708585",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "curry_paste",
+   "name": "Tikka Paste 200 g",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 200.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009233390609",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "breadcrumbs",
+   "name": "Toasted Ciabatta Breadcrumbs 180 g",
+   "today": 45.0,
+   "regular": 45.0,
+   "packSize": 180.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009245097565",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomato_onion_mix",
+   "name": "Tomato and Onion Mix 410 g",
+   "today": 26.99,
+   "regular": 26.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20034702",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomato_paste",
+   "name": "Tomato Paste 70 g",
+   "today": 17.99,
+   "regular": 17.99,
+   "packSize": 70.0,
+   "unit": "g",
+   "note": "1 sachet taken as 50 g",
+   "link": "https://www.woolworths.co.za/prod/_/A-20103354",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "tomato_soup",
+   "name": "Tomato Soup 400 g",
+   "today": 37.99,
+   "regular": 37.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-20002718",
+   "section": "Ready meals, soups & stocks",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "truffle_oil",
+   "name": "Truffle Flavoured Olive Oil 100 ml",
+   "today": 109.99,
+   "regular": 109.99,
+   "packSize": 100.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6005000896008",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "turmeric",
+   "name": "Turmeric Refill 55 g",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 55.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173963192",
+   "section": "Herbs, spices & stock",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sprinkles",
+   "name": "Unicorn Medley Sprinkles 40 g",
+   "today": 47.99,
+   "regular": 47.99,
+   "packSize": 40.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009233372148",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cocoa",
+   "name": "Unsweetened Cocoa Powder 150 g",
+   "today": 84.99,
+   "regular": 84.99,
+   "packSize": 150.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009195030711",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "vanilla_essence",
+   "name": "Vanilla Essence 50 ml",
+   "today": 29.99,
+   "regular": 29.99,
+   "packSize": 50.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009173755391",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "wasabi",
+   "name": "Wasabi-O Wasabi Paste 43 g",
+   "today": 86.99,
+   "regular": 86.99,
+   "packSize": 43.0,
+   "unit": "g",
+   "note": "Paste - no wasabi sauce listed",
+   "link": "https://www.woolworths.co.za/prod/_/A-8854958001273",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "fresh_cream",
+   "name": "Whipping Cream 500 ml",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 500.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189991974",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "white_cheddar",
+   "name": "White Mature Cheddar Cheese 240 g",
+   "today": 74.99,
+   "regular": 74.99,
+   "packSize": 240.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009101877447",
+   "section": "Dairy & eggs",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "sesame_seeds",
+   "name": "White Sesame Seeds 250 g",
+   "today": 64.99,
+   "regular": 64.99,
+   "packSize": 250.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009184246444",
+   "section": "Nuts, seeds & dried fruit",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "white_vinegar",
+   "name": "White Spirit Vinegar 750 ml",
+   "today": 25.99,
+   "regular": 25.99,
+   "packSize": 750.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009101961788",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "white_sugar",
+   "name": "White Sugar 1 kg",
+   "today": 33.99,
+   "regular": 33.99,
+   "packSize": 1000.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009023957",
+   "section": "Baking",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "broccoli",
+   "name": "Whole Broccoli Avg 400 g",
+   "today": 28.88,
+   "regular": 28.88,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2906825000004",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cauliflower",
+   "name": "Whole Cauliflower Avg 500 g",
+   "today": 36.0,
+   "regular": 36.0,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "Priced by weight",
+   "link": "https://www.woolworths.co.za/prod/_/A-2906824000005",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "wholegrain_mustard",
+   "name": "Whole Grain Mustard 210 g",
+   "today": 51.99,
+   "regular": 61.99,
+   "packSize": 210.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009223734093",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "spinach",
+   "name": "Whole Spinach 350 g",
+   "today": 22.99,
+   "regular": 22.99,
+   "packSize": 350.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009226283963",
+   "section": "Fruit & veg",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "cherry_tomatoes_tin",
+   "name": "Whole Unpeeled Cherry Tomatoes 400 g",
+   "today": 37.99,
+   "regular": 37.99,
+   "packSize": 1.0,
+   "unit": "ea",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6001009017260",
+   "section": "Tins & jars",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "ww_fusilli",
+   "name": "Whole Wheat Fusilli 500 g",
+   "today": 47.99,
+   "regular": 47.99,
+   "packSize": 500.0,
+   "unit": "g",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009189404955",
+   "section": "Pasta, grains & cereal",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "balsamic_vinegar",
+   "name": "Willow Creek Cabernet Sauvignon Balsamic Vinegar 250 ml",
+   "today": 59.99,
+   "regular": 59.99,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009681270386",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  },
+  {
+   "key": "lemon_olive_oil",
+   "name": "Willow Creek Lemon Flavoured Olive Oil 250 ml",
+   "today": 99.99,
+   "regular": 114.99,
+   "packSize": 250.0,
+   "unit": "ml",
+   "note": "",
+   "link": "https://www.woolworths.co.za/prod/_/A-6009681270454",
+   "section": "Sauces, oils & condiments",
+   "updated": "2026-10-06"
+  }
+ ],
+ "recipes": [
+  {
+   "id": "easy-chicken-pie",
+   "name": "Easy Chicken Pie",
+   "category": "Mains",
+   "notes": "Bake 180°C ~40 min. Pinned post.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/C4Pw3ETK0PZ/",
+   "lines": [
+    {
+     "id": "easy-chicken-pie-1",
+     "text": "1 packet fresh chicken soup",
+     "kind": "product",
+     "productKey": "fresh_chicken_soup",
+     "qty": 1.0
+    },
+    {
+     "id": "easy-chicken-pie-2",
+     "text": "1 cup lightly cooked vegetables (diced baby marrows & carrots)",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 70.0,
+     "note": "1 cup veg split as ~70 g baby marrow + ~60 g carrot"
+    },
+    {
+     "id": "easy-chicken-pie-3",
+     "text": "1 cup lightly cooked vegetables (diced baby marrows & carrots) (part 2)",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 60.0
+    },
+    {
+     "id": "easy-chicken-pie-4",
+     "text": "1 rotisserie chicken (breast & thigh), sliced",
+     "kind": "product",
+     "productKey": "rotisserie_chicken",
+     "qty": 1.0
+    },
+    {
+     "id": "easy-chicken-pie-5",
+     "text": "Puff pastry",
+     "kind": "product",
+     "productKey": "puff_pastry",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 roll"
+    },
+    {
+     "id": "easy-chicken-pie-6",
+     "text": "1 egg, for brushing",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 1.0
+    },
+    {
+     "id": "easy-chicken-pie-7",
+     "text": "Green salad, to serve",
+     "kind": "product",
+     "productKey": "salad_leaves",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 bag"
+    }
+   ]
+  },
+  {
+   "id": "bougie-up-your-veg-toppings",
+   "name": "Bougie-Up Your Veg (toppings)",
+   "category": "Sides & salads",
+   "notes": "A topping idea rather than a full recipe.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DeE9erkuKNG/",
+   "lines": [
+    {
+     "id": "bougie-up-your-veg-toppings-1",
+     "text": "Cooked vegetables of choice",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 350.0,
+     "note": "Amount not given - assumed 1 punnet baby marrows as the veg"
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-2",
+     "text": "Feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 50.0,
+     "note": "Amount not given - assumed 50 g"
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-3",
+     "text": "Pomegranate seeds",
+     "kind": "product",
+     "productKey": "pomegranate",
+     "qty": 50.0,
+     "note": "Amount not given - assumed 50 g"
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-4",
+     "text": "Lemon zest",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-5",
+     "text": "Balsamic glaze",
+     "kind": "product",
+     "productKey": "balsamic_glaze",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-6",
+     "text": "Rocket leaves",
+     "kind": "product",
+     "productKey": "rocket",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 bag"
+    },
+    {
+     "id": "bougie-up-your-veg-toppings-7",
+     "text": "Good olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    }
+   ]
+  },
+  {
+   "id": "spinach-feta-filo-tart",
+   "name": "Spinach & Feta Filo Tart",
+   "category": "Mains",
+   "notes": "Bake 180°C ~30 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Dd8O2VGO5wJ/",
+   "lines": [
+    {
+     "id": "spinach-feta-filo-tart-1",
+     "text": "2–3 sheets filo pastry (+1 extra for topping)",
+     "kind": "product",
+     "productKey": "filo",
+     "qty": 100.0,
+     "note": "4 sheets taken as ~100 g"
+    },
+    {
+     "id": "spinach-feta-filo-tart-2",
+     "text": "Olive oil spray",
+     "kind": "product",
+     "productKey": "olive_oil_spray",
+     "qty": 3.0,
+     "note": "Amount not given - assumed a few sprays"
+    },
+    {
+     "id": "spinach-feta-filo-tart-3",
+     "text": "500 g spinach",
+     "kind": "product",
+     "productKey": "spinach",
+     "qty": 500.0
+    },
+    {
+     "id": "spinach-feta-filo-tart-4",
+     "text": "2 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "spinach-feta-filo-tart-5",
+     "text": "1 round feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "spinach-feta-filo-tart-6",
+     "text": "1 onion, diced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "spinach-feta-filo-tart-7",
+     "text": "Zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "spinach-feta-filo-tart-8",
+     "text": "Sesame seeds",
+     "kind": "product",
+     "productKey": "sesame_seeds",
+     "qty": 9.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "spinach-feta-filo-tart-9",
+     "text": "Salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "pampoen-tert-lower-sugar",
+   "name": "Pampoen Tert (lower-sugar)",
+   "category": "Baking & sweet treats",
+   "notes": "Bake 180°C 30–35 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Ddy_YDmuIFf/",
+   "lines": [
+    {
+     "id": "pampoen-tert-lower-sugar-1",
+     "text": "800 g pumpkin, cooked & mashed",
+     "kind": "product",
+     "productKey": "pumpkin",
+     "qty": 800.0
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-2",
+     "text": "2 cups flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 250.0,
+     "note": "1 cup flour = 125 g"
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-3",
+     "text": "3 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 3.0
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-4",
+     "text": "¼ cup sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 50.0
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-5",
+     "text": "3 tsp baking powder",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 12.0,
+     "note": "1 tsp = 4 g"
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-6",
+     "text": "1 tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-7",
+     "text": "1 Tbsp vanilla essence",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 15.0
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-8",
+     "text": "50 g butter, melted",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 50.0
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-9",
+     "text": "Cinnamon & sugar, to sprinkle",
+     "kind": "product",
+     "productKey": "cinnamon",
+     "qty": 3.0,
+     "note": "Amount not given - assumed 1 tsp cinnamon + 1 Tbsp sugar"
+    },
+    {
+     "id": "pampoen-tert-lower-sugar-10",
+     "text": "Cinnamon & sugar, to sprinkle (part 2)",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 12.0
+    }
+   ]
+  },
+  {
+   "id": "sticky-glazed-meatloaf",
+   "name": "Sticky Glazed Meatloaf",
+   "category": "Mains",
+   "notes": "180°C 40 min, glaze, then 15 min more. Served with mash & petit pois.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdndJTwOoVo/",
+   "lines": [
+    {
+     "id": "sticky-glazed-meatloaf-1",
+     "text": "1 kg lean beef mince",
+     "kind": "product",
+     "productKey": "lean_mince",
+     "qty": 1000.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-2",
+     "text": "1 medium onion, finely chopped",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-3",
+     "text": "2 green apples, grated",
+     "kind": "product",
+     "productKey": "green_apples",
+     "qty": 2.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-4",
+     "text": "2 large eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-5",
+     "text": "3 garlic cloves, minced",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 3.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-6",
+     "text": "2 Tbsp tomato sauce",
+     "kind": "product",
+     "productKey": "tomato_sauce",
+     "qty": 30.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-7",
+     "text": "3 Tbsp fresh parsley (or 1 Tbsp dried Italian herbs)",
+     "kind": "product",
+     "productKey": "parsley",
+     "qty": 0.5,
+     "note": "~half a punnet"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-8",
+     "text": "¾ cup breadcrumbs",
+     "kind": "product",
+     "productKey": "breadcrumbs",
+     "qty": 80.0,
+     "note": "3/4 cup = ~80 g"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-9",
+     "text": "⅔ cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 167.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-10",
+     "text": "1 tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-11",
+     "text": "1 tsp Italian seasoning",
+     "kind": "product",
+     "productKey": "italian_herbs",
+     "qty": 1.0,
+     "note": "1 tsp dried herbs = ~1 g"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-12",
+     "text": "½ tsp ground black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-13",
+     "text": "Glaze: ⅓ cup tomato sauce",
+     "kind": "product",
+     "productKey": "tomato_sauce",
+     "qty": 83.0
+    },
+    {
+     "id": "sticky-glazed-meatloaf-14",
+     "text": "Glaze: ⅓ cup HP sauce",
+     "kind": "product",
+     "productKey": "steak_sauce",
+     "qty": 83.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: HP Sauce not sold at Woolworths"
+    },
+    {
+     "id": "sticky-glazed-meatloaf-15",
+     "text": "Glaze: 2 Tbsp vinegar",
+     "kind": "product",
+     "productKey": "white_vinegar",
+     "qty": 30.0
+    }
+   ]
+  },
+  {
+   "id": "fancy-fish-paste",
+   "name": "Fancy Fish Paste",
+   "category": "Snacks",
+   "notes": "Blend and spread on toast.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdVYOW3OQ-B/",
+   "lines": [
+    {
+     "id": "fancy-fish-paste-1",
+     "text": "1 tin sardines, drained",
+     "kind": "product",
+     "productKey": "sardines",
+     "qty": 1.0
+    },
+    {
+     "id": "fancy-fish-paste-2",
+     "text": "½ red onion, chopped",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 75.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "fancy-fish-paste-3",
+     "text": "Lemon juice",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a lemon"
+    },
+    {
+     "id": "fancy-fish-paste-4",
+     "text": "Fresh coriander",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a few sprigs"
+    },
+    {
+     "id": "fancy-fish-paste-5",
+     "text": "Toast, to serve",
+     "kind": "product",
+     "productKey": "bread",
+     "qty": 4.0,
+     "note": "Amount not given - assumed 4 slices"
+    },
+    {
+     "id": "fancy-fish-paste-6",
+     "text": "Black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    },
+    {
+     "id": "fancy-fish-paste-7",
+     "text": "Chilli oil (optional)",
+     "kind": "product",
+     "productKey": "chilli_oil",
+     "qty": 5.0,
+     "note": "Amount not given - assumed 1 tsp (optional)"
+    }
+   ]
+  },
+  {
+   "id": "easy-yoghurt-dressing",
+   "name": "Easy Yoghurt Dressing",
+   "category": "Sauces & dressings",
+   "notes": "Keeps 3–4 days in the fridge.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdRkcBTuh1n/",
+   "lines": [
+    {
+     "id": "easy-yoghurt-dressing-1",
+     "text": "½ cup yoghurt",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 125.0
+    },
+    {
+     "id": "easy-yoghurt-dressing-2",
+     "text": "Juice + zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "easy-yoghurt-dressing-3",
+     "text": "1 Tbsp mayonnaise",
+     "kind": "product",
+     "productKey": "mayonnaise",
+     "qty": 15.0
+    },
+    {
+     "id": "easy-yoghurt-dressing-4",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "easy-yoghurt-dressing-5",
+     "text": "Fresh chives, chopped",
+     "kind": "product",
+     "productKey": "chives",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    },
+    {
+     "id": "easy-yoghurt-dressing-6",
+     "text": "2 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "~10 cloves per 50 g"
+    }
+   ]
+  },
+  {
+   "id": "hoisin-pork-fillet-with-noodles",
+   "name": "Hoisin Pork Fillet (with noodles)",
+   "category": "Mains",
+   "notes": "Serves 4. Air fryer 180°C 7 min or oven 15 min.",
+   "yield": "Serves 4",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdO8M8FuXEr/",
+   "lines": [
+    {
+     "id": "hoisin-pork-fillet-with-noodles-1",
+     "text": "4 Tbsp hoisin sauce (+ extra to serve)",
+     "kind": "product",
+     "productKey": "hoisin",
+     "qty": 75.0,
+     "note": "4 Tbsp + extra to serve"
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-2",
+     "text": "1 pork fillet, trimmed",
+     "kind": "product",
+     "productKey": "pork_fillet",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-3",
+     "text": "3 whole-wheat egg noodle nests",
+     "kind": "product",
+     "productKey": "egg_noodles",
+     "qty": 3.0,
+     "note": "~6 nests per 340 g"
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-4",
+     "text": "1 Tbsp sesame oil",
+     "kind": "product",
+     "productKey": "sesame_oil",
+     "qty": 15.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-5",
+     "text": "1 Tbsp grated ginger",
+     "kind": "product",
+     "productKey": "ginger",
+     "qty": 15.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-6",
+     "text": "2 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-7",
+     "text": "200 g baby spinach",
+     "kind": "product",
+     "productKey": "baby_spinach",
+     "qty": 200.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-8",
+     "text": "1 bunch spring onions, sliced",
+     "kind": "product",
+     "productKey": "spring_onions",
+     "qty": 1.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-9",
+     "text": "110 g podded edamame beans",
+     "kind": "product",
+     "productKey": "edamame",
+     "qty": 110.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-10",
+     "text": "1 Tbsp sesame seeds, toasted (+1 tsp to garnish)",
+     "kind": "product",
+     "productKey": "sesame_seeds",
+     "qty": 12.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-11",
+     "text": "1 avocado, cubed",
+     "kind": "product",
+     "productKey": "avocado",
+     "qty": 1.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-12",
+     "text": "Lemon juice (for the avo)",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a squeeze"
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-13",
+     "text": "2 tsp low-salt soy sauce",
+     "kind": "product",
+     "productKey": "soy_sauce",
+     "qty": 10.0
+    },
+    {
+     "id": "hoisin-pork-fillet-with-noodles-14",
+     "text": "1 Tbsp rice vinegar",
+     "kind": "product",
+     "productKey": "rice_vinegar",
+     "qty": 15.0
+    }
+   ]
+  },
+  {
+   "id": "crispy-chickpeas",
+   "name": "Crispy Chickpeas",
+   "category": "Snacks",
+   "notes": "Air fryer 180°C ~40 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdHG5X4uiMl/",
+   "lines": [
+    {
+     "id": "crispy-chickpeas-1",
+     "text": "1 tin chickpeas",
+     "kind": "product",
+     "productKey": "chickpeas_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "crispy-chickpeas-2",
+     "text": "Lemon-flavoured olive oil",
+     "kind": "product",
+     "productKey": "lemon_olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "crispy-chickpeas-3",
+     "text": "Lemon (juice)",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a lemon"
+    },
+    {
+     "id": "crispy-chickpeas-4",
+     "text": "Fresh rosemary",
+     "kind": "product",
+     "productKey": "rosemary",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a sprig or two"
+    },
+    {
+     "id": "crispy-chickpeas-5",
+     "text": "Garlic",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 cloves"
+    },
+    {
+     "id": "crispy-chickpeas-6",
+     "text": "Salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "homemade-hot-choccie",
+   "name": "Homemade Hot Choccie",
+   "category": "Drinks",
+   "notes": "Serves 1 – multiply for the family.",
+   "yield": "Serves 1 – multiply for the family",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdCENQ7u7V6/",
+   "lines": [
+    {
+     "id": "homemade-hot-choccie-1",
+     "text": "1 cup full-cream or low-fat milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "homemade-hot-choccie-2",
+     "text": "1 Tbsp cocoa powder",
+     "kind": "product",
+     "productKey": "cocoa",
+     "qty": 7.0,
+     "note": "1 Tbsp cocoa = ~7 g"
+    },
+    {
+     "id": "homemade-hot-choccie-3",
+     "text": "1 tsp sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 4.0
+    }
+   ]
+  },
+  {
+   "id": "cottage-pie-with-crispy-potato-parmesan-crust",
+   "name": "Cottage Pie with Crispy Potato & Parmesan Crust",
+   "category": "Mains",
+   "notes": "Mince simmers 30–40 min; air fryer 200°C ~20 min to finish.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DdCER0yh3Ue/",
+   "lines": [
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-1",
+     "text": "500 g lean mince",
+     "kind": "product",
+     "productKey": "lean_mince",
+     "qty": 500.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-2",
+     "text": "1 medium onion, chopped",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-3",
+     "text": "2–3 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.5,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-4",
+     "text": "2 medium carrots, grated",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 160.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-5",
+     "text": "2 large mushrooms, grated",
+     "kind": "product",
+     "productKey": "portabello",
+     "qty": 2.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-6",
+     "text": "4–5 baby marrows, grated",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 315.0,
+     "note": "4-5 baby marrows at ~70 g each"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-7",
+     "text": "2 tomatoes, diced",
+     "kind": "product",
+     "productKey": "tomatoes",
+     "qty": 2.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-8",
+     "text": "1 tin tomato & onion mix",
+     "kind": "product",
+     "productKey": "tomato_onion_mix",
+     "qty": 1.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-9",
+     "text": "2 sachets tomato paste",
+     "kind": "product",
+     "productKey": "tomato_paste",
+     "qty": 100.0,
+     "note": "1 sachet taken as 50 g"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-10",
+     "text": "Fresh basil/thyme",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-11",
+     "text": "1 tsp sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 4.0
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-12",
+     "text": "½ tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-13",
+     "text": "Pre-cooked potatoes, sliced",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 800.0,
+     "note": "Amount not given - assumed 4 potatoes"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-14",
+     "text": "Parmesan, grated",
+     "kind": "product",
+     "productKey": "parmesan",
+     "qty": 20.0,
+     "note": "Amount not given - assumed 20 g"
+    },
+    {
+     "id": "cottage-pie-with-crispy-potato-parmesan-crust-15",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a few sprigs"
+    }
+   ]
+  },
+  {
+   "id": "quick-easy-chicken-parmigiana",
+   "name": "Quick & Easy Chicken Parmigiana",
+   "category": "Mains",
+   "notes": "No quantities given.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Dcq5Ap0h3tG/",
+   "lines": [
+    {
+     "id": "quick-easy-chicken-parmigiana-1",
+     "text": "Deboned skinless chicken thighs",
+     "kind": "product",
+     "productKey": "chicken_thigh_fillets",
+     "qty": 800.0,
+     "note": "Amount not given - assumed 1 pack (~800 g)"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-2",
+     "text": "Plain yoghurt (marinade)",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 125.0,
+     "note": "Amount not given - assumed 1/2 cup"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-3",
+     "text": "Breadcrumbs",
+     "kind": "product",
+     "productKey": "breadcrumbs",
+     "qty": 80.0,
+     "note": "Amount not given - assumed ~3/4 cup"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-4",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-5",
+     "text": "Italian herbs",
+     "kind": "product",
+     "productKey": "italian_herbs",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 tsp"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-6",
+     "text": "Zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-7",
+     "text": "Ready-made tomato soup",
+     "kind": "product",
+     "productKey": "tomato_soup",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 x 400 g"
+    },
+    {
+     "id": "quick-easy-chicken-parmigiana-8",
+     "text": "Grated cheddar",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 100.0,
+     "note": "Amount not given - assumed 1 cup"
+    }
+   ]
+  },
+  {
+   "id": "bovril-seed-crackers",
+   "name": "Bovril Seed Crackers",
+   "category": "Snacks",
+   "notes": "160°C 30 min, slice, then 30 min more.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Dcd6OEguGZz/",
+   "lines": [
+    {
+     "id": "bovril-seed-crackers-1",
+     "text": "¾ cup sunflower seeds",
+     "kind": "product",
+     "productKey": "sunflower_seeds",
+     "qty": 105.0,
+     "note": "3/4 cup = ~105 g"
+    },
+    {
+     "id": "bovril-seed-crackers-2",
+     "text": "¼ cup pumpkin seeds",
+     "kind": "product",
+     "productKey": "pumpkin_seeds",
+     "qty": 35.0
+    },
+    {
+     "id": "bovril-seed-crackers-3",
+     "text": "½ cup sesame seeds",
+     "kind": "product",
+     "productKey": "sesame_seeds",
+     "qty": 70.0
+    },
+    {
+     "id": "bovril-seed-crackers-4",
+     "text": "¼ cup chia seeds",
+     "kind": "product",
+     "productKey": "chia",
+     "qty": 40.0
+    },
+    {
+     "id": "bovril-seed-crackers-5",
+     "text": "1 Tbsp psyllium husk",
+     "kind": "missing",
+     "note": "Psyllium husk is not sold at Woolworths"
+    },
+    {
+     "id": "bovril-seed-crackers-6",
+     "text": "1 cup hot water",
+     "kind": "basic",
+     "note": "Water"
+    },
+    {
+     "id": "bovril-seed-crackers-7",
+     "text": "1 heaped tsp Bovril",
+     "kind": "product",
+     "productKey": "bovril",
+     "qty": 7.0
+    },
+    {
+     "id": "bovril-seed-crackers-8",
+     "text": "Salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "super-easy-tuna-pasta-bake",
+   "name": "Super Easy Tuna Pasta Bake",
+   "category": "Mains",
+   "notes": "Bake 180°C 20–25 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DcY3iuuBcHm/",
+   "lines": [
+    {
+     "id": "super-easy-tuna-pasta-bake-1",
+     "text": "3–4 cups whole-wheat fusilli, cooked (~½ x 500 g bag)",
+     "kind": "product",
+     "productKey": "ww_fusilli",
+     "qty": 250.0
+    },
+    {
+     "id": "super-easy-tuna-pasta-bake-2",
+     "text": "3 tins tuna, drained",
+     "kind": "product",
+     "productKey": "tuna",
+     "qty": 3.0
+    },
+    {
+     "id": "super-easy-tuna-pasta-bake-3",
+     "text": "1 cup petit pois peas",
+     "kind": "product",
+     "productKey": "peas",
+     "qty": 140.0,
+     "note": "1 cup peas = ~140 g"
+    },
+    {
+     "id": "super-easy-tuna-pasta-bake-4",
+     "text": "Creamy tomato soup (to taste)",
+     "kind": "product",
+     "productKey": "tomato_soup",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 x 400 g"
+    },
+    {
+     "id": "super-easy-tuna-pasta-bake-5",
+     "text": "Grated cheddar",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 100.0,
+     "note": "Amount not given - assumed 1 cup"
+    },
+    {
+     "id": "super-easy-tuna-pasta-bake-6",
+     "text": "Fresh basil, chopped",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    }
+   ]
+  },
+  {
+   "id": "cheat-s-hoisin-pork-bowls",
+   "name": "Cheat's Hoisin Pork Bowls",
+   "category": "Mains",
+   "notes": "Air fryer ~15 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DcG166Oha4t/",
+   "lines": [
+    {
+     "id": "cheat-s-hoisin-pork-bowls-1",
+     "text": "1–2 lean pork fillets, sliced into strips",
+     "kind": "product",
+     "productKey": "pork_fillet",
+     "qty": 1.5,
+     "note": "1-2 fillets - taken as 1.5"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-2",
+     "text": "½ bottle hoisin sauce",
+     "kind": "product",
+     "productKey": "hoisin",
+     "qty": 75.0
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-3",
+     "text": "90-second coconut rice (or: 1 cup jasmine rice + 1 cup coconut milk + ½ cup water + pinch of salt)",
+     "kind": "product",
+     "productKey": "coconut_rice",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 x 250 g pouches"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-4",
+     "text": "Crunchy slaw + dressing",
+     "kind": "product",
+     "productKey": "slaw",
+     "qty": 1.0
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-5",
+     "text": "Spring onions",
+     "kind": "product",
+     "productKey": "spring_onions",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 bunch"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-6",
+     "text": "Pickled ginger",
+     "kind": "product",
+     "productKey": "pickled_ginger",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 30 g"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-7",
+     "text": "Toasted sesame seeds",
+     "kind": "product",
+     "productKey": "sesame_seeds",
+     "qty": 9.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-8",
+     "text": "Edamame beans (optional)",
+     "kind": "product",
+     "productKey": "edamame",
+     "qty": 110.0,
+     "note": "Amount not given - assumed 1 pack (optional)"
+    },
+    {
+     "id": "cheat-s-hoisin-pork-bowls-9",
+     "text": "Wasabi sauce (optional)",
+     "kind": "product",
+     "productKey": "wasabi",
+     "qty": 5.0,
+     "note": "Amount not given - assumed 1 tsp (optional)"
+    }
+   ]
+  },
+  {
+   "id": "slow-cooked-beef-shin-osso-buco-style",
+   "name": "Slow-Cooked Beef Shin (Osso Buco style)",
+   "category": "Mains",
+   "notes": "Oven 180°C ~3 hrs (or pressure cooker 45 min + 40 min oven).",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Db4t8Boo3AZ/",
+   "lines": [
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-1",
+     "text": "6 beef shins",
+     "kind": "product",
+     "productKey": "beef_shin",
+     "qty": 1800.0,
+     "note": "Priced by weight; 1 shin taken as 300 g"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-2",
+     "text": "Cake flour, for dusting",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 30.0,
+     "note": "Amount not given - assumed ~1/4 cup"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-3",
+     "text": "2 carrots, diced",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 160.0
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-4",
+     "text": "2 onions, diced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 300.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-5",
+     "text": "2 celery sticks, chopped",
+     "kind": "product",
+     "productKey": "celery",
+     "qty": 2.0,
+     "note": "~10 sticks per head"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-6",
+     "text": "3–4 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 3.5,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-7",
+     "text": "2 tins crushed tomatoes",
+     "kind": "product",
+     "productKey": "tinned_tomatoes",
+     "qty": 2.0
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-8",
+     "text": "2 cups beef stock",
+     "kind": "product",
+     "productKey": "beef_stock_liquid",
+     "qty": 500.0
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-9",
+     "text": "1 cup white wine",
+     "kind": "product",
+     "productKey": "white_wine",
+     "qty": 250.0
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-10",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-11",
+     "text": "Fresh rosemary sprigs",
+     "kind": "product",
+     "productKey": "rosemary",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-12",
+     "text": "2–3 bay leaves",
+     "kind": "product",
+     "productKey": "bay_leaves",
+     "qty": 0.25
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-13",
+     "text": "Grated Parmesan",
+     "kind": "product",
+     "productKey": "parmesan",
+     "qty": 20.0,
+     "note": "Amount not given - assumed 20 g"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-14",
+     "text": "Fresh parsley, chopped",
+     "kind": "product",
+     "productKey": "parsley",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-15",
+     "text": "Zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "slow-cooked-beef-shin-osso-buco-style-16",
+     "text": "Bulgur wheat, to serve",
+     "kind": "product",
+     "productKey": "bulgur",
+     "qty": 300.0,
+     "note": "Amount not given - assumed ~300 g dry for 6"
+    }
+   ]
+  },
+  {
+   "id": "salted-caramel-date-squares",
+   "name": "Salted Caramel Date Squares",
+   "category": "Baking & sweet treats",
+   "notes": "Store and eat from the freezer.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DbzsQVWOSGG/",
+   "lines": [
+    {
+     "id": "salted-caramel-date-squares-1",
+     "text": "~15 cream crackers",
+     "kind": "product",
+     "productKey": "cream_crackers",
+     "qty": 15.0,
+     "note": "~24 crackers per 200 g"
+    },
+    {
+     "id": "salted-caramel-date-squares-2",
+     "text": "6–8 Medjool dates, pitted",
+     "kind": "product",
+     "productKey": "dates",
+     "qty": 7.0,
+     "note": "~8 dates per 150 g"
+    },
+    {
+     "id": "salted-caramel-date-squares-3",
+     "text": "1 heaped dessert spoon peanut butter (~½ cup)",
+     "kind": "product",
+     "productKey": "peanut_butter",
+     "qty": 125.0
+    },
+    {
+     "id": "salted-caramel-date-squares-4",
+     "text": "¼ cup hot water",
+     "kind": "basic",
+     "note": "Water"
+    },
+    {
+     "id": "salted-caramel-date-squares-5",
+     "text": "40 g milk chocolate",
+     "kind": "product",
+     "productKey": "milk_choc",
+     "qty": 40.0
+    },
+    {
+     "id": "salted-caramel-date-squares-6",
+     "text": "2 Tbsp toasted flaked almonds",
+     "kind": "product",
+     "productKey": "flaked_almonds",
+     "qty": 15.0
+    },
+    {
+     "id": "salted-caramel-date-squares-7",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "microwave-white-sauce",
+   "name": "Microwave White Sauce",
+   "category": "Sauces & dressings",
+   "notes": "For lasagne, pasta bakes, cauliflower cheese.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Dbmw4hGOUVZ/",
+   "lines": [
+    {
+     "id": "microwave-white-sauce-1",
+     "text": "1½ Tbsp butter",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 21.0
+    },
+    {
+     "id": "microwave-white-sauce-2",
+     "text": "3–4 Tbsp cake flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 30.0
+    },
+    {
+     "id": "microwave-white-sauce-3",
+     "text": "Milk (amount not given)",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0,
+     "note": "Amount not given - assumed 1 cup"
+    },
+    {
+     "id": "microwave-white-sauce-4",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "microwave-white-sauce-5",
+     "text": "1 tsp hot English mustard",
+     "kind": "product",
+     "productKey": "english_mustard",
+     "qty": 5.0
+    }
+   ]
+  },
+  {
+   "id": "easy-chicken-casserole-one-pot-chicken-bake",
+   "name": "Easy Chicken Casserole (One-Pot Chicken Bake)",
+   "category": "Mains",
+   "notes": "Serves 6. Bake 20–30 min.",
+   "yield": "Serves 6",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DbZzODsuPHE/",
+   "lines": [
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-1",
+     "text": "2 cooked chicken breasts (300 g), shredded",
+     "kind": "product",
+     "productKey": "cooked_chicken_breast",
+     "qty": 300.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-2",
+     "text": "1 Tbsp olive or canola oil",
+     "kind": "product",
+     "productKey": "canola_oil",
+     "qty": 15.0,
+     "note": "Canola chosen (cheaper than olive oil)"
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-3",
+     "text": "2 leeks OR 2 small onions, sliced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 200.0,
+     "note": "2 small onions chosen (cheaper than leeks)"
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-4",
+     "text": "2 corn cobs, cooked, kernels removed",
+     "kind": "product",
+     "productKey": "corn_cobs",
+     "qty": 2.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-5",
+     "text": "1 cup cooked petit pois",
+     "kind": "product",
+     "productKey": "peas",
+     "qty": 140.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-6",
+     "text": "2 large carrots, diced",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 240.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-7",
+     "text": "1 sachet chicken soup powder",
+     "kind": "product",
+     "productKey": "chicken_sauce_powder",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: no cream of chicken soup powder at Woolworths"
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-8",
+     "text": "1½ cups low-fat milk",
+     "kind": "product",
+     "productKey": "low_fat_milk",
+     "qty": 375.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-9",
+     "text": "4 potatoes, steamed & thinly sliced",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 800.0,
+     "note": "1 potato taken as 200 g"
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-10",
+     "text": "80 g grated cheddar",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 80.0
+    },
+    {
+     "id": "easy-chicken-casserole-one-pot-chicken-bake-11",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a few sprigs"
+    }
+   ]
+  },
+  {
+   "id": "kids-sausage-roll",
+   "name": "Kids' Sausage Roll",
+   "category": "Mains",
+   "notes": "Bake 180°C ~40 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DbPrvYPovhA/",
+   "lines": [
+    {
+     "id": "kids-sausage-roll-1",
+     "text": "1 sheet puff pastry",
+     "kind": "product",
+     "productKey": "puff_pastry",
+     "qty": 1.0,
+     "note": "1 roll = 1 sheet"
+    },
+    {
+     "id": "kids-sausage-roll-2",
+     "text": "1 packet sausages, removed from casings",
+     "kind": "product",
+     "productKey": "pork_sausages",
+     "qty": 1.0
+    },
+    {
+     "id": "kids-sausage-roll-3",
+     "text": "1 tsp Dijon mustard",
+     "kind": "product",
+     "productKey": "dijon",
+     "qty": 5.0
+    },
+    {
+     "id": "kids-sausage-roll-4",
+     "text": "1 egg, beaten",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 1.0
+    },
+    {
+     "id": "kids-sausage-roll-5",
+     "text": "Tomato sauce & Wimpy mustard, to serve",
+     "kind": "product",
+     "productKey": "tomato_sauce",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "kids-sausage-roll-6",
+     "text": "Tomato sauce & Wimpy mustard, to serve (part 2)",
+     "kind": "product",
+     "productKey": "german_mustard",
+     "qty": 15.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: no Wimpy/American mustard listed. Amount not given - assumed 1 Tbsp"
+    }
+   ]
+  },
+  {
+   "id": "healthier-potato-bake",
+   "name": "Healthier Potato Bake",
+   "category": "Sides & salads",
+   "notes": "Serves 4–6. 180°C 40 min covered + 20 min uncovered.",
+   "yield": "Serves 4–6",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Da4gE8XN9J0/",
+   "lines": [
+    {
+     "id": "healthier-potato-bake-1",
+     "text": "4–5 small/medium potatoes, thinly sliced",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 675.0,
+     "note": "4-5 small/medium potatoes at ~150 g"
+    },
+    {
+     "id": "healthier-potato-bake-2",
+     "text": "1 onion, thinly sliced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "healthier-potato-bake-3",
+     "text": "Crushed garlic",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 cloves"
+    },
+    {
+     "id": "healthier-potato-bake-4",
+     "text": "1 packet Knorr brown onion soup powder",
+     "kind": "product",
+     "productKey": "brown_onion_thickener",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: Knorr brown onion soup not sold"
+    },
+    {
+     "id": "healthier-potato-bake-5",
+     "text": "2 cups low-fat or full-cream milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 500.0
+    },
+    {
+     "id": "healthier-potato-bake-6",
+     "text": "Grated cheese",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 80.0,
+     "note": "Amount not given - assumed 80 g"
+    },
+    {
+     "id": "healthier-potato-bake-7",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a few sprigs"
+    },
+    {
+     "id": "healthier-potato-bake-8",
+     "text": "Black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    }
+   ]
+  },
+  {
+   "id": "leftover-steak-beef-stroganoff",
+   "name": "Leftover Steak Beef Stroganoff",
+   "category": "Mains",
+   "notes": "Serve over bulgur, brown rice or cauli-rice.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/Das0_STuLkz/",
+   "lines": [
+    {
+     "id": "leftover-steak-beef-stroganoff-1",
+     "text": "1 packet fresh mushroom soup (600 g)",
+     "kind": "product",
+     "productKey": "mushroom_soup",
+     "qty": 1.0
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-2",
+     "text": "1 onion, sliced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-3",
+     "text": "1 punnet sliced mushrooms",
+     "kind": "product",
+     "productKey": "sliced_mushrooms",
+     "qty": 1.0
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-4",
+     "text": "Leftover steak or 200 g beef strips",
+     "kind": "product",
+     "productKey": "beef_strips",
+     "qty": 200.0,
+     "note": "Costed as 200 g beef strips (leftover steak would be free)"
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-5",
+     "text": "1 Tbsp fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.5
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-6",
+     "text": "2 Tbsp grated parmesan",
+     "kind": "product",
+     "productKey": "parmesan",
+     "qty": 10.0,
+     "note": "Parmesan-style"
+    },
+    {
+     "id": "leftover-steak-beef-stroganoff-7",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    }
+   ]
+  },
+  {
+   "id": "yoghurt-curry-chicken-thighs",
+   "name": "Yoghurt Curry Chicken Thighs",
+   "category": "Mains",
+   "notes": "Marinate, then pan-fry. No quantities given.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DakMzNMO917/",
+   "lines": [
+    {
+     "id": "yoghurt-curry-chicken-thighs-1",
+     "text": "Chicken thighs",
+     "kind": "product",
+     "productKey": "chicken_thighs",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 pack (~500 g)"
+    },
+    {
+     "id": "yoghurt-curry-chicken-thighs-2",
+     "text": "Curry paste",
+     "kind": "product",
+     "productKey": "curry_paste",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "yoghurt-curry-chicken-thighs-3",
+     "text": "Yoghurt",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 125.0,
+     "note": "Amount not given - assumed 1/2 cup"
+    },
+    {
+     "id": "yoghurt-curry-chicken-thighs-4",
+     "text": "Fresh coriander",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 0.5,
+     "note": "Amount not given - assumed half a punnet"
+    },
+    {
+     "id": "yoghurt-curry-chicken-thighs-5",
+     "text": "Roti & sambals, to serve",
+     "kind": "product",
+     "productKey": "roti",
+     "qty": 6.0,
+     "note": "Amount not given - assumed 1 pack; sambals not costed (no Woolworths match)"
+    }
+   ]
+  },
+  {
+   "id": "shortcut-butter-chicken-curry",
+   "name": "Shortcut Butter Chicken Curry",
+   "category": "Mains",
+   "notes": "Serve with bulgur, brown basmati or cauli-rice.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaazZPvu04v/",
+   "lines": [
+    {
+     "id": "shortcut-butter-chicken-curry-1",
+     "text": "1 packet Butter Chicken Soup (Woolworths)",
+     "kind": "product",
+     "productKey": "butter_chicken_sauce",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: Woolworths Butter Chicken Soup not currently listed"
+    },
+    {
+     "id": "shortcut-butter-chicken-curry-2",
+     "text": "2 rotisserie chicken breasts, cubed",
+     "kind": "product",
+     "productKey": "rotisserie_chicken",
+     "qty": 1.0,
+     "note": "Both breasts of 1 rotisserie chicken"
+    },
+    {
+     "id": "shortcut-butter-chicken-curry-3",
+     "text": "1 cup petit pois peas",
+     "kind": "product",
+     "productKey": "peas",
+     "qty": 140.0
+    },
+    {
+     "id": "shortcut-butter-chicken-curry-4",
+     "text": "Fresh coriander, chopped",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 0.5
+    }
+   ]
+  },
+  {
+   "id": "moroccan-lamb-meatball-bake",
+   "name": "Moroccan Lamb Meatball Bake",
+   "category": "Mains",
+   "notes": "Bake 180°C 30 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaUXbnuudIg/",
+   "lines": [
+    {
+     "id": "moroccan-lamb-meatball-bake-1",
+     "text": "1 packet Moroccan Style Lamb Soup (Woolworths)",
+     "kind": "product",
+     "productKey": "moroccan_soup",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: Moroccan Style Lamb Soup not currently listed"
+    },
+    {
+     "id": "moroccan-lamb-meatball-bake-2",
+     "text": "12 lamb frikkadels",
+     "kind": "product",
+     "productKey": "lamb_frikkadels",
+     "qty": 12.0
+    },
+    {
+     "id": "moroccan-lamb-meatball-bake-3",
+     "text": "400 g punnet rosa tomatoes",
+     "kind": "product",
+     "productKey": "rosa_400",
+     "qty": 1.0
+    },
+    {
+     "id": "moroccan-lamb-meatball-bake-4",
+     "text": "1 handful chopped mint",
+     "kind": "product",
+     "productKey": "mint",
+     "qty": 0.5
+    },
+    {
+     "id": "moroccan-lamb-meatball-bake-5",
+     "text": "2 heaped Tbsp grated parmesan",
+     "kind": "product",
+     "productKey": "parmesan",
+     "qty": 12.0,
+     "note": "Parmesan-style"
+    }
+   ]
+  },
+  {
+   "id": "easy-slow-cooker-bolognese",
+   "name": "Easy Slow Cooker Bolognese",
+   "category": "Mains",
+   "notes": "Slow cook on Low 4 hrs.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaUTxh4oGXQ/",
+   "lines": [
+    {
+     "id": "easy-slow-cooker-bolognese-1",
+     "text": "2 onions, diced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 300.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-2",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-3",
+     "text": "Salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-4",
+     "text": "2–3 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.5,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-5",
+     "text": "800 g–1 kg beef mince",
+     "kind": "product",
+     "productKey": "lean_mince",
+     "qty": 900.0,
+     "note": "800 g-1 kg - taken as 900 g"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-6",
+     "text": "2 sachets tomato paste",
+     "kind": "product",
+     "productKey": "tomato_paste",
+     "qty": 100.0,
+     "note": "1 sachet taken as 50 g"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-7",
+     "text": "1 x 800 g tin puréed tomatoes",
+     "kind": "product",
+     "productKey": "tomato_puree",
+     "qty": 800.0
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-8",
+     "text": "2 beef stock cubes + 1 L water",
+     "kind": "product",
+     "productKey": "beef_stock_powder",
+     "qty": 20.0,
+     "note": "2 cubes; water not costed"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-9",
+     "text": "2 celery stalks, chopped",
+     "kind": "product",
+     "productKey": "celery",
+     "qty": 2.0,
+     "note": "~10 sticks per head"
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-10",
+     "text": "3–4 carrots, diced",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 280.0
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-11",
+     "text": "Fresh rosemary, thyme & bay leaves (herb bouquet)",
+     "kind": "product",
+     "productKey": "rosemary",
+     "qty": 0.25
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-12",
+     "text": "Fresh rosemary, thyme & bay leaves (herb bouquet) (part 2)",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    },
+    {
+     "id": "easy-slow-cooker-bolognese-13",
+     "text": "Fresh rosemary, thyme & bay leaves (herb bouquet) (part 3)",
+     "kind": "product",
+     "productKey": "bay_leaves",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "baked-coconut-chicken-curry",
+   "name": "Baked Coconut Chicken Curry",
+   "category": "Mains",
+   "notes": "Serves 4–6. 180°C 60 min + 15 min.",
+   "yield": "Serves 4–6",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaPPVqboff0/",
+   "lines": [
+    {
+     "id": "baked-coconut-chicken-curry-1",
+     "text": "1 Tbsp olive/canola oil",
+     "kind": "product",
+     "productKey": "canola_oil",
+     "qty": 15.0,
+     "note": "Canola chosen (cheaper than olive oil)"
+    },
+    {
+     "id": "baked-coconut-chicken-curry-2",
+     "text": "9-piece chicken pack",
+     "kind": "product",
+     "productKey": "chicken_portions",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "baked-coconut-chicken-curry-3",
+     "text": "2 brown onions, finely diced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 300.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "baked-coconut-chicken-curry-4",
+     "text": "2 Tbsp curry paste",
+     "kind": "product",
+     "productKey": "curry_paste",
+     "qty": 30.0
+    },
+    {
+     "id": "baked-coconut-chicken-curry-5",
+     "text": "250 ml Chardonnay",
+     "kind": "product",
+     "productKey": "chardonnay",
+     "qty": 250.0
+    },
+    {
+     "id": "baked-coconut-chicken-curry-6",
+     "text": "400 g punnet rosa tomatoes",
+     "kind": "product",
+     "productKey": "rosa_400",
+     "qty": 1.0
+    },
+    {
+     "id": "baked-coconut-chicken-curry-7",
+     "text": "½ cup reduced-fat coconut milk",
+     "kind": "product",
+     "productKey": "coconut_milk_lite",
+     "qty": 125.0
+    },
+    {
+     "id": "baked-coconut-chicken-curry-8",
+     "text": "1 bunch fresh coriander",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 1.0
+    }
+   ]
+  },
+  {
+   "id": "hearty-chicken-pot-pies",
+   "name": "Hearty Chicken Pot Pies",
+   "category": "Mains",
+   "notes": "Bake pastry tops separately, 180°C ~25 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaIkGT8OKmp/",
+   "lines": [
+    {
+     "id": "hearty-chicken-pot-pies-1",
+     "text": "1 packet Farmhouse Chicken Soup",
+     "kind": "product",
+     "productKey": "fresh_chicken_soup",
+     "qty": 1.0
+    },
+    {
+     "id": "hearty-chicken-pot-pies-2",
+     "text": "1 cup frozen veggies, blanched",
+     "kind": "product",
+     "productKey": "frozen_veg",
+     "qty": 140.0
+    },
+    {
+     "id": "hearty-chicken-pot-pies-3",
+     "text": "2 rotisserie chicken breasts, chunked",
+     "kind": "product",
+     "productKey": "rotisserie_chicken",
+     "qty": 1.0,
+     "note": "Both breasts of 1 rotisserie chicken"
+    },
+    {
+     "id": "hearty-chicken-pot-pies-4",
+     "text": "1–2 sheets puff pastry (250 g each)",
+     "kind": "product",
+     "productKey": "puff_pastry",
+     "qty": 1.0,
+     "note": "1-2 sheets - one 400 g roll"
+    },
+    {
+     "id": "hearty-chicken-pot-pies-5",
+     "text": "Butter or egg wash",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 egg"
+    }
+   ]
+  },
+  {
+   "id": "singita-rusks",
+   "name": "Singita Rusks",
+   "category": "Baking & sweet treats",
+   "notes": "Makes 65–75. Bake 160°C 30–45 min, dry at 50°C overnight.",
+   "yield": "Makes 65–75",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DaCPBuTuqHr/",
+   "lines": [
+    {
+     "id": "singita-rusks-1",
+     "text": "Butter, for greasing",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 10.0,
+     "note": "Amount not given - assumed 10 g"
+    },
+    {
+     "id": "singita-rusks-2",
+     "text": "500 g All Bran Flakes, crushed",
+     "kind": "product",
+     "productKey": "all_bran",
+     "qty": 500.0
+    },
+    {
+     "id": "singita-rusks-3",
+     "text": "500 g Corn Flakes, crushed",
+     "kind": "product",
+     "productKey": "corn_flakes",
+     "qty": 500.0
+    },
+    {
+     "id": "singita-rusks-4",
+     "text": "300 g mixed nuts, chopped",
+     "kind": "product",
+     "productKey": "mixed_nuts",
+     "qty": 300.0
+    },
+    {
+     "id": "singita-rusks-5",
+     "text": "300 g mixed dried fruit, diced",
+     "kind": "product",
+     "productKey": "dried_fruit",
+     "qty": 300.0
+    },
+    {
+     "id": "singita-rusks-6",
+     "text": "250 g mixed seeds",
+     "kind": "product",
+     "productKey": "mixed_seeds",
+     "qty": 250.0
+    },
+    {
+     "id": "singita-rusks-7",
+     "text": "1 kg self-raising flour",
+     "kind": "product",
+     "productKey": "self_raising_flour",
+     "qty": 1000.0
+    },
+    {
+     "id": "singita-rusks-8",
+     "text": "10 ml baking powder",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 8.0
+    },
+    {
+     "id": "singita-rusks-9",
+     "text": "5 ml salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "singita-rusks-10",
+     "text": "400 g yellow/brown sugar",
+     "kind": "product",
+     "productKey": "brown_sugar",
+     "qty": 400.0
+    },
+    {
+     "id": "singita-rusks-11",
+     "text": "2 eggs, beaten",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "singita-rusks-12",
+     "text": "500 g butter, melted",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 500.0
+    },
+    {
+     "id": "singita-rusks-13",
+     "text": "500 ml buttermilk or plain yoghurt",
+     "kind": "product",
+     "productKey": "buttermilk",
+     "qty": 500.0
+    },
+    {
+     "id": "singita-rusks-14",
+     "text": "5 ml vanilla essence",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 5.0
+    }
+   ]
+  },
+  {
+   "id": "preserved-lemons",
+   "name": "Preserved Lemons",
+   "category": "Sauces & dressings",
+   "notes": "Quarter (joined at base), pack with salt, jar and cover with juice.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DZpHXNpOuYe/",
+   "lines": [
+    {
+     "id": "preserved-lemons-1",
+     "text": "Lemons",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 6.0,
+     "note": "Amount not given - assumed 6 lemons"
+    },
+    {
+     "id": "preserved-lemons-2",
+     "text": "Coarse salt",
+     "kind": "basic",
+     "note": "Coarse salt"
+    },
+    {
+     "id": "preserved-lemons-3",
+     "text": "Freshly squeezed lemon juice (to cover)",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 4.0,
+     "note": "Amount not given - assumed juice of 4 lemons"
+    }
+   ]
+  },
+  {
+   "id": "baked-apple-brekkie",
+   "name": "Baked Apple Brekkie",
+   "category": "Breakfast",
+   "notes": "Air fryer 200°C 30 min. Keeps in the fridge.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DZEi1dDuDX6/",
+   "lines": [
+    {
+     "id": "baked-apple-brekkie-1",
+     "text": "Apples, cored",
+     "kind": "product",
+     "productKey": "apples",
+     "qty": 4.0,
+     "note": "Amount not given - assumed 4 apples"
+    },
+    {
+     "id": "baked-apple-brekkie-2",
+     "text": "Chopped or flaked almonds",
+     "kind": "product",
+     "productKey": "flaked_almonds",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 30 g"
+    },
+    {
+     "id": "baked-apple-brekkie-3",
+     "text": "Honey",
+     "kind": "product",
+     "productKey": "honey",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "baked-apple-brekkie-4",
+     "text": "Cinnamon",
+     "kind": "product",
+     "productKey": "cinnamon",
+     "qty": 3.0,
+     "note": "Amount not given - assumed 1 tsp"
+    },
+    {
+     "id": "baked-apple-brekkie-5",
+     "text": "Yoghurt, to serve",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 200.0,
+     "note": "Amount not given - assumed 200 g"
+    }
+   ]
+  },
+  {
+   "id": "green-pasta-salad-meal-prep-base",
+   "name": "Green Pasta Salad (meal-prep base)",
+   "category": "Lunch & meal prep",
+   "notes": "Keeps 3 days in the fridge. Also posted earlier (DUzx8TYCBSN).",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DZFM_ZHNgEu/",
+   "lines": [
+    {
+     "id": "green-pasta-salad-meal-prep-base-1",
+     "text": "2 cups whole-wheat fusilli (dry)",
+     "kind": "product",
+     "productKey": "ww_fusilli",
+     "qty": 180.0
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-2",
+     "text": "1 head broccoli, steamed & chopped",
+     "kind": "product",
+     "productKey": "broccoli",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-3",
+     "text": "1 cup petit pois peas, steamed",
+     "kind": "product",
+     "productKey": "peas",
+     "qty": 140.0
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-4",
+     "text": "1 tub full-cream smooth cottage cheese",
+     "kind": "product",
+     "productKey": "cottage_cheese",
+     "qty": 250.0
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-5",
+     "text": "3 Tbsp pesto",
+     "kind": "product",
+     "productKey": "pesto",
+     "qty": 45.0
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-6",
+     "text": "Juice of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-7",
+     "text": "1 round feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-8",
+     "text": "Handful fresh herbs (basil & mint)",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-9",
+     "text": "Handful fresh herbs (basil & mint) (part 2)",
+     "kind": "product",
+     "productKey": "mint",
+     "qty": 0.5
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-10",
+     "text": "Black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    },
+    {
+     "id": "green-pasta-salad-meal-prep-base-11",
+     "text": "Protein topping: tuna, shredded chicken or roasted chickpeas",
+     "kind": "product",
+     "productKey": "tuna",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 tins tuna as the protein"
+    }
+   ]
+  },
+  {
+   "id": "bacon-brussels-sprouts",
+   "name": "Bacon Brussels Sprouts",
+   "category": "Sides & salads",
+   "notes": "Steam 8–10 min, then air fry 200°C ~20 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DY_ZN6ouE1U/",
+   "lines": [
+    {
+     "id": "bacon-brussels-sprouts-1",
+     "text": "Brussels sprouts",
+     "kind": "product",
+     "productKey": "brussels",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 300 g"
+    },
+    {
+     "id": "bacon-brussels-sprouts-2",
+     "text": "Olive oil spray",
+     "kind": "product",
+     "productKey": "olive_oil_spray",
+     "qty": 3.0,
+     "note": "Amount not given - assumed a few sprays"
+    },
+    {
+     "id": "bacon-brussels-sprouts-3",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "bacon-brussels-sprouts-4",
+     "text": "1 garlic clove, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 1.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "bacon-brussels-sprouts-5",
+     "text": "3–4 rashers bacon, chopped",
+     "kind": "product",
+     "productKey": "bacon",
+     "qty": 88.0,
+     "note": "3-4 rashers at ~25 g"
+    }
+   ]
+  },
+  {
+   "id": "butternut-spinach-bake",
+   "name": "Butternut & Spinach Bake",
+   "category": "Sides & salads",
+   "notes": "Roast whole 200°C ~1 hr, top, then 200°C ~20 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DY6PmelOPU2/",
+   "lines": [
+    {
+     "id": "butternut-spinach-bake-1",
+     "text": "1 whole butternut (skin on)",
+     "kind": "product",
+     "productKey": "butternut",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "butternut-spinach-bake-2",
+     "text": "Frozen spinach & feta (Dr. Oetker, Checkers)",
+     "kind": "product",
+     "productKey": "chopped_spinach",
+     "qty": 200.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: Dr. Oetker frozen spinach & feta (Checkers) - costed as spinach + feta"
+    },
+    {
+     "id": "butternut-spinach-bake-3",
+     "text": "Frozen spinach & feta (Dr. Oetker, Checkers) (part 2)",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "butternut-spinach-bake-4",
+     "text": "Parmesan, grated",
+     "kind": "product",
+     "productKey": "parmesan",
+     "qty": 20.0,
+     "note": "Amount not given - assumed 20 g"
+    },
+    {
+     "id": "butternut-spinach-bake-5",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25,
+     "note": "Amount not given - assumed a few sprigs"
+    },
+    {
+     "id": "butternut-spinach-bake-6",
+     "text": "Black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    }
+   ]
+  },
+  {
+   "id": "hearty-chicken-soup",
+   "name": "Hearty Chicken Soup",
+   "category": "Soups",
+   "notes": "Simmer carcass ~1 hr, veg 15–20 min, then soup mix 5–10 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYtXpbBOoEC/",
+   "lines": [
+    {
+     "id": "hearty-chicken-soup-1",
+     "text": "Carcass of a roast chicken + scraps (or 1 breast)",
+     "kind": "product",
+     "productKey": "chicken_breast_fillets",
+     "qty": 150.0,
+     "note": "Costed as 1 breast (a leftover carcass would be free)"
+    },
+    {
+     "id": "hearty-chicken-soup-2",
+     "text": "Onions or leeks",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 300.0,
+     "note": "Amount not given - assumed 2 onions"
+    },
+    {
+     "id": "hearty-chicken-soup-3",
+     "text": "Carrots",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 160.0,
+     "note": "Amount not given - assumed 2 carrots"
+    },
+    {
+     "id": "hearty-chicken-soup-4",
+     "text": "Baby marrows",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 140.0,
+     "note": "Amount not given - assumed 2 baby marrows"
+    },
+    {
+     "id": "hearty-chicken-soup-5",
+     "text": "Corn",
+     "kind": "product",
+     "productKey": "corn_cobs",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 cob"
+    },
+    {
+     "id": "hearty-chicken-soup-6",
+     "text": "Potatoes",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 400.0,
+     "note": "Amount not given - assumed 2 potatoes"
+    },
+    {
+     "id": "hearty-chicken-soup-7",
+     "text": "1 packet cream of chicken soup powder",
+     "kind": "product",
+     "productKey": "chicken_sauce_powder",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: no cream of chicken soup powder at Woolworths"
+    },
+    {
+     "id": "hearty-chicken-soup-8",
+     "text": "1 cup milk (or reduced-fat coconut milk)",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "hearty-chicken-soup-9",
+     "text": "Seasoning of choice",
+     "kind": "basic",
+     "note": "Seasoning of choice"
+    },
+    {
+     "id": "hearty-chicken-soup-10",
+     "text": "Zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    }
+   ]
+  },
+  {
+   "id": "banana-bread-baked-oats",
+   "name": "Banana Bread Baked Oats",
+   "category": "Breakfast",
+   "notes": "Bake 180°C 15–20 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYtXm0OBIgB/",
+   "lines": [
+    {
+     "id": "banana-bread-baked-oats-1",
+     "text": "1 cup oats",
+     "kind": "product",
+     "productKey": "oats",
+     "qty": 90.0,
+     "note": "1 cup oats = ~90 g"
+    },
+    {
+     "id": "banana-bread-baked-oats-2",
+     "text": "40 g flaked almonds (½ cup)",
+     "kind": "product",
+     "productKey": "flaked_almonds",
+     "qty": 40.0
+    },
+    {
+     "id": "banana-bread-baked-oats-3",
+     "text": "1 tsp baking powder",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 4.0
+    },
+    {
+     "id": "banana-bread-baked-oats-4",
+     "text": "2 tsp cinnamon (+ extra to sprinkle)",
+     "kind": "product",
+     "productKey": "cinnamon",
+     "qty": 6.0
+    },
+    {
+     "id": "banana-bread-baked-oats-5",
+     "text": "1 tsp allspice",
+     "kind": "product",
+     "productKey": "allspice",
+     "qty": 2.5
+    },
+    {
+     "id": "banana-bread-baked-oats-6",
+     "text": "½ tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "banana-bread-baked-oats-7",
+     "text": "1 tsp sugar (+1 tsp for topping)",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 8.0
+    },
+    {
+     "id": "banana-bread-baked-oats-8",
+     "text": "3 ripe bananas, mashed",
+     "kind": "product",
+     "productKey": "bananas",
+     "qty": 3.0,
+     "note": "~6 bananas per 800 g"
+    },
+    {
+     "id": "banana-bread-baked-oats-9",
+     "text": "1 banana, thinly sliced (topping)",
+     "kind": "product",
+     "productKey": "bananas",
+     "qty": 1.0,
+     "note": "~6 bananas per 800 g"
+    },
+    {
+     "id": "banana-bread-baked-oats-10",
+     "text": "1 cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "banana-bread-baked-oats-11",
+     "text": "2 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "banana-bread-baked-oats-12",
+     "text": "5 ml vanilla essence",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 5.0
+    },
+    {
+     "id": "banana-bread-baked-oats-13",
+     "text": "Full-cream yoghurt, to serve",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 150.0,
+     "note": "Amount not given - assumed 150 g"
+    }
+   ]
+  },
+  {
+   "id": "loaded-avo-egg-bowl",
+   "name": "Loaded Avo & Egg Bowl",
+   "category": "Lunch & meal prep",
+   "notes": "Serves 1.",
+   "yield": "Serves 1",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYlpQMkBPV8/",
+   "lines": [
+    {
+     "id": "loaded-avo-egg-bowl-1",
+     "text": "1 handful baby spinach",
+     "kind": "product",
+     "productKey": "baby_spinach",
+     "qty": 30.0
+    },
+    {
+     "id": "loaded-avo-egg-bowl-2",
+     "text": "½ small red onion, chopped",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 50.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "loaded-avo-egg-bowl-3",
+     "text": "½ red pepper, chopped",
+     "kind": "product",
+     "productKey": "red_pepper",
+     "qty": 0.5
+    },
+    {
+     "id": "loaded-avo-egg-bowl-4",
+     "text": "2 hard-boiled eggs, quartered",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "loaded-avo-egg-bowl-5",
+     "text": "½ avocado, cubed",
+     "kind": "product",
+     "productKey": "avocado",
+     "qty": 0.5
+    },
+    {
+     "id": "loaded-avo-egg-bowl-6",
+     "text": "1 Tbsp avocado oil (+ extra for dressing)",
+     "kind": "product",
+     "productKey": "avocado_oil",
+     "qty": 20.0
+    },
+    {
+     "id": "loaded-avo-egg-bowl-7",
+     "text": "⅓ cup tinned chickpeas, rinsed & drained",
+     "kind": "product",
+     "productKey": "chickpeas_tin",
+     "qty": 0.33
+    },
+    {
+     "id": "loaded-avo-egg-bowl-8",
+     "text": "1 garlic clove, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 1.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "loaded-avo-egg-bowl-9",
+     "text": "⅓ round feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 33.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "loaded-avo-egg-bowl-10",
+     "text": "Balsamic vinegar",
+     "kind": "product",
+     "productKey": "balsamic_vinegar",
+     "qty": 10.0,
+     "note": "Amount not given - assumed 2 tsp"
+    },
+    {
+     "id": "loaded-avo-egg-bowl-11",
+     "text": "Fresh basil or coriander",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "loaded-mex-spuds",
+   "name": "Loaded Mex Spuds",
+   "category": "Mains",
+   "notes": "Serves 8. Simmer mince 20 min.",
+   "yield": "Serves 8",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYgoWpzNlk8/",
+   "lines": [
+    {
+     "id": "loaded-mex-spuds-1",
+     "text": "500 g lean mince",
+     "kind": "product",
+     "productKey": "lean_mince",
+     "qty": 500.0
+    },
+    {
+     "id": "loaded-mex-spuds-2",
+     "text": "1 onion, chopped",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "loaded-mex-spuds-3",
+     "text": "2 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "loaded-mex-spuds-4",
+     "text": "1 Tbsp olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0
+    },
+    {
+     "id": "loaded-mex-spuds-5",
+     "text": "2 Tbsp fresh coriander, chopped",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 0.5
+    },
+    {
+     "id": "loaded-mex-spuds-6",
+     "text": "2 tsp fresh or dried oregano",
+     "kind": "product",
+     "productKey": "oregano",
+     "qty": 2.0,
+     "note": "Dried oregano used"
+    },
+    {
+     "id": "loaded-mex-spuds-7",
+     "text": "1 tsp ground cumin",
+     "kind": "product",
+     "productKey": "cumin",
+     "qty": 2.5
+    },
+    {
+     "id": "loaded-mex-spuds-8",
+     "text": "1 tsp turmeric",
+     "kind": "product",
+     "productKey": "turmeric",
+     "qty": 2.5
+    },
+    {
+     "id": "loaded-mex-spuds-9",
+     "text": "1 sachet (2 Tbsp) tomato paste",
+     "kind": "product",
+     "productKey": "tomato_paste",
+     "qty": 50.0,
+     "note": "1 sachet taken as 50 g"
+    },
+    {
+     "id": "loaded-mex-spuds-10",
+     "text": "2 cups chopped tomatoes",
+     "kind": "product",
+     "productKey": "tomatoes",
+     "qty": 3.0,
+     "note": "2 cups chopped = ~3 tomatoes"
+    },
+    {
+     "id": "loaded-mex-spuds-11",
+     "text": "1 tin red kidney beans",
+     "kind": "product",
+     "productKey": "kidney_beans",
+     "qty": 1.0
+    },
+    {
+     "id": "loaded-mex-spuds-12",
+     "text": "1 tin whole kernel corn (or 2 cobs)",
+     "kind": "product",
+     "productKey": "corn_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "loaded-mex-spuds-13",
+     "text": "1 cup beef stock",
+     "kind": "product",
+     "productKey": "beef_stock_liquid",
+     "qty": 250.0
+    },
+    {
+     "id": "loaded-mex-spuds-14",
+     "text": "Potatoes, steamed",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 800.0,
+     "note": "Amount not given - assumed 4 potatoes"
+    },
+    {
+     "id": "loaded-mex-spuds-15",
+     "text": "Toppings: avo, salsa, lettuce, jalapeños, coriander, cottage cheese, parmesan, lime",
+     "kind": "product",
+     "productKey": "avocado",
+     "qty": 1.0,
+     "note": "Amount not given - assumed toppings costed as 1 avo + salsa + lettuce"
+    },
+    {
+     "id": "loaded-mex-spuds-16",
+     "text": "Toppings: avo, salsa, lettuce, jalapeños, coriander, cottage cheese, parmesan, lime (part 2)",
+     "kind": "product",
+     "productKey": "salsa",
+     "qty": 100.0
+    },
+    {
+     "id": "loaded-mex-spuds-17",
+     "text": "Toppings: avo, salsa, lettuce, jalapeños, coriander, cottage cheese, parmesan, lime (part 3)",
+     "kind": "product",
+     "productKey": "iceberg",
+     "qty": 1.0
+    }
+   ]
+  },
+  {
+   "id": "1-pot-porkies",
+   "name": "1 Pot Porkies",
+   "category": "Mains",
+   "notes": "Bake 180°C 45–60 min. Optional: serve on bulgur wheat.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYQ7v4toyPX/",
+   "lines": [
+    {
+     "id": "1-pot-porkies-1",
+     "text": "600 g tub rosa tomatoes",
+     "kind": "product",
+     "productKey": "rosa_600",
+     "qty": 1.0
+    },
+    {
+     "id": "1-pot-porkies-2",
+     "text": "1 red onion, chopped",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 150.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "1-pot-porkies-3",
+     "text": "1 red pepper, sliced",
+     "kind": "product",
+     "productKey": "red_pepper",
+     "qty": 1.0
+    },
+    {
+     "id": "1-pot-porkies-4",
+     "text": "1 orange pepper, sliced",
+     "kind": "product",
+     "productKey": "yellow_pepper",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: no single orange pepper - yellow used"
+    },
+    {
+     "id": "1-pot-porkies-5",
+     "text": "3 potatoes, pre-cooked, in wedges",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 600.0,
+     "note": "1 potato taken as 200 g"
+    },
+    {
+     "id": "1-pot-porkies-6",
+     "text": "2 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "1-pot-porkies-7",
+     "text": "Olive oil spray + olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp + sprays"
+    },
+    {
+     "id": "1-pot-porkies-8",
+     "text": "Olive oil spray + olive oil (part 2)",
+     "kind": "product",
+     "productKey": "olive_oil_spray",
+     "qty": 3.0
+    },
+    {
+     "id": "1-pot-porkies-9",
+     "text": "Salt & black pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "1-pot-porkies-10",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    },
+    {
+     "id": "1-pot-porkies-11",
+     "text": "Zest & juice of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "1-pot-porkies-12",
+     "text": "Pork sausages",
+     "kind": "product",
+     "productKey": "pork_sausages",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 pack"
+    },
+    {
+     "id": "1-pot-porkies-13",
+     "text": "Fresh basil, to garnish",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "roasted-beetroot-apple-goat-s-cheese-salad",
+   "name": "Roasted Beetroot, Apple & Goat's Cheese Salad",
+   "category": "Sides & salads",
+   "notes": "Roast beetroot 200°C 45–60 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYJdzs4IfXq/",
+   "lines": [
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-1",
+     "text": "Beetroot, scrubbed & quartered",
+     "kind": "product",
+     "productKey": "beetroot",
+     "qty": 500.0,
+     "note": "Amount not given - assumed 500 g"
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-2",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp"
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-3",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-4",
+     "text": "3 handfuls baby spinach",
+     "kind": "product",
+     "productKey": "baby_spinach",
+     "qty": 90.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-5",
+     "text": "1 green apple, thinly sliced",
+     "kind": "product",
+     "productKey": "green_apples",
+     "qty": 1.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-6",
+     "text": "100 g soft goat's cheese",
+     "kind": "product",
+     "productKey": "goats_cheese",
+     "qty": 100.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-7",
+     "text": "50 g pistachios, chopped",
+     "kind": "product",
+     "productKey": "pistachios",
+     "qty": 50.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-8",
+     "text": "Dressing: ¼ cup olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 62.5
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-9",
+     "text": "Dressing: ¼ cup balsamic vinegar",
+     "kind": "product",
+     "productKey": "balsamic_vinegar",
+     "qty": 62.5
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-10",
+     "text": "Dressing: 1 tsp Dijon mustard",
+     "kind": "product",
+     "productKey": "dijon",
+     "qty": 5.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-11",
+     "text": "Dressing: 1 tsp honey",
+     "kind": "product",
+     "productKey": "honey",
+     "qty": 7.0
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-12",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "roasted-beetroot-apple-goat-s-cheese-salad-13",
+     "text": "Fresh mint leaves",
+     "kind": "product",
+     "productKey": "mint",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "tree-tomato-tamarillo-chutney",
+   "name": "Tree Tomato (Tamarillo) Chutney",
+   "category": "Sauces & dressings",
+   "notes": "Adapted from Aparna Balasubramanian's recipe.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DYB1PYBA3PO/",
+   "lines": [
+    {
+     "id": "tree-tomato-tamarillo-chutney-1",
+     "text": "10–12 ripe tamarillos",
+     "kind": "missing",
+     "note": "Tamarillos are not listed at Woolworths (seasonal)"
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-2",
+     "text": "1 large apple, diced",
+     "kind": "product",
+     "productKey": "apples",
+     "qty": 1.0
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-3",
+     "text": "1 large red onion, grated",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 200.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-4",
+     "text": "½ cup brown sugar",
+     "kind": "product",
+     "productKey": "brown_sugar",
+     "qty": 100.0
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-5",
+     "text": "¼ cup white vinegar",
+     "kind": "product",
+     "productKey": "white_vinegar",
+     "qty": 62.5
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-6",
+     "text": "½ tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-7",
+     "text": "½ tsp red chilli powder",
+     "kind": "product",
+     "productKey": "chilli_powder",
+     "qty": 1.5
+    },
+    {
+     "id": "tree-tomato-tamarillo-chutney-8",
+     "text": "¾ tsp allspice",
+     "kind": "product",
+     "productKey": "allspice",
+     "qty": 2.0
+    }
+   ]
+  },
+  {
+   "id": "butternut-chickpea-curry",
+   "name": "Butternut & Chickpea Curry",
+   "category": "Mains",
+   "notes": "Pressure cooker (Beans setting) – two rounds of ~30–35 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DX_NPjeNBPa/",
+   "lines": [
+    {
+     "id": "butternut-chickpea-curry-1",
+     "text": "1 cup dried chickpeas, soaked overnight",
+     "kind": "product",
+     "productKey": "dried_chickpeas",
+     "qty": 200.0,
+     "note": "1 cup dried = ~200 g"
+    },
+    {
+     "id": "butternut-chickpea-curry-2",
+     "text": "1 butternut, cubed (or 500 g pre-cut)",
+     "kind": "product",
+     "productKey": "butternut",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "butternut-chickpea-curry-3",
+     "text": "2 onions, diced",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 300.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "butternut-chickpea-curry-4",
+     "text": "2 Tbsp curry paste",
+     "kind": "product",
+     "productKey": "curry_paste",
+     "qty": 30.0
+    },
+    {
+     "id": "butternut-chickpea-curry-5",
+     "text": "1 Tbsp garam masala",
+     "kind": "product",
+     "productKey": "garam_masala",
+     "qty": 7.0
+    },
+    {
+     "id": "butternut-chickpea-curry-6",
+     "text": "1 knob ginger, grated",
+     "kind": "product",
+     "productKey": "ginger",
+     "qty": 30.0,
+     "note": "1 knob taken as ~30 g"
+    },
+    {
+     "id": "butternut-chickpea-curry-7",
+     "text": "3 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 3.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "butternut-chickpea-curry-8",
+     "text": "2 cups vegetable or chicken stock",
+     "kind": "product",
+     "productKey": "veg_stock",
+     "qty": 500.0
+    },
+    {
+     "id": "butternut-chickpea-curry-9",
+     "text": "1 handful fresh coriander (+ extra to serve)",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 1.0
+    },
+    {
+     "id": "butternut-chickpea-curry-10",
+     "text": "⅓ cup plain yoghurt",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 85.0
+    },
+    {
+     "id": "butternut-chickpea-curry-11",
+     "text": "Mrs Balls chutney, to serve",
+     "kind": "product",
+     "productKey": "chutney",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    }
+   ]
+  },
+  {
+   "id": "strawberries-cream-fro-yo",
+   "name": "Strawberries & Cream Fro-Yo",
+   "category": "Desserts & ice cream",
+   "notes": "Churned ~20 min in an ice-cream maker.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DX8kE48No57/",
+   "lines": [
+    {
+     "id": "strawberries-cream-fro-yo-1",
+     "text": "Lancewood Double Cream Strawberries & Cream yoghurt",
+     "kind": "product",
+     "productKey": "strawberry_yoghurt",
+     "qty": 1.0,
+     "substitute": true,
+     "note": "SUBSTITUTE: Lancewood Strawberries & Cream not sold at Woolworths. Amount not given - assumed 1 x 1 kg tub"
+    },
+    {
+     "id": "strawberries-cream-fro-yo-2",
+     "text": "Fresh berries, to top",
+     "kind": "product",
+     "productKey": "berries",
+     "qty": 125.0,
+     "note": "Amount not given - assumed 125 g"
+    }
+   ]
+  },
+  {
+   "id": "one-pot-lemon-chicken-orzo",
+   "name": "One-Pot Lemon Chicken Orzo",
+   "category": "Mains",
+   "notes": "Bake 180°C 1 hr, rest 15 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXqa8bVOgo3/",
+   "lines": [
+    {
+     "id": "one-pot-lemon-chicken-orzo-1",
+     "text": "1 large red onion, sliced",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 200.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-2",
+     "text": "1 Tbsp olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-3",
+     "text": "1 chicken stock cube or gel",
+     "kind": "product",
+     "productKey": "chicken_stock_tubs",
+     "qty": 1.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-4",
+     "text": "Juice of 2 lemons",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 2.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-5",
+     "text": "2 cups boiling water",
+     "kind": "basic",
+     "note": "Water"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-6",
+     "text": "1 cup raw orzo",
+     "kind": "product",
+     "productKey": "orzo",
+     "qty": 190.0,
+     "note": "1 cup orzo = ~190 g"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-7",
+     "text": "2 garlic cloves, grated",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-8",
+     "text": "9-pack chicken thighs & legs (skin on)",
+     "kind": "product",
+     "productKey": "chicken_thighs_drums",
+     "qty": 1.0,
+     "note": "Closest pack ~900 g"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-9",
+     "text": "½ punnet baby marrows, chopped",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 175.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-10",
+     "text": "1 cup frozen petit pois peas",
+     "kind": "product",
+     "productKey": "peas",
+     "qty": 140.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-11",
+     "text": "1 lemon, halved",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-12",
+     "text": "Feta, to crumble",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 50.0,
+     "note": "Amount not given - assumed 50 g"
+    },
+    {
+     "id": "one-pot-lemon-chicken-orzo-13",
+     "text": "Fresh basil, chopped",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5
+    }
+   ]
+  },
+  {
+   "id": "smashed-baked-potatoes",
+   "name": "Smashed Baked Potatoes",
+   "category": "Sides & salads",
+   "notes": "Parboil ~40 min, smash, roast 180°C ~45 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXl8EA3gHs1/",
+   "lines": [
+    {
+     "id": "smashed-baked-potatoes-1",
+     "text": "Medium potatoes",
+     "kind": "product",
+     "productKey": "potatoes",
+     "qty": 1000.0,
+     "note": "Amount not given - assumed 1 kg"
+    },
+    {
+     "id": "smashed-baked-potatoes-2",
+     "text": "Olive oil spray",
+     "kind": "product",
+     "productKey": "olive_oil_spray",
+     "qty": 3.0,
+     "note": "Amount not given - assumed a few sprays"
+    },
+    {
+     "id": "smashed-baked-potatoes-3",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "smashed-baked-potatoes-4",
+     "text": "Rosemary",
+     "kind": "product",
+     "productKey": "rosemary",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "low-sugar-choc-crunchies",
+   "name": "Low Sugar Choc Crunchies",
+   "category": "Baking & sweet treats",
+   "notes": "20 x 20 cm tray, 180°C 20–25 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DXOUk5FjW8t/",
+   "lines": [
+    {
+     "id": "low-sugar-choc-crunchies-1",
+     "text": "180 g butter, melted",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 180.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-2",
+     "text": "½ cup sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 100.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-3",
+     "text": "1 cup flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 125.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-4",
+     "text": "1 cup oats",
+     "kind": "product",
+     "productKey": "oats",
+     "qty": 90.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-5",
+     "text": "1 cup desiccated coconut",
+     "kind": "product",
+     "productKey": "desiccated_coconut",
+     "qty": 80.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-6",
+     "text": "½ tsp baking powder",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 2.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-7",
+     "text": "2 Tbsp cocoa powder",
+     "kind": "product",
+     "productKey": "cocoa",
+     "qty": 14.0
+    },
+    {
+     "id": "low-sugar-choc-crunchies-8",
+     "text": "¼ cup chocolate chips, melted",
+     "kind": "product",
+     "productKey": "choc_chips",
+     "qty": 45.0
+    }
+   ]
+  },
+  {
+   "id": "easy-baked-haddock-with-creamy-mozzarella",
+   "name": "Easy Baked Haddock with Creamy Mozzarella",
+   "category": "Mains",
+   "notes": "Poach ~10 min, thicken sauce, grill ~10 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWiUs7POTux/",
+   "lines": [
+    {
+     "id": "easy-baked-haddock-with-creamy-mozzarella-1",
+     "text": "500 g frozen haddock",
+     "kind": "product",
+     "productKey": "haddock",
+     "qty": 500.0
+    },
+    {
+     "id": "easy-baked-haddock-with-creamy-mozzarella-2",
+     "text": "1 cup low-fat milk",
+     "kind": "product",
+     "productKey": "low_fat_milk",
+     "qty": 250.0
+    },
+    {
+     "id": "easy-baked-haddock-with-creamy-mozzarella-3",
+     "text": "1 Tbsp corn starch",
+     "kind": "product",
+     "productKey": "corn_starch",
+     "qty": 8.0
+    },
+    {
+     "id": "easy-baked-haddock-with-creamy-mozzarella-4",
+     "text": "40–60 g mozzarella",
+     "kind": "product",
+     "productKey": "mozzarella",
+     "qty": 50.0
+    },
+    {
+     "id": "easy-baked-haddock-with-creamy-mozzarella-5",
+     "text": "Fresh chives",
+     "kind": "product",
+     "productKey": "chives",
+     "qty": 0.5
+    }
+   ]
+  },
+  {
+   "id": "really-good-green-sauce",
+   "name": "Really Good Green Sauce",
+   "category": "Sauces & dressings",
+   "notes": "Blend. Keeps ~1 week. Adapted from the Seasons cookbook.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DW20KYvun-g/",
+   "lines": [
+    {
+     "id": "really-good-green-sauce-1",
+     "text": "~3 cups soft herbs (basil, coriander, flat-leaf parsley, mint)",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 1.0,
+     "note": "~3 cups herbs: 1 punnet each of basil, coriander, parsley, mint"
+    },
+    {
+     "id": "really-good-green-sauce-2",
+     "text": "~3 cups soft herbs (basil, coriander, flat-leaf parsley, mint) (part 2)",
+     "kind": "product",
+     "productKey": "coriander",
+     "qty": 1.0
+    },
+    {
+     "id": "really-good-green-sauce-3",
+     "text": "~3 cups soft herbs (basil, coriander, flat-leaf parsley, mint) (part 3)",
+     "kind": "product",
+     "productKey": "parsley",
+     "qty": 1.0
+    },
+    {
+     "id": "really-good-green-sauce-4",
+     "text": "~3 cups soft herbs (basil, coriander, flat-leaf parsley, mint) (part 4)",
+     "kind": "product",
+     "productKey": "mint",
+     "qty": 1.0
+    },
+    {
+     "id": "really-good-green-sauce-5",
+     "text": "1 avocado",
+     "kind": "product",
+     "productKey": "avocado",
+     "qty": 1.0
+    },
+    {
+     "id": "really-good-green-sauce-6",
+     "text": "1 chilli",
+     "kind": "product",
+     "productKey": "chilli",
+     "qty": 1.0,
+     "note": "~8 chillies per 50 g"
+    },
+    {
+     "id": "really-good-green-sauce-7",
+     "text": "1 garlic clove",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 1.0,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "really-good-green-sauce-8",
+     "text": "1 small red onion",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 100.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "really-good-green-sauce-9",
+     "text": "Black pepper",
+     "kind": "basic",
+     "note": "Black pepper"
+    },
+    {
+     "id": "really-good-green-sauce-10",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "really-good-green-sauce-11",
+     "text": "⅓ cup avocado/olive/canola oil",
+     "kind": "product",
+     "productKey": "canola_oil",
+     "qty": 83.0,
+     "note": "Canola chosen (cheapest of the three oils)"
+    },
+    {
+     "id": "really-good-green-sauce-12",
+     "text": "Juice of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    }
+   ]
+  },
+  {
+   "id": "roasted-veg-jars",
+   "name": "Roasted Veg Jars",
+   "category": "Lunch & meal prep",
+   "notes": "Roast 180°C ~1 hr.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DW0WURuunVB/",
+   "lines": [
+    {
+     "id": "roasted-veg-jars-1",
+     "text": "Cauliflower",
+     "kind": "product",
+     "productKey": "cauliflower",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 head"
+    },
+    {
+     "id": "roasted-veg-jars-2",
+     "text": "Red & yellow peppers",
+     "kind": "product",
+     "productKey": "red_pepper",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 1 red + 1 yellow"
+    },
+    {
+     "id": "roasted-veg-jars-3",
+     "text": "Red & yellow peppers (part 2)",
+     "kind": "product",
+     "productKey": "yellow_pepper",
+     "qty": 1.0
+    },
+    {
+     "id": "roasted-veg-jars-4",
+     "text": "Rosa tomatoes",
+     "kind": "product",
+     "productKey": "rosa_200",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 200 g"
+    },
+    {
+     "id": "roasted-veg-jars-5",
+     "text": "Baby marrows",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 350.0,
+     "note": "Amount not given - assumed 1 punnet"
+    },
+    {
+     "id": "roasted-veg-jars-6",
+     "text": "2 tins chickpeas, rinsed & drained",
+     "kind": "product",
+     "productKey": "chickpeas_tin",
+     "qty": 2.0
+    },
+    {
+     "id": "roasted-veg-jars-7",
+     "text": "Red onions",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 300.0,
+     "note": "Amount not given - assumed 2 red onions"
+    },
+    {
+     "id": "roasted-veg-jars-8",
+     "text": "Zest of 1 lemon",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "roasted-veg-jars-9",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    },
+    {
+     "id": "roasted-veg-jars-10",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "roasted-veg-jars-11",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    },
+    {
+     "id": "roasted-veg-jars-12",
+     "text": "90-second grains (Woolworths)",
+     "kind": "product",
+     "productKey": "grains_90s",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 pouches"
+    },
+    {
+     "id": "roasted-veg-jars-13",
+     "text": "Feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "Amount not given - assumed 100 g"
+    },
+    {
+     "id": "roasted-veg-jars-14",
+     "text": "Green sauce or pesto",
+     "kind": "product",
+     "productKey": "pesto",
+     "qty": 45.0,
+     "note": "Amount not given - assumed 3 Tbsp pesto"
+    }
+   ]
+  },
+  {
+   "id": "easy-easter-bark",
+   "name": "Easy Easter Bark",
+   "category": "Desserts & ice cream",
+   "notes": "Set in fridge ~2 hrs.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWn0AHfAMqa/",
+   "lines": [
+    {
+     "id": "easy-easter-bark-1",
+     "text": "180 g Cadbury chocolate slab",
+     "kind": "product",
+     "productKey": "cadbury",
+     "qty": 180.0,
+     "note": "Woolworths sells 150 g slabs, not 180 g"
+    },
+    {
+     "id": "easy-easter-bark-2",
+     "text": "1½ cups popped popcorn",
+     "kind": "product",
+     "productKey": "popcorn",
+     "qty": 15.0,
+     "note": "1.5 cups popped = ~15 g"
+    },
+    {
+     "id": "easy-easter-bark-3",
+     "text": "1 cup salted pretzels",
+     "kind": "product",
+     "productKey": "pretzels",
+     "qty": 40.0,
+     "note": "1 cup = ~40 g"
+    },
+    {
+     "id": "easy-easter-bark-4",
+     "text": "Smarties or Smartie eggs",
+     "kind": "product",
+     "productKey": "smarties",
+     "qty": 70.0,
+     "note": "Amount not given - assumed 1 x 70 g box"
+    },
+    {
+     "id": "easy-easter-bark-5",
+     "text": "Sprinkles (optional)",
+     "kind": "product",
+     "productKey": "sprinkles",
+     "qty": 5.0,
+     "note": "Amount not given - assumed 1 tsp (optional)"
+    }
+   ]
+  },
+  {
+   "id": "baked-chocolate-oats",
+   "name": "Baked Chocolate Oats",
+   "category": "Breakfast",
+   "notes": "Fills 4–6 ramekins or 9 muffins. 180°C ~15 min.",
+   "yield": "Fills 4–6 ramekins or 9 muffins",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWk5aawCEpt/",
+   "lines": [
+    {
+     "id": "baked-chocolate-oats-1",
+     "text": "3 ripe bananas",
+     "kind": "product",
+     "productKey": "bananas",
+     "qty": 3.0,
+     "note": "~6 bananas per 800 g"
+    },
+    {
+     "id": "baked-chocolate-oats-2",
+     "text": "2 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 2.0
+    },
+    {
+     "id": "baked-chocolate-oats-3",
+     "text": "1 tsp vanilla essence",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 5.0
+    },
+    {
+     "id": "baked-chocolate-oats-4",
+     "text": "3 Tbsp cocoa powder",
+     "kind": "product",
+     "productKey": "cocoa",
+     "qty": 21.0
+    },
+    {
+     "id": "baked-chocolate-oats-5",
+     "text": "1 cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "baked-chocolate-oats-6",
+     "text": "1 cup oats",
+     "kind": "product",
+     "productKey": "oats",
+     "qty": 90.0
+    },
+    {
+     "id": "baked-chocolate-oats-7",
+     "text": "½ cup flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 62.5
+    },
+    {
+     "id": "baked-chocolate-oats-8",
+     "text": "½ cup desiccated coconut",
+     "kind": "product",
+     "productKey": "desiccated_coconut",
+     "qty": 40.0
+    },
+    {
+     "id": "baked-chocolate-oats-9",
+     "text": "2 heaped tsp baking powder",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 10.0
+    },
+    {
+     "id": "baked-chocolate-oats-10",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "baked-chocolate-oats-11",
+     "text": "2 Tbsp sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 24.0
+    },
+    {
+     "id": "baked-chocolate-oats-12",
+     "text": "Yoghurt & cocoa, to serve",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 150.0,
+     "note": "Amount not given - assumed 150 g yoghurt (cocoa from the tub above)"
+    }
+   ]
+  },
+  {
+   "id": "hot-cross-bun-ice-cream",
+   "name": "Hot Cross Bun Ice Cream",
+   "category": "Desserts & ice cream",
+   "notes": "Freeze 24 hrs; made with a Freeze Wand ice-cream maker.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWiaDP0iBaP/",
+   "lines": [
+    {
+     "id": "hot-cross-bun-ice-cream-1",
+     "text": "1 tsp cinnamon",
+     "kind": "product",
+     "productKey": "cinnamon",
+     "qty": 2.5
+    },
+    {
+     "id": "hot-cross-bun-ice-cream-2",
+     "text": "½ tsp mixed spice",
+     "kind": "product",
+     "productKey": "mixed_spice",
+     "qty": 1.5
+    },
+    {
+     "id": "hot-cross-bun-ice-cream-3",
+     "text": "1 heaped tsp honey",
+     "kind": "product",
+     "productKey": "honey",
+     "qty": 10.0
+    },
+    {
+     "id": "hot-cross-bun-ice-cream-4",
+     "text": "¾ cup evaporated milk",
+     "kind": "product",
+     "productKey": "evaporated_milk",
+     "qty": 190.0
+    },
+    {
+     "id": "hot-cross-bun-ice-cream-5",
+     "text": "Handful chopped hot cross bun",
+     "kind": "product",
+     "productKey": "hot_cross_buns",
+     "qty": 1.0
+    }
+   ]
+  },
+  {
+   "id": "carrot-cake-ice-cream",
+   "name": "Carrot Cake Ice Cream",
+   "category": "Desserts & ice cream",
+   "notes": "Freeze 24 hrs; made with a Freeze Wand ice-cream maker.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWiaDP0iBaP/",
+   "lines": [
+    {
+     "id": "carrot-cake-ice-cream-1",
+     "text": "1 tsp cinnamon (+ extra to sprinkle)",
+     "kind": "product",
+     "productKey": "cinnamon",
+     "qty": 3.0
+    },
+    {
+     "id": "carrot-cake-ice-cream-2",
+     "text": "1 heaped tsp honey",
+     "kind": "product",
+     "productKey": "honey",
+     "qty": 10.0
+    },
+    {
+     "id": "carrot-cake-ice-cream-3",
+     "text": "¾ cup evaporated milk",
+     "kind": "product",
+     "productKey": "evaporated_milk",
+     "qty": 190.0
+    },
+    {
+     "id": "carrot-cake-ice-cream-4",
+     "text": "Handful chopped carrot muffin",
+     "kind": "product",
+     "productKey": "carrot_muffin",
+     "qty": 1.0
+    },
+    {
+     "id": "carrot-cake-ice-cream-5",
+     "text": "Carrot cake crumble",
+     "kind": "product",
+     "productKey": "carrot_muffin",
+     "qty": 1.0,
+     "note": "Costed as a second carrot muffin, crumbled"
+    },
+    {
+     "id": "carrot-cake-ice-cream-6",
+     "text": "Toasted pecans",
+     "kind": "product",
+     "productKey": "pecans",
+     "qty": 20.0,
+     "note": "Amount not given - assumed 20 g"
+    }
+   ]
+  },
+  {
+   "id": "egg-hunt-ice-cream",
+   "name": "Egg Hunt Ice Cream",
+   "category": "Desserts & ice cream",
+   "notes": "Freeze 24 hrs; made with a Freeze Wand ice-cream maker.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWiaDP0iBaP/",
+   "lines": [
+    {
+     "id": "egg-hunt-ice-cream-1",
+     "text": "2 ripe bananas",
+     "kind": "product",
+     "productKey": "bananas",
+     "qty": 2.0,
+     "note": "~6 bananas per 800 g"
+    },
+    {
+     "id": "egg-hunt-ice-cream-2",
+     "text": "1 heaped Tbsp cocoa powder",
+     "kind": "product",
+     "productKey": "cocoa",
+     "qty": 9.0
+    },
+    {
+     "id": "egg-hunt-ice-cream-3",
+     "text": "½ cup evaporated milk",
+     "kind": "product",
+     "productKey": "evaporated_milk",
+     "qty": 125.0
+    },
+    {
+     "id": "egg-hunt-ice-cream-4",
+     "text": "Green-tinted desiccated coconut",
+     "kind": "product",
+     "productKey": "desiccated_coconut",
+     "qty": 10.0,
+     "note": "Amount not given - assumed 10 g (food colouring not costed)"
+    },
+    {
+     "id": "egg-hunt-ice-cream-5",
+     "text": "Small Easter eggs",
+     "kind": "product",
+     "productKey": "easter_eggs",
+     "qty": 50.0,
+     "note": "Amount not given - assumed 1 x 50 g bag"
+    }
+   ]
+  },
+  {
+   "id": "whole-roasted-butternut-with-feta-sage",
+   "name": "Whole-Roasted Butternut with Feta & Sage",
+   "category": "Sides & salads",
+   "notes": "Roast whole 200°C 1 hr; air fry 5 min with toppings.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWYLgKviGbX/",
+   "lines": [
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-1",
+     "text": "Butternut or pumpkin (whole)",
+     "kind": "product",
+     "productKey": "butternut",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-2",
+     "text": "Olive oil (+ spray)",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 15.0,
+     "note": "Amount not given - assumed 1 Tbsp + sprays"
+    },
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-3",
+     "text": "Olive oil (+ spray) (part 2)",
+     "kind": "product",
+     "productKey": "olive_oil_spray",
+     "qty": 3.0
+    },
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-4",
+     "text": "Salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-5",
+     "text": "Feta",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "Amount not given - assumed 100 g"
+    },
+    {
+     "id": "whole-roasted-butternut-with-feta-sage-6",
+     "text": "Fresh sage leaves",
+     "kind": "product",
+     "productKey": "sage",
+     "qty": 0.5
+    }
+   ]
+  },
+  {
+   "id": "egg-pancakes-with-fillings",
+   "name": "Egg Pancakes (with fillings)",
+   "category": "Breakfast",
+   "notes": "Makes 6.",
+   "yield": "Makes 6",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWVcuCauJAG/",
+   "lines": [
+    {
+     "id": "egg-pancakes-with-fillings-1",
+     "text": "6 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 6.0
+    },
+    {
+     "id": "egg-pancakes-with-fillings-2",
+     "text": "Splash of milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 30.0
+    },
+    {
+     "id": "egg-pancakes-with-fillings-3",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "egg-pancakes-with-fillings-4",
+     "text": "Filling 1: cream cheese, chopped salami, feta, chives",
+     "kind": "product",
+     "productKey": "cream_cheese",
+     "qty": 40.0,
+     "note": "Amount not given - assumed per filling: 40 g cream cheese, 40 g salami, 30 g feta"
+    },
+    {
+     "id": "egg-pancakes-with-fillings-5",
+     "text": "Filling 1: cream cheese, chopped salami, feta, chives (part 2)",
+     "kind": "product",
+     "productKey": "salami",
+     "qty": 40.0
+    },
+    {
+     "id": "egg-pancakes-with-fillings-6",
+     "text": "Filling 1: cream cheese, chopped salami, feta, chives (part 3)",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 30.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "egg-pancakes-with-fillings-7",
+     "text": "Filling 1: cream cheese, chopped salami, feta, chives (part 4)",
+     "kind": "product",
+     "productKey": "chives",
+     "qty": 0.25
+    },
+    {
+     "id": "egg-pancakes-with-fillings-8",
+     "text": "Filling 2: cream cheese, smoked salmon, chives, capers",
+     "kind": "product",
+     "productKey": "cream_cheese",
+     "qty": 40.0,
+     "note": "Amount not given - assumed 40 g cream cheese, 50 g salmon, 1 Tbsp capers"
+    },
+    {
+     "id": "egg-pancakes-with-fillings-9",
+     "text": "Filling 2: cream cheese, smoked salmon, chives, capers (part 2)",
+     "kind": "product",
+     "productKey": "smoked_salmon",
+     "qty": 50.0
+    },
+    {
+     "id": "egg-pancakes-with-fillings-10",
+     "text": "Filling 2: cream cheese, smoked salmon, chives, capers (part 3)",
+     "kind": "product",
+     "productKey": "chives",
+     "qty": 0.25
+    },
+    {
+     "id": "egg-pancakes-with-fillings-11",
+     "text": "Filling 2: cream cheese, smoked salmon, chives, capers (part 4)",
+     "kind": "product",
+     "productKey": "capers",
+     "qty": 10.0
+    },
+    {
+     "id": "egg-pancakes-with-fillings-12",
+     "text": "Filling 3: cream cheese, leftover Mexican mince, pickled onions",
+     "kind": "product",
+     "productKey": "cream_cheese",
+     "qty": 40.0,
+     "note": "Amount not given - assumed leftover mince not costed"
+    },
+    {
+     "id": "egg-pancakes-with-fillings-13",
+     "text": "Filling 3: cream cheese, leftover Mexican mince, pickled onions (part 2)",
+     "kind": "product",
+     "productKey": "pickled_onions",
+     "qty": 20.0
+    }
+   ]
+  },
+  {
+   "id": "mediterranean-meatball-bake",
+   "name": "Mediterranean Meatball Bake",
+   "category": "Mains",
+   "notes": "Bake 45 min. Serve with bulgur, wild rice, cauli-rice or couscous.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWQTKXCO4Zo/",
+   "lines": [
+    {
+     "id": "mediterranean-meatball-bake-1",
+     "text": "Ready-made meatballs",
+     "kind": "product",
+     "productKey": "meatballs",
+     "qty": 12.0,
+     "note": "Amount not given - assumed 12 pk"
+    },
+    {
+     "id": "mediterranean-meatball-bake-2",
+     "text": "Mediterranean Cook-in Sauce (Woolworths)",
+     "kind": "product",
+     "productKey": "med_cook_in",
+     "qty": 1.0
+    },
+    {
+     "id": "mediterranean-meatball-bake-3",
+     "text": "1 tin cherry tomatoes (or 1 punnet fresh)",
+     "kind": "product",
+     "productKey": "cherry_tomatoes_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "mediterranean-meatball-bake-4",
+     "text": "Handful pitted green olives, chopped",
+     "kind": "product",
+     "productKey": "green_olives",
+     "qty": 40.0
+    },
+    {
+     "id": "mediterranean-meatball-bake-5",
+     "text": "1 round feta",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "1 round taken as 100 g"
+    },
+    {
+     "id": "mediterranean-meatball-bake-6",
+     "text": "Fresh basil",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5
+    }
+   ]
+  },
+  {
+   "id": "spinach-feta-egg-muffins",
+   "name": "Spinach & Feta Egg Muffins",
+   "category": "Breakfast",
+   "notes": "Makes 12. Bake 12–15 min.",
+   "yield": "Makes 12",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DWDseQxjSaK/",
+   "lines": [
+    {
+     "id": "spinach-feta-egg-muffins-1",
+     "text": "6 eggs",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 6.0
+    },
+    {
+     "id": "spinach-feta-egg-muffins-2",
+     "text": "¼ cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 62.5
+    },
+    {
+     "id": "spinach-feta-egg-muffins-3",
+     "text": "1 heaped tsp wholegrain mustard",
+     "kind": "product",
+     "productKey": "wholegrain_mustard",
+     "qty": 7.0
+    },
+    {
+     "id": "spinach-feta-egg-muffins-4",
+     "text": "1 tsp bicarb (or 2 tsp baking powder)",
+     "kind": "product",
+     "productKey": "bicarb",
+     "qty": 5.0
+    },
+    {
+     "id": "spinach-feta-egg-muffins-5",
+     "text": "200 g baby spinach, blanched & squeezed dry",
+     "kind": "product",
+     "productKey": "baby_spinach",
+     "qty": 200.0
+    },
+    {
+     "id": "spinach-feta-egg-muffins-6",
+     "text": "1 packet (~90 g drained) pitted olives, chopped",
+     "kind": "product",
+     "productKey": "green_olives",
+     "qty": 90.0
+    },
+    {
+     "id": "spinach-feta-egg-muffins-7",
+     "text": "1 small red onion, finely chopped",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 100.0,
+     "note": "1 red onion taken as 150 g"
+    },
+    {
+     "id": "spinach-feta-egg-muffins-8",
+     "text": "1 round feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 100.0,
+     "note": "1 round taken as 100 g"
+    }
+   ]
+  },
+  {
+   "id": "chia-pear-overnight-oats",
+   "name": "Chia & Pear Overnight Oats",
+   "category": "Breakfast",
+   "notes": "Makes 3 portions.",
+   "yield": "Makes 3 portions",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DV-ugSADeko/",
+   "lines": [
+    {
+     "id": "chia-pear-overnight-oats-1",
+     "text": "1 tin pears in fruit juice, chopped (with juice)",
+     "kind": "product",
+     "productKey": "pears_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "chia-pear-overnight-oats-2",
+     "text": "3 Tbsp chia seeds",
+     "kind": "product",
+     "productKey": "chia",
+     "qty": 30.0
+    },
+    {
+     "id": "chia-pear-overnight-oats-3",
+     "text": "1½ cups plain yoghurt",
+     "kind": "product",
+     "productKey": "plain_yoghurt",
+     "qty": 375.0
+    },
+    {
+     "id": "chia-pear-overnight-oats-4",
+     "text": "½ cup oats",
+     "kind": "product",
+     "productKey": "oats",
+     "qty": 45.0
+    }
+   ]
+  },
+  {
+   "id": "roast-veg-grains-bowl",
+   "name": "Roast Veg + Grains Bowl",
+   "category": "Lunch & meal prep",
+   "notes": "Roast 45–60 min. Makes 3 jars.",
+   "yield": "Makes 3 jars",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DV-ugSADeko/",
+   "lines": [
+    {
+     "id": "roast-veg-grains-bowl-1",
+     "text": "Baby marrows",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 350.0,
+     "note": "Amount not given - assumed 1 punnet"
+    },
+    {
+     "id": "roast-veg-grains-bowl-2",
+     "text": "Red onion",
+     "kind": "product",
+     "productKey": "red_onions",
+     "qty": 150.0,
+     "note": "Amount not given - assumed 1 onion"
+    },
+    {
+     "id": "roast-veg-grains-bowl-3",
+     "text": "1 tin artichokes (in brine)",
+     "kind": "product",
+     "productKey": "artichokes",
+     "qty": 1.0,
+     "note": "Closest match; check it is the tinned/brined type"
+    },
+    {
+     "id": "roast-veg-grains-bowl-4",
+     "text": "Rosa tomatoes",
+     "kind": "product",
+     "productKey": "rosa_200",
+     "qty": 1.0,
+     "note": "Amount not given - assumed 200 g"
+    },
+    {
+     "id": "roast-veg-grains-bowl-5",
+     "text": "1 tin chickpeas, rinsed & drained",
+     "kind": "product",
+     "productKey": "chickpeas_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "roast-veg-grains-bowl-6",
+     "text": "Crushed garlic",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.0,
+     "note": "Amount not given - assumed 2 cloves"
+    },
+    {
+     "id": "roast-veg-grains-bowl-7",
+     "text": "Lemon zest (+ squeeze of lemon)",
+     "kind": "product",
+     "productKey": "lemons",
+     "qty": 1.0
+    },
+    {
+     "id": "roast-veg-grains-bowl-8",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "roast-veg-grains-bowl-9",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    },
+    {
+     "id": "roast-veg-grains-bowl-10",
+     "text": "1 packet 90-second grains (Woolworths)",
+     "kind": "product",
+     "productKey": "grains_90s",
+     "qty": 1.0
+    },
+    {
+     "id": "roast-veg-grains-bowl-11",
+     "text": "~1½ rounds feta, crumbled",
+     "kind": "product",
+     "productKey": "feta",
+     "qty": 150.0,
+     "note": "1 round taken as 100 g"
+    }
+   ]
+  },
+  {
+   "id": "5-veg-mince-freezer-base",
+   "name": "5 Veg Mince (freezer base)",
+   "category": "Mains",
+   "notes": "Simmer 30–45 min. Freeze half.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVsQEZGCG7X/",
+   "lines": [
+    {
+     "id": "5-veg-mince-freezer-base-1",
+     "text": "500 g lean mince",
+     "kind": "product",
+     "productKey": "lean_mince",
+     "qty": 500.0
+    },
+    {
+     "id": "5-veg-mince-freezer-base-2",
+     "text": "1 medium onion, chopped",
+     "kind": "product",
+     "productKey": "onions",
+     "qty": 150.0,
+     "note": "1 onion taken as 150 g"
+    },
+    {
+     "id": "5-veg-mince-freezer-base-3",
+     "text": "2–3 garlic cloves, crushed",
+     "kind": "product",
+     "productKey": "garlic",
+     "qty": 2.5,
+     "note": "~10 cloves per 50 g"
+    },
+    {
+     "id": "5-veg-mince-freezer-base-4",
+     "text": "2 medium carrots, grated",
+     "kind": "product",
+     "productKey": "carrots",
+     "qty": 160.0
+    },
+    {
+     "id": "5-veg-mince-freezer-base-5",
+     "text": "4–5 baby marrows, grated",
+     "kind": "product",
+     "productKey": "baby_marrows",
+     "qty": 315.0
+    },
+    {
+     "id": "5-veg-mince-freezer-base-6",
+     "text": "2 tomatoes, diced",
+     "kind": "product",
+     "productKey": "tomatoes",
+     "qty": 2.0
+    },
+    {
+     "id": "5-veg-mince-freezer-base-7",
+     "text": "2 tins whole tomatoes, puréed",
+     "kind": "product",
+     "productKey": "tinned_tomatoes",
+     "qty": 2.0,
+     "note": "Diced tomatoes (cheapest tin) used for whole tomatoes"
+    },
+    {
+     "id": "5-veg-mince-freezer-base-8",
+     "text": "1 tin lentils (optional)",
+     "kind": "product",
+     "productKey": "lentils_tin",
+     "qty": 1.0
+    },
+    {
+     "id": "5-veg-mince-freezer-base-9",
+     "text": "2 packets tomato paste",
+     "kind": "product",
+     "productKey": "tomato_paste",
+     "qty": 100.0,
+     "note": "1 sachet taken as 50 g"
+    },
+    {
+     "id": "5-veg-mince-freezer-base-10",
+     "text": "Bunch fresh basil/thyme",
+     "kind": "product",
+     "productKey": "basil",
+     "qty": 0.5
+    },
+    {
+     "id": "5-veg-mince-freezer-base-11",
+     "text": "Bunch fresh basil/thyme (part 2)",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.5
+    },
+    {
+     "id": "5-veg-mince-freezer-base-12",
+     "text": "½ tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "mince-in-gems",
+   "name": "Mince in Gems",
+   "category": "Mains",
+   "notes": "Air fry 12 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVsQEZGCG7X/",
+   "lines": [
+    {
+     "id": "mince-in-gems-1",
+     "text": "5 Veg Mince (above)",
+     "kind": "recipe",
+     "recipeId": "5-veg-mince-freezer-base",
+     "qty": 1.0,
+     "note": "One batch of 5 Veg Mince"
+    },
+    {
+     "id": "mince-in-gems-2",
+     "text": "Gem squash halves, steamed",
+     "kind": "product",
+     "productKey": "gem_squash",
+     "qty": 6.0,
+     "note": "Amount not given - assumed 6 halves"
+    },
+    {
+     "id": "mince-in-gems-3",
+     "text": "Grated cheese",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 80.0,
+     "note": "Amount not given - assumed 80 g"
+    },
+    {
+     "id": "mince-in-gems-4",
+     "text": "Salt & pepper",
+     "kind": "basic",
+     "note": "Salt & pepper"
+    }
+   ]
+  },
+  {
+   "id": "mince-on-mushrooms",
+   "name": "Mince on Mushrooms",
+   "category": "Mains",
+   "notes": "Air fry 15 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVsQEZGCG7X/",
+   "lines": [
+    {
+     "id": "mince-on-mushrooms-1",
+     "text": "5 Veg Mince (above)",
+     "kind": "recipe",
+     "recipeId": "5-veg-mince-freezer-base",
+     "qty": 1.0,
+     "note": "One batch of 5 Veg Mince"
+    },
+    {
+     "id": "mince-on-mushrooms-2",
+     "text": "Large mushrooms",
+     "kind": "product",
+     "productKey": "portabello",
+     "qty": 4.0,
+     "note": "Amount not given - assumed 4 mushrooms"
+    },
+    {
+     "id": "mince-on-mushrooms-3",
+     "text": "Grated cheese",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 80.0,
+     "note": "Amount not given - assumed 80 g"
+    },
+    {
+     "id": "mince-on-mushrooms-4",
+     "text": "Truffle oil (optional)",
+     "kind": "product",
+     "productKey": "truffle_oil",
+     "qty": 5.0,
+     "note": "Amount not given - assumed 1 tsp (optional)"
+    }
+   ]
+  },
+  {
+   "id": "low-carb-cottage-pie-cauli-mash",
+   "name": "Low-Carb Cottage Pie (cauli mash)",
+   "category": "Mains",
+   "notes": "Air fry 12 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVsQEZGCG7X/",
+   "lines": [
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-1",
+     "text": "5 Veg Mince (above)",
+     "kind": "recipe",
+     "recipeId": "5-veg-mince-freezer-base",
+     "qty": 1.0,
+     "note": "One batch of 5 Veg Mince"
+    },
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-2",
+     "text": "1–2 Tbsp chutney",
+     "kind": "product",
+     "productKey": "chutney",
+     "qty": 22.0
+    },
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-3",
+     "text": "1 head cauliflower, steamed",
+     "kind": "product",
+     "productKey": "cauliflower",
+     "qty": 1.0,
+     "note": "Priced by weight"
+    },
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-4",
+     "text": "¼ cup warm milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 62.5
+    },
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-5",
+     "text": "Pinch of salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "low-carb-cottage-pie-cauli-mash-6",
+     "text": "Grated cheese",
+     "kind": "product",
+     "productKey": "cheddar_grated",
+     "qty": 80.0,
+     "note": "Amount not given - assumed 80 g"
+    }
+   ]
+  },
+  {
+   "id": "melanzane-the-faster-way",
+   "name": "Melanzane (the faster way)",
+   "category": "Mains",
+   "notes": "Roast eggplant 200°C 25–30 min; bake 180°C 30–40 min.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVfpC7FiEPn/",
+   "lines": [
+    {
+     "id": "melanzane-the-faster-way-1",
+     "text": "4–6 large eggplants, sliced",
+     "kind": "product",
+     "productKey": "brinjals",
+     "qty": 1500.0,
+     "note": "4-6 large brinjals taken as ~1.5 kg"
+    },
+    {
+     "id": "melanzane-the-faster-way-2",
+     "text": "Olive oil",
+     "kind": "product",
+     "productKey": "olive_oil",
+     "qty": 30.0,
+     "note": "Amount not given - assumed 2 Tbsp"
+    },
+    {
+     "id": "melanzane-the-faster-way-3",
+     "text": "White sauce: 1½ Tbsp butter",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 21.0
+    },
+    {
+     "id": "melanzane-the-faster-way-4",
+     "text": "White sauce: 3–4 Tbsp cake flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 30.0
+    },
+    {
+     "id": "melanzane-the-faster-way-5",
+     "text": "White sauce: ±1 cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "melanzane-the-faster-way-6",
+     "text": "White sauce: ½–1 tsp hot English mustard + salt",
+     "kind": "product",
+     "productKey": "english_mustard",
+     "qty": 4.0,
+     "note": "Salt not costed"
+    },
+    {
+     "id": "melanzane-the-faster-way-7",
+     "text": "2 x 350 ml bottles crushed tomato sauce (or 2 tins Italian tomatoes + 2 garlic cloves + 2 Tbsp Italian herbs)",
+     "kind": "product",
+     "productKey": "passata",
+     "qty": 2.0
+    },
+    {
+     "id": "melanzane-the-faster-way-8",
+     "text": "Grated white cheddar",
+     "kind": "product",
+     "productKey": "white_cheddar",
+     "qty": 100.0,
+     "note": "Amount not given - assumed 100 g"
+    },
+    {
+     "id": "melanzane-the-faster-way-9",
+     "text": "Fresh thyme",
+     "kind": "product",
+     "productKey": "thyme",
+     "qty": 0.25
+    }
+   ]
+  },
+  {
+   "id": "reduced-sugar-peanut-butter-bites",
+   "name": "Reduced Sugar Peanut Butter Bites",
+   "category": "Baking & sweet treats",
+   "notes": "Bake 180°C 10–15 min. Adapted from Drizzle & Dip.",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DVdMVbTDVqR/",
+   "lines": [
+    {
+     "id": "reduced-sugar-peanut-butter-bites-1",
+     "text": "115 g (½ cup) butter, softened",
+     "kind": "product",
+     "productKey": "butter",
+     "qty": 115.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-2",
+     "text": "100 g (½ cup) brown sugar",
+     "kind": "product",
+     "productKey": "brown_sugar",
+     "qty": 100.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-3",
+     "text": "1 egg",
+     "kind": "product",
+     "productKey": "eggs",
+     "qty": 1.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-4",
+     "text": "250 g (1 cup) peanut butter (sugar-free)",
+     "kind": "product",
+     "productKey": "peanut_butter",
+     "qty": 250.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-5",
+     "text": "½ tsp vanilla extract",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 2.5,
+     "note": "Vanilla essence used (extract costs ~6x more)"
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-6",
+     "text": "190 g (1½ cups) cake flour",
+     "kind": "product",
+     "productKey": "cake_flour",
+     "qty": 190.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-7",
+     "text": "½ tsp baking powder or bicarb",
+     "kind": "product",
+     "productKey": "baking_powder",
+     "qty": 2.0
+    },
+    {
+     "id": "reduced-sugar-peanut-butter-bites-8",
+     "text": "½ tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    }
+   ]
+  },
+  {
+   "id": "biscoff-crumble-vanilla-ice-cream",
+   "name": "Biscoff Crumble Vanilla Ice Cream",
+   "category": "Desserts & ice cream",
+   "notes": "Churned in an ice-cream maker (~30 min).",
+   "yield": "",
+   "link": "https://www.instagram.com/jadeseeliger_dietitian/reel/DU7hE3UiBVI/",
+   "lines": [
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-1",
+     "text": "500 ml fresh cream",
+     "kind": "product",
+     "productKey": "fresh_cream",
+     "qty": 500.0
+    },
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-2",
+     "text": "½ cup white sugar",
+     "kind": "product",
+     "productKey": "white_sugar",
+     "qty": 100.0
+    },
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-3",
+     "text": "1 cup milk",
+     "kind": "product",
+     "productKey": "milk",
+     "qty": 250.0
+    },
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-4",
+     "text": "2 tsp vanilla extract",
+     "kind": "product",
+     "productKey": "vanilla_essence",
+     "qty": 10.0,
+     "note": "Vanilla essence used (extract costs ~6x more)"
+    },
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-5",
+     "text": "1 tsp salt",
+     "kind": "basic",
+     "note": "Salt"
+    },
+    {
+     "id": "biscoff-crumble-vanilla-ice-cream-6",
+     "text": "Biscoff biscuits, crushed",
+     "kind": "product",
+     "productKey": "biscoff",
+     "qty": 12.0,
+     "note": "Amount not given - assumed 1 pack (12 biscuits)"
+    }
+   ]
+  }
+ ]
+}
