@@ -7,6 +7,7 @@ import { useApp, useSummaries } from "../lib/store";
 import type { PlanEntry } from "../types";
 import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
+import { Thumb } from "./Photo";
 
 export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: string) => void }) {
   const current = weekStart(today());
@@ -199,7 +200,8 @@ export function RecipePicker({ title, onClose, onPick }: { title: string; onClos
         {shown.map((r) => (
           <li key={r.id}>
             <button onClick={() => onPick(r.id)}>
-              <span>
+              <Thumb recipe={r} />
+              <span className="pick-text">
                 <span className="pick-name">{r.name}</span>
                 <span className="pick-cat">{r.category}</span>
               </span>

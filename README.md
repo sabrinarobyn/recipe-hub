@@ -23,13 +23,18 @@ costed ingredient lines, with prices from woolworths.co.za on 6 October 2026.
   amounts from the text (e.g. "500 g spinach" or "2 eggs"). A recipe can use another recipe as an
   ingredient, the way the mince dishes use one batch of *5 Veg Mince*.
 
+- **Photos**: add a photo to any recipe from the card, the recipe page or the editor (on a phone
+  this offers the camera or photo library; on a computer you can also drop or paste an image).
+  Photos are shrunk to about 720 px before saving. Recipes without one show a lettered tile.
+
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
 reset.
 
 ### Where data is saved
 
-- Run locally or on GitHub Pages, data is saved in the browser (`localStorage`). Use
+- Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
+  IndexedDB). Use
   **Settings → Download backup / Restore from backup** to move it to another device.
 - Hosted as a Claude artifact, it's saved privately to your Claude account, so it follows you
   across devices.

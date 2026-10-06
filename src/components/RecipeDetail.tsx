@@ -4,9 +4,10 @@ import { qty, rand, slugify, uid } from "../lib/format";
 import { editState, seedRecipeIds, useApp, useSummaries } from "../lib/store";
 import type { IngredientLine } from "../types";
 import { ConfirmButton, Icon, Modal } from "./ui";
+import { PhotoField, photoError } from "./Photo";
 
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
-  const { catalog, data, actions } = useApp();
+  const { catalog, data, actions, photos } = useApp();
   const summaries = useSummaries();
   const recipe = catalog.recipes.get(id);
   if (!recipe) return null;
@@ -20,6 +21,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
     while (catalog.recipeList.some((r) => r.name === name)) name = `${recipe.name} (copy ${n++})`;
     const newId = `${slugify(name)}-${uid().slice(0, 4)}`;
     actions.saveRecipe({ ...recipe, id: newId, name, lines: recipe.lines.map((l) => ({ ...l, id: uid() })) });
+    if (photos[id]) actions.setPhoto(newId, photos[id]).catch(() => {});
     open.notify(`Made a copy: ${name}`);
     open.recipe(newId);
   };
@@ -59,6 +61,19 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
         </>
       }
     >
+      <PhotoField
+        recipe={recipe}
+        url={photos[id]}
+        notify={open.notify}
+        onChange={async (url) => {
+          try {
+            await actions.setPhoto(id, url);
+            open.notify(url ? "Photo saved" : "Photo removed");
+          } catch (e) {
+            open.notify(photoError(e));
+          }
+        }}
+      />
       <div className="detail-meta">
         <span className="eyebrow">{recipe.category}</span>
         {recipe.yield && <span className="pill">{recipe.yield}</span>}

@@ -1695,3 +1695,156 @@ select.input {
   flex-direction: column;
   gap: 4px;
 }
+
+/* ---------- photos ---------- */
+.card-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--surface-2);
+  overflow: hidden;
+  cursor: pointer;
+}
+div.card-photo {
+  cursor: default;
+}
+.card-photo img,
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--tint-bg);
+  color: var(--tint-fg);
+  /* faint chopping-board grain */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 10px,
+    color-mix(in srgb, var(--tint-fg) 6%, transparent) 10px 11px
+  );
+}
+.tint-0 {
+  --tint-bg: var(--accent-soft);
+  --tint-fg: var(--accent);
+}
+.tint-1 {
+  --tint-bg: var(--butternut-soft);
+  --tint-fg: var(--butternut);
+}
+.tint-2 {
+  --tint-bg: var(--beet-soft);
+  --tint-fg: var(--beet);
+}
+.tint-3 {
+  --tint-bg: var(--surface-2);
+  --tint-fg: var(--muted);
+}
+.photo-letter {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  line-height: 1;
+  opacity: 0.5;
+}
+.photo-add {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+.recipe-card:hover .photo-add,
+.photo-add:focus-visible {
+  opacity: 1;
+}
+.photo-field {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex: none;
+}
+.photo-field.is-over {
+  outline: 3px dashed var(--accent);
+  outline-offset: -3px;
+}
+.photo-hero {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 320px;
+  object-fit: cover;
+}
+.photo-field .photo-placeholder {
+  height: 150px;
+}
+.photo-empty-text {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  max-width: calc(100% - 180px);
+  font-size: var(--step--1);
+  color: var(--ink);
+  opacity: 0.75;
+}
+.photo-actions {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.btn-on-photo {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-color: transparent;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+}
+@media (max-width: 600px) {
+  .photo-empty-text {
+    display: none;
+  }
+}
+.thumb {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: block;
+}
+.thumb .photo-letter {
+  font-size: 1.3rem;
+}
+.pick-list button {
+  justify-content: flex-start;
+}
+.pick-text {
+  flex: 1;
+  min-width: 0;
+}
+.modal-body .search {
+  flex: none;
+}

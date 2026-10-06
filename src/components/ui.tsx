@@ -117,6 +117,7 @@ const PATHS: Record<string, string> = {
   download: "M12 4v11M7 10l5 5 5-5M5 20h14",
   upload: "M12 20V9M7 14l5-5 5 5M5 4h14",
   home: "M4 11l8-7 8 7v9h-5v-6H9v6H4z",
+  camera: "M4 8h3l2-3h6l2 3h3v11H4zM12 10a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z",
 };
 
 export function Icon({ name, size = 18 }: { name: keyof typeof PATHS | string; size?: number }) {

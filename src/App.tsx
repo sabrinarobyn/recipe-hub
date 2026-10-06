@@ -118,6 +118,7 @@ export default function App() {
         <RecipeEditor
           recipe={editing === "new" ? null : editing}
           onClose={() => setEditing(null)}
+          notify={notify}
           onSaved={(r) => {
             setEditing(null);
             setDetailId(r.id);

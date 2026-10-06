@@ -41,9 +41,20 @@ export function saveLocal(data: UserData): void {
 
 /* ---------- Claude-hosted page: keep data in the viewer's private store ---------- */
 
+interface DocSnap {
+  id: string;
+  exists: boolean;
+  data(): Record<string, unknown> | undefined;
+}
 interface DocRef {
-  get(): Promise<{ exists: boolean; data(): Record<string, unknown> | undefined }>;
+  get(): Promise<DocSnap>;
   set(data: Record<string, unknown>): Promise<void>;
+  delete(): Promise<void>;
+  collection(path: string): CollectionRef;
+}
+interface CollectionRef {
+  doc(id: string): DocRef;
+  limit(n: number): { get(): Promise<{ docs: DocSnap[] }> };
 }
 interface ClaudeRuntime {
   use(name: string): Promise<unknown>;
@@ -52,6 +63,8 @@ interface ClaudeRuntime {
 export interface RemoteStore {
   load(): Promise<UserData | null>;
   save(data: UserData): Promise<void>;
+  loadPhotos(): Promise<Record<string, string>>;
+  setPhoto(recipeId: string, dataUrl: string | null): Promise<void>;
 }
 
 function claudeRuntime(): ClaudeRuntime | null {
@@ -78,6 +91,8 @@ export async function connectRemote(): Promise<RemoteStore | null> {
   // Two documents keep each under the store's per-document size limit.
   const core = db.doc(`data/users/${id}/core`);
   const recipes = db.doc(`data/users/${id}/recipes`);
+  // One document per photo, each well under the size limit.
+  const photos = db.doc(`data/users/${id}/photos`).collection("items");
   const written: Record<string, string> = {};
   const queue: Record<string, Promise<void>> = {};
 
@@ -108,6 +123,22 @@ export async function connectRemote(): Promise<RemoteStore | null> {
     async save(data) {
       const { recipeEdits, ...rest } = data;
       await Promise.all([write("core", core, rest), write("recipes", recipes, { recipeEdits })]);
+    },
+    async loadPhotos() {
+      const snap = await photos.limit(1000).get();
+      const out: Record<string, string> = {};
+      for (const d of snap.docs) {
+        const url = d.data()?.url;
+        if (typeof url === "string") out[d.id] = url;
+      }
+      return out;
+    },
+    setPhoto(recipeId, dataUrl) {
+      const ref = photos.doc(recipeId);
+      const name = `photo:${recipeId}`;
+      const next = (queue[name] ?? Promise.resolve()).then(() => (dataUrl ? ref.set({ url: dataUrl }) : ref.delete()));
+      queue[name] = next.catch(() => {});
+      return next;
     },
   };
 }

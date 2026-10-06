@@ -3,6 +3,7 @@ import type { Open } from "../App";
 import { rand } from "../lib/format";
 import { editState, seedRecipeIds, useApp, useSummaries } from "../lib/store";
 import { Icon } from "./ui";
+import { CardPhoto } from "./Photo";
 
 type Sort = "name" | "cheap" | "dear" | "shop";
 
@@ -104,6 +105,7 @@ export function RecipesView({ open }: { open: Open }) {
             const state = editState(data.recipeEdits, seedRecipeIds, r.id);
             return (
               <li key={r.id} className="recipe-card">
+                <CardPhoto recipe={r} onOpen={() => open.recipe(r.id)} notify={open.notify} />
                 <button className="recipe-card-main" onClick={() => open.recipe(r.id)}>
                   <span className="eyebrow">
                     {r.category}

@@ -3,6 +3,7 @@ import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { connectRemote, emptyUserData, loadLocal, saveLocal, type RemoteStore } from "./storage";
+import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
 
 export const seed = seedJson as Seed;
 
@@ -51,28 +52,63 @@ function useAppDataInternal() {
   const latest = useRef(data);
   latest.current = data;
 
+  const [photos, setPhotos] = useState<Photos>({});
+  const photosRef = useRef(photos);
+  photosRef.current = photos;
+
   useEffect(() => {
     let cancelled = false;
     setSync("connecting");
-    connectRemote()
-      .then(async (store) => {
-        if (cancelled) return;
-        if (!store) return setSync("browser");
-        const saved = await store.load();
-        remote.current = store;
-        // Edits made while connecting win over the stored copy.
-        if (saved && !changedByUser.current) {
-          setData(saved);
-          saveLocal(saved);
-        } else {
-          await store.save(latest.current);
-        }
-        if (!cancelled) setSync("account");
-      })
-      .catch(() => !cancelled && setSync("error"));
+    (async () => {
+      const localPhotos = await loadLocalPhotos();
+      if (cancelled) return;
+      setPhotos((p) => ({ ...localPhotos, ...p }));
+      const store = await connectRemote();
+      if (cancelled) return;
+      if (!store) return setSync("browser");
+      const [saved, remotePhotos] = await Promise.all([store.load(), store.loadPhotos()]);
+      remote.current = store;
+      // Edits made while connecting win over the stored copy.
+      if (saved && !changedByUser.current) {
+        setData(saved);
+        saveLocal(saved);
+      } else {
+        await store.save(latest.current);
+      }
+      if (saved) {
+        // The account copy is the record: make this browser's photo cache match it.
+        await replaceLocalPhotos(remotePhotos);
+        if (!cancelled) setPhotos(remotePhotos);
+      } else {
+        // First time on this account: bring up photos added in this browser.
+        for (const [id, url] of Object.entries(photosRef.current)) await store.setPhoto(id, url);
+      }
+      if (!cancelled) setSync("account");
+    })().catch(() => !cancelled && setSync("error"));
     return () => {
       cancelled = true;
     };
+  }, []);
+
+  const setPhoto = useCallback(async (recipeId: string, dataUrl: string | null) => {
+    setPhotos((p) => {
+      const next = { ...p };
+      if (dataUrl) next[recipeId] = dataUrl;
+      else delete next[recipeId];
+      return next;
+    });
+    await saveLocalPhoto(recipeId, dataUrl);
+    await remote.current?.setPhoto(recipeId, dataUrl);
+  }, []);
+
+  const replacePhotos = useCallback(async (next: Photos) => {
+    const before = photosRef.current;
+    setPhotos(next);
+    await replaceLocalPhotos(next);
+    const store = remote.current;
+    if (!store) return;
+    for (const id of Object.keys(before)) if (!(id in next)) await store.setPhoto(id, null);
+    for (const [id, url] of Object.entries(next)) if (before[id] !== url) await store.setPhoto(id, url);
   }, []);
 
   const timer = useRef<number>();
@@ -127,12 +163,14 @@ function useAppDataInternal() {
           return { ...d, productEdits };
         }),
       saveRecipe: (r: Recipe) => update((d) => ({ ...d, recipeEdits: { ...d.recipeEdits, [r.id]: r } })),
-      deleteRecipe: (id: string) =>
+      deleteRecipe: (id: string) => {
+        if (photosRef.current[id]) setPhoto(id, null).catch(() => {});
         update((d) => ({
           ...d,
           recipeEdits: { ...d.recipeEdits, [id]: null },
           plan: d.plan.filter((e) => e.recipeId !== id),
-        })),
+        }));
+      },
       resetRecipe: (id: string) =>
         update((d) => {
           const recipeEdits = { ...d.recipeEdits };
@@ -149,11 +187,13 @@ function useAppDataInternal() {
       updateList: (week: string, fn: (l: WeekList) => WeekList) =>
         update((d) => ({ ...d, lists: { ...d.lists, [week]: fn(d.lists[week] ?? emptyList()) } })),
       replaceAll,
+      setPhoto,
+      replacePhotos,
     }),
-    [update, replaceAll],
+    [update, replaceAll, setPhoto, replacePhotos],
   );
 
-  return { data, catalog, sync, actions };
+  return { data, catalog, sync, actions, photos };
 }
 
 type AppData = ReturnType<typeof useAppDataInternal>;

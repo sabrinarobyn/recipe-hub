@@ -6,6 +6,7 @@ import { buildCatalog, useApp } from "../lib/store";
 import type { IngredientLine, LineKind, Product, Recipe } from "../types";
 import { ProductEditor } from "./PricesView";
 import { Icon, Modal, NumberField } from "./ui";
+import { PhotoField, photoError } from "./Photo";
 
 const KINDS: { id: LineKind; label: string }[] = [
   { id: "product", label: "Woolworths product" },
@@ -16,8 +17,20 @@ const KINDS: { id: LineKind; label: string }[] = [
 
 const NEW_CATEGORY = "__new__";
 
-export function RecipeEditor({ recipe, onClose, onSaved }: { recipe: Recipe | null; onClose: () => void; onSaved: (r: Recipe) => void }) {
-  const { catalog, data, actions } = useApp();
+export function RecipeEditor({
+  recipe,
+  onClose,
+  onSaved,
+  notify,
+}: {
+  recipe: Recipe | null;
+  onClose: () => void;
+  onSaved: (r: Recipe) => void;
+  notify: (m: string) => void;
+}) {
+  const { catalog, data, actions, photos } = useApp();
+  /** undefined = photo unchanged; null = remove it. */
+  const [photo, setPhoto] = useState<string | null | undefined>(undefined);
   const isNew = !recipe;
   const [draft, setDraft] = useState<Recipe>(
     () =>
@@ -100,6 +113,7 @@ export function RecipeEditor({ recipe, onClose, onSaved }: { recipe: Recipe | nu
       });
     const saved: Recipe = { ...draft, id, name, category, lines, notes: draft.notes.trim(), yield: draft.yield.trim(), link: draft.link.trim() };
     actions.saveRecipe(saved);
+    if (photo !== undefined) actions.setPhoto(id, photo).catch((e) => notify(photoError(e)));
     onSaved(saved);
   };
 
@@ -131,6 +145,12 @@ export function RecipeEditor({ recipe, onClose, onSaved }: { recipe: Recipe | nu
         </>
       }
     >
+      <PhotoField
+        recipe={draft}
+        url={photo === undefined ? photos[draft.id] : (photo ?? undefined)}
+        onChange={(url) => setPhoto(url)}
+        notify={notify}
+      />
       <div className="form-grid">
         <label className="field span-2">
           <span className="field-label">Recipe name</span>

@@ -5,21 +5,24 @@ import { seed, useApp } from "../lib/store";
 import { ConfirmButton, Icon, Modal } from "./ui";
 
 export function SettingsModal({ onClose, notify }: { onClose: () => void; notify: (m: string) => void }) {
-  const { data, sync, actions } = useApp();
+  const { data, sync, actions, photos } = useApp();
+  const photoCount = Object.keys(photos).length;
   const fileRef = useRef<HTMLInputElement>(null);
   const recipeCount = Object.keys(data.recipeEdits).length;
   const productCount = Object.keys(data.productEdits).length;
 
   const backup = async () => {
-    const ok = await saveFile(`recipe-hub-backup-${today()}.json`, JSON.stringify(data, null, 1), "application/json");
+    const ok = await saveFile(`recipe-hub-backup-${today()}.json`, JSON.stringify({ ...data, photos }), "application/json");
     if (!ok) notify("Downloads aren't available here.");
   };
 
   const restore = async (file: File) => {
     try {
-      const next = normalize(JSON.parse(await file.text()));
+      const raw = JSON.parse(await file.text());
+      const next = normalize(raw);
       if (!next) throw new Error();
       actions.replaceAll(next);
+      if (raw.photos && typeof raw.photos === "object") await actions.replacePhotos(raw.photos);
       notify("Restored your backup");
       onClose();
     } catch {
@@ -39,7 +42,7 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
           {sync === "error" && "Couldn't reach your account just now. Changes are kept in this browser and will sync when it reconnects."}
         </p>
         <p className="hint">
-          You've changed {productCount} product{productCount === 1 ? "" : "s"} and {recipeCount} recipe{recipeCount === 1 ? "" : "s"}, and planned{" "}
+          You've changed {productCount} product{productCount === 1 ? "" : "s"} and {recipeCount} recipe{recipeCount === 1 ? "" : "s"}, added {photoCount} photo{photoCount === 1 ? "" : "s"}, and planned{" "}
           {data.plan.length} meal{data.plan.length === 1 ? "" : "s"}.
         </p>
         <div className="btn-row">
@@ -66,11 +69,12 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
 
       <section className="settings-block">
         <h3 className="sub-head">Start over</h3>
-        <p className="hint">Puts every recipe and price back to the original spreadsheet and empties your plans and lists.</p>
+        <p className="hint">Puts every recipe and price back to the original spreadsheet, removes your photos, and empties your plans and lists.</p>
         <ConfirmButton
           confirmLabel="Tap again to erase everything"
           onConfirm={() => {
             actions.replaceAll(emptyUserData());
+            actions.replacePhotos({}).catch(() => {});
             notify("Back to the original spreadsheet");
             onClose();
           }}
