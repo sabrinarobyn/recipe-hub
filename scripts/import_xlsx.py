@@ -10,6 +10,7 @@ src/data/seed.json. Needs openpyxl (`pip install openpyxl`).
 The workbook is read with cached values, so open and save it in Excel once
 after editing formulas so the values are up to date.
 """
+import csv
 import json
 import re
 import sys
@@ -20,6 +21,8 @@ import openpyxl
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XLSX = ROOT / "data" / "Jade_Seeliger_Recipes_Woolworths_Costed.xlsx"
 DEFAULT_OUT = ROOT / "src" / "data" / "seed.json"
+NUTRITION_CSV = ROOT / "data" / "nutrition.csv"
+SERVINGS_CSV = ROOT / "data" / "servings.csv"
 
 # Shopping-list sections, assigned per product key. Anything not listed
 # falls back to "Pantry".
@@ -100,6 +103,21 @@ def main():
         })
     product_keys = {p["key"] for p in products}
 
+    # Nutrition per 100 g (or 100 ml), with the weight of one unit for products
+    # counted in eggs, punnets, cloves and so on.
+    with open(NUTRITION_CSV, newline="", encoding="utf-8") as f:
+        nutrition = {row["key"]: row for row in csv.DictReader(f)}
+    missing = product_keys - nutrition.keys()
+    if missing:
+        raise SystemExit(f"No nutrition row for: {', '.join(sorted(missing))}")
+    for p in products:
+        row = nutrition[p["key"]]
+        p["nutrition"] = {k: float(row[k]) for k in ("kcal", "protein", "carbs", "fat", "fibre")}
+        if p["unit"] not in ("g", "ml"):
+            if not row["grams_per_unit"]:
+                raise SystemExit(f"{p['key']} is counted in {p['unit']} and needs grams_per_unit")
+            p["gramsPerUnit"] = float(row["grams_per_unit"])
+
     # Recipes (headline info)
     recipes = {}
     order = []
@@ -121,6 +139,13 @@ def main():
             "lines": [],
         }
         order.append(name)
+
+    servings = {}
+    if SERVINGS_CSV.exists():
+        with open(SERVINGS_CSV, newline="", encoding="utf-8") as f:
+            servings = {row["recipe_id"]: float(row["servings"]) for row in csv.DictReader(f)}
+    for r in recipes.values():
+        r["servings"] = servings.get(r["id"])
 
     # Ingredient lines
     ws = wb["Ingredient Costing"]

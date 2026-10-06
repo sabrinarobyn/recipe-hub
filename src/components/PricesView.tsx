@@ -6,7 +6,7 @@ import { today } from "../lib/dates";
 import { packLabel, rand, shortDate, slugify } from "../lib/format";
 import { saveFile } from "../lib/storage";
 import { editState, seed, seedProductKeys, useApp } from "../lib/store";
-import type { Product } from "../types";
+import type { Nutrition, Product } from "../types";
 import { ConfirmButton, Icon, Modal, NumberField } from "./ui";
 
 type Filter = "all" | "promo" | "mine" | "unused" | "planned";
@@ -305,6 +305,15 @@ export function PricesView({ open }: { open: Open }) {
   );
 }
 
+const NUTRIENTS: [keyof Nutrition, string][] = [
+  ["kcal", "Energy (kcal)"],
+  ["protein", "Protein (g)"],
+  ["carbs", "Carbs (g)"],
+  ["fat", "Fat (g)"],
+  ["fibre", "Fibre (g)"],
+];
+const EMPTY_NUTRITION: Nutrition = { kcal: 0, protein: 0, carbs: 0, fat: 0, fibre: 0 };
+
 const UNITS = ["g", "ml", "ea", "punnet", "bunch", "clove", "slice", "stick", "nest"];
 
 export function ProductEditor({
@@ -442,6 +451,39 @@ export function ProductEditor({
           <span className="field-label">Note (optional)</span>
           <input id="product-note" className="input" value={draft.note} onChange={(e) => set({ note: e.target.value })} placeholder="e.g. 1 onion taken as 150 g" />
         </label>
+        <h3 className="sub-head span-2">Nutrition per 100 {draft.unit === "ml" ? "ml" : "g"}</h3>
+        <p className="hint span-2">
+          Copy these from the pack's nutrition label (enter kJ or kcal, the other fills in). They're used for the calories and macros of
+          every recipe with this product.
+        </p>
+        <div className="nutrition-fields span-2">
+          <label className="field">
+            <span className="field-label">Energy (kJ)</span>
+            <NumberField
+              id="product-kj"
+              value={draft.nutrition ? Math.round(draft.nutrition.kcal * 4.184) : null}
+              onCommit={(n) => set({ nutrition: { ...(draft.nutrition ?? EMPTY_NUTRITION), kcal: Math.round(((n ?? 0) / 4.184) * 10) / 10 } })}
+              placeholder="0"
+            />
+          </label>
+          {NUTRIENTS.map(([field, label]) => (
+            <label className="field" key={field}>
+              <span className="field-label">{label}</span>
+              <NumberField
+                id={`product-${field}`}
+                value={draft.nutrition?.[field] ?? null}
+                onCommit={(n) => set({ nutrition: { ...(draft.nutrition ?? EMPTY_NUTRITION), [field]: n ?? 0 } })}
+                placeholder="0"
+              />
+            </label>
+          ))}
+        </div>
+        {draft.unit !== "g" && draft.unit !== "ml" && (
+          <label className="field">
+            <span className="field-label">Weight of 1 {draft.unit || "unit"} (g)</span>
+            <NumberField id="product-unit-grams" value={draft.gramsPerUnit ?? null} onCommit={(n) => set({ gramsPerUnit: n })} placeholder="e.g. 50 for an egg" />
+          </label>
+        )}
         {!isNew && usedIn > 0 && <p className="hint span-2">Used in {usedIn} recipe{usedIn > 1 ? "s" : ""}, so it can't be deleted.</p>}
         {error && <p className="form-error span-2">{error}</p>}
       </div>

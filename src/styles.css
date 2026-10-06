@@ -17,6 +17,9 @@
   --beet-soft: #f7dfe5;
   --paper: #fffdf7;
   --paper-ink: #2a2a24;
+  --macro-p: #2c6a4c;
+  --macro-c: #c9831f;
+  --macro-f: #6d5a99;
   --shadow: 0 1px 2px rgb(24 34 29 / 0.06), 0 4px 16px rgb(24 34 29 / 0.06);
   --backdrop: rgb(18 26 22 / 0.45);
 
@@ -52,6 +55,9 @@
     --beet-soft: #3c1b24;
     --paper: #1d2420;
     --paper-ink: #e6e2d6;
+    --macro-p: #78c19a;
+    --macro-c: #eaa65a;
+    --macro-f: #b4a3e0;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.25);
     --backdrop: rgb(0 0 0 / 0.6);
     color-scheme: dark;
@@ -74,6 +80,9 @@
   --beet-soft: #3c1b24;
   --paper: #1d2420;
   --paper-ink: #e6e2d6;
+  --macro-p: #78c19a;
+  --macro-c: #eaa65a;
+  --macro-f: #b4a3e0;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.25);
   --backdrop: rgb(0 0 0 / 0.6);
   color-scheme: dark;
@@ -1864,4 +1873,146 @@ div.card-photo {
 }
 .sync-dot {
   flex: none;
+}
+
+/* ---------- nutrition ---------- */
+.macro-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.macro-kcal {
+  color: var(--ink);
+  font-weight: 500;
+}
+.macro-letter {
+  font-weight: 600;
+}
+.macro-p {
+  color: var(--macro-p);
+}
+.macro-c {
+  color: var(--macro-c);
+}
+.macro-f {
+  color: var(--macro-f);
+}
+.card-macros {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+.card-macros .cost-label {
+  font-size: 0.66rem;
+}
+.energy-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.energy-bar span {
+  display: block;
+  height: 100%;
+}
+.eb-p {
+  background: var(--macro-p);
+}
+.eb-c {
+  background: var(--macro-c);
+}
+.eb-f {
+  background: var(--macro-f);
+}
+.nutrition {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.nutrition-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+.nutrition-kcal {
+  display: block;
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.macro-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.macro-grid dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.macro-grid dd {
+  margin: 2px 0 0;
+  font-size: var(--step-0);
+}
+.macro-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+@media (max-width: 600px) {
+  .macro-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.entry-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.entry-kcal {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.day-macros {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+.day-macros .cost-label {
+  font-size: 0.66rem;
+}
+.editor-nutrition {
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+.nutrition-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.nutrition-fields .input {
+  font-family: var(--font-mono);
 }

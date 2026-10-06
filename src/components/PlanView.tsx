@@ -3,7 +3,9 @@ import type { Open } from "../App";
 import { buildShoppingList } from "../lib/costing";
 import { addDays, dayMonth, dayName, today, weekDays, weekLabel, weekStart } from "../lib/dates";
 import { rand, uid } from "../lib/format";
-import { useApp, useSummaries } from "../lib/store";
+import { useApp, useNutrition, useSummaries } from "../lib/store";
+import { addMacros, ZERO } from "../lib/nutrition";
+import { kcal, MacroLine } from "./Nutrition";
 import type { PlanEntry } from "../types";
 import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
@@ -35,6 +37,12 @@ export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: strin
 export function PlanView({ open, week, setWeek }: { open: Open; week: string; setWeek: (w: string) => void }) {
   const { data, catalog, actions } = useApp();
   const summaries = useSummaries();
+  const nutrition = useNutrition();
+  /** One serving of each planned meal: what one person eats. */
+  const serving = (recipeId: string) => {
+    const n = nutrition.get(recipeId);
+    return n ? (n.perServing ?? n.total) : ZERO;
+  };
   const [picking, setPicking] = useState<string | null>(null);
   const [editing, setEditing] = useState<PlanEntry | null>(null);
   const days = weekDays(week);
@@ -46,6 +54,8 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     [data.plan, week, end, catalog],
   );
   const list = useMemo(() => buildShoppingList(entries, catalog), [entries, catalog]);
+  const weekTotal = entries.reduce((acc, e) => addMacros(acc, serving(e.recipeId)), ZERO);
+  const plannedDays = new Set(entries.map((e) => e.date)).size;
   const lastWeek = useMemo(() => {
     const from = addDays(week, -7);
     return data.plan.filter((e) => e.date >= from && e.date < week && catalog.recipes.has(e.recipeId));
@@ -90,6 +100,12 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
           <span className="cost-label">Value of what you use</span>
           <span className="summary-value num">{rand(list.usedTotal)}</span>
         </div>
+        {plannedDays > 0 && (
+          <div>
+            <span className="cost-label">Per person, average day</span>
+            <span className="summary-value num">{kcal(weekTotal.kcal / plannedDays)}</span>
+          </div>
+        )}
         <button className="btn btn-primary" onClick={() => open.goTo("list")} disabled={entries.length === 0}>
           <Icon name="cart" /> Shopping list
         </button>
@@ -130,7 +146,10 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
                       const r = catalog.recipes.get(e.recipeId)!;
                       return (
                         <button key={e.id} className="entry" onClick={() => setEditing(e)}>
-                          <span className="entry-name">{r.name}</span>
+                          <span className="entry-text">
+                            <span className="entry-name">{r.name}</span>
+                            <span className="entry-kcal num">{kcal(serving(r.id).kcal)} / serving</span>
+                          </span>
                           <span className="entry-meta num">
                             {e.batches !== 1 && <span className="entry-batches">×{e.batches}</span>}
                             {rand((summaries.get(r.id)?.perMake ?? 0) * e.batches)}
@@ -141,6 +160,12 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
                   </div>
                 );
               })}
+              {dayEntries.length > 0 && (
+                <div className="day-macros">
+                  <span className="cost-label">Per person</span>
+                  <MacroLine m={dayEntries.reduce((acc, e) => addMacros(acc, serving(e.recipeId)), ZERO)} />
+                </div>
+              )}
               <button className="add-meal" onClick={() => setPicking(d)}>
                 <Icon name="plus" size={16} /> Add meal
               </button>
@@ -178,6 +203,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
 export function RecipePicker({ title, onClose, onPick }: { title: string; onClose: () => void; onPick: (id: string) => void }) {
   const { catalog } = useApp();
   const summaries = useSummaries();
+  const nutrition = useNutrition();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
   const shown = catalog.recipeList
@@ -203,7 +229,9 @@ export function RecipePicker({ title, onClose, onPick }: { title: string; onClos
               <Thumb recipe={r} />
               <span className="pick-text">
                 <span className="pick-name">{r.name}</span>
-                <span className="pick-cat">{r.category}</span>
+                <span className="pick-cat">
+                  {r.category} · {kcal((nutrition.get(r.id)?.perServing ?? nutrition.get(r.id)?.total)?.kcal ?? 0)} per serving
+                </span>
               </span>
               <span className="num">{rand(summaries.get(r.id)?.perMake)}</span>
             </button>

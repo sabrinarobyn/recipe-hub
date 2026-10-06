@@ -23,6 +23,12 @@ costed ingredient lines, with prices from woolworths.co.za on 6 October 2026.
   amounts from the text (e.g. "500 g spinach" or "2 eggs"). A recipe can use another recipe as an
   ingredient, the way the mince dishes use one batch of *5 Veg Mince*.
 
+- **Calories and macros**: every recipe shows kcal, protein, carbs, fat and fibre per serving (and for
+  the whole recipe), with a calorie-per-ingredient column. The plan shows each meal's kcal per
+  serving and a per-person total for each day (one serving of each planned meal). Sort recipes by
+  calories or protein. Values are estimates from typical food-composition figures per 100 g in
+  `data/nutrition.csv`, not Woolworths labels: edit any product (Prices → pencil) to enter the label
+  values (kJ or kcal). Portions per recipe are in `data/servings.csv` and editable in the app.
 - **Photos**: add a photo to any recipe from the card, the recipe page or the editor (on a phone
   this offers the camera or photo library; on a computer you can also drop or paste an image).
   Photos are shrunk to about 720 px before saving. Recipes without one show a lettered tile.
@@ -66,7 +72,8 @@ pip install openpyxl
 npm run import-xlsx   # or: python3 scripts/import_xlsx.py path/to/workbook.xlsx
 ```
 
-The script reads the cached values, so open and save the workbook in Excel first. Shop sections for
+The script reads the cached values, so open and save the workbook in Excel first. It also reads
+`data/nutrition.csv` (every product needs a row) and `data/servings.csv`. Shop sections for
 new products are set in the `SECTIONS` table at the top of `scripts/import_xlsx.py`. Edits made in
 the app are kept on top of the new data.
 

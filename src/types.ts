@@ -1,5 +1,14 @@
 export type PriceBasis = "today" | "regular";
 
+/** Per 100 g, or per 100 ml for liquids. */
+export interface Nutrition {
+  kcal: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fibre: number;
+}
+
 export interface Product {
   key: string;
   name: string;
@@ -15,6 +24,9 @@ export interface Product {
   section: string;
   /** ISO date the price was last checked. */
   updated: string;
+  nutrition?: Nutrition | null;
+  /** Weight of one unit, for products counted in ea, punnets, cloves… */
+  gramsPerUnit?: number | null;
 }
 
 export type LineKind = "product" | "recipe" | "basic" | "missing";
@@ -40,6 +52,8 @@ export interface Recipe {
   category: string;
   notes: string;
   yield: string;
+  /** Portions the recipe makes, for per-serving nutrition. */
+  servings?: number | null;
   link: string;
   lines: IngredientLine[];
 }

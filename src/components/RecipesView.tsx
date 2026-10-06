@@ -1,15 +1,18 @@
 import { useMemo, useState } from "react";
 import type { Open } from "../App";
 import { rand } from "../lib/format";
-import { editState, seedRecipeIds, useApp, useSummaries } from "../lib/store";
+import { editState, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
+import { MacroLine } from "./Nutrition";
+import type { RecipeNutrition } from "../lib/nutrition";
 import { Icon } from "./ui";
 import { CardPhoto } from "./Photo";
 
-type Sort = "name" | "cheap" | "dear" | "shop";
+type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein";
 
 export function RecipesView({ open }: { open: Open }) {
   const { catalog, data, canEditBook } = useApp();
   const summaries = useSummaries();
+  const nutrition = useNutrition();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("All");
   const [sort, setSort] = useState<Sort>("name");
@@ -30,9 +33,15 @@ export function RecipesView({ open }: { open: Open }) {
       if (sort === "cheap") return cost(a.id).perMake - cost(b.id).perMake;
       if (sort === "dear") return cost(b.id).perMake - cost(a.id).perMake;
       if (sort === "shop") return cost(a.id).shop - cost(b.id).shop;
+      const per = (id: string) => {
+        const n = nutrition.get(id)!;
+        return n.perServing ?? n.total;
+      };
+      if (sort === "kcal") return per(a.id).kcal - per(b.id).kcal;
+      if (sort === "protein") return per(b.id).protein - per(a.id).protein;
       return a.name.localeCompare(b.name);
     });
-  }, [catalog, summaries, query, category, sort]);
+  }, [catalog, summaries, nutrition, query, category, sort]);
 
   const counts = useMemo(() => {
     const m = new Map<string, number>();
@@ -80,6 +89,8 @@ export function RecipesView({ open }: { open: Open }) {
             <option value="cheap">Cost per make: low to high</option>
             <option value="dear">Cost per make: high to low</option>
             <option value="shop">Shop-from-scratch: low to high</option>
+            <option value="kcal">Calories per serving: low to high</option>
+            <option value="protein">Protein per serving: high to low</option>
           </select>
         </label>
       </div>
@@ -125,6 +136,7 @@ export function RecipesView({ open }: { open: Open }) {
                       <span className="cost-label">from scratch</span>
                     </span>
                   </span>
+                  <NutritionLine n={nutrition.get(r.id)!} />
                   <span className="flags">
                     {s.substitutes > 0 && <span className="flag flag-warn">{s.substitutes} substitute{s.substitutes > 1 ? "s" : ""}</span>}
                     {s.missing > 0 && <span className="flag flag-bad">{s.missing} not at Woolies</span>}
@@ -140,5 +152,14 @@ export function RecipesView({ open }: { open: Open }) {
         </ul>
       )}
     </section>
+  );
+}
+
+function NutritionLine({ n }: { n: RecipeNutrition }) {
+  return (
+    <span className="card-macros">
+      <span className="cost-label">{n.perServing ? "Per serving" : "Whole recipe"}</span>
+      <MacroLine m={n.perServing ?? n.total} />
+    </span>
   );
 }

@@ -1,7 +1,9 @@
 import type { Open } from "../App";
 import { lineCost, onPromotion } from "../lib/costing";
 import { qty, rand, slugify, uid } from "../lib/format";
-import { editState, seedRecipeIds, useApp, useSummaries } from "../lib/store";
+import { editState, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
+import { productMacros } from "../lib/nutrition";
+import { NutritionPanel } from "./Nutrition";
 import type { IngredientLine } from "../types";
 import { ConfirmButton, Icon, Modal } from "./ui";
 import { PhotoField, photoError } from "./Photo";
@@ -9,9 +11,11 @@ import { PhotoField, photoError } from "./Photo";
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
   const { catalog, data, actions, photos, canEditBook } = useApp();
   const summaries = useSummaries();
+  const nutrition = useNutrition();
   const recipe = catalog.recipes.get(id);
   if (!recipe) return null;
   const s = summaries.get(id)!;
+  const n = nutrition.get(id)!;
   const state = editState(data.recipeEdits, seedRecipeIds, id);
   const usedBy = catalog.recipeList.filter((r) => r.lines.some((l) => l.kind === "recipe" && l.recipeId === id));
 
@@ -104,7 +108,16 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           <span className="cost-big num">{rand(s.shop)}</span>
           <span className="hint">Full packs, if you had none of it at home</span>
         </div>
+        {n.servings && n.servings > 1 && (
+          <div>
+            <span className="cost-label">Per serving</span>
+            <span className="cost-big num">{rand(s.perMake / n.servings)}</span>
+            <span className="hint">Cost per make ÷ {n.servings} servings</span>
+          </div>
+        )}
       </div>
+
+      <NutritionPanel n={n} />
 
       <div className="table-scroll">
         <table className="ing-table">
@@ -113,6 +126,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
               <th>Ingredient</th>
               <th>Woolworths product</th>
               <th className="right">Amount</th>
+              <th className="right">kcal</th>
               <th className="right">Cost</th>
             </tr>
           </thead>
@@ -121,7 +135,8 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan={3}>Cost per make</td>
+              <td colSpan={3}>Whole recipe</td>
+              <td className="right num">{Math.round(n.total.kcal)}</td>
               <td className="right num">{rand(s.perMake)}</td>
             </tr>
           </tfoot>
@@ -159,6 +174,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
             {line.kind === "basic" ? "Pantry basic, not costed" : line.note || "Not sold at Woolworths"}
           </td>
           <td className="right muted">–</td>
+          <td className="right muted">–</td>
         </tr>
       );
     }
@@ -182,6 +198,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           <td className="right num">
             {line.qty ?? 1} batch{(line.qty ?? 1) === 1 ? "" : "es"}
           </td>
+          <td className="right num">{sub ? Math.round(nutrition.get(sub.id)!.total.kcal * (line.qty ?? 1)) : "–"}</td>
           <td className="right num">{rand(cost)}</td>
         </tr>
       );
@@ -206,8 +223,15 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           )}
         </td>
         <td className="right num">{product && line.qty ? qty(line.qty, product.unit) : "–"}</td>
+        <td className="right num">{lineKcal(product, line.qty)}</td>
         <td className="right num">{rand(cost)}</td>
       </tr>
     );
   }
+}
+
+function lineKcal(product: Parameters<typeof productMacros>[0] | undefined, amount: number | null | undefined): string {
+  if (!product || !amount) return "–";
+  const m = productMacros(product, amount);
+  return m ? String(Math.round(m.kcal)) : "–";
 }

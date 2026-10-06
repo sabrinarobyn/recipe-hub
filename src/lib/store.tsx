@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
+import { recipeNutrition } from "./nutrition";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
 
@@ -15,7 +16,8 @@ function merge<T>(base: T[], keyOf: (t: T) => string, edits: Record<string, T | 
     seen.add(k);
     if (k in edits) {
       const e = edits[k];
-      if (e) out.push(e);
+      // Fields added since the edit was saved (like nutrition) come from the original.
+      if (e) out.push({ ...item, ...e });
     } else out.push(item);
   }
   for (const [k, e] of Object.entries(edits)) if (!seen.has(k) && e) out.push(e);
@@ -327,3 +329,9 @@ export function editState(edits: Record<string, unknown>, baseIds: Set<string>, 
 
 export const seedRecipeIds = new Set(seed.recipes.map((r) => r.id));
 export const seedProductKeys = new Set(seed.products.map((p) => p.key));
+
+/** Calories and macros for every recipe, recomputed only when the data changes. */
+export function useNutrition() {
+  const { catalog } = useApp();
+  return useMemo(() => new Map(catalog.recipeList.map((r) => [r.id, recipeNutrition(r, catalog)])), [catalog]);
+}

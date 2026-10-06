@@ -7,6 +7,8 @@ import type { IngredientLine, LineKind, Product, Recipe } from "../types";
 import { ProductEditor } from "./PricesView";
 import { Icon, Modal, NumberField } from "./ui";
 import { PhotoField, photoError } from "./Photo";
+import { kcal, MacroLine } from "./Nutrition";
+import { recipeNutrition } from "../lib/nutrition";
 
 const KINDS: { id: LineKind; label: string }[] = [
   { id: "product", label: "Woolworths product" },
@@ -41,6 +43,7 @@ export function RecipeEditor({
         notes: "",
         yield: "",
         link: "",
+        servings: 4,
         lines: [{ id: uid(), text: "", kind: "product" }],
       },
   );
@@ -67,7 +70,11 @@ export function RecipeEditor({
   const draftId = draft.id || "__draft__";
   const preview = useMemo(() => {
     const cat = buildCatalog({ ...data, recipeEdits: { ...data.recipeEdits, [draftId]: { ...draft, id: draftId } } });
-    return { cat, list: buildShoppingList([{ recipeId: draftId, batches: 1 }], cat) };
+    return {
+      cat,
+      list: buildShoppingList([{ recipeId: draftId, batches: 1 }], cat),
+      nutrition: recipeNutrition({ ...draft, id: draftId }, cat),
+    };
   }, [data, draft, draftId]);
 
   // How often each product is used, so common matches (eggs, not Easter eggs) come first.
@@ -135,6 +142,8 @@ export function RecipeEditor({
             <span className="num">{rand(preview.list.usedTotal)}</span>
             <span className="cost-label">From scratch</span>
             <span className="num">{rand(preview.list.total)}</span>
+            <span className="cost-label">Per serving</span>
+            <span className="num">{kcal((preview.nutrition.perServing ?? preview.nutrition.total).kcal)}</span>
           </div>
           <button className="btn" onClick={onClose}>
             Cancel
@@ -176,6 +185,14 @@ export function RecipeEditor({
             <input id="recipe-yield" className="input" value={draft.yield} onChange={(e) => set({ yield: e.target.value })} placeholder="e.g. Serves 4" />
           </label>
         )}
+        <label className="field">
+          <span className="field-label">Portions it makes (for calories per serving)</span>
+          <NumberField id="recipe-servings" value={draft.servings ?? null} onCommit={(n) => set({ servings: n && n > 0 ? n : null })} placeholder="e.g. 4" />
+        </label>
+        <div className="field editor-nutrition">
+          <span className="field-label">{preview.nutrition.perServing ? "Per serving" : "Whole recipe"}</span>
+          <MacroLine m={preview.nutrition.perServing ?? preview.nutrition.total} />
+        </div>
         <label className="field span-2">
           <span className="field-label">Method notes (optional)</span>
           <textarea id="recipe-notes" className="input" rows={2} value={draft.notes} onChange={(e) => set({ notes: e.target.value })} placeholder="e.g. Bake 180°C for 40 min." />
