@@ -3,9 +3,17 @@ import { today } from "../lib/dates";
 import { emptyUserData, normalize, saveFile } from "../lib/storage";
 import { seed, useApp } from "../lib/store";
 import { ConfirmButton, Icon, Modal } from "./ui";
+import type { SyncState } from "../lib/store";
+
+export function bookDot(book: SyncState["book"]): string {
+  if (book === "live") return "sync-account";
+  if (book === "connecting") return "sync-connecting";
+  if (book === "error" || book === "signed-out") return "sync-error";
+  return "";
+}
 
 export function SettingsModal({ onClose, notify }: { onClose: () => void; notify: (m: string) => void }) {
-  const { data, sync, actions, photos } = useApp();
+  const { data, sync, actions, photos, canEditBook } = useApp();
   const photoCount = Object.keys(photos).length;
   const fileRef = useRef<HTMLInputElement>(null);
   const recipeCount = Object.keys(data.recipeEdits).length;
@@ -34,12 +42,28 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
     <Modal title="Settings & backup" onClose={onClose}>
       <section className="settings-block">
         <h3 className="sub-head">Where your changes are saved</h3>
-        <p className={`sync-line sync-${sync}`}>
-          <span className={`sync-dot sync-${sync}`} aria-hidden="true" />
-          {sync === "account" && "Saved to your Claude account, so they follow you to any device you open this page on."}
-          {sync === "connecting" && "Connecting…"}
-          {sync === "browser" && "Saved in this browser on this device. Use a backup file to move them to another device."}
-          {sync === "error" && "Couldn't reach your account just now. Changes are kept in this browser and will sync when it reconnects."}
+        <p className="sync-line">
+          <span className={`sync-dot ${bookDot(sync.book)}`} aria-hidden="true" />
+          <span>
+            <strong>Recipes, prices &amp; photos: </strong>
+            {sync.book === "live" &&
+              (canEditBook
+                ? "shared. Everyone you share this page with sees your changes within seconds."
+                : "shared by the owner and kept up to date for you. Only the owner can change them.")}
+            {sync.book === "local" && "saved in this browser on this device."}
+            {sync.book === "connecting" && "connecting…"}
+            {sync.book === "signed-out" && "sign in to Claude to see the owner's latest recipes and prices. You're seeing the original spreadsheet."}
+            {sync.book === "error" && "couldn't reach the shared copy just now. Changes are kept in this browser."}
+          </span>
+        </p>
+        <p className="sync-line">
+          <span className={`sync-dot ${sync.personal === "account" ? "sync-account" : ""}`} aria-hidden="true" />
+          <span>
+            <strong>Your meal plan &amp; shopping list: </strong>
+            {sync.personal === "account"
+              ? "private to you, saved to your Claude account so they follow you between devices."
+              : "private to you, saved in this browser. Use a backup file to move them to another device."}
+          </span>
         </p>
         <p className="hint">
           You've changed {productCount} product{productCount === 1 ? "" : "s"} and {recipeCount} recipe{recipeCount === 1 ? "" : "s"}, added {photoCount} photo{photoCount === 1 ? "" : "s"}, and planned{" "}
@@ -69,13 +93,17 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
 
       <section className="settings-block">
         <h3 className="sub-head">Start over</h3>
-        <p className="hint">Puts every recipe and price back to the original spreadsheet, removes your photos, and empties your plans and lists.</p>
+        <p className="hint">
+          {canEditBook
+            ? "Puts every recipe and price back to the original spreadsheet, removes the photos, and empties your plans and lists. If you've shared this page, everyone sees the reset."
+            : "Empties your meal plans and shopping lists. The owner's recipes and prices stay as they are."}
+        </p>
         <ConfirmButton
           confirmLabel="Tap again to erase everything"
           onConfirm={() => {
             actions.replaceAll(emptyUserData());
             actions.replacePhotos({}).catch(() => {});
-            notify("Back to the original spreadsheet");
+            notify(canEditBook ? "Back to the original spreadsheet" : "Cleared your plans and lists");
             onClose();
           }}
         >

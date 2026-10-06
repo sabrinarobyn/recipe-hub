@@ -8,7 +8,7 @@ import { CardPhoto } from "./Photo";
 type Sort = "name" | "cheap" | "dear" | "shop";
 
 export function RecipesView({ open }: { open: Open }) {
-  const { catalog, data } = useApp();
+  const { catalog, data, canEditBook } = useApp();
   const summaries = useSummaries();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("All");
@@ -55,9 +55,11 @@ export function RecipesView({ open }: { open: Open }) {
             <strong className="num">{rand(avg)}</strong>.
           </p>
         </div>
-        <button className="btn btn-primary" onClick={() => open.editRecipe("new")}>
-          <Icon name="plus" /> New recipe
-        </button>
+        {canEditBook && (
+          <button className="btn btn-primary" onClick={() => open.editRecipe("new")}>
+            <Icon name="plus" /> New recipe
+          </button>
+        )}
       </div>
 
       <div className="toolbar">

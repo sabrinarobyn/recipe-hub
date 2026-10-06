@@ -7,7 +7,7 @@ import { ConfirmButton, Icon, Modal } from "./ui";
 import { PhotoField, photoError } from "./Photo";
 
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
-  const { catalog, data, actions, photos } = useApp();
+  const { catalog, data, actions, photos, canEditBook } = useApp();
   const summaries = useSummaries();
   const recipe = catalog.recipes.get(id);
   if (!recipe) return null;
@@ -33,6 +33,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
       onClose={onClose}
       footer={
         <>
+          {canEditBook && (
           <div className="foot-left">
             {state === "edited" && (
               <ConfirmButton onConfirm={() => (actions.resetRecipe(id), open.notify("Restored the original recipe"))}>
@@ -49,12 +50,17 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
               <Icon name="trash" /> Delete
             </ConfirmButton>
           </div>
-          <button className="btn" onClick={duplicate}>
-            <Icon name="duplicate" /> Duplicate
-          </button>
-          <button className="btn" onClick={() => open.editRecipe(recipe)}>
-            <Icon name="edit" /> Edit
-          </button>
+          )}
+          {canEditBook && (
+            <>
+              <button className="btn" onClick={duplicate}>
+                <Icon name="duplicate" /> Duplicate
+              </button>
+              <button className="btn" onClick={() => open.editRecipe(recipe)}>
+                <Icon name="edit" /> Edit
+              </button>
+            </>
+          )}
           <button className="btn btn-primary" onClick={() => open.addToPlan(id)}>
             <Icon name="plus" /> Add to plan
           </button>
@@ -63,6 +69,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
     >
       <PhotoField
         recipe={recipe}
+        readOnly={!canEditBook}
         url={photos[id]}
         notify={open.notify}
         onChange={async (url) => {

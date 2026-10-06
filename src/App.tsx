@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { bookDot } from "./components/SettingsModal";
 import { Icon, useToast } from "./components/ui";
 import { RecipesView } from "./components/RecipesView";
 import { PlanView } from "./components/PlanView";
@@ -34,7 +35,7 @@ export type Open = {
 };
 
 export default function App() {
-  const { data, sync } = useApp();
+  const { data, sync, canEditBook, setNotifier } = useApp();
   const [tab, setTab] = useState<Tab>(tabFromHash);
   const [week, setWeek] = useState(() => weekStart(today()));
   const [detailId, setDetailId] = useState<string | null>(null);
@@ -42,6 +43,8 @@ export default function App() {
   const [planning, setPlanning] = useState<{ recipeId: string; date?: string } | null>(null);
   const [settings, setSettings] = useState(false);
   const [toast, notify] = useToast();
+
+  useEffect(() => setNotifier(notify), [setNotifier, notify]);
 
   useEffect(() => {
     const onHash = () => setTab(tabFromHash());
@@ -101,12 +104,23 @@ export default function App() {
           </nav>
           <button className="icon-btn settings-btn" onClick={() => setSettings(true)} aria-label="Settings and backup">
             <Icon name="settings" />
-            <span className={`sync-dot sync-${sync}`} aria-hidden="true" />
+            <span className={`sync-dot ${bookDot(sync.book)}`} aria-hidden="true" />
           </button>
         </div>
       </header>
 
       <main className="main">
+        {sync.book === "signed-out" && (
+          <p className="banner banner-warn">
+            Sign in to Claude to see the latest recipes, prices and photos. Until then you're seeing the original spreadsheet.
+          </p>
+        )}
+        {sync.book === "live" && !canEditBook && (
+          <p className="banner">
+            This recipe book is shared with you and stays up to date with the owner's changes. Your meal plan and shopping list are
+            your own.
+          </p>
+        )}
         {tab === "recipes" && <RecipesView open={open} />}
         {tab === "plan" && <PlanView open={open} week={week} setWeek={setWeek} />}
         {tab === "list" && <ShoppingListView open={open} week={week} setWeek={setWeek} />}

@@ -20,7 +20,7 @@ export function unitPrice(p: Product, price: number | null): string {
 }
 
 export function PricesView({ open }: { open: Open }) {
-  const { catalog, data, actions } = useApp();
+  const { catalog, data, actions, canEditBook } = useApp();
   const [q, setQ] = useState("");
   const [section, setSection] = useState("All");
   const [filter, setFilter] = useState<Filter>("all");
@@ -149,16 +149,19 @@ export function PricesView({ open }: { open: Open }) {
           <h1>Woolworths prices</h1>
           <p className="lede">
             {catalog.productList.length} products. Prices captured {shortDate(seed.pricesCaptured)}
-            {edited > 0 && <>; you've changed {edited}</>}. Type a new price and every recipe, plan and list updates.
+            {edited > 0 && <>; {edited} updated since</>}.{" "}
+            {canEditBook ? "Type a new price and every recipe, plan and list updates." : "Prices are kept up to date by the owner."}
           </p>
         </div>
         <div className="head-actions">
           <button className="btn" onClick={exportCsv}>
             <Icon name="download" /> Export CSV
           </button>
-          <button className="btn" onClick={() => fileRef.current?.click()}>
-            <Icon name="upload" /> Import CSV
-          </button>
+          {canEditBook && (
+            <button className="btn" onClick={() => fileRef.current?.click()}>
+              <Icon name="upload" /> Import CSV
+            </button>
+          )}
           <input
             ref={fileRef}
             id="price-import"
@@ -171,9 +174,11 @@ export function PricesView({ open }: { open: Open }) {
               e.target.value = "";
             }}
           />
-          <button className="btn btn-primary" onClick={() => setEditing("new")}>
-            <Icon name="plus" /> Add product
-          </button>
+          {canEditBook && (
+            <button className="btn btn-primary" onClick={() => setEditing("new")}>
+              <Icon name="plus" /> Add product
+            </button>
+          )}
         </div>
       </div>
 
@@ -249,17 +254,25 @@ export function PricesView({ open }: { open: Open }) {
               </span>
               <span className="p-price" role="cell">
                 <span className="cell-label">Shelf</span>
-                <span className="money-input">
-                  <span>R</span>
-                  <NumberField id={`today-${p.key}`} value={p.today} onCommit={(n) => setPrice(p, "today", n)} ariaLabel={`Shelf price for ${p.name}`} />
-                </span>
+                {canEditBook ? (
+                  <span className="money-input">
+                    <span>R</span>
+                    <NumberField id={`today-${p.key}`} value={p.today} onCommit={(n) => setPrice(p, "today", n)} ariaLabel={`Shelf price for ${p.name}`} />
+                  </span>
+                ) : (
+                  <span className="num">{rand(p.today)}</span>
+                )}
               </span>
               <span className="p-price" role="cell">
                 <span className="cell-label">Regular</span>
-                <span className="money-input">
-                  <span>R</span>
-                  <NumberField id={`regular-${p.key}`} value={p.regular} onCommit={(n) => setPrice(p, "regular", n)} ariaLabel={`Regular price for ${p.name}`} />
-                </span>
+                {canEditBook ? (
+                  <span className="money-input">
+                    <span>R</span>
+                    <NumberField id={`regular-${p.key}`} value={p.regular} onCommit={(n) => setPrice(p, "regular", n)} ariaLabel={`Regular price for ${p.name}`} />
+                  </span>
+                ) : (
+                  <span className="num">{rand(p.regular)}</span>
+                )}
               </span>
               <span className="p-unit num" role="cell">
                 {unitPrice(p, priceOf(p, catalog.basis))}
@@ -268,9 +281,11 @@ export function PricesView({ open }: { open: Open }) {
                 {shortDate(p.updated)}
               </span>
               <span role="cell" className="p-edit">
-                <button className="icon-btn" onClick={() => setEditing(p)} aria-label={`Edit ${p.name}`}>
-                  <Icon name="edit" />
-                </button>
+                {canEditBook && (
+                  <button className="icon-btn" onClick={() => setEditing(p)} aria-label={`Edit ${p.name}`}>
+                    <Icon name="edit" />
+                  </button>
+                )}
               </span>
             </div>
           );

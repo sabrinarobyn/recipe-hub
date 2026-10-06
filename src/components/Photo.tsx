@@ -61,7 +61,7 @@ export function Placeholder({ recipe, children }: { recipe: Recipe; children?: R
 
 /** Photo on a recipe card: the picture, or a tile with an "Add photo" button. */
 export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: () => void; notify: (m: string) => void }) {
-  const { photos, actions } = useApp();
+  const { photos, actions, canEditBook } = useApp();
   const url = photos[recipe.id];
   const picker = usePhotoPicker((u) => actions.setPhoto(recipe.id, u), notify);
   if (url) {
@@ -74,9 +74,11 @@ export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: 
   return (
     <div className="card-photo">
       <Placeholder recipe={recipe}>
+        {canEditBook && (
         <button className="photo-add" onClick={picker.open} disabled={picker.busy} aria-label={`Add a photo of ${recipe.name}`}>
           <Icon name="camera" size={16} /> {picker.busy ? "Adding…" : "Add photo"}
         </button>
+        )}
       </Placeholder>
       {picker.input}
     </div>
@@ -92,8 +94,10 @@ export function PhotoField({
   url,
   onChange,
   notify,
+  readOnly,
 }: {
   recipe: Recipe;
+  readOnly?: boolean;
   url: string | undefined;
   onChange: (dataUrl: string | null) => Promise<void> | void;
   notify: (m: string) => void;
@@ -101,6 +105,14 @@ export function PhotoField({
   const picker = usePhotoPicker((u) => onChange(u), notify);
   const [over, setOver] = useState(false);
   const fromTransfer = (dt: DataTransfer | null) => [...(dt?.files ?? [])].find((f) => f.type.startsWith("image/"));
+  if (readOnly) {
+    if (!url) return null;
+    return (
+      <div className="photo-field">
+        <img className="photo-hero" src={url} alt={`Photo of ${recipe.name}`} />
+      </div>
+    );
+  }
   return (
     <div
       className={`photo-field${over ? " is-over" : ""}`}

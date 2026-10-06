@@ -34,10 +34,13 @@ reset.
 ### Where data is saved
 
 - Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
-  IndexedDB). Use
-  **Settings → Download backup / Restore from backup** to move it to another device.
-- Hosted as a Claude artifact, it's saved privately to your Claude account, so it follows you
-  across devices.
+  IndexedDB). Use **Settings → Download backup / Restore from backup** to move it to another device.
+- Hosted as a Claude artifact, the **recipe book** (recipes, prices, categories, photos) is one
+  shared copy under `data/book` in the artifact's store. Everyone the page is shared with reads it
+  and sees changes live; only the owner and people given Editor access can change it (a `db` rule
+  sets `write: "admin"` on `data/book`). Each person's **meal plan, shopping lists and price
+  setting** are private to them under `data/users/<id>`, or in their browser if their access is
+  view-only.
 
 ## Running it
 
