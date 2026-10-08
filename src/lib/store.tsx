@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import seedJson from "../data/seed.json";
-import type { PlanEntry, Product, Recipe, Seed, UserData, WeekList } from "../types";
+import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
@@ -34,6 +34,7 @@ export function buildCatalog(data: UserData): Catalog & { productList: Product[]
     products: new Map(productList.map((p) => [p.key, p])),
     recipes: new Map(recipeList.map((r) => [r.id, r])),
     basis: data.settings.priceBasis,
+    store: data.settings.store ?? "woolworths",
     productList,
     recipeList,
     categories,
@@ -240,6 +241,7 @@ function useAppDataInternal() {
     () => ({
       setPriceBasis: (priceBasis: UserData["settings"]["priceBasis"]) =>
         update((d) => ({ ...d, settings: { ...d.settings, priceBasis } })),
+      setStore: (store: StoreId) => update((d) => ({ ...d, settings: { ...d.settings, store } })),
       saveProduct: (p: Product, previousKey?: string) =>
         update((d) => {
           const productEdits = { ...d.productEdits, [p.key]: p };
@@ -251,6 +253,13 @@ function useAppDataInternal() {
           const current = buildCatalog(d).products.get(key);
           if (!current) return d;
           return { ...d, productEdits: { ...d.productEdits, [key]: { ...current, [field]: value, updated: date } } };
+        }, "book"),
+      updateCheckersPrice: (key: string, value: number | null, date: string) =>
+        update((d) => {
+          const current = buildCatalog(d).products.get(key);
+          if (!current?.checkers) return d;
+          const checkers = { ...current.checkers, price: value, updated: date };
+          return { ...d, productEdits: { ...d.productEdits, [key]: { ...current, checkers } } };
         }, "book"),
       deleteProduct: (key: string) => update((d) => ({ ...d, productEdits: { ...d.productEdits, [key]: null } }), "book"),
       resetProduct: (key: string) =>

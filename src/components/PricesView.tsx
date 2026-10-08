@@ -1,15 +1,15 @@
 import { useMemo, useRef, useState } from "react";
 import type { Open } from "../App";
-import { onPromotion, priceOf } from "../lib/costing";
+import { offerFor, onPromotion, priceOf } from "../lib/costing";
 import { parseCsv, toCsv } from "../lib/csv";
 import { today } from "../lib/dates";
 import { packLabel, rand, shortDate, slugify } from "../lib/format";
 import { saveFile } from "../lib/storage";
 import { editState, seed, seedProductKeys, useApp } from "../lib/store";
-import type { Nutrition, Product } from "../types";
+import type { Nutrition, Product, StoreOffer } from "../types";
 import { ConfirmButton, Icon, Modal, NumberField } from "./ui";
 
-type Filter = "all" | "promo" | "mine" | "unused" | "planned";
+type Filter = "all" | "promo" | "mine" | "unused" | "planned" | "cheaper" | "nomatch";
 
 export function unitPrice(p: Product, price: number | null): string {
   if (price == null || !p.packSize) return "–";
@@ -18,6 +18,16 @@ export function unitPrice(p: Product, price: number | null): string {
   if (p.unit === "ml") return `${rand(per * 1000)}/L`;
   return `${rand(per)}/${p.unit}`;
 }
+
+/** Checkers price per Woolworths pack-unit minus Woolworths', or null when there's nothing to compare. */
+export function checkersSaving(p: Product, basis: "today" | "regular"): number | null {
+  const w = offerFor(p, "woolworths", basis);
+  const c = offerFor(p, "checkers", basis);
+  if (c.fallback || w.price == null || c.price == null || !w.packSize || !c.packSize) return null;
+  return w.price / w.packSize - c.price / c.packSize;
+}
+
+const MATCH_LABEL: Record<StoreOffer["match"], string> = { same: "Same", similar: "Similar", none: "No match" };
 
 export function PricesView({ open }: { open: Open }) {
   const { catalog, data, actions, canEditBook } = useApp();
@@ -50,6 +60,8 @@ export function PricesView({ open }: { open: Open }) {
   const sections = useMemo(() => [...new Set(catalog.productList.map((p) => p.section))].sort(), [catalog]);
   const edited = Object.keys(data.productEdits).length;
   const promos = catalog.productList.filter(onPromotion).length;
+  const cheaper = catalog.productList.filter((p) => (checkersSaving(p, catalog.basis) ?? 0) > 1e-9).length;
+  const noMatch = catalog.productList.filter((p) => !p.checkers || p.checkers.match === "none").length;
 
   const shown = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -60,6 +72,8 @@ export function PricesView({ open }: { open: Open }) {
         if (filter === "mine" && !(p.key in data.productEdits)) return false;
         if (filter === "unused" && usage.has(p.key)) return false;
         if (filter === "planned" && !planned.has(p.key)) return false;
+        if (filter === "cheaper" && !((checkersSaving(p, catalog.basis) ?? 0) > 1e-9)) return false;
+        if (filter === "nomatch" && p.checkers && p.checkers.match !== "none") return false;
         return !needle || p.name.toLowerCase().includes(needle) || p.key.includes(needle);
       })
       .sort((a, b) => a.name.localeCompare(b.name));
@@ -77,8 +91,15 @@ export function PricesView({ open }: { open: Open }) {
       "Price checked": p.updated,
       Link: p.link,
       Note: p.note,
+      "Checkers product": p.checkers?.name ?? "",
+      "Checkers pack size": p.checkers?.packSize ?? "",
+      "Checkers price (R)": p.checkers?.price ?? "",
+      "Checkers regular (R)": p.checkers?.regular ?? "",
+      "Checkers match": p.checkers?.match ?? "",
+      "Checkers link": p.checkers?.link ?? "",
+      "Checkers note": p.checkers?.note ?? "",
     }));
-    const ok = await saveFile(`woolworths-prices-${today()}.csv`, toCsv(rows), "text/csv");
+    const ok = await saveFile(`grocery-prices-${today()}.csv`, toCsv(rows), "text/csv");
     if (!ok) open.notify("Downloads aren't available here.");
   };
 
@@ -93,6 +114,25 @@ export function PricesView({ open }: { open: Open }) {
     let added = 0;
     let skipped = 0;
     const date = today();
+    const checkersFrom = (row: Record<string, string>, prev: StoreOffer | null | undefined): StoreOffer | null | undefined => {
+      if (!("Checkers price (R)" in row) && !("Checkers product" in row)) return prev;
+      const name = row["Checkers product"]?.trim() ?? prev?.name ?? "";
+      const match = (["same", "similar", "none"] as const).find((m) => m === row["Checkers match"]?.trim().toLowerCase());
+      const price = num(row["Checkers price (R)"]) ?? null;
+      if (!name && price == null) return prev ?? null;
+      const next: StoreOffer = {
+        name,
+        packSize: num(row["Checkers pack size"]) ?? null,
+        price,
+        regular: num(row["Checkers regular (R)"]) ?? null,
+        link: row["Checkers link"] ?? prev?.link ?? "",
+        match: match ?? (price == null ? "none" : "similar"),
+        note: row["Checkers note"] ?? prev?.note ?? "",
+        updated: prev?.updated ?? date,
+      };
+      if (prev && prev.price === next.price && prev.regular === next.regular) return { ...next, updated: prev.updated };
+      return { ...next, updated: date };
+    };
     for (const row of rows) {
       const key = row["Key"] || (row["Product"] ? slugify(row["Product"]).replace(/-/g, "_") : "");
       if (!key) {
@@ -113,6 +153,7 @@ export function PricesView({ open }: { open: Open }) {
           regular: regular ?? existing.regular,
           link: row["Link"] ?? existing.link,
           note: row["Note"] ?? existing.note,
+          checkers: checkersFrom(row, existing.checkers),
         };
         const priceChanged = next.today !== existing.today || next.regular !== existing.regular;
         if (JSON.stringify(next) !== JSON.stringify(existing)) {
@@ -131,6 +172,7 @@ export function PricesView({ open }: { open: Open }) {
           link: row["Link"] ?? "",
           note: row["Note"] ?? "",
           updated: row["Price checked"] || date,
+          checkers: checkersFrom(row, null),
         });
         added++;
       } else skipped++;
@@ -146,9 +188,10 @@ export function PricesView({ open }: { open: Open }) {
     <section className="view">
       <div className="view-head">
         <div>
-          <h1>Woolworths prices</h1>
+          <h1>Prices</h1>
           <p className="lede">
-            {catalog.productList.length} products. Prices captured {shortDate(seed.pricesCaptured)}
+            {catalog.productList.length} products. Woolworths prices captured {shortDate(seed.pricesCaptured)}
+            {seed.checkersCaptured && <>, Checkers equivalents {shortDate(seed.checkersCaptured)}</>}
             {edited > 0 && <>; {edited} updated since</>}.{" "}
             {canEditBook ? "Type a new price and every recipe, plan and list updates." : "Prices are kept up to date by the owner."}
           </p>
@@ -192,7 +235,9 @@ export function PricesView({ open }: { open: Open }) {
             Regular price
           </button>
         </div>
-        <span className="hint">{promos} products are on promotion.</span>
+        <span className="hint">
+          {promos} products are on promotion at Woolworths. {cheaper} are cheaper at Checkers; {noMatch} have no Checkers match.
+        </span>
       </div>
 
       <div className="toolbar">
@@ -212,6 +257,8 @@ export function PricesView({ open }: { open: Open }) {
           <option value="promo">On promotion</option>
           <option value="mine">Changed by me</option>
           <option value="unused">Not in any recipe</option>
+          <option value="cheaper">Cheaper at Checkers</option>
+          <option value="nomatch">No Checkers match</option>
         </select>
       </div>
 
@@ -222,6 +269,7 @@ export function PricesView({ open }: { open: Open }) {
           <span role="columnheader">Shelf price</span>
           <span role="columnheader">Regular</span>
           <span role="columnheader">Unit price</span>
+          <span role="columnheader">Checkers</span>
           <span role="columnheader">Checked</span>
           <span role="columnheader" className="sr-only">
             Edit
@@ -230,6 +278,8 @@ export function PricesView({ open }: { open: Open }) {
         {shown.map((p) => {
           const state = editState(data.productEdits, seedProductKeys, p.key);
           const used = usage.get(p.key)?.size ?? 0;
+          const saving = checkersSaving(p, catalog.basis);
+          const c = p.checkers;
           return (
             <div key={p.key} className={`price-row${onPromotion(p) ? " is-promo" : ""}`} role="row">
               <span className="p-name" role="cell">
@@ -276,6 +326,42 @@ export function PricesView({ open }: { open: Open }) {
               </span>
               <span className="p-unit num" role="cell">
                 {unitPrice(p, priceOf(p, catalog.basis))}
+              </span>
+              <span className="p-checkers" role="cell">
+                <span className="cell-label">Checkers</span>
+                {c && c.match !== "none" ? (
+                  <>
+                    {canEditBook ? (
+                      <span className="money-input">
+                        <span>R</span>
+                        <NumberField
+                          id={`checkers-${p.key}`}
+                          value={c.price}
+                          onCommit={(n) => actions.updateCheckersPrice(p.key, n, today())}
+                          ariaLabel={`Checkers price for ${p.name}`}
+                        />
+                      </span>
+                    ) : (
+                      <span className="num">{rand(c.price)}</span>
+                    )}
+                    <span className="p-sub c-name" title={c.note || undefined}>
+                      {c.link ? (
+                        <a href={c.link} target="_blank" rel="noreferrer" title="Open on checkers.co.za">
+                          {c.name}
+                        </a>
+                      ) : (
+                        c.name
+                      )}
+                    </span>
+                    <span className="c-flags">
+                      <span className={`badge badge-match-${c.match}`}>{MATCH_LABEL[c.match]}</span>
+                      {saving != null && saving > 1e-9 && <span className="flag flag-good">Cheaper</span>}
+                      {c.regular != null && c.price != null && c.price < c.regular && <span className="flag flag-promo">Promo</span>}
+                    </span>
+                  </>
+                ) : (
+                  <span className="p-sub">{c ? "No equivalent found" : "Not researched"}</span>
+                )}
               </span>
               <span className={`p-date${p.updated !== seed.pricesCaptured ? " is-new" : ""}`} role="cell">
                 {shortDate(p.updated)}
@@ -337,6 +423,9 @@ export function ProductEditor({
   const [error, setError] = useState("");
   const sections = [...new Set(catalog.productList.map((p) => p.section))].sort();
   const set = (patch: Partial<Product>) => setDraft((d) => ({ ...d, ...patch }));
+  const blankOffer: StoreOffer = { name: "", packSize: null, price: null, regular: null, link: "", match: "similar", note: "", updated: today() };
+  const setC = (patch: Partial<StoreOffer>) => setDraft((d) => ({ ...d, checkers: { ...(d.checkers ?? blankOffer), ...patch } }));
+  const cOffer = draft.checkers ?? null;
   const state = product ? editState(data.productEdits, seedProductKeys, product.key) : null;
 
   const save = () => {
@@ -351,12 +440,24 @@ export function ProductEditor({
       while (catalog.products.has(key)) key = `${base}_${n++}`;
     }
     const priceChanged = !product || product.today !== draft.today || product.regular !== draft.regular;
+    let checkers = draft.checkers ?? null;
+    if (checkers && checkers.match !== "none") {
+      if (!checkers.name.trim() && checkers.price == null) checkers = product?.checkers ?? null;
+      else if (!checkers.packSize || checkers.packSize <= 0 || checkers.price == null)
+        return setError(`Enter the Checkers pack size (in ${draft.unit}) and price, or choose "No equivalent".`);
+    }
+    if (checkers) {
+      const was = product?.checkers;
+      const cChanged = !was || was.price !== checkers.price || was.regular !== checkers.regular || was.packSize !== checkers.packSize;
+      checkers = { ...checkers, name: checkers.name.trim(), updated: cChanged ? today() : checkers.updated };
+    }
     const next: Product = {
       ...draft,
       key,
       name,
       regular: draft.regular ?? draft.today,
       updated: priceChanged ? today() : draft.updated,
+      checkers,
     };
     actions.saveProduct(next);
     notify(isNew ? `Added ${name}` : `Saved ${name}`);
@@ -450,6 +551,47 @@ export function ProductEditor({
         <label className="field span-2">
           <span className="field-label">Note (optional)</span>
           <input id="product-note" className="input" value={draft.note} onChange={(e) => set({ note: e.target.value })} placeholder="e.g. 1 onion taken as 150 g" />
+        </label>
+        <h3 className="sub-head span-2">Checkers equivalent</h3>
+        <p className="hint span-2">
+          Used for the store comparison. Enter the pack size in <strong>{draft.unit || "the unit above"}</strong>, the same unit as the
+          Woolworths pack (a 1 kg bag is <strong>1000</strong> when the unit is g).
+        </p>
+        <label className="field">
+          <span className="field-label">Match</span>
+          <select id="checkers-match" className="input" value={cOffer?.match ?? "similar"} onChange={(e) => setC({ match: e.target.value as StoreOffer["match"] })}>
+            <option value="same">Same product</option>
+            <option value="similar">Similar (other brand or size)</option>
+            <option value="none">No equivalent at Checkers</option>
+          </select>
+        </label>
+        {cOffer?.match !== "none" && (
+          <>
+            <label className="field">
+              <span className="field-label">Checkers product name</span>
+              <input id="checkers-name" className="input" value={cOffer?.name ?? ""} onChange={(e) => setC({ name: e.target.value })} placeholder="e.g. Fairview Feta 200 g" />
+            </label>
+            <label className="field">
+              <span className="field-label">Checkers pack size ({draft.unit || "unit"})</span>
+              <NumberField id="checkers-pack" value={cOffer?.packSize ?? null} onCommit={(n) => setC({ packSize: n })} placeholder="500" />
+            </label>
+            <label className="field">
+              <span className="field-label">Checkers price (R)</span>
+              <NumberField id="checkers-price" value={cOffer?.price ?? null} onCommit={(n) => setC({ price: n })} placeholder="0.00" />
+            </label>
+            <label className="field">
+              <span className="field-label">Checkers regular price (R, optional)</span>
+              <NumberField id="checkers-regular" value={cOffer?.regular ?? null} onCommit={(n) => setC({ regular: n })} placeholder="If on promotion" />
+            </label>
+            <label className="field">
+              <span className="field-label">Checkers link (optional)</span>
+              <input id="checkers-link" className="input" value={cOffer?.link ?? ""} onChange={(e) => setC({ link: e.target.value })} placeholder="https://www.checkers.co.za/…" />
+            </label>
+          </>
+        )}
+        <label className="field span-2">
+          <span className="field-label">Checkers note (optional)</span>
+          <input id="checkers-note" className="input" value={cOffer?.note ?? ""} onChange={(e) => setC({ note: e.target.value })} placeholder="e.g. sold per kg, priced for 500 g" />
         </label>
         <h3 className="sub-head span-2">Nutrition per 100 {draft.unit === "ml" ? "ml" : "g"}</h3>
         <p className="hint span-2">

@@ -1,5 +1,5 @@
 import type { Open } from "../App";
-import { lineCost, onPromotion } from "../lib/costing";
+import { lineCost, offerFor, STORE_NAMES, summarizeRecipe } from "../lib/costing";
 import { qty, rand, slugify, uid } from "../lib/format";
 import { editState, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
 import { productMacros } from "../lib/nutrition";
@@ -16,6 +16,10 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
   if (!recipe) return null;
   const s = summaries.get(id)!;
   const n = nutrition.get(id)!;
+  const store = catalog.store ?? "woolworths";
+  const atStore = (st: "woolworths" | "checkers") => summarizeRecipe(recipe, { ...catalog, store: st });
+  const ww = atStore("woolworths");
+  const ck = atStore("checkers");
   const state = editState(data.recipeEdits, seedRecipeIds, id);
   const usedBy = catalog.recipeList.filter((r) => r.lines.some((l) => l.kind === "recipe" && l.recipeId === id));
 
@@ -99,7 +103,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
 
       <div className="detail-costs">
         <div>
-          <span className="cost-label">Cost per make</span>
+          <span className="cost-label">Cost per make · {STORE_NAMES[store]}</span>
           <span className="cost-big num">{rand(s.perMake)}</span>
           <span className="hint">Only the share of each pack this recipe uses</span>
         </div>
@@ -117,6 +121,21 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
         )}
       </div>
 
+      <div className="store-compare" aria-label="Cost at each store">
+        {(["woolworths", "checkers"] as const).map((st) => {
+          const v = st === "woolworths" ? ww : ck;
+          const cheaper = (st === "woolworths" ? ww.perMake < ck.perMake : ck.perMake < ww.perMake) && Math.abs(ww.perMake - ck.perMake) >= 0.5;
+          return (
+            <div key={st} className={`${st === store ? "is-current" : ""}${cheaper ? " is-cheaper" : ""}`}>
+              <span className="cost-label">{STORE_NAMES[st]}</span>
+              <span className="num">{rand(v.perMake)}</span>
+              <span className="hint">per make · {rand(v.shop)} from scratch</span>
+              {cheaper && <span className="flag flag-good">Cheaper</span>}
+            </div>
+          );
+        })}
+      </div>
+
       <NutritionPanel n={n} />
 
       <div className="table-scroll">
@@ -124,7 +143,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           <thead>
             <tr>
               <th>Ingredient</th>
-              <th>Woolworths product</th>
+              <th>{STORE_NAMES[store]} product</th>
               <th className="right">Amount</th>
               <th className="right">kcal</th>
               <th className="right">Cost</th>
@@ -208,15 +227,16 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
       <tr key={line.id} className={line.substitute ? "line-sub" : ""}>
         <td>
           {isPart ? <span className="muted">↳ also</span> : text}
-          {product && <span className="line-product">{product.name}</span>}
+          {product && <span className="line-product">{offerFor(product, store, catalog.basis).name}</span>}
           {line.note && <span className="line-note">{line.note}</span>}
         </td>
         <td>
           {product ? (
             <>
-              {product.name}
+              {offerFor(product, store, catalog.basis).name}
               {line.substitute && <span className="flag flag-warn">Substitute</span>}
-              {onPromotion(product) && <span className="flag flag-promo">On promo</span>}
+              {offerFor(product, store, catalog.basis).promo && <span className="flag flag-promo">On promo</span>}
+              {offerFor(product, store, catalog.basis).fallback && <span className="flag flag-warn">Woolworths item</span>}
             </>
           ) : (
             <span className="flag flag-bad">No product chosen</span>

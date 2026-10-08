@@ -1,5 +1,6 @@
 {
  "pricesCaptured": "2026-10-06",
+ "checkersCaptured": "2026-10-08",
  "notes": [
   {
    "label": "Prices captured",
@@ -153,6 +154,16 @@
     "carbs": 58.0,
     "fat": 30.0,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No milk chocolate chips/drops listing with a price found",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -172,6 +183,16 @@
     "carbs": 25.0,
     "fat": 0.1,
     "fibre": 0.5
+   },
+   "checkers": {
+    "name": "ALL GOLD Tomato Sauce Bottle 500ml",
+    "packSize": 500.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/Tomato-Sauce/ALL-GOLD-Tomato-Sauce-Bottle-500ml/p/10767836EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -192,7 +213,17 @@
     "fat": 0.3,
     "fibre": 3.0
    },
-   "gramsPerUnit": 200.0
+   "gramsPerUnit": 200.0,
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/staffords-artichoke-hearts-can-400g-6006ec53dc16133633339de1",
+    "match": "none",
+    "note": "Staffords Artichoke Hearts 400g listed but no price shown",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "hoisin",
@@ -211,6 +242,16 @@
     "carbs": 44.0,
     "fat": 3.4,
     "fibre": 2.8
+   },
+   "checkers": {
+    "name": "Thai Choice Hoisin Sauce 340g",
+    "packSize": 340.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/Chilli-and-Hot-Sauces/Thai-Choice-Hoisin-Sauce-340g/p/10640195EA",
+    "match": "similar",
+    "note": "Bigger bottle",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -231,7 +272,17 @@
     "fat": 2.5,
     "fibre": 8.0
    },
-   "gramsPerUnit": 57.0
+   "gramsPerUnit": 57.0,
+   "checkers": {
+    "name": "Roka Egg Noodles 250g",
+    "packSize": 4.4,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/roka-egg-noodles-250g-10419684EA",
+    "match": "similar",
+    "note": "Not wholewheat; ~4 nests per 250 g; price from an older listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rice_vinegar",
@@ -250,6 +301,16 @@
     "carbs": 4.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "SAFARI Rice Vinegar 375ml",
+    "packSize": 375.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/safari-rice-vinegar-375ml-10172978EA",
+    "match": "similar",
+    "note": "Bigger bottle",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -269,6 +330,16 @@
     "carbs": 11.0,
     "fat": 0.1,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Vegetables/Japanese-Choice-Pickled-Sushi-Ginger-110g/p/10394381EA",
+    "match": "none",
+    "note": "Japanese Choice Pickled Sushi Ginger 110g listed but no price shown",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -288,6 +359,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Westfalia Fruit Plain Avocado Oil 250ml",
+    "packSize": 250.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/westfalia-fruit-plain-avocado-oil-250ml-10209971EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -307,6 +388,16 @@
     "carbs": 4.8,
     "fat": 1.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "LANCEWOOD Cultured Full Cream Buttermilk 500ml",
+    "packSize": 500.0,
+    "price": 21.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/lancewood-cultured-full-cream-buttermilk-500ml-10706984EA",
+    "match": "similar",
+    "note": "Full cream (no low-fat 500 ml found)",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -326,6 +417,16 @@
     "carbs": 5.5,
     "fat": 3.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Crystal Valley Plain Double Cream Yoghurt 500g",
+    "packSize": 500.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/crystal-valley-plain-double-cream-yoghurt-500g-10644891EA",
+    "match": "similar",
+    "note": "Double cream",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -345,6 +446,16 @@
     "carbs": 2.2,
     "fat": 0.3,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Baby Marrows 400g",
+    "packSize": 400.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/baby-marrows-400g-10151507EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -364,6 +475,16 @@
     "carbs": 1.4,
     "fat": 0.4,
     "fibre": 2.2
+   },
+   "checkers": {
+    "name": "Baby Spinach Bag 200g",
+    "packSize": 200.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Spinach",
+    "match": "same",
+    "note": "-Cabbages-and-Greens/Baby-Spinach-Bag-200g/p/10456707EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -384,7 +505,17 @@
     "fat": 12.0,
     "fibre": 3.0
    },
-   "gramsPerUnit": 8.3
+   "gramsPerUnit": 8.3,
+   "checkers": {
+    "name": "Bakers Cream Crackers 200g",
+    "packSize": 24.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/bakers-cream-crackers-200g-10393138EA",
+    "match": "same",
+    "note": "Another listing shows R31.99",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "baking_powder",
@@ -403,6 +534,16 @@
     "carbs": 28.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "The Kitchen Baking Powder 200g",
+    "packSize": 200.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Bigger pack; no 100 g with a price found",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -422,6 +563,16 @@
     "carbs": 5.0,
     "fat": 45.0,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "Goldcrest Basil Pesto 140g",
+    "packSize": 140.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/goldcrest-basil-pesto-140g-10539107EA",
+    "match": "same",
+    "note": "Another listing shows R56.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -441,6 +592,16 @@
     "carbs": 0.0,
     "fat": 3.6,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Bone In Beef Shin (per kg)",
+    "packSize": 600.0,
+    "price": 83.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/bone-in-beef-shin-per-kg-10151671KG",
+    "match": "same",
+    "note": "Sold by weight at R139.99/kg; priced for 600 g",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -460,6 +621,16 @@
     "carbs": 35.0,
     "fat": 5.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Knorrox Beef Flavoured Stock Powder 100g",
+    "packSize": 100.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Soups-and-Stocks/Knorrox-Beef-Flavoured-Stock-Powder-100g/p/10769009EA",
+    "match": "similar",
+    "note": "Smaller pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -479,6 +650,16 @@
     "carbs": 7.5,
     "fat": 0.2,
     "fibre": 2.8
+   },
+   "checkers": {
+    "name": "Beetroot Bag 1kg",
+    "packSize": 1000.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "similar",
+    "note": "-Herbs-and-Dip/Spring-Onions",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -498,6 +679,16 @@
     "carbs": 0.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Robertsons Bicarbonate of Soda 100g",
+    "packSize": 100.0,
+    "price": 12.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/robertsons-bicarbonate-of-soda-100g-10364949EA",
+    "match": "similar",
+    "note": "Smaller pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -517,6 +708,16 @@
     "carbs": 4.0,
     "fat": 0.3,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Bovril Meat and Vegetable Extract 125g",
+    "packSize": 125.0,
+    "price": 42.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/bovril-beefy-meat-and-vegetable-extract-125g-10124383EA",
+    "match": "same",
+    "note": "One listing shows R39.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -536,6 +737,16 @@
     "carbs": 12.0,
     "fat": 47.0,
     "fibre": 10.0
+   },
+   "checkers": {
+    "name": "Health Connection Wholefoods Ultimate Seed Mix 250g",
+    "packSize": 250.0,
+    "price": 64.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/health-connection-wholefoods-ultimate-seed-mix-250g-10201149EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -555,6 +766,16 @@
     "carbs": 3.0,
     "fat": 0.2,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Brinjal (per kg)",
+    "packSize": 1000.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Courgettes",
+    "match": "same",
+    "note": "-Aubergines-and-Squash/Brinjal-Per-kg/p/10151622KG",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -575,7 +796,17 @@
     "fat": 3.0,
     "fibre": 1.0
    },
-   "gramsPerUnit": 40.0
+   "gramsPerUnit": 40.0,
+   "checkers": {
+    "name": "Knorr Brown Onion Thickening Soup 50g",
+    "packSize": 1.0,
+    "price": 7.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/knorr-brown-onion-thickening-soup-50g-10146372EA",
+    "match": "same",
+    "note": "The Knorr soup the recipe asks for",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "onions",
@@ -594,6 +825,16 @@
     "carbs": 7.6,
     "fat": 0.1,
     "fibre": 1.7
+   },
+   "checkers": {
+    "name": "Brown Onions Bag 1kg",
+    "packSize": 1000.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Onions-and-Leeks/Brown-Onions-Bag-1kg/p/10135699EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -614,7 +855,17 @@
     "fat": 0.3,
     "fibre": 3.8
    },
-   "gramsPerUnit": 300.0
+   "gramsPerUnit": 300.0,
+   "checkers": {
+    "name": "Brussel Sprouts 300g",
+    "packSize": 1.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/brussel-sprouts-300g-10151815EA",
+    "match": "same",
+    "note": "Listings range R39.99–R52.99",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "bulgur",
@@ -633,6 +884,16 @@
     "carbs": 64.0,
     "fat": 1.3,
     "fibre": 12.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/natures-choice-bulgar-wheat-500g-697224c0a25bafd4afa97e18",
+    "match": "none",
+    "note": "Nature's Choice Bulgar Wheat 500g listed but no price shown",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -652,6 +913,16 @@
     "carbs": 6.0,
     "fat": 0.1,
     "fibre": 0.5
+   },
+   "checkers": {
+    "name": "Pumpkin Cubes 500g",
+    "packSize": 500.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Frozen-Food/Frozen-Vegetables/Frozen-Carrots",
+    "match": "similar",
+    "note": "-Pumpkin-and-Butternut/Pumpkin-Cubes-500g/p/10145412EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -672,7 +943,17 @@
     "fat": 0.2,
     "fibre": 2.5
    },
-   "gramsPerUnit": 250.0
+   "gramsPerUnit": 250.0,
+   "checkers": {
+    "name": "Freshmark Coleslaw 350g",
+    "packSize": 1.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/coleslaw-350g-10145409EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "butter_chicken_sauce",
@@ -692,7 +973,17 @@
     "fat": 8.0,
     "fibre": 1.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Exotic Taste Butter Chicken Cooking Sauce 400g",
+    "packSize": 1.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From the Cook-In Sauces listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "butternut",
@@ -712,7 +1003,17 @@
     "fat": 0.1,
     "fibre": 2.0
    },
-   "gramsPerUnit": 750.0
+   "gramsPerUnit": 750.0,
+   "checkers": {
+    "name": "Butternut (per kg)",
+    "packSize": 1.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Courgettes",
+    "match": "same",
+    "note": "-Aubergines-and-Squash/Butternut-Per-kg/p/10707013KG",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "milk_choc",
@@ -731,6 +1032,16 @@
     "carbs": 57.0,
     "fat": 30.0,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Cadbury Dairy Milk Milk Chocolate Slab 80g",
+    "packSize": 80.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/cadbury-dairy-milk-milk-chocolate-slab-80g-10398825EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -750,6 +1061,16 @@
     "carbs": 57.0,
     "fat": 30.0,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Cadbury Dairy Milk Chocolate Slab 150g",
+    "packSize": 150.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/cadbury-dairy-milk-chocolate-slab-150g-10398830EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -769,6 +1090,16 @@
     "carbs": 73.0,
     "fat": 1.0,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Golden Cloud Cake Wheat Flour 1kg",
+    "packSize": 1000.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Baking/Flour/Golden-Cloud-Cake-Wheat-Flour-1kg/p/10137557EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -788,6 +1119,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Flowergold Pure Canola Oil 750ml",
+    "packSize": 750.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/flowergold-pure-canola-oil-750ml-10729280EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -808,7 +1149,17 @@
     "fat": 20.0,
     "fibre": 2.0
    },
-   "gramsPerUnit": 100.0
+   "gramsPerUnit": 100.0,
+   "checkers": {
+    "name": "The Bakery Carrot & Apple Muffins 4 Pack",
+    "packSize": 4.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Carrot & apple; from a related-products listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "celery",
@@ -828,7 +1179,17 @@
     "fat": 0.2,
     "fibre": 1.6
    },
-   "gramsPerUnit": 40.0
+   "gramsPerUnit": 40.0,
+   "checkers": {
+    "name": "Table Celery 350g",
+    "packSize": 9.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Celery-and-Fennel/Table-Celery-350g/p/10151617EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "goats_cheese",
@@ -847,6 +1208,16 @@
     "carbs": 1.0,
     "fat": 21.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Fairview Chevin Traditional Soft Goat Cheese 100g",
+    "packSize": 100.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/fairview-chevin-traditional-full-fat-soft-goat-cheese-100g-10127197EA",
+    "match": "same",
+    "note": "One listing shows R49.99 on promotion",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -866,6 +1237,16 @@
     "carbs": 8.0,
     "fat": 31.0,
     "fibre": 34.0
+   },
+   "checkers": {
+    "name": "Health Connection Wholefoods Chia Seeds 200g",
+    "packSize": 200.0,
+    "price": 94.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Biltong",
+    "match": "similar",
+    "note": "-Dried-Fruit",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -886,7 +1267,17 @@
     "fat": 10.0,
     "fibre": 1.0
    },
-   "gramsPerUnit": 37.0
+   "gramsPerUnit": 37.0,
+   "checkers": {
+    "name": "Knorr Cream Of Chicken Soup 50g",
+    "packSize": 1.0,
+    "price": 6.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/knorr-cream-of-chicken-soup-50g-10140647EA",
+    "match": "same",
+    "note": "The cream of chicken soup the recipe asks for",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chicken_thighs_drums",
@@ -906,7 +1297,17 @@
     "fat": 14.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 630.0
+   "gramsPerUnit": 630.0,
+   "checkers": {
+    "name": "Farmer's Choice Fresh Thighs & Drumsticks 8 Piece (per kg)",
+    "packSize": 1.0,
+    "price": 71.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/farmers-choice-fresh-thighs-and-drumsticks-chicken-8-piece-per-kg-10732971KG",
+    "match": "same",
+    "note": "Sold by weight at R79.99/kg; priced for 900 g",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chicken_breast_fillets",
@@ -925,6 +1326,16 @@
     "carbs": 0.0,
     "fat": 1.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Chicken Breast Fillet (per kg)",
+    "packSize": 450.0,
+    "price": 40.5,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/chicken-breast-fillet-500g-700g-10152214KG",
+    "match": "same",
+    "note": "Sold by weight at R89.99/kg in 500–700 g packs; priced per gram",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -945,7 +1356,17 @@
     "fat": 3.5,
     "fibre": 0.0
    },
-   "gramsPerUnit": 24.0
+   "gramsPerUnit": 24.0,
+   "checkers": {
+    "name": "Knorr Chicken Stock Pot 4 x 28g",
+    "packSize": 4.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "dried_chickpeas",
@@ -964,6 +1385,16 @@
     "carbs": 45.0,
     "fat": 6.0,
     "fibre": 17.0
+   },
+   "checkers": {
+    "name": "Health Connection Wholefoods Chickpeas 500g",
+    "packSize": 500.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Peas%2C-Beans%2C-Sweetcorn-and-Asparagus/Health-Connection-Wholefoods-Chickpeas-500g/p/10418376EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -984,7 +1415,17 @@
     "fat": 2.5,
     "fibre": 6.0
    },
-   "gramsPerUnit": 240.0
+   "gramsPerUnit": 240.0,
+   "checkers": {
+    "name": "Pot O' Gold Chickpeas in Brine 400g",
+    "packSize": 1.0,
+    "price": 21.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/pot-o-gold-chickpeas-in-brine-400g-10219496EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chilli_oil",
@@ -1003,6 +1444,16 @@
     "carbs": 10.0,
     "fat": 60.0,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Spice Chilli Crisp Oil 125ml",
+    "packSize": 125.0,
+    "price": 89.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/spice-chilli-crisp-oil-125ml-10930845EA",
+    "match": "similar",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1022,6 +1473,16 @@
     "carbs": 30.0,
     "fat": 14.0,
     "fibre": 34.0
+   },
+   "checkers": {
+    "name": "Spice Mecca Chilli Powder 100g",
+    "packSize": 100.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Bigger pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1041,6 +1502,16 @@
     "carbs": 1.0,
     "fat": 0.4,
     "fibre": 2.5
+   },
+   "checkers": {
+    "name": "Pot O' Gold Frozen Chopped Spinach 1kg",
+    "packSize": 1000.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/pot-o-gold-frozen-chopped-spinach-1kg-10627866EA",
+    "match": "similar",
+    "note": "Frozen; bigger bag",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1060,6 +1531,16 @@
     "carbs": 1.7,
     "fat": 0.9,
     "fibre": 3.2
+   },
+   "checkers": {
+    "name": "Mayfair Capers in Vinegar 100g",
+    "packSize": 100.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Olives",
+    "match": "same",
+    "note": "-Gherkins-and-Pickles/Atchar-and-Pickles/Mayfair-Capers-in-Vinegar-100g/p/10147538EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1079,6 +1560,16 @@
     "carbs": 14.0,
     "fat": 10.0,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "Colman's Original Hot English Mustard 168g",
+    "packSize": 168.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/colmans-original-hot-english-mustard-168g-10157518EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1098,6 +1589,16 @@
     "carbs": 14.0,
     "fat": 25.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Crosse & Blackwell Tangy Mayonnaise 750g",
+    "packSize": 750.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/crosse-and-blackwell-tangy-mayonnaise-750g-10128012EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1117,6 +1618,16 @@
     "carbs": 7.0,
     "fat": 65.0,
     "fibre": 16.0
+   },
+   "checkers": {
+    "name": "Imbo Medium Desiccated Coconut 200g",
+    "packSize": 200.0,
+    "price": 27.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Baking/Icing-and-Decorating/Imbo-Medium-Desiccated-Coconut-200g/p/10138300EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1136,6 +1647,16 @@
     "carbs": 1.0,
     "fat": 23.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Eskort Raw Lean Diced Bacon 200g",
+    "packSize": 200.0,
+    "price": 32.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Meat-and-Poultry/Fresh-Bacon-and-Gammon/Eskort-Raw-Lean-Diced-Bacon-200g/p/10471404EA",
+    "match": "similar",
+    "note": "Smaller pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1155,6 +1676,16 @@
     "carbs": 5.0,
     "fat": 11.0,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "Maille Dijon Originale Mustard 215g",
+    "packSize": 215.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/maille-dijon-originale-mustard-215g-10128897EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1175,7 +1706,17 @@
     "fat": 7.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 1000.0
+   "gramsPerUnit": 1000.0,
+   "checkers": {
+    "name": "Lancewood Strawberries & Cream Double Cream Yoghurt 1kg",
+    "packSize": 1.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/lancewood-strawberries-and-cream-flavoured-double-cream-yoghurt-no-sugar-added-1kg-10717273EA",
+    "match": "same",
+    "note": "The Lancewood yoghurt the recipe asks for; R51.99 at some stores",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "olive_oil_spray",
@@ -1194,6 +1735,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "B-well Olive Oil Cooking Spray 300ml",
+    "packSize": 300.0,
+    "price": 64.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/b-well-olive-oil-cooking-spray-300ml-10687325EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1213,6 +1764,16 @@
     "carbs": 68.0,
     "fat": 21.0,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Mister Sweet Speckled Eggs 50g",
+    "packSize": 50.0,
+    "price": 21.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/All-Departments/Food/Food-Cupboard/Chocolates-and-Sweets/Chocolates-and-Sweet-Party-Packs/Mister-Sweet-Speckled-Eggs-50g-/p/10243801EA",
+    "match": "similar",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1233,7 +1794,17 @@
     "fat": 2.0,
     "fibre": 0.8
    },
-   "gramsPerUnit": 600.0
+   "gramsPerUnit": 600.0,
+   "checkers": {
+    "name": "Platinum Heat and Eat Creamy Chicken Soup 600g",
+    "packSize": 1.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Ready-Meals/Soups/Platinum-Heat-And-Eat-Creamy-Chicken-Soup-600g/p/10741503EA",
+    "match": "similar",
+    "note": "Creamy chicken",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "cinnamon",
@@ -1252,6 +1823,16 @@
     "carbs": 27.0,
     "fat": 1.2,
     "fibre": 53.0
+   },
+   "checkers": {
+    "name": "Hinds Cinnamon Spice 40g",
+    "packSize": 40.0,
+    "price": 13.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Spices/Hinds-Cinnamon-Spice-40g/p/10727382EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1272,7 +1853,17 @@
     "fat": 16.0,
     "fibre": 0.5
    },
-   "gramsPerUnit": 40.0
+   "gramsPerUnit": 40.0,
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No beef frikkadel/meatball pack with a price found",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "beef_strips",
@@ -1291,6 +1882,16 @@
     "carbs": 0.0,
     "fat": 6.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Stir Fry Beef (per kg)",
+    "packSize": 500.0,
+    "price": 84.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/stir-fry-beef-per-kg-10152538KG",
+    "match": "similar",
+    "note": "Sold by weight at R169.99/kg; priced for 500 g",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1311,7 +1912,17 @@
     "fat": 15.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 840.0
+   "gramsPerUnit": 840.0,
+   "checkers": {
+    "name": "Simple Truth Free-Range Fresh Chicken 12 Piece (per kg)",
+    "packSize": 1.0,
+    "price": 143.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Meat-and-Poultry/Fresh-Chicken/Simple-Truth-Free-Range-Fresh-Chicken-12-Piece-Per-kg/p/10766866KG",
+    "match": "same",
+    "note": "Sold by weight at R119.99/kg; priced for 1.2 kg",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chicken_thighs",
@@ -1331,7 +1942,17 @@
     "fat": 15.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 350.0
+   "gramsPerUnit": 350.0,
+   "checkers": {
+    "name": "Simple Truth Free-Range Chicken Thighs (per kg)",
+    "packSize": 1.0,
+    "price": 67.5,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/simple-truth-free-range-chicken-thighs-per-kg-10718845KG",
+    "match": "same",
+    "note": "Sold by weight at R134.99/kg; priced for 500 g",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "lamb_frikkadels",
@@ -1351,7 +1972,17 @@
     "fat": 20.0,
     "fibre": 0.5
    },
-   "gramsPerUnit": 40.0
+   "gramsPerUnit": 40.0,
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No lamb frikkadels found",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "eggs",
@@ -1371,7 +2002,17 @@
     "fat": 9.5,
     "fibre": 0.0
    },
-   "gramsPerUnit": 50.0
+   "gramsPerUnit": 50.0,
+   "checkers": {
+    "name": "Simple Truth Extra Large Free-Range Eggs 6 Pack",
+    "packSize": 6.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Milk",
+    "match": "same",
+    "note": "-Butter-and-Eggs/Eggs/Simple-Truth-Extra-Large-Free-Range-Eggs-6-Pack/p/10720824EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chicken_thigh_fillets",
@@ -1390,6 +2031,16 @@
     "carbs": 0.0,
     "fat": 4.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Farmer's Choice Deboned & Skinless Chicken Thighs (per kg)",
+    "packSize": 800.0,
+    "price": 99.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/farmers-choice-fresh-deboned-and-skinless-chicken-thighs-per-kg-10732970KG",
+    "match": "similar",
+    "note": "Not free range; R124.99/kg priced for 800 g",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1410,7 +2061,17 @@
     "fat": 0.6,
     "fibre": 1.6
    },
-   "gramsPerUnit": 30.0
+   "gramsPerUnit": 30.0,
+   "checkers": {
+    "name": "Basil Pack 40g",
+    "packSize": 1.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Fresh-Herbs/Basil-Pack-40g/p/10420770EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "bay_leaves",
@@ -1430,7 +2091,17 @@
     "fat": 0.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "Spice Season Bay Leaves 9.5g",
+    "packSize": 1.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Dried-Herbs/Spice-Season-Bay-Leaves-9-5g/p/10461387EA",
+    "match": "similar",
+    "note": "Dried",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "roti",
@@ -1450,7 +2121,17 @@
     "fat": 11.0,
     "fibre": 2.0
    },
-   "gramsPerUnit": 75.0
+   "gramsPerUnit": 75.0,
+   "checkers": {
+    "name": "Spice Plain White Roti 5 Pack",
+    "packSize": 5.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/spice-plain-white-roti-5-pack-10852130EA",
+    "match": "similar",
+    "note": "Plain (not butter) rotis; 5 per pack",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chives",
@@ -1470,7 +2151,17 @@
     "fat": 0.7,
     "fibre": 2.5
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "French Chives Bag 20g",
+    "packSize": 1.0,
+    "price": 12.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad%2C-Herbs-and-Dip/Fresh-Herbs/French-Chives-Bag-20g/p/10158602EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "coriander",
@@ -1490,7 +2181,17 @@
     "fat": 0.5,
     "fibre": 2.8
    },
-   "gramsPerUnit": 30.0
+   "gramsPerUnit": 30.0,
+   "checkers": {
+    "name": "Coriander 20g",
+    "packSize": 1.0,
+    "price": 14.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/coriander-20g-10147555EA",
+    "match": "similar",
+    "note": "20 g bag (Woolworths punnet is 30 g)",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "ginger",
@@ -1509,6 +2210,16 @@
     "carbs": 15.0,
     "fat": 0.8,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "Crushed Garlic & Ginger 100g",
+    "packSize": 100.0,
+    "price": 14.99,
+    "regular": 19.99,
+    "link": "https://www.checkers.co.za/product/crushed-garlic-and-ginger-100g-10145805EA",
+    "match": "similar",
+    "note": "Garlic and ginger mix; no plain crushed ginger found",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1528,6 +2239,16 @@
     "carbs": 0.5,
     "fat": 0.2,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No ready-to-use liquid beef stock found (only concentrates)",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1547,6 +2268,16 @@
     "carbs": 1.2,
     "fat": 0.2,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No ready-to-use liquid vegetable stock found (only concentrates)",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1567,7 +2298,17 @@
     "fat": 0.7,
     "fibre": 6.8
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "Mint 20g",
+    "packSize": 1.0,
+    "price": 14.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/mint-20g-10147491EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "parsley",
@@ -1587,7 +2328,17 @@
     "fat": 0.8,
     "fibre": 3.3
    },
-   "gramsPerUnit": 30.0
+   "gramsPerUnit": 30.0,
+   "checkers": {
+    "name": "Italian Parsley 20g",
+    "packSize": 1.0,
+    "price": 14.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad%2C-Herbs-and-Dip/Fresh-Herbs/Italian-Parsley-20g/p/10163225EA",
+    "match": "similar",
+    "note": "20 g bag (Woolworths punnet is 30 g)",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "garlic",
@@ -1607,7 +2358,17 @@
     "fat": 0.5,
     "fibre": 2.1
    },
-   "gramsPerUnit": 5.0
+   "gramsPerUnit": 5.0,
+   "checkers": {
+    "name": "Freshmark Peeled Garlic Cloves 50g",
+    "packSize": 10.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/peeled-garlic-cloves-50g-10889321EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rosemary",
@@ -1627,7 +2388,17 @@
     "fat": 5.9,
     "fibre": 14.0
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "Rosemary 20g",
+    "packSize": 1.0,
+    "price": 12.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/rosemary-20g-10147493EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "sage",
@@ -1647,7 +2418,17 @@
     "fat": 2.0,
     "fibre": 4.0
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "Sage Bag 20g",
+    "packSize": 1.0,
+    "price": 11.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Fresh-Chillies",
+    "match": "same",
+    "note": "-Herbs",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "thyme",
@@ -1667,7 +2448,17 @@
     "fat": 1.7,
     "fibre": 14.0
    },
-   "gramsPerUnit": 20.0
+   "gramsPerUnit": 20.0,
+   "checkers": {
+    "name": "Thyme Herb Bag 20g",
+    "packSize": 1.0,
+    "price": 12.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Fresh-Herbs/Thyme-Herb-Bag-20g/p/10147475EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rocket",
@@ -1687,7 +2478,17 @@
     "fat": 0.7,
     "fibre": 1.6
    },
-   "gramsPerUnit": 30.0
+   "gramsPerUnit": 30.0,
+   "checkers": {
+    "name": "Freshmark Wild Rocket 40g",
+    "packSize": 1.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Lettuce-and-Salad-Bags/Wild-Rocket-40g-/p/10536824EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "frozen_veg",
@@ -1706,6 +2507,16 @@
     "carbs": 13.0,
     "fat": 1.0,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "Harvestime Frozen Gourmet Peas Carrots & Corn 750g",
+    "packSize": 750.0,
+    "price": 44.99,
+    "regular": 59.99,
+    "link": "https://www.checkers.co.za/product/mccain-frozen-peas-carrots-and-sweet-corn-mix-750g-10714255EA",
+    "match": "similar",
+    "note": "Includes carrots",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1725,6 +2536,16 @@
     "carbs": 0.0,
     "fat": 0.6,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "I&J Frozen Oak Smoked Haddock Medallions 450g",
+    "packSize": 450.0,
+    "price": 99.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/i-and-j-frozen-oak-smoked-haddock-medallions-450g-10514480EA",
+    "match": "same",
+    "note": "Other listings R114.99–R134.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1744,6 +2565,16 @@
     "carbs": 9.0,
     "fat": 0.4,
     "fibre": 5.0
+   },
+   "checkers": {
+    "name": "McCain Frozen Young & Tender Green Baby Peas 500g",
+    "packSize": 500.0,
+    "price": 46.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/mccain-frozen-young-and-tender-green-baby-peas-500g-10705340EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1763,6 +2594,16 @@
     "carbs": 60.0,
     "fat": 3.0,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "Mediterranean Delicacies Frozen Phyllo Pastry 500g",
+    "packSize": 500.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Frozen-Food/Frozen-Fruit-and-Pastry/Frozen-Pastry-and-Bakery/Mediterranean-Delicacies-Frozen-Phyllo-Pastry-500g/p/10195189EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1783,7 +2624,17 @@
     "fat": 25.0,
     "fibre": 1.5
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Checkers Housebrand Frozen Puff Pastry 400g",
+    "packSize": 1.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/checkers-housebrand-frozen-puff-pastry-400g-10458991EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "hot_cross_buns",
@@ -1803,7 +2654,17 @@
     "fat": 4.0,
     "fibre": 2.5
    },
-   "gramsPerUnit": 70.0
+   "gramsPerUnit": 70.0,
+   "checkers": {
+    "name": "The Bakery Fruit Free Hot Cross Buns 6 Pack",
+    "packSize": 6.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Bakery/Croissants",
+    "match": "same",
+    "note": "-Scones-and-Pastries/Hot-Cross-Buns/The-Bakery-Fruit-Free-Hot-Cross-Buns-6-Pack/p/10834260EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "grains_90s",
@@ -1823,7 +2684,17 @@
     "fat": 3.0,
     "fibre": 4.0
    },
-   "gramsPerUnit": 250.0
+   "gramsPerUnit": 250.0,
+   "checkers": {
+    "name": "Simple Truth Plant-Based 7 Ancient Grains 250g",
+    "packSize": 1.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/simple-truth-plant-based-7-ancient-grains-250g-10676259EA",
+    "match": "same",
+    "note": "Heat-and-eat grains with lentils and quinoa",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "coconut_rice",
@@ -1843,7 +2714,17 @@
     "fat": 4.0,
     "fibre": 0.5
    },
-   "gramsPerUnit": 250.0
+   "gramsPerUnit": 250.0,
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No ready-cooked coconut rice pouch found",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "honey",
@@ -1862,6 +2743,16 @@
     "carbs": 82.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Fleures Honey 250g",
+    "packSize": 250.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Not fynbos honey (Checkers' fynbos honey is 340 g at R89.99)",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1881,6 +2772,16 @@
     "carbs": 45.0,
     "fat": 15.0,
     "fibre": 25.0
+   },
+   "checkers": {
+    "name": "Osman's Taj Mahal Extra Special Garum Masala 100g",
+    "packSize": 100.0,
+    "price": 25.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/osmans-taj-mahal-extra-special-garum-masala-100g-602b93ce53c61418474124a0",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1901,7 +2802,17 @@
     "fat": 0.1,
     "fibre": 1.5
    },
-   "gramsPerUnit": 100.0
+   "gramsPerUnit": 100.0,
+   "checkers": {
+    "name": "Gem Squash Halves 6s",
+    "packSize": 6.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/gem-squash-halves-6s-10146418EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "german_mustard",
@@ -1920,6 +2831,16 @@
     "carbs": 6.0,
     "fat": 4.5,
     "fibre": 2.0
+   },
+   "checkers": {
+    "name": "Colman's Mild American Mustard 167g",
+    "packSize": 167.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/colmans-mild-american-mustard-167g-10157520EA",
+    "match": "same",
+    "note": "The American mustard the recipe asks for",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1940,7 +2861,17 @@
     "fat": 0.2,
     "fibre": 2.4
    },
-   "gramsPerUnit": 150.0
+   "gramsPerUnit": 150.0,
+   "checkers": {
+    "name": "Golden Delicious Apples Bag 1.5kg",
+    "packSize": 10.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Fruit/Apples-and-Pears/Golden-Delicious-Apples-Bag-1-5kg/p/10603695EA",
+    "match": "similar",
+    "note": "~10 apples per 1.5 kg bag",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "green_apples",
@@ -1960,7 +2891,17 @@
     "fat": 0.2,
     "fibre": 2.4
    },
-   "gramsPerUnit": 150.0
+   "gramsPerUnit": 150.0,
+   "checkers": {
+    "name": "Granny Smith Apples 1.5kg",
+    "packSize": 10.0,
+    "price": 32.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "~10 apples per 1.5 kg bag",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "cheddar_grated",
@@ -1979,6 +2920,16 @@
     "carbs": 1.0,
     "fat": 33.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Parmalat Grated Cheddar Cheese 250g",
+    "packSize": 250.0,
+    "price": 59.99,
+    "regular": 72.99,
+    "link": "https://www.checkers.co.za/product/parmalat-grated-cheddar-cheese-pack-250g-10131477EA",
+    "match": "same",
+    "note": "On promotion when checked",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -1998,6 +2949,16 @@
     "carbs": 2.0,
     "fat": 22.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Parmalat Grated Mozzarella Cheese 250g",
+    "packSize": 250.0,
+    "price": 64.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Cheese/Grated-and-Sliced-Cheese/Parmalat-Grated-Mozzarella-Cheese-Pack-250g/p/10498500EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2017,6 +2978,16 @@
     "carbs": 50.0,
     "fat": 8.7,
     "fibre": 22.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/spice-mecca-all-spice-pimento-25g-643d11c28a2aa9116d9707da",
+    "match": "none",
+    "note": "Spice Mecca All Spice 25g listed but no price shown",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2036,6 +3007,16 @@
     "carbs": 34.0,
     "fat": 22.0,
     "fibre": 10.0
+   },
+   "checkers": {
+    "name": "Robertsons Ground Cumin 39g",
+    "packSize": 39.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Spices/Robertsons-Ground-Cumin-39g/p/10165572EA",
+    "match": "similar",
+    "note": "Smaller pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2055,6 +3036,16 @@
     "carbs": 0.0,
     "fat": 10.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Lean Beef Mince (per kg)",
+    "packSize": 500.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/lean-beef-mince-300g-500g-10152009KG",
+    "match": "same",
+    "note": "Sold by weight at R139.99/kg; max 10% fat",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2075,7 +3066,17 @@
     "fat": 2.5,
     "fibre": 7.0
    },
-   "gramsPerUnit": 35.0
+   "gramsPerUnit": 35.0,
+   "checkers": {
+    "name": "Albany Everyday Brown Bread 700g",
+    "packSize": 20.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Bakery/Bread-and-Rolls/Brown-and-Wholemeal-Bread/Albany-Everyday-Brown-Bread-Loaf-700g/p/10351328EA",
+    "match": "same",
+    "note": "High fibre",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chilli",
@@ -2095,7 +3096,17 @@
     "fat": 0.4,
     "fibre": 1.5
    },
-   "gramsPerUnit": 6.0
+   "gramsPerUnit": 6.0,
+   "checkers": {
+    "name": "Mixed Chillies 150g",
+    "packSize": 25.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/mixed-chillies-150g-10689217EA",
+    "match": "similar",
+    "note": "Mixed varieties; ~25 chillies per pack",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chardonnay",
@@ -2114,6 +3125,16 @@
     "carbs": 2.6,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "BC Wines Chardonnay 750ml",
+    "packSize": 750.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/c-2365/All-Departments/Drinks/Wine/White-Wine/Chardonnay",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2133,6 +3154,16 @@
     "carbs": 2.6,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "BC Wines Sauvignon Blanc 750ml",
+    "packSize": 750.0,
+    "price": 52.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/bc-wines-sauvignon-blanc-white-wine-bottle-750ml-10452201EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2152,6 +3183,16 @@
     "carbs": 40.0,
     "fat": 6.0,
     "fibre": 30.0
+   },
+   "checkers": {
+    "name": "Robertsons Italian Herbs Dry Herbs Refill 15g",
+    "packSize": 15.0,
+    "price": 22.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Dried-Herbs/Robertsons-Italian-Herbs-Dry-Herbs-Refill-15g/p/10256605EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2171,6 +3212,16 @@
     "carbs": 6.0,
     "fat": 0.2,
     "fibre": 1.5
+   },
+   "checkers": {
+    "name": "Monteverde Passata Sauce 700g",
+    "packSize": 700.0,
+    "price": 34.99,
+    "regular": 39.99,
+    "link": "",
+    "match": "similar",
+    "note": "Passata; on promotion when checked",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2190,6 +3241,16 @@
     "carbs": 60.0,
     "fat": 7.0,
     "fibre": 10.0
+   },
+   "checkers": {
+    "name": "Jungle Oats 1kg",
+    "packSize": 1000.0,
+    "price": 36.99,
+    "regular": 46.99,
+    "link": "https://www.checkers.co.za/product/jungle-oats-1kg-10129974EA",
+    "match": "same",
+    "note": "On promotion until 11 Oct 2026",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2209,6 +3270,16 @@
     "carbs": 62.0,
     "fat": 2.0,
     "fibre": 15.0
+   },
+   "checkers": {
+    "name": "Kellogg's All Bran Cereal Flakes 500g",
+    "packSize": 500.0,
+    "price": 64.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/kelloggs-all-bran-cereal-flakes-500g-10127229EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2228,6 +3299,16 @@
     "carbs": 84.0,
     "fat": 0.9,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Kellogg's Corn Flakes Cereal 500g",
+    "packSize": 500.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/corn-flakes-cereal-500g-10127228EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2247,6 +3328,16 @@
     "carbs": 6.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Kikkoman Less Sodium Soy Sauce 148ml",
+    "packSize": 148.0,
+    "price": 104.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/Brown-Sauces/Kikkoman-Less-Sodium-Soy-Sauce-148ml/p/10186428EA",
+    "match": "same",
+    "note": "Another listing shows R119.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2267,7 +3358,17 @@
     "fat": 1.0,
     "fibre": 2.0
    },
-   "gramsPerUnit": 285.0
+   "gramsPerUnit": 285.0,
+   "checkers": {
+    "name": "KOO Whole Kernel Sweetcorn in Brine 410g",
+    "packSize": 1.0,
+    "price": 23.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Vegetables/KOO-Veggies-Whole-Kernel-Sweetcorn-in-Brine-410g-/p/10137341EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "potatoes",
@@ -2286,6 +3387,16 @@
     "carbs": 17.0,
     "fat": 0.1,
     "fibre": 2.2
+   },
+   "checkers": {
+    "name": "Chips Potatoes Bag 2kg",
+    "packSize": 2000.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Potatoes-and-Sweet-Potatoes/Chips-Potatoes-Bag-2kg/p/10208924EA",
+    "match": "same",
+    "note": "One listing shows R39.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2306,7 +3417,17 @@
     "fat": 0.3,
     "fibre": 2.8
    },
-   "gramsPerUnit": 100.0
+   "gramsPerUnit": 100.0,
+   "checkers": {
+    "name": "Lemons 800g",
+    "packSize": 8.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/lemons-800g-10145551EA",
+    "match": "similar",
+    "note": "~8 lemons per bag",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "lentils_tin",
@@ -2326,7 +3447,17 @@
     "fat": 0.5,
     "fibre": 4.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Pot O' Gold Lentils in Tomato Flavoured Brine 400g",
+    "packSize": 1.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Vegetables/Pot-O'-Gold-Lentils-in-Tomato-Flavoured-Brine-400g/p/10243605EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "brown_sugar",
@@ -2345,6 +3476,16 @@
     "carbs": 98.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Selati Golden Brown Sugar 1kg",
+    "packSize": 1000.0,
+    "price": 35.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Sugar-and-Sweeteners/Brown",
+    "match": "same",
+    "note": "-Caramel-and-Treacle-Sugar/Selati-Golden-Brown-Sugar-1kg/p/10133295EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2365,7 +3506,17 @@
     "fat": 1.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 120.0
+   "gramsPerUnit": 120.0,
+   "checkers": {
+    "name": "Checkers Housebrand Light Meat Shredded Tuna in Water 170g",
+    "packSize": 1.0,
+    "price": 22.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/checkers-housebrand-light-meat-shredded-tuna-in-water-170g-10165121EA",
+    "match": "same",
+    "note": "In water rather than brine",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "milk",
@@ -2384,6 +3535,16 @@
     "carbs": 4.8,
     "fat": 3.4,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Checkers Housebrand Long Life Full Cream Milk 1L",
+    "packSize": 1000.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/checkers-housebrand-long-life-full-cream-milk-1l-10156094EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2403,6 +3564,16 @@
     "carbs": 4.8,
     "fat": 1.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Checkers Housebrand Long Life Low Fat Milk 1L",
+    "packSize": 1000.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/checkers-housebrand-long-life-low-fat-milk-1l-10156114EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2423,7 +3594,17 @@
     "fat": 19.0,
     "fibre": 1.3
    },
-   "gramsPerUnit": 6.25
+   "gramsPerUnit": 6.25,
+   "checkers": {
+    "name": "Lotus Biscoff Cookies 93g (6 x 2)",
+    "packSize": 12.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Biscuits",
+    "match": "same",
+    "note": "-Cookies-and-Cereal-Bars/Cookies/Lotus-Biscoff-Cookies-93g/p/10812251EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "steak_sauce",
@@ -2442,6 +3623,16 @@
     "carbs": 28.0,
     "fat": 0.3,
     "fibre": 0.5
+   },
+   "checkers": {
+    "name": "HP Original Sauce 255g",
+    "packSize": 255.0,
+    "price": 39.99,
+    "regular": 53.99,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/BBQ-Sauce-and-Marinades/HP-Original-Sauce-255g/p/10124839EA",
+    "match": "same",
+    "note": "The HP Sauce the recipe asks for; R39.99 is the Xtra Savings card price",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2461,6 +3652,16 @@
     "carbs": 88.0,
     "fat": 0.1,
     "fibre": 0.9
+   },
+   "checkers": {
+    "name": "Snowflake Corn Flour 500g",
+    "packSize": 500.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/snowflake-corn-flour-500g-10627618EA",
+    "match": "same",
+    "note": "Maizena 500 g is R41.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2481,7 +3682,17 @@
     "fat": 2.5,
     "fibre": 1.5
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Rhodes Quality Mediterranean Style Tomatoes 400g",
+    "packSize": 1.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/rhodes-quality-italian-style-tomatoes-410g-10232998EA",
+    "match": "similar",
+    "note": "Seasoned tinned tomatoes rather than a cook-in sauce",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "carrots",
@@ -2500,6 +3711,16 @@
     "carbs": 7.0,
     "fat": 0.2,
     "fibre": 2.8
+   },
+   "checkers": {
+    "name": "Large Carrots 1kg",
+    "packSize": 1000.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/large-carrots-1kg-10641732EA",
+    "match": "similar",
+    "note": "Bigger bag",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2520,7 +3741,17 @@
     "fat": 12.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 800.0
+   "gramsPerUnit": 800.0,
+   "checkers": {
+    "name": "Salt & Pepper Grilled Whole Chicken",
+    "packSize": 1.0,
+    "price": 89.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/salt-and-pepper-grilled-whole-chicken-10895621EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "salsa",
@@ -2539,6 +3770,16 @@
     "carbs": 6.0,
     "fat": 0.2,
     "fibre": 1.5
+   },
+   "checkers": {
+    "name": "Santa Anna's Mild Tomato & Red Pepper Salsa 375g",
+    "packSize": 375.0,
+    "price": 74.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/Chutney-and-Relishes/Santa-Anna's-Mild-Tomato-and-Red-Pepper-Salsa-375g/p/10758461EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2559,7 +3800,17 @@
     "fat": 0.3,
     "fibre": 1.5
    },
-   "gramsPerUnit": 180.0
+   "gramsPerUnit": 180.0,
+   "checkers": {
+    "name": "Mixed Leaf Salad Bag 200g",
+    "packSize": 1.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Lettuce-and-Salad-Bags/Mixed-Leaf-Salad-Bag-200g/p/10145543EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "mixed_spice",
@@ -2578,6 +3829,16 @@
     "carbs": 55.0,
     "fat": 9.0,
     "fibre": 20.0
+   },
+   "checkers": {
+    "name": "Spice Season Mixed Spice Shaker 38g",
+    "packSize": 38.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2598,7 +3859,17 @@
     "fat": 2.0,
     "fibre": 2.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No Moroccan or chickpea soup found",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "chutney",
@@ -2617,6 +3888,16 @@
     "carbs": 42.0,
     "fat": 0.2,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Mrs H.S. Ball's Original Chutney 470g",
+    "packSize": 470.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/mrs-hs-balls-chutney-original-chutney-470g-10140349EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2637,7 +3918,17 @@
     "fat": 4.0,
     "fibre": 0.5
    },
-   "gramsPerUnit": 600.0
+   "gramsPerUnit": 600.0,
+   "checkers": {
+    "name": "Pot O' Gold Creamy Mushroom Soup 410g",
+    "packSize": 1.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "410 g tin (Woolworths is a 600 g fresh tub); from a related-products listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "evaporated_milk",
@@ -2656,6 +3947,16 @@
     "carbs": 10.0,
     "fat": 7.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Nestlé Ideal Evaporated Milk 380ml",
+    "packSize": 380.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Baking/Condensed-and-Evaporated-Milk/Nestl%C3%A9-Ideal-Evaporated-Milk-380ml/p/10154872EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2675,6 +3976,16 @@
     "carbs": 70.0,
     "fat": 18.0,
     "fibre": 1.5
+   },
+   "checkers": {
+    "name": "Nestlé Smarties Chocolate Box 70g",
+    "packSize": 70.0,
+    "price": 21.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/smarties-chocolate-box-70g-10426047EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2694,6 +4005,16 @@
     "carbs": 13.0,
     "fat": 50.0,
     "fibre": 7.0
+   },
+   "checkers": {
+    "name": "Black Cat No Added Sugar and Salt Smooth Peanut Butter 400g",
+    "packSize": 400.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Spreads%2C-Honey-and-Preserves/Peanut-and-Nut-Butters/Black-Cat-No-Added-Sugar-and-Salt-Smooth-Peanut-Butter-400g/p/10167225EA",
+    "match": "same",
+    "note": "Sometimes on promotion at R36.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2713,6 +4034,16 @@
     "carbs": 0.0,
     "fat": 10.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Forage And Feast Cold Smoked Norwegian Salmon Ribbons 100g",
+    "packSize": 100.0,
+    "price": 199.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Fish-and-Seafood/Smoked-Fish/Forage-And-Feast-Cold-Smoked-Norwegian-Salmon-Ribbons-100g/p/10781937EA",
+    "match": "similar",
+    "note": "Bigger pack",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2732,6 +4063,16 @@
     "carbs": 26.0,
     "fat": 4.3,
     "fibre": 43.0
+   },
+   "checkers": {
+    "name": "Robertsons Ground Origanum 12g",
+    "packSize": 12.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/robertsons-ground-origanum-12g-10128866EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2752,7 +4093,17 @@
     "fat": 0.3,
     "fibre": 2.6
    },
-   "gramsPerUnit": 120.0
+   "gramsPerUnit": 120.0,
+   "checkers": {
+    "name": "Bananas 1.2kg",
+    "packSize": 8.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Fruit/Bananas/Bananas-1-2kg/p/10147193EA",
+    "match": "similar",
+    "note": "~8 bananas per bunch; not organic",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "berries",
@@ -2771,6 +4122,16 @@
     "carbs": 12.0,
     "fat": 0.3,
     "fibre": 2.4
+   },
+   "checkers": {
+    "name": "Blueberries 125g",
+    "packSize": 125.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2790,6 +4151,16 @@
     "carbs": 3.5,
     "fat": 7.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Crystal Valley Plain Smooth Creamed Cottage Cheese 250g",
+    "packSize": 250.0,
+    "price": 42.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/crystal-valley-plain-smooth-creamed-cottage-cheese-250g-10365959EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2809,6 +4180,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Lemcke Organic Sesame Cooking Oil 250ml",
+    "packSize": 250.0,
+    "price": 119.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/lemcke-organic-sesame-cooking-oil-250ml-6123741f4fa3f7b4787d4c8e",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2828,6 +4209,16 @@
     "carbs": 71.0,
     "fat": 1.5,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Rice",
+    "match": "none",
+    "note": "-Pasta",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2848,7 +4239,17 @@
     "fat": 0.3,
     "fibre": 1.5
    },
-   "gramsPerUnit": 340.0
+   "gramsPerUnit": 340.0,
+   "checkers": {
+    "name": "Monteverde Passata Sauce 700g",
+    "packSize": 1.0,
+    "price": 34.99,
+    "regular": 39.99,
+    "link": "",
+    "match": "similar",
+    "note": "Bigger jar; on promotion when checked",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "pears_tin",
@@ -2868,7 +4269,17 @@
     "fat": 0.1,
     "fibre": 1.5
    },
-   "gramsPerUnit": 420.0
+   "gramsPerUnit": 420.0,
+   "checkers": {
+    "name": "KOO Pear Halves in Syrup 410g",
+    "packSize": 1.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Fruit/KOO-Pear-Halves-in-Syrup-410g/p/10126823EA",
+    "match": "similar",
+    "note": "In syrup rather than fruit juice",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "pecans",
@@ -2887,6 +4298,16 @@
     "carbs": 4.0,
     "fat": 72.0,
     "fibre": 9.6
+   },
+   "checkers": {
+    "name": "Padkos Raw Pecan Nuts 100g",
+    "packSize": 100.0,
+    "price": 52.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/padkos-raw-pecan-nuts-100g-10188398EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2907,7 +4328,17 @@
     "fat": 0.2,
     "fibre": 1.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Pot O' Gold Diced Italian Tomatoes in Juice 400g",
+    "packSize": 1.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/c-821/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Tomatoes-and-Puree",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "iceberg",
@@ -2927,7 +4358,17 @@
     "fat": 0.1,
     "fibre": 1.2
    },
-   "gramsPerUnit": 135.0
+   "gramsPerUnit": 135.0,
+   "checkers": {
+    "name": "Freshmark Iceberg Lettuce",
+    "packSize": 1.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/iceberg-lettuce-10684677EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "pickled_onions",
@@ -2946,6 +4387,16 @@
     "carbs": 13.0,
     "fat": 0.1,
     "fibre": 1.0
+   },
+   "checkers": {
+    "name": "Pickled Red Onion 90g",
+    "packSize": 90.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2965,6 +4416,16 @@
     "carbs": 0.5,
     "fat": 15.0,
     "fibre": 3.3
+   },
+   "checkers": {
+    "name": "Santa Bianca Pitted Green Olives 195g",
+    "packSize": 195.0,
+    "price": 15.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/santa-bianca-pitted-green-olives-195g-10469863EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -2985,7 +4446,17 @@
     "fat": 0.2,
     "fibre": 6.7
    },
-   "gramsPerUnit": 19.0
+   "gramsPerUnit": 19.0,
+   "checkers": {
+    "name": "Pitted Medjool Dates 150g",
+    "packSize": 8.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/pitted-medjool-dates-150g-10900280EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "balsamic_glaze",
@@ -3004,6 +4475,16 @@
     "carbs": 60.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Forage And Feast Original Balsamic Glaze 150ml",
+    "packSize": 150.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Table-Condiments-and-Dressings/Balsamic-Vinegar/Forage-And-Feast-Original-Balsamic-Glaze-150ml/p/10779454EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3023,6 +4504,16 @@
     "carbs": 4.0,
     "fat": 19.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Farm Hill Dairy Plain Full Fat Cream Cheese 250g",
+    "packSize": 250.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Full fat; from a related-products listing",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3042,6 +4533,16 @@
     "carbs": 4.0,
     "fat": 21.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Fairview Feta Cheese 100g",
+    "packSize": 100.0,
+    "price": 23.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Cheese/Feta-and-Goats-Cheese/Fairview-Feta-Cheese-Pack-100g/p/10257665EA",
+    "match": "same",
+    "note": "Buy 3 for R65",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3061,6 +4562,16 @@
     "carbs": 14.0,
     "fat": 1.2,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "Pomegranate 80g",
+    "packSize": 80.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Fruit/Mango",
+    "match": "similar",
+    "note": "-Kiwi-and-Exotic-Fruit/Pomegranate-80g/p/10233775EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3081,7 +4592,17 @@
     "fat": 3.5,
     "fibre": 0.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Farmstead Pork Fillet (per kg)",
+    "packSize": 1.0,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/farmstead-pork-fillet-per-kg-10151958KG",
+    "match": "same",
+    "note": "Sold by weight at R99.99/kg; priced for 400 g",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "pork_sausages",
@@ -3101,7 +4622,17 @@
     "fat": 22.0,
     "fibre": 0.5
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Eskort Frozen Gold Medal Pork Sausages 375g",
+    "packSize": 1.0,
+    "price": 79.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/eskort-frozen-gold-medal-pork-sausages-375g-10154326EA",
+    "match": "similar",
+    "note": "12 sausages; frozen",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "portabello",
@@ -3121,7 +4652,17 @@
     "fat": 0.3,
     "fibre": 1.3
    },
-   "gramsPerUnit": 80.0
+   "gramsPerUnit": 80.0,
+   "checkers": {
+    "name": "Portabelini Mushrooms 250g",
+    "packSize": 3.0,
+    "price": 36.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/portabelini-mushrooms-250g-10411769EA",
+    "match": "similar",
+    "note": "Smaller brown mushrooms (no large portabellos found); ~3 portabello-sized servings per pack",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "olive_oil",
@@ -3140,6 +4681,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Santa Bianca Extra Virgin Olive Oil 250ml",
+    "packSize": 250.0,
+    "price": 79.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/santa-bianca-extra-virgin-olive-oil-250ml-10243782EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3159,6 +4710,16 @@
     "carbs": 10.0,
     "fat": 49.0,
     "fibre": 6.0
+   },
+   "checkers": {
+    "name": "Padkos Raw Pumpkin Seeds 100g",
+    "packSize": 100.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Biltong",
+    "match": "similar",
+    "note": "-Dried-Fruit",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3178,6 +4739,16 @@
     "carbs": 9.0,
     "fat": 50.0,
     "fibre": 12.0
+   },
+   "checkers": {
+    "name": "SAFARI Flaked Almonds 100g",
+    "packSize": 100.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Biltong",
+    "match": "same",
+    "note": "-Dried-Fruit",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3197,6 +4768,16 @@
     "carbs": 11.0,
     "fat": 60.0,
     "fibre": 8.0
+   },
+   "checkers": {
+    "name": "Padkos Raw Mixed Nuts 100g",
+    "packSize": 100.0,
+    "price": 42.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/padkos-raw-mixed-nuts-100g-10524518EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3216,6 +4797,16 @@
     "carbs": 17.0,
     "fat": 45.0,
     "fibre": 10.0
+   },
+   "checkers": {
+    "name": "Padkos Raw Pistachio Nuts 100g",
+    "packSize": 100.0,
+    "price": 79.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/padkos-raw-pistachio-nuts-100g-10668715EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3236,7 +4827,17 @@
     "fat": 0.5,
     "fibre": 6.0
    },
-   "gramsPerUnit": 240.0
+   "gramsPerUnit": 240.0,
+   "checkers": {
+    "name": "Pot O' Gold Red Kidney Beans in Brine 400g",
+    "packSize": 1.0,
+    "price": 23.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Pulses",
+    "match": "same",
+    "note": "-Lentils-and-Beans/Pot-O'-Gold-Red-Kidney-Beans-In-Brine-400g/p/10204712EA",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "red_onions",
@@ -3255,6 +4856,16 @@
     "carbs": 8.0,
     "fat": 0.1,
     "fibre": 1.7
+   },
+   "checkers": {
+    "name": "Red Onions Bag 1kg",
+    "packSize": 1000.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Onions-and-Leeks/Red-Onions-Bag-1kg/p/10135703EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3274,6 +4885,16 @@
     "carbs": 2.0,
     "fat": 7.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Pot O' Gold Lite Coconut Milk 400ml",
+    "packSize": 400.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Coconut-Milk-and-Cream/Pot-O'-Gold-Lite-Coconut-Milk-400ml/p/10247831EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3294,7 +4915,17 @@
     "fat": 15.0,
     "fibre": 6.7
    },
-   "gramsPerUnit": 150.0
+   "gramsPerUnit": 150.0,
+   "checkers": {
+    "name": "Avocado Ripe & Ready (single)",
+    "packSize": 1.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/avocado-ripe-and-ready-10151601EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rosa_200",
@@ -3314,7 +4945,17 @@
     "fat": 0.2,
     "fibre": 1.2
    },
-   "gramsPerUnit": 200.0
+   "gramsPerUnit": 200.0,
+   "checkers": {
+    "name": "Baby Plum Tomatoes 250g",
+    "packSize": 1.25,
+    "price": 39.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/baby-plum-tomatoes-250g-10145423EA",
+    "match": "similar",
+    "note": "No Rosa tomatoes listed; baby plum 250 g used (1.25 Rosa punnets by weight)",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rosa_400",
@@ -3334,7 +4975,17 @@
     "fat": 0.2,
     "fibre": 1.2
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Baby Plum Tomatoes 2 x 250g",
+    "packSize": 1.25,
+    "price": 79.98,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/baby-plum-tomatoes-250g-10145423EA",
+    "match": "similar",
+    "note": "No Rosa tomatoes listed; priced as two 250 g punnets of baby plum tomatoes (1.25 Rosa punnets by weight)",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "rosa_600",
@@ -3354,7 +5005,17 @@
     "fat": 0.2,
     "fibre": 1.2
    },
-   "gramsPerUnit": 600.0
+   "gramsPerUnit": 600.0,
+   "checkers": {
+    "name": "Baby Plum Tomatoes 3 x 250g",
+    "packSize": 1.25,
+    "price": 119.97,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/baby-plum-tomatoes-250g-10145423EA",
+    "match": "similar",
+    "note": "No Rosa tomatoes listed; priced as three 250 g punnets of baby plum tomatoes (1.25 Rosa punnets by weight)",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "butter",
@@ -3373,6 +5034,16 @@
     "carbs": 0.6,
     "fat": 80.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Parmalat Salted Butter 500g",
+    "packSize": 500.0,
+    "price": 74.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/parmalat-salted-butter-500g-10856203EA",
+    "match": "similar",
+    "note": "Bigger brick (no 250 g salted butter with a price found)",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3392,6 +5063,16 @@
     "carbs": 78.0,
     "fat": 4.0,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Truda Deliciously Salted Pretzels 240g",
+    "packSize": 240.0,
+    "price": 32.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/truda-deliciously-salted-pretzels-240g-10864451EA",
+    "match": "similar",
+    "note": "Bigger bag",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3412,7 +5093,17 @@
     "fat": 12.0,
     "fibre": 0.0
    },
-   "gramsPerUnit": 90.0
+   "gramsPerUnit": 90.0,
+   "checkers": {
+    "name": "Mayfair Sardines In Vegetable Oil 120g",
+    "packSize": 1.0,
+    "price": 32.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Fish-and-Seafood/Mayfair-Sardines-In-Vegetable-Oil-With-Salt-120g/p/10748902EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "popcorn",
@@ -3431,6 +5122,16 @@
     "carbs": 60.0,
     "fat": 15.0,
     "fibre": 14.0
+   },
+   "checkers": {
+    "name": "Jumpin Jack Salted Gourmet Popcorn 90g",
+    "packSize": 90.0,
+    "price": 26.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/jumpin-jack-salted-gourmet-popcorn-90g-10125439EA",
+    "match": "similar",
+    "note": "Not air-popped",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3450,6 +5151,16 @@
     "carbs": 72.0,
     "fat": 1.0,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "Snowflake Self Raising Wheat Flour 1kg",
+    "packSize": 1000.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/snowflake-self-raising-wheat-flour-1kg-10137605EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3469,6 +5180,16 @@
     "carbs": 6.0,
     "fat": 5.0,
     "fibre": 5.0
+   },
+   "checkers": {
+    "name": "Freshmark Shelled Edamame Beans 200g",
+    "packSize": 200.0,
+    "price": 49.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/shelled-edamame-beans-200g-10671594EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3489,7 +5210,17 @@
     "fat": 0.3,
     "fibre": 2.1
    },
-   "gramsPerUnit": 160.0
+   "gramsPerUnit": 160.0,
+   "checkers": {
+    "name": "Loose Red Pepper (per kg)",
+    "packSize": 1.0,
+    "price": 14.38,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/loose-red-pepper-per-kg-10144972KG",
+    "match": "same",
+    "note": "Sold by weight at R89.90/kg; priced for a 160 g pepper",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "yellow_pepper",
@@ -3509,7 +5240,17 @@
     "fat": 0.2,
     "fibre": 0.9
    },
-   "gramsPerUnit": 160.0
+   "gramsPerUnit": 160.0,
+   "checkers": {
+    "name": "Loose Yellow Pepper (per kg)",
+    "packSize": 1.0,
+    "price": 11.18,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "same",
+    "note": "-Herbs-and-Dip/Peppers/Loose-Yellow-Pepper-Per-kg/p/10144975KG",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "cooked_chicken_breast",
@@ -3528,6 +5269,16 @@
     "carbs": 1.0,
     "fat": 4.5,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Feinschmecker Smoked Chicken Breast (per kg)",
+    "packSize": 300.0,
+    "price": 74.97,
+    "regular": null,
+    "link": "",
+    "match": "similar",
+    "note": "Smoked; R249.90/kg priced for 300 g",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3548,7 +5299,17 @@
     "fat": 0.3,
     "fibre": 1.0
    },
-   "gramsPerUnit": 250.0
+   "gramsPerUnit": 250.0,
+   "checkers": {
+    "name": "Sliced White Button Mushrooms 250g",
+    "packSize": 1.0,
+    "price": 36.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/sliced-white-button-mushrooms-250g-10411765EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "tomatoes",
@@ -3568,7 +5329,17 @@
     "fat": 0.2,
     "fibre": 1.2
    },
-   "gramsPerUnit": 120.0
+   "gramsPerUnit": 120.0,
+   "checkers": {
+    "name": "Tomatoes 4 Pack",
+    "packSize": 4.0,
+    "price": 21.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/tomatoes-4s-10158226EA",
+    "match": "same",
+    "note": "Listings range R16.99–R29.99",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "salami",
@@ -3587,6 +5358,16 @@
     "carbs": 1.0,
     "fat": 34.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Farmer's Deli Italian Style Salami 100g",
+    "packSize": 100.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Cooked-Meats",
+    "match": "same",
+    "note": "-Sandwich-Fillers-and-Deli/Chorizo",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3606,6 +5387,16 @@
     "carbs": 60.0,
     "fat": 0.5,
     "fibre": 7.0
+   },
+   "checkers": {
+    "name": "Padkos Dried Fruit Mix 500g",
+    "packSize": 500.0,
+    "price": 89.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/padkos-dried-fruit-mix-500g-10143979EA",
+    "match": "similar",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3625,6 +5416,16 @@
     "carbs": 1.0,
     "fat": 25.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Zandam Parmesan Cheese 60g",
+    "packSize": 60.0,
+    "price": 34.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Cheese/Grated-and-Sliced-Cheese/Zandam-Parmesan-Cheese-60g/p/10336894EA",
+    "match": "same",
+    "note": "A block for grating rather than pre-grated",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3645,7 +5446,17 @@
     "fat": 0.2,
     "fibre": 2.6
    },
-   "gramsPerUnit": 100.0
+   "gramsPerUnit": 100.0,
+   "checkers": {
+    "name": "Freshmark Spring Onions 75g",
+    "packSize": 1.0,
+    "price": 23.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Onions-and-Leeks/Spring-Onions-Pack-75g/p/10148755EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "sunflower_seeds",
@@ -3664,6 +5475,16 @@
     "carbs": 11.0,
     "fat": 51.0,
     "fibre": 9.0
+   },
+   "checkers": {
+    "name": "Health Connection Wholefoods Sunflower Seeds 250g",
+    "packSize": 250.0,
+    "price": 54.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Biltong",
+    "match": "same",
+    "note": "-Dried-Fruit",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3684,7 +5505,17 @@
     "fat": 1.4,
     "fibre": 2.4
    },
-   "gramsPerUnit": 150.0
+   "gramsPerUnit": 150.0,
+   "checkers": {
+    "name": "Sweetcorn 2s",
+    "packSize": 2.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Peas",
+    "match": "same",
+    "note": "-Beans",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "curry_paste",
@@ -3703,6 +5534,16 @@
     "carbs": 12.0,
     "fat": 21.0,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "",
+    "match": "none",
+    "note": "No tikka curry paste with a price found",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3722,6 +5563,16 @@
     "carbs": 75.0,
     "fat": 4.0,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "Wheatlands Unseasoned Bread Crumbs 200g",
+    "packSize": 200.0,
+    "price": 15.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/wheatlands-unseasoned-bread-crumbs-200g-10766174EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3742,7 +5593,17 @@
     "fat": 0.8,
     "fibre": 1.5
    },
-   "gramsPerUnit": 410.0
+   "gramsPerUnit": 410.0,
+   "checkers": {
+    "name": "Checkers Housebrand Tomato & Onion Mix 410g",
+    "packSize": 1.0,
+    "price": 17.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/checkers-housebrand-tomato-and-onion-mix-410g-10163021EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "tomato_paste",
@@ -3761,6 +5622,16 @@
     "carbs": 15.0,
     "fat": 0.5,
     "fibre": 4.0
+   },
+   "checkers": {
+    "name": "Rhodes Tomato Paste Sachet 50g",
+    "packSize": 50.0,
+    "price": 6.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Gravies",
+    "match": "same",
+    "note": "-Sauces-and-Pastes/Rhodes-Tomato-Paste-Sachet-50g/p/10351880EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3781,7 +5652,17 @@
     "fat": 1.5,
     "fibre": 1.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "DENNY Creamy Tomato Ready To Serve Soup 400g",
+    "packSize": 1.0,
+    "price": 37.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "truffle_oil",
@@ -3800,6 +5681,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Cooking-Oils-and-Fats/Stonebarn-Black-Truffle-Oil-100ml/p/10800324EA",
+    "match": "none",
+    "note": "Truffle oils listed but no price shown",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3819,6 +5710,16 @@
     "carbs": 44.0,
     "fat": 3.3,
     "fibre": 22.0
+   },
+   "checkers": {
+    "name": "Robertsons Turmeric Spice Refill 57g",
+    "packSize": 57.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Cooking-Ingredients/Spices/Robertsons-Turmeric-Spice-Refill-57g/p/10125810EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3838,6 +5739,16 @@
     "carbs": 90.0,
     "fat": 8.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Trumps 100's & 1000's Decorative Sprinkles 75g",
+    "packSize": 75.0,
+    "price": 24.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Baking/Icing-and-Decorating/Trumps-100's-and-1000's-Decorative-Sprinkles-75g/p/10147536EA",
+    "match": "similar",
+    "note": "Another listing shows R29.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3857,6 +5768,16 @@
     "carbs": 24.0,
     "fat": 14.0,
     "fibre": 33.0
+   },
+   "checkers": {
+    "name": "Staffords Cocoa Powder 125g",
+    "packSize": 125.0,
+    "price": 59.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/staffords-cocoa-powder-125g-10977142EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3876,6 +5797,16 @@
     "carbs": 12.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Robertsons Vanilla Flavour Essence 40ml",
+    "packSize": 40.0,
+    "price": 13.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/robertsons-vanilla-flavour-essence-40ml-10234294EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3895,6 +5826,16 @@
     "carbs": 45.0,
     "fat": 9.0,
     "fibre": 3.0
+   },
+   "checkers": {
+    "name": "",
+    "packSize": null,
+    "price": null,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Salad",
+    "match": "none",
+    "note": "-Herbs-and-Dip/Hummus-and-Dips/Japanese-Choice-Wasabi-Paste-43g/p/10394380EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3914,6 +5855,16 @@
     "carbs": 3.0,
     "fat": 35.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Dewfresh Fresh Cream 500ml",
+    "packSize": 500.0,
+    "price": 46.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Milk",
+    "match": "same",
+    "note": "-Butter-and-Eggs/Fresh-Cream-and-Custard/Dewfresh-Fresh-Cream-500ml/p/10138066EA",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3933,6 +5884,16 @@
     "carbs": 1.0,
     "fat": 33.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Crystal Valley White Cheddar Cheese 750g",
+    "packSize": 750.0,
+    "price": 109.99,
+    "regular": 129.99,
+    "link": "https://www.checkers.co.za/product/crystal-valley-white-cheddar-cheese-750g-10605698EA",
+    "match": "similar",
+    "note": "Much bigger block; on promotion when checked",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3952,6 +5913,16 @@
     "carbs": 12.0,
     "fat": 50.0,
     "fibre": 12.0
+   },
+   "checkers": {
+    "name": "Health Connection Wholefoods Dehusked Sesame Seeds 250g",
+    "packSize": 250.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/health-connection-wholefoods-dehusked-sesame-seeds-250g-10201148EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3971,6 +5942,16 @@
     "carbs": 0.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Checkers Housebrand White Spirit Vinegar 750ml",
+    "packSize": 750.0,
+    "price": 16.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "From a related-products listing",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -3990,6 +5971,16 @@
     "carbs": 100.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Sugarfields White Sugar 1kg",
+    "packSize": 1000.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "",
+    "match": "same",
+    "note": "Huletts 1 kg is R36.99",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -4010,7 +6001,17 @@
     "fat": 0.4,
     "fibre": 2.6
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Broccoli 350g",
+    "packSize": 1.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Broccoli-and-Cauliflower/Broccoli-Pack/p/10151420EA",
+    "match": "same",
+    "note": "350 g pack",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "cauliflower",
@@ -4030,7 +6031,17 @@
     "fat": 0.3,
     "fibre": 2.0
    },
-   "gramsPerUnit": 500.0
+   "gramsPerUnit": 500.0,
+   "checkers": {
+    "name": "Cauliflower 400g",
+    "packSize": 1.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Fresh-Food/Fresh-Vegetables/Broccoli-and-Cauliflower/Cauliflower-Pack/p/10151423EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "wholegrain_mustard",
@@ -4049,6 +6060,16 @@
     "carbs": 8.0,
     "fat": 10.0,
     "fibre": 5.0
+   },
+   "checkers": {
+    "name": "The Kitchen Whole Grain Mustard 200g",
+    "packSize": 200.0,
+    "price": 44.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/the-kitchen-whole-grain-mustard-200g-10454172EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -4068,6 +6089,16 @@
     "carbs": 1.4,
     "fat": 0.4,
     "fibre": 2.2
+   },
+   "checkers": {
+    "name": "Spinach Leaf 300g",
+    "packSize": 300.0,
+    "price": 19.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/spinach-leaf-300g-10144922EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -4088,7 +6119,17 @@
     "fat": 0.2,
     "fibre": 1.0
    },
-   "gramsPerUnit": 400.0
+   "gramsPerUnit": 400.0,
+   "checkers": {
+    "name": "Pot O' Gold Whole Unpeeled Cherry Tomatoes in Tomato Juice 400g",
+    "packSize": 1.0,
+    "price": 23.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/All-Departments/Food/Food-Cupboard/Canned-Food/Canned-Tomatoes-and-Puree/Pot-O'-Gold-Whole-Unpeeled-Cherry-Tomatoes-in-Tomato-Juice-400g/p/10350324EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
+   }
   },
   {
    "key": "ww_fusilli",
@@ -4107,6 +6148,16 @@
     "carbs": 64.0,
     "fat": 2.5,
     "fibre": 9.0
+   },
+   "checkers": {
+    "name": "M.G. Pasta Whole Wheat Fusilli 500g",
+    "packSize": 500.0,
+    "price": 29.99,
+    "regular": null,
+    "link": "https://products.checkers.co.za/All-Departments/Food/Food-Cupboard/Rice",
+    "match": "same",
+    "note": "-Pasta",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -4126,6 +6177,16 @@
     "carbs": 17.0,
     "fat": 0.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Forage And Feast Balsamic Vinegar 250ml",
+    "packSize": 250.0,
+    "price": 69.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/forage-and-feast-balsamic-vinegar-bottle-250ml-10733848EA",
+    "match": "same",
+    "note": "R59.99 at some stores",
+    "updated": "2026-10-08"
    }
   },
   {
@@ -4145,6 +6206,16 @@
     "carbs": 0.0,
     "fat": 92.0,
     "fibre": 0.0
+   },
+   "checkers": {
+    "name": "Willow Creek Lemon Flavoured Extra Virgin Olive Oil 250ml",
+    "packSize": 250.0,
+    "price": 109.99,
+    "regular": null,
+    "link": "https://www.checkers.co.za/product/willow-creek-lemon-flavoured-extra-virgin-olive-oil-250ml-10229145EA",
+    "match": "same",
+    "note": "",
+    "updated": "2026-10-08"
    }
   }
  ],

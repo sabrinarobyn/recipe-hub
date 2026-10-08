@@ -1,5 +1,21 @@
 export type PriceBasis = "today" | "regular";
 
+export type StoreId = "woolworths" | "checkers";
+
+/** The equivalent product at another store. Pack size is in the Woolworths product's unit. */
+export interface StoreOffer {
+  name: string;
+  packSize: number | null;
+  price: number | null;
+  /** Price without promotion, when the listing showed one. */
+  regular: number | null;
+  link: string;
+  /** "same" = same product or a near-identical one; "similar" = different size, brand or variety; "none" = no equivalent found. */
+  match: "same" | "similar" | "none";
+  note: string;
+  updated: string;
+}
+
 /** Per 100 g, or per 100 ml for liquids. */
 export interface Nutrition {
   kcal: number;
@@ -27,6 +43,7 @@ export interface Product {
   nutrition?: Nutrition | null;
   /** Weight of one unit, for products counted in ea, punnets, cloves… */
   gramsPerUnit?: number | null;
+  checkers?: StoreOffer | null;
 }
 
 export type LineKind = "product" | "recipe" | "basic" | "missing";
@@ -60,6 +77,7 @@ export interface Recipe {
 
 export interface Seed {
   pricesCaptured: string;
+  checkersCaptured?: string;
   notes: { label: string; text: string }[];
   excluded: { name: string; reason: string; link: string }[];
   categories: string[];
@@ -95,6 +113,8 @@ export interface WeekList {
 
 export interface Settings {
   priceBasis: PriceBasis;
+  /** Which store's prices to cost with. */
+  store?: StoreId;
 }
 
 /** Everything the person changes. Seed data is never stored; only edits on top of it. */

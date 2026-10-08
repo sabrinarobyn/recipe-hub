@@ -1,10 +1,14 @@
-import type { PriceBasis, Product, Recipe } from "../types";
+import type { PriceBasis, Product, Recipe, StoreId } from "../types";
 
 export interface Catalog {
   products: Map<string, Product>;
   recipes: Map<string, Recipe>;
   basis: PriceBasis;
+  /** Store to cost with. Defaults to Woolworths. */
+  store?: StoreId;
 }
+
+export const STORE_NAMES: Record<StoreId, string> = { woolworths: "Woolworths", checkers: "Checkers" };
 
 export function priceOf(p: Product, basis: PriceBasis): number | null {
   return basis === "regular" ? (p.regular ?? p.today) : (p.today ?? p.regular);
@@ -12,6 +16,42 @@ export function priceOf(p: Product, basis: PriceBasis): number | null {
 
 export function onPromotion(p: Product): boolean {
   return p.today != null && p.regular != null && p.today < p.regular;
+}
+
+/** What you'd actually buy for a product at a store. */
+export interface Offer {
+  store: StoreId;
+  name: string;
+  price: number | null;
+  packSize: number | null;
+  link: string;
+  promo: boolean;
+  /** The chosen store has no equivalent, so the Woolworths product stands in. */
+  fallback: boolean;
+}
+
+export function offerFor(p: Product, store: StoreId = "woolworths", basis: PriceBasis = "today"): Offer {
+  const c = p.checkers;
+  if (store === "checkers" && c && c.match !== "none" && c.price != null && c.packSize) {
+    return {
+      store: "checkers",
+      name: c.name,
+      price: basis === "regular" ? (c.regular ?? c.price) : c.price,
+      packSize: c.packSize,
+      link: c.link,
+      promo: c.regular != null && c.price < c.regular,
+      fallback: false,
+    };
+  }
+  return {
+    store: "woolworths",
+    name: p.name,
+    price: priceOf(p, basis),
+    packSize: p.packSize,
+    link: p.link,
+    promo: onPromotion(p),
+    fallback: store !== "woolworths",
+  };
 }
 
 /** Packs needed to cover qty. Tiny tolerance so 500 g of a 500 g pack is 1 pack, not 2. */
@@ -73,14 +113,15 @@ export function expandRecipe(
 }
 
 /** Cost of the share of each pack actually used. null when the product has no price or pack size. */
-export function usedCost(product: Product, qty: number, basis: PriceBasis): number | null {
-  const price = priceOf(product, basis);
-  if (price == null || !product.packSize) return null;
-  return (qty / product.packSize) * price;
+export function usedCost(product: Product, qty: number, catalog: Catalog): number | null {
+  const offer = offerFor(product, catalog.store, catalog.basis);
+  if (offer.price == null || !offer.packSize) return null;
+  return (qty / offer.packSize) * offer.price;
 }
 
 export interface ShoppingItem {
   product: Product;
+  offer: Offer;
   qty: number;
   packs: number;
   /** Full packs × price. null if the product has no price. */
@@ -101,6 +142,8 @@ export interface ShoppingList {
   /** Value of what the recipes actually use. */
   usedTotal: number;
   unpriced: number;
+  /** Items priced at Woolworths because the chosen store has no equivalent. */
+  fallbacks: number;
 }
 
 export function buildShoppingList(entries: { recipeId: string; batches: number }[], catalog: Catalog): ShoppingList {
@@ -118,22 +161,24 @@ export function buildShoppingList(entries: { recipeId: string; batches: number }
   let total = 0;
   let usedTotal = 0;
   let unpriced = 0;
+  let fallbacks = 0;
   for (const [key, uses] of byProduct) {
     const product = catalog.products.get(key)!;
+    const offer = offerFor(product, catalog.store, catalog.basis);
     const qty = uses.reduce((s, u) => s + u.qty, 0);
-    const price = priceOf(product, catalog.basis);
-    const packSize = product.packSize || 0;
+    const packSize = offer.packSize || 0;
     const packs = packSize ? packsFor(qty, packSize) : 1;
-    const cost = price == null ? null : packs * price;
-    const used = usedCost(product, qty, catalog.basis);
+    const cost = offer.price == null ? null : packs * offer.price;
+    const used = usedCost(product, qty, catalog);
     if (cost == null) unpriced++;
+    if (offer.fallback) fallbacks++;
     total += cost ?? 0;
     usedTotal += used ?? 0;
-    items.push({ product, qty, packs, cost, usedCost: used, leftover: packSize ? packs * packSize - qty : 0, uses });
+    items.push({ product, offer, qty, packs, cost, usedCost: used, leftover: packSize ? packs * packSize - qty : 0, uses });
   }
   items.sort((a, b) => a.product.section.localeCompare(b.product.section) || a.product.name.localeCompare(b.product.name));
 
-  return { items, basics: expansion.basics, missing: expansion.missing, problems: expansion.problems, total, usedTotal, unpriced };
+  return { items, basics: expansion.basics, missing: expansion.missing, problems: expansion.problems, total, usedTotal, unpriced, fallbacks };
 }
 
 export interface RecipeSummary {
@@ -164,7 +209,7 @@ export function lineCost(line: Recipe["lines"][number], catalog: Catalog): numbe
   if (line.kind === "product") {
     const product = line.productKey ? catalog.products.get(line.productKey) : undefined;
     if (!product || !line.qty) return null;
-    return usedCost(product, line.qty, catalog.basis);
+    return usedCost(product, line.qty, catalog);
   }
   if (line.kind === "recipe") {
     const sub = line.recipeId ? catalog.recipes.get(line.recipeId) : undefined;
@@ -172,4 +217,38 @@ export function lineCost(line: Recipe["lines"][number], catalog: Catalog): numbe
     return buildShoppingList([{ recipeId: sub.id, batches: line.qty ?? 1 }], catalog).usedTotal;
   }
   return 0;
+}
+
+export interface StoreComparison {
+  woolworths: ShoppingList;
+  checkers: ShoppingList;
+  /** Buying each item wherever it's cheaper. */
+  split: number;
+  /** Items cheaper at Checkers in the split. */
+  splitCheckers: number;
+  /** Per product: full-pack cost at each store (Checkers null when there's no equivalent). */
+  byProduct: Map<string, { woolworths: number | null; checkers: number | null }>;
+}
+
+/** Cost the same plan at both stores, and work out the cheapest split. */
+export function compareStores(entries: { recipeId: string; batches: number }[], catalog: Catalog): StoreComparison {
+  const woolworths = buildShoppingList(entries, { ...catalog, store: "woolworths" });
+  const checkers = buildShoppingList(entries, { ...catalog, store: "checkers" });
+  const byProduct = new Map<string, { woolworths: number | null; checkers: number | null }>();
+  for (const i of woolworths.items) byProduct.set(i.product.key, { woolworths: i.cost, checkers: null });
+  for (const i of checkers.items) {
+    const row = byProduct.get(i.product.key)!;
+    row.checkers = i.offer.fallback ? null : i.cost;
+  }
+  let split = 0;
+  let splitCheckers = 0;
+  for (const row of byProduct.values()) {
+    const w = row.woolworths;
+    const c = row.checkers;
+    if (c != null && (w == null || c < w)) {
+      split += c;
+      splitCheckers++;
+    } else split += w ?? 0;
+  }
+  return { woolworths, checkers, split, splitCheckers, byProduct };
 }

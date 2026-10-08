@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import type { Open } from "../App";
 import { rand } from "../lib/format";
+import { STORE_NAMES } from "../lib/costing";
 import { editState, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
 import { MacroLine } from "./Nutrition";
 import type { RecipeNutrition } from "../lib/nutrition";
@@ -60,7 +61,7 @@ export function RecipesView({ open }: { open: Open }) {
         <div>
           <h1>Choose your meals</h1>
           <p className="lede">
-            {catalog.recipeList.length} recipes, each costed against Woolworths prices. Average cost per make{" "}
+            {catalog.recipeList.length} recipes, each costed against {STORE_NAMES[catalog.store ?? "woolworths"]} prices. Average cost per make{" "}
             <strong className="num">{rand(avg)}</strong>.
           </p>
         </div>

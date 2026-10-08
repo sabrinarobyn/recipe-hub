@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Open } from "../App";
-import { buildShoppingList } from "../lib/costing";
+import { buildShoppingList, STORE_NAMES } from "../lib/costing";
 import { addDays, dayMonth, dayName, today, weekDays, weekLabel, weekStart } from "../lib/dates";
 import { rand, uid } from "../lib/format";
 import { useApp, useNutrition, useSummaries } from "../lib/store";
@@ -93,7 +93,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
           <span className="summary-value num">{entries.length}</span>
         </div>
         <div>
-          <span className="cost-label">Shopping estimate</span>
+          <span className="cost-label">Shopping estimate · {STORE_NAMES[catalog.store ?? "woolworths"]}</span>
           <span className="summary-value num">{rand(list.total)}</span>
         </div>
         <div>

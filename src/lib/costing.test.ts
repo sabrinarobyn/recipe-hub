@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import sheet from "./__fixtures__/sheet-totals.json";
 import type { Seed } from "../types";
-import { buildShoppingList, packsFor, summarizeRecipe, type Catalog } from "./costing";
+import { buildShoppingList, compareStores, packsFor, summarizeRecipe, type Catalog } from "./costing";
 
 const seed = seedJson as Seed;
 const catalog = (basis: Catalog["basis"] = "today"): Catalog => ({
@@ -57,5 +57,48 @@ describe("shopping list", () => {
     expect(packsFor(0.1 + 0.2, 0.3)).toBe(1);
     expect(packsFor(501, 500)).toBe(2);
     expect(packsFor(0, 500)).toBe(0);
+  });
+});
+
+describe("store comparison", () => {
+  const plan = [
+    { recipeId: "easy-chicken-pie", batches: 1 },
+    { recipeId: "spinach-feta-filo-tart", batches: 1 },
+    { recipeId: "bovril-seed-crackers", batches: 1 },
+  ];
+
+  it("prices with the Checkers equivalent and its pack size", () => {
+    const list = buildShoppingList([{ recipeId: "spinach-feta-filo-tart", batches: 1 }], { ...catalog(), store: "checkers" });
+    const feta = list.items.find((i) => i.product.key === "feta")!;
+    expect(feta.offer.store).toBe("checkers");
+    expect(feta.offer.name).toMatch(/Fairview/);
+    expect(feta.cost).toBeCloseTo(feta.packs * 23.99, 2);
+  });
+
+  it("falls back to Woolworths where Checkers has no equivalent", () => {
+    const products = new Map(seed.products.map((p) => [p.key, p]));
+    const noMatch = seed.products.find((p) => p.checkers?.match === "none")!;
+    const recipe = { id: "x", name: "x", category: "Mains", notes: "", yield: "", link: "", lines: [{ id: "1", text: "x", kind: "product" as const, productKey: noMatch.key, qty: 1 }] };
+    const cat: Catalog = { products, recipes: new Map([["x", recipe]]), basis: "today", store: "checkers" };
+    const list = buildShoppingList([{ recipeId: "x", batches: 1 }], cat);
+    expect(list.fallbacks).toBe(1);
+    expect(list.items[0].offer.store).toBe("woolworths");
+  });
+
+  it("the split is never dearer than either store", () => {
+    const c = compareStores(plan, catalog());
+    expect(c.split).toBeLessThanOrEqual(c.woolworths.total + 0.001);
+    expect(c.split).toBeLessThanOrEqual(c.checkers.total + 0.001);
+    expect(c.byProduct.size).toBe(c.woolworths.items.length);
+  });
+
+  it("every researched Checkers match has a price and pack size", () => {
+    for (const p of seed.products) {
+      expect(p.checkers, p.key).toBeTruthy();
+      if (p.checkers!.match !== "none") {
+        expect(p.checkers!.price, p.key).toBeGreaterThan(0);
+        expect(p.checkers!.packSize, p.key).toBeGreaterThan(0);
+      }
+    }
   });
 });

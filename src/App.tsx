@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { bookDot } from "./components/SettingsModal";
+import { StorePicker } from "./components/StorePicker";
 import { Icon, useToast } from "./components/ui";
 import { RecipesView } from "./components/RecipesView";
 import { PlanView } from "./components/PlanView";
@@ -85,7 +86,7 @@ export default function App() {
             </span>
             <span className="brand-text">
               <span className="brand-name">Recipe Hub</span>
-              <span className="brand-sub">Meals, plans &amp; Woolworths costs</span>
+              <span className="brand-sub">Meals, plans &amp; grocery costs</span>
             </span>
           </a>
           <nav className="tabs" aria-label="Sections">
@@ -102,6 +103,7 @@ export default function App() {
               </button>
             ))}
           </nav>
+          <StorePicker compact />
           <button className="icon-btn settings-btn" onClick={() => setSettings(true)} aria-label="Settings and backup">
             <Icon name="settings" />
             <span className={`sync-dot ${bookDot(sync.book)}`} aria-hidden="true" />

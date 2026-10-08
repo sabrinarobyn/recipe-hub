@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Open } from "../App";
-import { buildShoppingList, onPromotion, priceOf, type LooseItem, type ShoppingItem } from "../lib/costing";
+import { compareStores, STORE_NAMES, type LooseItem, type ShoppingItem } from "../lib/costing";
 import { addDays, weekLabel } from "../lib/dates";
 import { packLabel, qty, rand, shortDate, uid } from "../lib/format";
 import { toCsv } from "../lib/csv";
@@ -16,9 +16,12 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
     () => data.plan.filter((e) => e.date >= week && e.date <= end && catalog.recipes.has(e.recipeId)),
     [data.plan, week, end, catalog],
   );
-  const list = useMemo(() => buildShoppingList(entries, catalog), [entries, catalog]);
+  const comparison = useMemo(() => compareStores(entries, catalog), [entries, catalog]);
+  const store = catalog.store ?? "woolworths";
+  const other = store === "checkers" ? "woolworths" : "checkers";
+  const list = comparison[store];
   const wl = data.lists[week] ?? emptyList();
-  const have = new Set(wl.have);
+  const have = useMemo(() => new Set(wl.have), [wl.have]);
   const got = new Set(wl.got);
   const [extraText, setExtraText] = useState("");
   const [extraPrice, setExtraPrice] = useState<number | null>(null);
@@ -27,6 +30,26 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
   const extrasTotal = wl.extras.reduce((s, x) => s + (x.price ?? 0), 0);
   const estimate = list.total - haveSaving + extrasTotal;
   const toBuy = list.items.filter((i) => !have.has(i.product.key));
+  // Both stores and the cheapest-of-each total, for what's still to buy.
+  const cmp = useMemo(() => {
+    let w = 0;
+    let c = 0;
+    let split = 0;
+    let fromCheckers = 0;
+    let notAtCheckers = 0;
+    for (const [key, row] of comparison.byProduct) {
+      if (have.has(key)) continue;
+      const ww = row.woolworths ?? 0;
+      w += ww;
+      if (row.checkers == null) notAtCheckers++;
+      c += row.checkers ?? ww;
+      if (row.checkers != null && row.checkers < ww) {
+        split += row.checkers;
+        fromCheckers++;
+      } else split += ww;
+    }
+    return { w: w + extrasTotal, c: c + extrasTotal, split: split + extrasTotal, fromCheckers, notAtCheckers };
+  }, [comparison, have, extrasTotal]);
   const remaining = toBuy.filter((i) => !got.has(i.product.key)).length + wl.extras.filter((x) => !got.has(x.id)).length;
 
   const sections = useMemo(() => {
@@ -54,12 +77,12 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
   };
 
   const asText = () => {
-    const lines = [`Shopping list, ${weekLabel(week)} (estimate ${rand(estimate)})`, ""];
+    const lines = [`Shopping list, ${weekLabel(week)}, ${STORE_NAMES[store]} (estimate ${rand(estimate)})`, ""];
     for (const [section, items] of sections) {
       const buy = items.filter((i) => !have.has(i.product.key));
       if (!buy.length) continue;
       lines.push(section.toUpperCase());
-      for (const i of buy) lines.push(`☐ ${i.product.name}${i.packs > 1 ? ` ×${i.packs}` : ""}  ${rand(i.cost)}`);
+      for (const i of buy) lines.push(`☐ ${i.offer.name}${i.packs > 1 ? ` ×${i.packs}` : ""}  ${rand(i.cost)}`);
       lines.push("");
     }
     if (wl.extras.length) {
@@ -86,14 +109,15 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
   const downloadCsv = async () => {
     const rows = toBuy.map((i) => ({
       Section: i.product.section,
-      Product: i.product.name,
+      Store: STORE_NAMES[i.offer.store],
+      Product: i.offer.name,
       Needed: qty(i.qty, i.product.unit),
       Packs: i.packs,
-      "Pack price (R)": priceOf(i.product, catalog.basis)?.toFixed(2) ?? "",
+      "Pack price (R)": i.offer.price?.toFixed(2) ?? "",
       "Cost (R)": i.cost?.toFixed(2) ?? "",
       For: [...new Set(i.uses.map((u) => catalog.recipes.get(u.recipeId)?.name))].join("; "),
     }));
-    for (const x of wl.extras) rows.push({ Section: "Extras", Product: x.text, Needed: "", Packs: 1, "Pack price (R)": "", "Cost (R)": x.price?.toFixed(2) ?? "", For: "" });
+    for (const x of wl.extras) rows.push({ Section: "Extras", Store: "", Product: x.text, Needed: "", Packs: 1, "Pack price (R)": "", "Cost (R)": x.price?.toFixed(2) ?? "", For: "" });
     const ok = await saveFile(`shopping-list-${week}.csv`, toCsv(rows), "text/csv");
     if (!ok) open.notify("Downloads aren't available here. Use Copy list instead.");
   };
@@ -136,7 +160,9 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
 
       <div className="list-layout">
         <aside className="receipt" aria-label="Estimate">
-          <p className="receipt-title">Estimate · {weekLabel(week)}</p>
+          <p className="receipt-title">
+            {STORE_NAMES[store]} · {weekLabel(week)}
+          </p>
           <dl>
             <div>
               <dt>{list.items.length} products, full packs</dt>
@@ -162,9 +188,38 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
           <p className="receipt-note">
             The recipes use about {rand(list.usedTotal)} of this. The rest stays in your cupboard for next time.
           </p>
+          <div className="compare">
+            <p className="compare-title">Same list at each store</p>
+            <dl>
+              <div className={store === "woolworths" ? "is-current" : ""}>
+                <dt>Woolworths</dt>
+                <dd>{rand(cmp.w)}</dd>
+              </div>
+              <div className={store === "checkers" ? "is-current" : ""}>
+                <dt>
+                  Checkers
+                  {cmp.notAtCheckers > 0 && <span className="compare-note"> ({cmp.notAtCheckers} at Woolworths price)</span>}
+                </dt>
+                <dd>{rand(cmp.c)}</dd>
+              </div>
+              <div className="compare-split">
+                <dt>
+                  Cheapest of each
+                  <span className="compare-note"> ({cmp.fromCheckers} from Checkers)</span>
+                </dt>
+                <dd>{rand(cmp.split)}</dd>
+              </div>
+            </dl>
+            {Math.abs(cmp.w - cmp.c) >= 1 && (
+              <p className="compare-verdict">
+                {cmp.c < cmp.w ? "Checkers" : "Woolworths"} is {rand(Math.abs(cmp.w - cmp.c))} cheaper for this list.
+              </p>
+            )}
+          </div>
           <p className="receipt-note">
-            {catalog.basis === "today" ? "Shelf prices incl. promotions" : "Regular prices (no promotions)"}. Prices from{" "}
-            woolworths.co.za, {shortDate(seed.pricesCaptured)}, unless you've updated them.
+            {catalog.basis === "today" ? "Shelf prices incl. promotions" : "Regular prices (no promotions)"}. Woolworths prices from{" "}
+            woolworths.co.za, {shortDate(seed.pricesCaptured)}; Checkers prices from checkers.co.za listings,{" "}
+            {shortDate(seed.checkersCaptured ?? seed.pricesCaptured)}, unless you've updated them.
           </p>
           <p className="receipt-progress">
             {remaining === 0 ? "All ticked off" : `${remaining} left to pick up`}
@@ -187,6 +242,9 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
                   const isHave = have.has(k);
                   const isGot = got.has(k);
                   const recipes = [...new Set(item.uses.map((u) => u.recipeId))].map((id) => catalog.recipes.get(id)!);
+                  const row = comparison.byProduct.get(k);
+                  const otherCost = other === "checkers" ? row?.checkers : row?.woolworths;
+                  const cheaperElsewhere = otherCost != null && item.cost != null && otherCost < item.cost - 0.005;
                   return (
                     <li key={k} className={`item${isHave ? " is-have" : ""}${isGot ? " is-got" : ""}`}>
                       <label className="check">
@@ -195,15 +253,16 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
                       </label>
                       <div className="item-main">
                         <span className="item-name">
-                          {item.product.name}
-                          {onPromotion(item.product) && <span className="flag flag-promo">Promo</span>}
+                          {item.offer.name}
+                          {item.offer.promo && <span className="flag flag-promo">Promo</span>}
+                          {item.offer.fallback && <span className="flag flag-warn">Woolworths item</span>}
                         </span>
                         <span className="item-sub">
                           Need {qty(item.qty, item.product.unit)}
-                          {item.product.packSize && item.product.packSize !== 1
-                            ? ` · ${item.packs} × ${packLabel(item.product.packSize, item.product.unit)}`
+                          {item.offer.packSize && item.offer.packSize !== 1
+                            ? ` · ${item.packs} × ${packLabel(item.offer.packSize, item.product.unit)}`
                             : ""}{" "}
-                          · {rand(priceOf(item.product, catalog.basis))} each
+                          · {rand(item.offer.price)} each
                         </span>
                         <span className="item-for">
                           For{" "}
@@ -219,6 +278,11 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
                       </div>
                       <div className="item-end">
                         <span className="item-cost num">{isHave ? "–" : rand(item.cost)}</span>
+                        {!isHave && (
+                          <span className={`item-other num${cheaperElsewhere ? " is-cheaper" : ""}`}>
+                            {STORE_NAMES[other]} {otherCost != null ? rand(otherCost) : "–"}
+                          </span>
+                        )}
                         <button className={`have-btn${isHave ? " active" : ""}`} onClick={() => toggle("have", k)} aria-pressed={isHave}>
                           {isHave ? "At home" : "Have it?"}
                         </button>

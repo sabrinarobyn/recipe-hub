@@ -23,6 +23,8 @@ DEFAULT_XLSX = ROOT / "data" / "Jade_Seeliger_Recipes_Woolworths_Costed.xlsx"
 DEFAULT_OUT = ROOT / "src" / "data" / "seed.json"
 NUTRITION_CSV = ROOT / "data" / "nutrition.csv"
 SERVINGS_CSV = ROOT / "data" / "servings.csv"
+CHECKERS_CSV = ROOT / "data" / "checkers.csv"
+CHECKERS_CAPTURED = "2026-10-08"
 
 # Shopping-list sections, assigned per product key. Anything not listed
 # falls back to "Pantry".
@@ -140,6 +142,27 @@ def main():
         }
         order.append(name)
 
+    # Checkers equivalents, researched from checkers.co.za listings. pack_size is
+    # in the Woolworths product's unit so recipe amounts carry straight over.
+    if CHECKERS_CSV.exists():
+        with open(CHECKERS_CSV, newline="", encoding="utf-8") as f:
+            checkers = {row["key"]: row for row in csv.DictReader(f)}
+        for p in products:
+            row = checkers.get(p["key"])
+            if not row:
+                continue
+            found = row["match"] != "none"
+            p["checkers"] = {
+                "name": row["checkers_name"],
+                "packSize": float(row["pack_size"]) if found else None,
+                "price": float(row["price"]) if found else None,
+                "regular": float(row["regular"]) if row["regular"] else None,
+                "link": row["link"],
+                "match": row["match"],
+                "note": row["note"],
+                "updated": CHECKERS_CAPTURED,
+            }
+
     servings = {}
     if SERVINGS_CSV.exists():
         with open(SERVINGS_CSV, newline="", encoding="utf-8") as f:
@@ -190,6 +213,7 @@ def main():
 
     seed = {
         "pricesCaptured": "2026-10-06",
+        "checkersCaptured": CHECKERS_CAPTURED,
         "notes": notes,
         "excluded": excluded,
         "categories": sorted({r["category"] for r in recipes.values()}),
