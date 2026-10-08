@@ -7,7 +7,9 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
 
 ## What it does
 
-- **Recipes**: browse, search by recipe or ingredient, filter by category and sort by cost. Each
+- **Recipes**: a list grouped by category, with a small photo, kcal and cost on each row. Search by
+  recipe or ingredient, filter by category and sort by cost. Remove a recipe with the bin on its row
+  (tap twice); **Removed recipes** at the bottom of the list brings a built-in one back. Each
   recipe shows its **cost per make** (only the share of each pack it uses) and its
   **shop-from-scratch** cost (full packs), along with substitutes and items Woolworths doesn't sell.
 - **Plan**: a week view (Monday to Sunday) with breakfast, lunch, dinner and extras. Make a recipe

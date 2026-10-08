@@ -54,11 +54,14 @@ export function ConfirmButton({
   children,
   confirmLabel = "Tap again to confirm",
   className = "btn btn-danger-quiet",
+  ariaLabel,
 }: {
   onConfirm: () => void;
   children: ReactNode;
   confirmLabel?: string;
   className?: string;
+  /** Names the action when the button shows only an icon. */
+  ariaLabel?: string;
 }) {
   const [armed, setArmed] = useState(false);
   useEffect(() => {
@@ -70,6 +73,7 @@ export function ConfirmButton({
     <button
       type="button"
       className={`${className}${armed ? " armed" : ""}`}
+      aria-label={armed ? undefined : ariaLabel}
       onClick={() => (armed ? (setArmed(false), onConfirm()) : setArmed(true))}
     >
       {armed ? confirmLabel : children}

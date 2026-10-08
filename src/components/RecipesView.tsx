@@ -2,17 +2,16 @@ import { useMemo, useState } from "react";
 import type { Open } from "../App";
 import { rand } from "../lib/format";
 import { STORE_NAMES } from "../lib/costing";
-import { editState, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
+import { editState, seed, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
 import { MacroLine } from "./Nutrition";
-import type { RecipeNutrition } from "../lib/nutrition";
-import { Icon } from "./ui";
-import { CardPhoto } from "./Photo";
+import { ConfirmButton, Icon } from "./ui";
+import { Thumb } from "./Photo";
 import { Sticker, StickerCluster } from "./Brand";
 
 type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein";
 
 export function RecipesView({ open }: { open: Open }) {
-  const { catalog, data, canEditBook } = useApp();
+  const { catalog, data, actions, canEditBook } = useApp();
   const summaries = useSummaries();
   const nutrition = useNutrition();
   const [query, setQuery] = useState("");
@@ -50,6 +49,22 @@ export function RecipesView({ open }: { open: Open }) {
     for (const r of catalog.recipeList) m.set(r.category, (m.get(r.category) ?? 0) + 1);
     return m;
   }, [catalog]);
+
+  /** The filtered recipes under their category headings, in the book's category order. */
+  const groups = useMemo(() => {
+    const byCat = new Map<string, typeof recipes>();
+    for (const r of recipes) byCat.set(r.category, [...(byCat.get(r.category) ?? []), r]);
+    const order = [...catalog.categories, ...[...byCat.keys()].filter((c) => !catalog.categories.includes(c))];
+    return order.filter((c) => byCat.has(c)).map((c) => ({ category: c, recipes: byCat.get(c)! }));
+  }, [recipes, catalog]);
+
+  /** Built-in recipes that were removed, so they can be brought back. */
+  const removed = useMemo(() => seed.recipes.filter((r) => data.recipeEdits[r.id] === null), [data.recipeEdits]);
+
+  const remove = (id: string, name: string) => {
+    actions.deleteRecipe(id);
+    open.notify(`Removed ${name}`);
+  };
 
   const avg = useMemo(() => {
     const all = [...summaries.values()];
@@ -119,54 +134,86 @@ export function RecipesView({ open }: { open: Open }) {
           </button>
         </div>
       ) : (
-        <ul className="recipe-grid">
-          {recipes.map((r) => {
-            const s = summaries.get(r.id)!;
-            const state = editState(data.recipeEdits, seedRecipeIds, r.id);
-            return (
-              <li key={r.id} className="recipe-card">
-                <CardPhoto recipe={r} onOpen={() => open.recipe(r.id)} notify={open.notify} />
-                <button className="recipe-card-main" onClick={() => open.recipe(r.id)}>
-                  <span className="eyebrow">
-                    {r.category}
-                    {state && <span className={`badge badge-${state}`}>{state === "new" ? "Yours" : "Edited"}</span>}
-                  </span>
-                  <span className="recipe-name">{r.name}</span>
-                  {r.yield && <span className="recipe-yield">{r.yield}</span>}
-                  <span className="recipe-costs">
-                    <span>
-                      <span className="cost-big num">{rand(s.perMake)}</span>
-                      <span className="cost-label">per make</span>
-                    </span>
-                    <span>
-                      <span className="cost-small num">{rand(s.shop)}</span>
-                      <span className="cost-label">from scratch</span>
-                    </span>
-                  </span>
-                  <NutritionLine n={nutrition.get(r.id)!} />
-                  <span className="flags">
-                    {s.substitutes > 0 && <span className="flag flag-warn">{s.substitutes} substitute{s.substitutes > 1 ? "s" : ""}</span>}
-                    {s.missing > 0 && <span className="flag flag-bad">{s.missing} not at Woolies</span>}
-                    {s.problems > 0 && <span className="flag flag-bad">{s.problems} not costed</span>}
-                  </span>
-                </button>
-                <button className="btn btn-quiet add-plan" onClick={() => open.addToPlan(r.id)}>
-                  <Icon name="plus" /> Add to plan
+        <div className="recipe-groups">
+          {groups.map((g) => (
+            <section key={g.category} className="recipe-group" aria-labelledby={`cat-${g.category}`}>
+              <h2 className="recipe-group-title" id={`cat-${g.category}`}>
+                {g.category}
+                <span className="chip-count">{g.recipes.length}</span>
+              </h2>
+              <ul className="recipe-list">
+                {g.recipes.map((r) => {
+                  const s = summaries.get(r.id)!;
+                  const n = nutrition.get(r.id)!;
+                  const state = editState(data.recipeEdits, seedRecipeIds, r.id);
+                  return (
+                    <li key={r.id} className="recipe-row">
+                      <button className="recipe-row-main" onClick={() => open.recipe(r.id)}>
+                        <Thumb recipe={r} />
+                        <span className="recipe-row-text">
+                          <span className="recipe-row-name">
+                            {r.name}
+                            {state && <span className={`badge badge-${state}`}>{state === "new" ? "Yours" : "Edited"}</span>}
+                          </span>
+                          <span className="recipe-row-meta">
+                            <MacroLine m={n.perServing ?? n.total} />
+                            <span className="cost-label">{n.perServing ? "per serving" : "whole recipe"}</span>
+                            {s.substitutes > 0 && <span className="flag flag-warn">{s.substitutes} substitute{s.substitutes > 1 ? "s" : ""}</span>}
+                            {s.missing > 0 && <span className="flag flag-bad">{s.missing} not at Woolies</span>}
+                            {s.problems > 0 && <span className="flag flag-bad">{s.problems} not costed</span>}
+                          </span>
+                        </span>
+                        <span className="recipe-row-cost">
+                          <span className="num">{rand(s.perMake)}</span>
+                          <span className="cost-label">per make</span>
+                        </span>
+                        <span className="recipe-row-cost recipe-row-scratch">
+                          <span className="num">{rand(s.shop)}</span>
+                          <span className="cost-label">from scratch</span>
+                        </span>
+                      </button>
+                      <button className="btn btn-quiet btn-small row-add" onClick={() => open.addToPlan(r.id)} aria-label={`Add ${r.name} to plan`}>
+                        <Icon name="plus" /> <span className="row-add-text">Plan</span>
+                      </button>
+                      {canEditBook && (
+                        <ConfirmButton
+                          className="btn btn-danger-quiet btn-small row-remove"
+                          confirmLabel="Remove?"
+                          ariaLabel={`Remove ${r.name}`}
+                          onConfirm={() => remove(r.id, r.name)}
+                        >
+                          <Icon name="trash" />
+                        </ConfirmButton>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ))}
+        </div>
+      )}
+
+      {canEditBook && removed.length > 0 && (
+        <details className="removed-recipes">
+          <summary>
+            Removed recipes <span className="chip-count">{removed.length}</span>
+          </summary>
+          <ul>
+            {removed.map((r) => (
+              <li key={r.id}>
+                <span>{r.name}</span>
+                <button
+                  className="btn btn-small"
+                  onClick={() => (actions.resetRecipe(r.id), open.notify(`Restored ${r.name}`))}
+                >
+                  Restore
                 </button>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        </details>
       )}
     </section>
-  );
-}
-
-function NutritionLine({ n }: { n: RecipeNutrition }) {
-  return (
-    <span className="card-macros">
-      <span className="cost-label">{n.perServing ? "Per serving" : "Whole recipe"}</span>
-      <MacroLine m={n.perServing ?? n.total} />
-    </span>
   );
 }
