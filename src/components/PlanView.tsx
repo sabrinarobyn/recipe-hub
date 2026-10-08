@@ -10,6 +10,7 @@ import type { PlanEntry } from "../types";
 import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
 import { Thumb } from "./Photo";
+import { Sticker } from "./Brand";
 
 export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: string) => void }) {
   const current = weekStart(today());
@@ -113,6 +114,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
 
       {entries.length === 0 && (
         <div className="empty empty-inline">
+          <Sticker name="radish" size={56} />
           <p>
             Nothing planned for {weekLabel(week)} yet. Tap <strong>Add meal</strong> on a day, or pick from{" "}
             <button className="text-link" onClick={() => open.goTo("recipes")}>

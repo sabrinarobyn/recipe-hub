@@ -1,88 +1,131 @@
-/* Layout: a working kitchen planner. Herb-green ink on a cool counter-top ground, with the
-   shopping estimate printed as a till slip. Butternut marks promotions, beetroot marks problems. */
+/* Recipe Hub brand (docs/brand/recipe-hub-brand-board.webp): "good food for everyday".
+   Forest-green ink on a warm cream ground, hand-drawn ingredient stickers, Recoleta-style soft
+   serif headings, Kalam for handwritten accents and DM Sans for reading. Sunshine yellow is the
+   highlight, olive-mustard marks promotions and tomato marks problems. */
 :root {
-  --bg: #f2f5f1;
-  --surface: #ffffff;
-  --surface-2: #e7ece6;
-  --ink: #18221d;
-  --muted: #5a6960;
-  --line: #d3dcd4;
-  --accent: #2c6a4c;
-  --accent-hover: #235a40;
-  --accent-ink: #ffffff;
-  --accent-soft: #dbebe1;
-  --butternut: #b5650f;
-  --butternut-soft: #fbe9d3;
-  --beet: #a0304a;
-  --beet-soft: #f7dfe5;
-  --paper: #fffdf7;
-  --paper-ink: #2a2a24;
-  --macro-p: #2c6a4c;
-  --macro-c: #c9831f;
-  --macro-f: #6d5a99;
-  --shadow: 0 1px 2px rgb(24 34 29 / 0.06), 0 4px 16px rgb(24 34 29 / 0.06);
-  --backdrop: rgb(18 26 22 / 0.45);
+  /* brand palette: fixed in both themes, used by the stickers and logo */
+  --c-forest: #0d3f37;
+  --c-olive: #aa972e;
+  --c-lime: #cccd76;
+  --c-pink: #f6bfb6;
+  --c-tomato: #ef5744;
+  --c-sun: #f4bf2b;
+  --c-sun-deep: #d99a14;
+  --c-lavender: #d7b4de;
+  --c-lavender-deep: #b98ac6;
+  --c-cream: #eadfd1;
+  --c-sage: #bfc1a7;
+  --c-leaf: #2e5e4a;
+  --c-olive-leaf: #8f9a37;
+  --c-pit: #7a5233;
 
-  --font-display: "Young Serif", "Iowan Old Style", Georgia, serif;
-  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #fdf7ee;
+  --surface: #fffdf8;
+  --surface-2: #f5ecdf;
+  --ink: #1f2b27;
+  --heading: #0d3f37;
+  --muted: #66695e;
+  --line: #eadfce;
+  --accent: #0d3f37;
+  --accent-hover: #17574b;
+  --accent-ink: #fdf7ee;
+  --accent-soft: #e6ecd8;
+  --highlight: #f4bf2b;
+  --highlight-ink: #0d3f37;
+  --butternut: #7d6608;
+  --butternut-soft: #fbefc3;
+  --beet: #c23a28;
+  --beet-soft: #fde2dc;
+  --paper: #fffbf2;
+  --paper-ink: #2a2a24;
+  --macro-p: #2e6b55;
+  --macro-c: #c48a0c;
+  --macro-f: #9c6bb3;
+  --tint-pink: #fbe0da;
+  --tint-lime: #eef0cf;
+  --tint-sun: #fdefc2;
+  --tint-lavender: #f1e4f3;
+  --tint-sage: #e7e8da;
+  --shadow: 0 1px 2px rgb(13 63 55 / 0.05), 0 6px 20px rgb(13 63 55 / 0.07);
+  --backdrop: rgb(13 40 34 / 0.45);
+
+  --font-display: "Recoleta", "Fraunces", "Cooper", Georgia, serif;
+  --font-hand: "Kalam", "Comic Neue", "Segoe Print", cursive;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --step--1: 0.8125rem;
   --step-0: 0.9375rem;
   --step-1: 1.125rem;
-  --step-2: 1.4rem;
-  --step-3: 1.9rem;
-  --radius: 10px;
-  --radius-sm: 6px;
+  --step-2: 1.45rem;
+  --step-3: 2.1rem;
+  --radius: 18px;
+  --radius-sm: 10px;
   --gutter: clamp(16px, 3vw, 28px);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #101512;
-    --surface: #18201b;
-    --surface-2: #212a24;
-    --ink: #e3ebe5;
-    --muted: #97a69d;
-    --line: #2d3832;
-    --accent: #78c19a;
-    --accent-hover: #8fd0ad;
-    --accent-ink: #0c1912;
-    --accent-soft: #1e3a2b;
-    --butternut: #eaa65a;
-    --butternut-soft: #3a2914;
-    --beet: #ec8aa0;
-    --beet-soft: #3c1b24;
-    --paper: #1d2420;
-    --paper-ink: #e6e2d6;
-    --macro-p: #78c19a;
-    --macro-c: #eaa65a;
-    --macro-f: #b4a3e0;
+    --bg: #0c221d;
+    --surface: #123029;
+    --surface-2: #193a32;
+    --ink: #f3ecdf;
+    --heading: #f8f0e2;
+    --muted: #a9b5a6;
+    --line: #24463d;
+    --accent: #cccd76;
+    --accent-hover: #dadb8d;
+    --accent-ink: #0d3f37;
+    --accent-soft: #23443a;
+    --highlight: #f4bf2b;
+    --highlight-ink: #0d3f37;
+    --butternut: #f2cd5c;
+    --butternut-soft: #3a3214;
+    --beet: #ff8f7c;
+    --beet-soft: #45221c;
+    --paper: #15342d;
+    --paper-ink: #efe7d8;
+    --macro-p: #8fd0b0;
+    --macro-c: #f2c14e;
+    --macro-f: #d7b4de;
+    --tint-pink: #3d2a2b;
+    --tint-lime: #2c3a25;
+    --tint-sun: #3b3319;
+    --tint-lavender: #33293a;
+    --tint-sage: #263a33;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.25);
     --backdrop: rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #101512;
-  --surface: #18201b;
-  --surface-2: #212a24;
-  --ink: #e3ebe5;
-  --muted: #97a69d;
-  --line: #2d3832;
-  --accent: #78c19a;
-  --accent-hover: #8fd0ad;
-  --accent-ink: #0c1912;
-  --accent-soft: #1e3a2b;
-  --butternut: #eaa65a;
-  --butternut-soft: #3a2914;
-  --beet: #ec8aa0;
-  --beet-soft: #3c1b24;
-  --paper: #1d2420;
-  --paper-ink: #e6e2d6;
-  --macro-p: #78c19a;
-  --macro-c: #eaa65a;
-  --macro-f: #b4a3e0;
+  --bg: #0c221d;
+  --surface: #123029;
+  --surface-2: #193a32;
+  --ink: #f3ecdf;
+  --heading: #f8f0e2;
+  --muted: #a9b5a6;
+  --line: #24463d;
+  --accent: #cccd76;
+  --accent-hover: #dadb8d;
+  --accent-ink: #0d3f37;
+  --accent-soft: #23443a;
+  --highlight: #f4bf2b;
+  --highlight-ink: #0d3f37;
+  --butternut: #f2cd5c;
+  --butternut-soft: #3a3214;
+  --beet: #ff8f7c;
+  --beet-soft: #45221c;
+  --paper: #15342d;
+  --paper-ink: #efe7d8;
+  --macro-p: #8fd0b0;
+  --macro-c: #f2c14e;
+  --macro-f: #d7b4de;
+  --tint-pink: #3d2a2b;
+  --tint-lime: #2c3a25;
+  --tint-sun: #3b3319;
+  --tint-lavender: #33293a;
+  --tint-sage: #263a33;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.25);
   --backdrop: rgb(0 0 0 / 0.6);
   color-scheme: dark;
@@ -108,12 +151,21 @@ h3 {
   text-wrap: balance;
   margin: 0;
 }
-h1 {
+h1,
+.display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  color: var(--heading);
+}
+h1 {
   font-size: var(--step-3);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 400;
 }
 a {
   color: var(--accent);
@@ -184,30 +236,29 @@ button {
   color: var(--ink);
   min-width: 0;
 }
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+.brand-art {
   flex: none;
+  display: block;
 }
 .brand-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  line-height: 1.05;
 }
 .brand-name {
   font-family: var(--font-display);
-  font-size: var(--step-1);
+  font-weight: 700;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  color: var(--heading);
 }
 .brand-sub {
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-family: var(--font-hand);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--heading);
+  opacity: 0.8;
 }
 .tabs {
   display: flex;
@@ -232,8 +283,8 @@ button {
   background: var(--surface-2);
 }
 .tab.active {
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 .tab-count {
   font-family: var(--font-mono);
@@ -244,8 +295,9 @@ button {
   display: inline-grid;
   place-items: center;
   border-radius: 999px;
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--highlight);
+  color: var(--highlight-ink);
+  font-weight: 500;
 }
 .icon-btn {
   position: relative;
@@ -376,6 +428,50 @@ button {
   gap: 8px;
   min-width: 0;
 }
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding: 26px 30px;
+  border-radius: 24px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.hero-text .btn-row {
+  margin-top: 6px;
+}
+.hero-art {
+  margin-right: 8px;
+}
+@media (max-width: 640px) {
+  .hero {
+    padding: 20px 18px;
+  }
+  .hero .hero-art {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 124px;
+    margin: 0;
+    zoom: 0.36;
+  }
+  .hero-art .sc-lemon,
+  .hero-art .sc-sprig,
+  .hero-art .sc-avocado {
+    display: none;
+  }
+  .hero .hand-note {
+    max-width: calc(100% - 96px);
+  }
+}
 .lede {
   margin: 0;
   color: var(--muted);
@@ -395,9 +491,9 @@ button {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   background: var(--surface);
   color: var(--ink);
   font-weight: 600;
@@ -432,7 +528,16 @@ button {
   border-color: transparent;
 }
 .btn-small {
-  padding: 4px 10px;
+  padding: 4px 12px;
+}
+.btn-sun {
+  background: var(--highlight);
+  border-color: var(--highlight);
+  color: var(--highlight-ink);
+}
+.btn-sun:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--highlight) 88%, var(--c-sun-deep));
+  border-color: color-mix(in srgb, var(--highlight) 88%, var(--c-sun-deep));
 }
 .btn-danger-quiet {
   border-color: transparent;
@@ -525,9 +630,9 @@ select.input {
   border-color: var(--muted);
 }
 .chip.active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
 }
 .chip-count {
   font-family: var(--font-mono);
@@ -541,9 +646,9 @@ select.input {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -608,9 +713,9 @@ select.input {
 }
 .cost-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -626,10 +731,11 @@ select.input {
   color: var(--muted);
 }
 .empty {
-  padding: 40px 20px;
+  padding: 36px 20px 40px;
   text-align: center;
-  border: 1px dashed var(--line);
+  border: 2px dashed var(--line);
   border-radius: var(--radius);
+  background: var(--surface);
   color: var(--muted);
   display: flex;
   flex-direction: column;
@@ -689,11 +795,12 @@ select.input {
   border-radius: var(--radius);
   background: var(--surface);
   overflow: hidden;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 .recipe-card:hover {
-  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
   box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
 .recipe-card-main {
   flex: 1;
@@ -708,8 +815,11 @@ select.input {
 }
 .recipe-name {
   font-family: var(--font-display);
-  font-size: var(--step-1);
-  line-height: 1.25;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: var(--heading);
 }
 .recipe-yield {
   font-size: var(--step--1);
@@ -748,7 +858,7 @@ select.input {
   display: flex;
   flex-direction: column;
   background: var(--surface);
-  border-radius: 14px;
+  border-radius: 22px;
   box-shadow: var(--shadow);
   outline: none;
 }
@@ -764,7 +874,9 @@ select.input {
 }
 .modal-head h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  color: var(--heading);
   font-size: var(--step-2);
   line-height: 1.2;
 }
@@ -799,7 +911,7 @@ select.input {
   .modal-wide {
     width: 100%;
     max-height: 94%;
-    border-radius: 14px 14px 0 0;
+    border-radius: 22px 22px 0 0;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .modal-body {
@@ -960,8 +1072,8 @@ select.input {
   background: var(--surface);
 }
 .day-card.is-today {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 2px var(--highlight);
 }
 .day-head {
   display: flex;
@@ -971,6 +1083,9 @@ select.input {
 }
 .day-name {
   font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  color: var(--heading);
   font-size: var(--step-1);
   margin-right: 8px;
 }
@@ -1103,13 +1218,13 @@ select.input {
   flex-wrap: wrap;
   padding: 3px;
   gap: 2px;
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   background: var(--surface-2);
 }
 .seg button {
   padding: 6px 12px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 999px;
   background: none;
   font-size: var(--step--1);
   font-weight: 600;
@@ -1210,7 +1325,7 @@ select.input {
   margin: 0 0 12px;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   font-size: 0.72rem;
   padding-bottom: 10px;
   border-bottom: 1px dashed currentColor;
@@ -1297,10 +1412,12 @@ select.input {
 }
 .section-title {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+  color: var(--heading);
   font-size: var(--step-1);
   padding-bottom: 6px;
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--heading);
 }
 .items {
   list-style: none;
@@ -1795,6 +1912,82 @@ select.input {
   gap: 4px;
 }
 
+/* ---------- brand stickers ---------- */
+.sticker {
+  display: block;
+  flex: none;
+  overflow: visible;
+  filter: drop-shadow(0 2px 3px rgb(13 63 55 / 0.14));
+}
+/* the white die-cut edge: the same art drawn underneath, fattened and painted white */
+.sticker-edge,
+.sticker-edge * {
+  fill: #fffdf8;
+  stroke: #fffdf8;
+  stroke-width: 7px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 1;
+}
+/* a thin gap where the logo's lemon overlaps the radish */
+.mark-edge,
+.mark-edge * {
+  fill: var(--bg);
+  stroke: var(--bg);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  opacity: 1;
+}
+.sticker-cluster {
+  position: relative;
+  flex: none;
+  width: 240px;
+  height: 150px;
+}
+.sticker-cluster .sticker {
+  position: absolute;
+}
+.sc-tomato {
+  left: 0;
+  top: 46px;
+  transform: rotate(-8deg);
+}
+.sc-radish {
+  left: 62px;
+  top: 0;
+  transform: rotate(6deg);
+}
+.sc-lemon {
+  left: 132px;
+  top: 58px;
+  transform: rotate(-4deg);
+}
+.sc-flower {
+  left: 186px;
+  top: 6px;
+  transform: rotate(14deg);
+}
+.sc-sprig {
+  left: 82px;
+  top: 88px;
+  transform: rotate(-70deg);
+}
+.sc-avocado {
+  left: 196px;
+  top: 92px;
+  transform: rotate(10deg);
+}
+.empty .sticker {
+  margin-bottom: -4px;
+  transform: rotate(-6deg);
+}
+.hand-note {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  color: var(--heading);
+  line-height: 1.2;
+}
+
 /* ---------- photos ---------- */
 .card-photo {
   display: block;
@@ -1823,36 +2016,41 @@ div.card-photo {
   height: 100%;
   display: grid;
   place-items: center;
+  overflow: hidden;
   background-color: var(--tint-bg);
-  color: var(--tint-fg);
-  /* faint chopping-board grain */
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent 0 10px,
-    color-mix(in srgb, var(--tint-fg) 6%, transparent) 10px 11px
-  );
+  /* hand-drawn speckle, like the brand board's dotted graphic elements */
+  background-image: radial-gradient(color-mix(in srgb, var(--c-forest) 10%, transparent) 1.4px, transparent 1.6px);
+  background-size: 18px 18px;
+  background-position: 4px 6px;
 }
 .tint-0 {
-  --tint-bg: var(--accent-soft);
-  --tint-fg: var(--accent);
+  --tint-bg: var(--tint-pink);
 }
 .tint-1 {
-  --tint-bg: var(--butternut-soft);
-  --tint-fg: var(--butternut);
+  --tint-bg: var(--tint-lime);
 }
 .tint-2 {
-  --tint-bg: var(--beet-soft);
-  --tint-fg: var(--beet);
+  --tint-bg: var(--tint-sun);
 }
 .tint-3 {
-  --tint-bg: var(--surface-2);
-  --tint-fg: var(--muted);
+  --tint-bg: var(--tint-lavender);
 }
-.photo-letter {
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 9vw, 4rem);
-  line-height: 1;
-  opacity: 0.5;
+.tint-4 {
+  --tint-bg: var(--tint-sage);
+}
+.photo-sticker {
+  width: 42%;
+  height: auto;
+  max-height: 72%;
+  transform: rotate(var(--tilt, -6deg));
+}
+.photo-field .photo-sticker {
+  width: auto;
+  height: 66%;
+}
+.thumb .photo-sticker {
+  width: 76%;
+  max-height: 76%;
 }
 .photo-add {
   position: absolute;
@@ -1861,11 +2059,11 @@ div.card-photo {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border: 0;
   border-radius: 999px;
   background: var(--surface);
-  color: var(--ink);
+  color: var(--heading);
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
@@ -1903,9 +2101,10 @@ div.card-photo {
   left: 14px;
   bottom: 14px;
   max-width: calc(100% - 180px);
-  font-size: var(--step--1);
-  color: var(--ink);
-  opacity: 0.75;
+  font-family: var(--font-hand);
+  font-size: var(--step-0);
+  color: var(--heading);
+  opacity: 0.85;
 }
 .photo-actions {
   position: absolute;
@@ -1934,9 +2133,7 @@ div.card-photo {
   overflow: hidden;
   display: block;
 }
-.thumb .photo-letter {
-  font-size: 1.3rem;
-}
+
 .pick-list button {
   justify-content: flex-start;
 }
@@ -1949,7 +2146,7 @@ div.card-photo {
 }
 .banner {
   margin: 0 0 18px;
-  padding: 10px 14px;
+  padding: 10px 16px;
   border-radius: var(--radius-sm);
   background: var(--accent-soft);
   color: var(--ink);

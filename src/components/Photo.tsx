@@ -1,8 +1,9 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { resizePhoto } from "../lib/photos";
 import { useApp } from "../lib/store";
 import type { Recipe } from "../types";
 import { Icon } from "./ui";
+import { Sticker, doodleFor } from "./Brand";
 
 /** Message for a failed photo save, in the person's terms. */
 export function photoError(e: unknown): string {
@@ -42,18 +43,17 @@ export function usePhotoPicker(onPicked: (dataUrl: string) => Promise<void> | vo
   return { open: () => ref.current?.click(), input, busy, handle };
 }
 
-const TINTS = 4;
+const TINTS = 5;
 
-/** Lettered tile shown when a recipe has no photo, tinted by category. */
+/** Brand tile shown when a recipe has no photo: a hand-drawn sticker on a category tint. */
 export function Placeholder({ recipe, children }: { recipe: Recipe; children?: ReactNode }) {
   const { catalog } = useApp();
   const tint = Math.max(0, catalog.categories.indexOf(recipe.category)) % TINTS;
-  const letter = recipe.name.match(/[A-Za-z]/)?.[0]?.toUpperCase() ?? "•";
+  const doodle = doodleFor(recipe.id);
+  const tilt = `${((recipe.name.length * 7) % 17) - 8}deg`;
   return (
     <div className={`photo-placeholder tint-${tint}`}>
-      <span className="photo-letter" aria-hidden="true">
-        {letter}
-      </span>
+      <Sticker name={doodle} size={64} className="photo-sticker" style={{ "--tilt": tilt } as CSSProperties} />
       {children}
     </div>
   );

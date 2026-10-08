@@ -7,6 +7,7 @@ import { MacroLine } from "./Nutrition";
 import type { RecipeNutrition } from "../lib/nutrition";
 import { Icon } from "./ui";
 import { CardPhoto } from "./Photo";
+import { Sticker, StickerCluster } from "./Brand";
 
 type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein";
 
@@ -57,19 +58,23 @@ export function RecipesView({ open }: { open: Open }) {
 
   return (
     <section className="view">
-      <div className="view-head">
-        <div>
+      <div className="hero">
+        <div className="hero-text">
+          <span className="hand-note">Save, plan, cook &amp; enjoy</span>
           <h1>Choose your meals</h1>
           <p className="lede">
             {catalog.recipeList.length} recipes, each costed against {STORE_NAMES[catalog.store ?? "woolworths"]} prices. Average cost per make{" "}
             <strong className="num">{rand(avg)}</strong>.
           </p>
+          {canEditBook && (
+            <div className="btn-row">
+              <button className="btn btn-sun" onClick={() => open.editRecipe("new")}>
+                <Icon name="plus" /> New recipe
+              </button>
+            </div>
+          )}
         </div>
-        {canEditBook && (
-          <button className="btn btn-primary" onClick={() => open.editRecipe("new")}>
-            <Icon name="plus" /> New recipe
-          </button>
-        )}
+        <StickerCluster className="hero-art" />
       </div>
 
       <div className="toolbar">
@@ -107,6 +112,7 @@ export function RecipesView({ open }: { open: Open }) {
 
       {recipes.length === 0 ? (
         <div className="empty">
+          <Sticker name="lemon" size={64} />
           <p>No recipes match “{query}”.</p>
           <button className="btn" onClick={() => (setQuery(""), setCategory("All"))}>
             Clear filters

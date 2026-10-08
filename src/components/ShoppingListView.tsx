@@ -8,6 +8,7 @@ import { saveFile } from "../lib/storage";
 import { emptyList, seed, useApp } from "../lib/store";
 import { WeekSwitch } from "./PlanView";
 import { Icon, NumberField } from "./ui";
+import { Sticker } from "./Brand";
 
 export function ShoppingListView({ open, week, setWeek }: { open: Open; week: string; setWeek: (w: string) => void }) {
   const { data, catalog, actions } = useApp();
@@ -132,6 +133,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
           </div>
         </div>
         <div className="empty">
+          <Sticker name="tomato" size={64} />
           <p>Plan some meals for {weekLabel(week)} and your costed shopping list appears here.</p>
           <button className="btn btn-primary" onClick={() => open.goTo("plan")}>
             Go to meal plan

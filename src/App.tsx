@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { bookDot } from "./components/SettingsModal";
+import { BrandMark } from "./components/Brand";
 import { StorePicker } from "./components/StorePicker";
 import { Icon, useToast } from "./components/ui";
 import { RecipesView } from "./components/RecipesView";
@@ -81,12 +82,10 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-inner">
           <a className="brand" href="#recipes" onClick={(e) => (e.preventDefault(), goTo("recipes"))}>
-            <span className="brand-mark" aria-hidden="true">
-              R
-            </span>
+            <BrandMark size={44} />
             <span className="brand-text">
               <span className="brand-name">Recipe Hub</span>
-              <span className="brand-sub">Meals, plans &amp; grocery costs</span>
+              <span className="brand-sub">good food for everyday</span>
             </span>
           </a>
           <nav className="tabs" aria-label="Sections">

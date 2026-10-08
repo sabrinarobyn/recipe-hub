@@ -39,7 +39,7 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   the Woolworths price and flagged.
 - **Photos**: add a photo to any recipe from the card, the recipe page or the editor (on a phone
   this offers the camera or photo library; on a computer you can also drop or paste an image).
-  Photos are shrunk to about 720 px before saving. Recipes without one show a lettered tile.
+  Photos are shrunk to about 720 px before saving. Recipes without one show a brand sticker tile.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
@@ -55,6 +55,21 @@ reset.
   sets `write: "admin"` on `data/book`). Each person's **meal plan, shopping lists and price
   setting** are private to them under `data/users/<id>`, or in their browser if their access is
   view-only.
+
+## Brand
+
+The look follows the brand board in [`docs/brand/recipe-hub-brand-board.webp`](docs/brand/recipe-hub-brand-board.webp):
+*good food for everyday*, meaning simple, joyful and organised.
+
+- **Colour**: forest green `#0d3f37` for ink and primary actions on a warm cream ground `#fdf7ee`,
+  with sunshine yellow `#f4bf2b` as the highlight. Olive, lime, blush pink, tomato, lavender and sage
+  tint the recipe tiles and stickers. The tokens are at the top of `src/styles.css` (with a deep-green
+  dark mode).
+- **Type**: Recoleta for headings (Fraunces with its soft axis stands in where Recoleta isn't
+  installed), Kalam for handwritten accents and DM Sans for body text. Prices stay in DM Mono.
+- **Imagery**: the logo mark (a lemon and a leafy radish) and the hand-drawn ingredient stickers are
+  inline SVG in `src/components/Brand.tsx`. Recipes without a photo show a sticker on a category
+  tint. For recipe photos, use bright, natural light and seasonal, real food.
 
 ## Running it
 
@@ -105,5 +120,6 @@ scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits
 src/lib/storage.ts    browser storage, Claude account storage, file downloads
-src/components/       the screens
+src/components/       the screens (Brand.tsx: logo and sticker artwork)
+docs/brand/           the brand board
 ```
