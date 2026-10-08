@@ -39,7 +39,10 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   the Woolworths price and flagged.
 - **Photos**: add a photo to any recipe from the card, the recipe page or the editor (on a phone
   this offers the camera or photo library; on a computer you can also drop or paste an image).
-  Photos are shrunk to about 720 px before saving. Recipes without one show a brand sticker tile.
+  Photos are shrunk to about 720 px before saving. Until a recipe has a real photo, it shows an
+  **AI mockup** (labelled as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces
+  it, and removing that photo brings the mockup back. New recipes without a photo show a brand
+  sticker tile.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
@@ -70,6 +73,10 @@ The look follows the brand board in [`docs/brand/recipe-hub-brand-board.webp`](d
 - **Imagery**: the logo mark (a lemon and a leafy radish) and the hand-drawn ingredient stickers are
   inline SVG in `src/components/Brand.tsx`. Recipes without a photo show a sticker on a category
   tint. For recipe photos, use bright, natural light and seasonal, real food.
+- **Mockups**: the stand-in photos were generated with Canva's AI image tool in October 2026 to that
+  same brief (natural daylight, cream linen, everyday home cooking). `data/mockups.csv` maps each
+  recipe to its Canva media id. They're small (about 200 × 150 px), so swap in real photos, or drop
+  a bigger file with the same name into `src/assets/mockups/`, whenever you have one.
 
 ## Running it
 
@@ -115,7 +122,9 @@ the app are kept on top of the new data.
 ## Project layout
 
 ```
-data/                 the source spreadsheet, nutrition, servings and Checkers equivalents (checkers.csv)
+data/                 the source spreadsheet, nutrition, servings, Checkers equivalents (checkers.csv)
+                      and the Canva source of each mockup photo (mockups.csv)
+src/assets/mockups/   AI mockup photo for each built-in recipe
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits

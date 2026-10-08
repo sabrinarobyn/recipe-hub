@@ -1,4 +1,5 @@
 import { useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { mockupFor } from "../lib/mockups";
 import { resizePhoto } from "../lib/photos";
 import { useApp } from "../lib/store";
 import type { Recipe } from "../types";
@@ -59,11 +60,23 @@ export function Placeholder({ recipe, children }: { recipe: Recipe; children?: R
   );
 }
 
-/** Photo on a recipe card: the picture, or a tile with an "Add photo" button. */
+/** AI mockup standing in for a real photo, labelled so nobody mistakes it for the dish as made. */
+export function Mockup({ src, hero, onClick, children }: { src: string; hero?: boolean; onClick?: () => void; children?: ReactNode }) {
+  return (
+    <div className={`photo-mockup${hero ? " is-hero" : ""}`}>
+      <img src={src} alt="" loading="lazy" onClick={onClick} />
+      <span className="mockup-badge">AI mockup</span>
+      {children}
+    </div>
+  );
+}
+
+/** Photo on a recipe card: the picture, or its mockup or a sticker tile, with an "Add photo" button. */
 export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: () => void; notify: (m: string) => void }) {
   const { photos, actions, canEditBook } = useApp();
   const url = photos[recipe.id];
   const picker = usePhotoPicker((u) => actions.setPhoto(recipe.id, u), notify);
+  const mockup = mockupFor(recipe.id);
   if (url) {
     return (
       <button className="card-photo" onClick={onOpen} tabIndex={-1} aria-hidden="true">
@@ -71,15 +84,20 @@ export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: 
       </button>
     );
   }
+  const add = canEditBook && (
+    <button className="photo-add" onClick={picker.open} disabled={picker.busy} aria-label={`Add a photo of ${recipe.name}`}>
+      <Icon name="camera" size={16} /> {picker.busy ? "Adding…" : "Add photo"}
+    </button>
+  );
   return (
     <div className="card-photo">
-      <Placeholder recipe={recipe}>
-        {canEditBook && (
-        <button className="photo-add" onClick={picker.open} disabled={picker.busy} aria-label={`Add a photo of ${recipe.name}`}>
-          <Icon name="camera" size={16} /> {picker.busy ? "Adding…" : "Add photo"}
-        </button>
-        )}
-      </Placeholder>
+      {mockup ? (
+        <Mockup src={mockup} onClick={onOpen}>
+          {add}
+        </Mockup>
+      ) : (
+        <Placeholder recipe={recipe}>{add}</Placeholder>
+      )}
       {picker.input}
     </div>
   );
@@ -103,13 +121,14 @@ export function PhotoField({
   notify: (m: string) => void;
 }) {
   const picker = usePhotoPicker((u) => onChange(u), notify);
+  const mockup = mockupFor(recipe.id);
   const [over, setOver] = useState(false);
   const fromTransfer = (dt: DataTransfer | null) => [...(dt?.files ?? [])].find((f) => f.type.startsWith("image/"));
   if (readOnly) {
-    if (!url) return null;
+    if (!url && !mockup) return null;
     return (
       <div className="photo-field">
-        <img className="photo-hero" src={url} alt={`Photo of ${recipe.name}`} />
+        {url ? <img className="photo-hero" src={url} alt={`Photo of ${recipe.name}`} /> : <Mockup src={mockup!} hero />}
       </div>
     );
   }
@@ -133,6 +152,8 @@ export function PhotoField({
     >
       {url ? (
         <img className="photo-hero" src={url} alt={`Photo of ${recipe.name}`} />
+      ) : mockup ? (
+        <Mockup src={mockup} hero />
       ) : (
         <Placeholder recipe={recipe}>
           <span className="photo-empty-text">No photo yet. Add one, or drop an image here.</span>
@@ -155,7 +176,7 @@ export function PhotoField({
 
 export function Thumb({ recipe }: { recipe: Recipe }) {
   const { photos } = useApp();
-  const url = photos[recipe.id];
+  const url = photos[recipe.id] ?? mockupFor(recipe.id);
   return (
     <span className="thumb">
       {url ? <img src={url} alt="" loading="lazy" /> : <Placeholder recipe={recipe} />}
