@@ -2236,6 +2236,7 @@ div.card-photo {
   opacity: 1;
 }
 .photo-field {
+  --photo-hero-h: 200px;
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
@@ -2250,7 +2251,7 @@ div.card-photo {
   width: 100%;
   max-width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 320px;
+  max-height: var(--photo-hero-h);
   object-fit: cover;
 }
 .photo-field .photo-placeholder {
@@ -2270,8 +2271,13 @@ div.card-photo {
 }
 .photo-mockup.is-hero img {
   aspect-ratio: 16 / 9;
-  max-height: 320px;
+  max-height: var(--photo-hero-h);
   cursor: default;
+}
+@media (max-width: 600px) {
+  .photo-field {
+    --photo-hero-h: 150px;
+  }
 }
 .mockup-badge {
   position: absolute;
