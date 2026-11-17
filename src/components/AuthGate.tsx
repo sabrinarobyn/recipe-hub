@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { BrandMark, StickerCluster } from "./Brand";
 import { clearLocal } from "../lib/storage";
 import { currentAccount, onAuthChange, sendSignInLink, signOut, supabaseConfigured, type Account } from "../lib/supabase";
 
@@ -92,7 +93,7 @@ function Splash({ children }: { children: ReactNode }) {
   return (
     <main className="auth-page">
       <div className="auth-card">
-        <span className="auth-rule" aria-hidden="true" />
+        <BrandMark size={64} />
         <h1 className="auth-title">Recipe Hub</h1>
         <div className="auth-text">{children}</div>
       </div>
@@ -113,10 +114,12 @@ function SignIn() {
 
   return (
     <main className="auth-page">
-      <div className="auth-card">
-        <span className="auth-rule" aria-hidden="true" />
-        <h1 className="auth-title">Recipe Hub</h1>
-        <p className="auth-sub">good food for everyday</p>
+      <div className="auth-card auth-card-signin">
+        <StickerCluster className="auth-art" />
+        <h1 className="auth-title auth-wordmark">
+          <span>Recipe</span> <span>Hub</span>
+        </h1>
+        <p className="auth-sub">Good food for everyday. Let's get cooking!</p>
         {status === "sent" ? (
           <div className="auth-text" role="status">
             <p>

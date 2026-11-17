@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { bookDot } from "./components/SettingsModal";
+import { BrandMark } from "./components/Brand";
 import { StorePicker } from "./components/StorePicker";
 import { Icon, useToast } from "./components/ui";
 import { RecipesView } from "./components/RecipesView";
@@ -81,6 +82,7 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-inner">
           <a className="brand" href="#recipes" onClick={(e) => (e.preventDefault(), goTo("recipes"))}>
+            <BrandMark size={44} />
             <span className="brand-text">
               <span className="brand-name">Recipe Hub</span>
               <span className="brand-sub">good food for everyday</span>
@@ -131,6 +133,7 @@ export default function App() {
         <RecipeEditor
           recipe={editing === "new" ? null : editing}
           onClose={() => setEditing(null)}
+          notify={notify}
           onSaved={(r) => {
             setEditing(null);
             setDetailId(r.id);

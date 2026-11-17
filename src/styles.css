@@ -1,67 +1,82 @@
-/* Recipe Hub brand: a quiet, grown-up kitchen palette.
-   Arsenic (#354242) for ink and primary actions on a soft American Silver ground (#cfcfcd),
-   Morning Blue (#8b9b93) as the cool mid-tone, and Liver Chestnut (#55453a) and Bistre (#362419)
-   as the warm, chocolate accents. Playfair Display (a high-contrast serif) for headings, its italic
-   for small accents, DM Sans for reading and DM Mono for prices. */
+/* Recipe Hub look: a lively market. Cream paper, deep tomato-red display capitals, papaya and burnt
+   orange colour blocks, and flat cut-paper produce in leaf green, cobalt, lemon and pumpkin. Chunky
+   condensed Archivo for headings and labels, EB Garamond for recipe names and recipe pages, DM Sans for
+   reading. */
 :root {
-  /* brand palette: fixed in both themes */
-  --arsenic: #354242;
-  --morning-blue: #8b9b93;
-  --american-silver: #cfcfcd;
-  --liver-chestnut: #55453a;
-  --bistre: #362419;
-  /* champagne gold: hairlines, small labels, the active tab */
-  --gold: #a1855a;
-  --gold-soft: #d8c7a8;
+  --tomato-red: #a0141e;
+  --papaya: #e8622a;
+  --burnt-orange: #b04e1f;
+  --plum: #5b2b7e;
+  --cream: #fbf1e6;
+  /* illustration colours (cut-paper produce) */
+  --i-tomato: #d4452b;
+  --i-tomato-deep: #a8301f;
+  --i-leaf: #2f7a3a;
+  --i-leaf-deep: #1f5a2a;
+  --i-lemon: #f6cf4e;
+  --i-lemon-deep: #e2a92a;
+  --i-cream: #fff6e8;
+  --i-radish: #c8253a;
+  --i-radish-deep: #93192b;
+  --i-pumpkin: #f0a03a;
+  --i-pumpkin-deep: #d27b25;
+  --i-stem: #6b4a2a;
+  --i-cobalt: #2a1aa8;
+  --i-cobalt-deep: #1c1180;
+  --i-pear: #f3d36a;
+  --i-pear-deep: #dcb247;
+  --i-papaya: #e8622a;
+  --i-papaya-light: #f59a52;
+  --i-seed: #241a18;
+  --i-red: #c81e2a;
+  --i-red-deep: #921520;
 
-  /* sticker and logo colours: muted to sit with the palette */
-  --c-forest: #354242;
-  --c-olive: #8c7a4e;
-  --c-lime: #c2c6a8;
-  --c-pink: #d8beb1;
-  --c-tomato: #9c4a38;
-  --c-sun: #c8a66b;
-  --c-sun-deep: #a3824b;
-  --c-lavender: #bcb1bd;
-  --c-lavender-deep: #8e7f92;
-  --c-cream: #cfcfcd;
-  --c-sage: #8b9b93;
-  --c-leaf: #4a5c55;
-  --c-olive-leaf: #7f8f80;
-  --c-pit: #55453a;
+  /* older names still used by a few rules */
+  --c-forest: #a0141e;
+  --c-sun: #f6cf4e;
+  --c-sun-deep: #e2a92a;
+  --c-leaf: #2f7a3a;
+  --c-olive-leaf: #2f7a3a;
+  --c-lavender: #2a1aa8;
+  --c-lavender-deep: #1c1180;
+  --c-pink: #f9d9cf;
+  --c-tomato: #d4452b;
+  --c-lime: #e3edc9;
+  --c-pit: #6b4a2a;
 
-  --bg: #f3f1ed;
-  --surface: #fbfaf8;
-  --surface-2: #e6e5e1;
-  --ink: #2b2420;
-  --heading: #354242;
-  --muted: #69635d;
-  --line: #d9d8d4;
-  --accent: #354242;
-  --accent-hover: #273232;
-  --accent-ink: #f4f1ec;
-  --accent-soft: #dfe5e2;
-  --highlight: #55453a;
-  --highlight-ink: #f4ede4;
-  --butternut: #75592c;
-  --butternut-soft: #efe6d4;
-  --beet: #9a3a2c;
-  --beet-soft: #f3e1dc;
-  --paper: #fbfaf7;
-  --paper-ink: #2b2420;
-  --macro-p: #4f6f64;
-  --macro-c: #a3773c;
-  --macro-f: #7e6a88;
-  --tint-pink: #ece2dc;
-  --tint-lime: #e4e7df;
-  --tint-sun: #ebe3d6;
-  --tint-lavender: #e6e2e6;
-  --tint-sage: #dde3e0;
-  --shadow: 0 1px 2px rgb(54 36 25 / 0.05), 0 8px 24px rgb(54 36 25 / 0.06);
-  --backdrop: rgb(30 36 36 / 0.5);
+  --bg: #fbf1e6;
+  --surface: #fffaf3;
+  --surface-2: #f6e5d4;
+  --ink: #2a1714;
+  --heading: #a0141e;
+  --muted: #7a5f55;
+  --line: #ecd8c5;
+  --accent: #a0141e;
+  --accent-hover: #85101a;
+  --accent-ink: #fff5ea;
+  --accent-soft: #f8dbd1;
+  --highlight: #e8622a;
+  --highlight-ink: #fff5ea;
+  --butternut: #8a5600;
+  --butternut-soft: #fbe6bc;
+  --beet: #b3261e;
+  --beet-soft: #fbdcd5;
+  --paper: #fffaf3;
+  --paper-ink: #2a1714;
+  --macro-p: #2f7a3a;
+  --macro-c: #e08a1e;
+  --macro-f: #5b2b7e;
+  --tint-pink: #f9d9cf;
+  --tint-lime: #e3edc9;
+  --tint-sun: #fbe7b0;
+  --tint-lavender: #e4daf3;
+  --tint-sage: #d5eadb;
+  --shadow: 0 1px 2px rgb(90 30 20 / 0.06), 0 10px 28px rgb(90 30 20 / 0.08);
+  --backdrop: rgb(40 16 14 / 0.5);
 
-  --font-display: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
-  --font-hand: "Playfair Display", "Didot", Georgia, serif;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-serif: "EB Garamond", Garamond, Georgia, serif;
+  --font-hand: var(--font-display);
   --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -70,78 +85,76 @@
   --step-1: 1.125rem;
   --step-2: 1.45rem;
   --step-3: 2.1rem;
-  --radius: 4px;
-  --radius-sm: 2px;
+  --radius: 22px;
+  --radius-sm: 14px;
   --gutter: clamp(16px, 3vw, 28px);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --gold: #c9ad7f;
-    --gold-soft: #5a4c37;
-    --bg: #1c2424;
-    --surface: #232d2d;
-    --surface-2: #2b3636;
-    --ink: #e7e3dd;
-    --heading: #f1ece4;
-    --muted: #a3aca7;
-    --line: #384545;
-    --accent: #b4c2ba;
-    --accent-hover: #c7d3cc;
-    --accent-ink: #1c2424;
-    --accent-soft: #2f3d3b;
-    --highlight: #c9aa8e;
-    --highlight-ink: #2a1c14;
-    --butternut: #d9bf86;
-    --butternut-soft: #383124;
-    --beet: #e59a88;
-    --beet-soft: #3f2622;
-    --paper: #222c2c;
-    --paper-ink: #e8e3da;
-    --macro-p: #9dbfb2;
-    --macro-c: #d9b07a;
-    --macro-f: #bfa9c9;
-    --tint-pink: #352b28;
-    --tint-lime: #2b332f;
-    --tint-sun: #352f27;
-    --tint-lavender: #312c32;
-    --tint-sage: #283433;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+    --bg: #1f1418;
+    --surface: #2a1c21;
+    --surface-2: #35242a;
+    --ink: #f6e9dc;
+    --heading: #ff9466;
+    --muted: #c2a99b;
+    --line: #47323a;
+    --accent: #f07a45;
+    --accent-hover: #ff8f5c;
+    --accent-ink: #1f1418;
+    --accent-soft: #4a2b25;
+    --highlight: #f6cf4e;
+    --highlight-ink: #2a1714;
+    --butternut: #f2c46b;
+    --butternut-soft: #3d2f1a;
+    --beet: #ff8f7c;
+    --beet-soft: #4a221e;
+    --paper: #2a1c21;
+    --paper-ink: #f6e9dc;
+    --macro-p: #8fd19b;
+    --macro-c: #f6b552;
+    --macro-f: #c9a6f0;
+    --tint-pink: #43262a;
+    --tint-lime: #2c3524;
+    --tint-sun: #3f3219;
+    --tint-lavender: #33284a;
+    --tint-sage: #243a2e;
+    --i-cream: #fff1dc;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.3);
     --backdrop: rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --gold: #c9ad7f;
-  --gold-soft: #5a4c37;
-  --bg: #1c2424;
-  --surface: #232d2d;
-  --surface-2: #2b3636;
-  --ink: #e7e3dd;
-  --heading: #f1ece4;
-  --muted: #a3aca7;
-  --line: #384545;
-  --accent: #b4c2ba;
-  --accent-hover: #c7d3cc;
-  --accent-ink: #1c2424;
-  --accent-soft: #2f3d3b;
-  --highlight: #c9aa8e;
-  --highlight-ink: #2a1c14;
-  --butternut: #d9bf86;
-  --butternut-soft: #383124;
-  --beet: #e59a88;
-  --beet-soft: #3f2622;
-  --paper: #222c2c;
-  --paper-ink: #e8e3da;
-  --macro-p: #9dbfb2;
-  --macro-c: #d9b07a;
-  --macro-f: #bfa9c9;
-  --tint-pink: #352b28;
-  --tint-lime: #2b332f;
-  --tint-sun: #352f27;
-  --tint-lavender: #312c32;
-  --tint-sage: #283433;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+  --bg: #1f1418;
+  --surface: #2a1c21;
+  --surface-2: #35242a;
+  --ink: #f6e9dc;
+  --heading: #ff9466;
+  --muted: #c2a99b;
+  --line: #47323a;
+  --accent: #f07a45;
+  --accent-hover: #ff8f5c;
+  --accent-ink: #1f1418;
+  --accent-soft: #4a2b25;
+  --highlight: #f6cf4e;
+  --highlight-ink: #2a1714;
+  --butternut: #f2c46b;
+  --butternut-soft: #3d2f1a;
+  --beet: #ff8f7c;
+  --beet-soft: #4a221e;
+  --paper: #2a1c21;
+  --paper-ink: #f6e9dc;
+  --macro-p: #8fd19b;
+  --macro-c: #f6b552;
+  --macro-f: #c9a6f0;
+  --tint-pink: #43262a;
+  --tint-lime: #2c3524;
+  --tint-sun: #3f3219;
+  --tint-lavender: #33284a;
+  --tint-sage: #243a2e;
+  --i-cream: #fff1dc;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.3);
   --backdrop: rgb(0 0 0 / 0.6);
   color-scheme: dark;
 }
@@ -551,8 +564,8 @@ button {
   color: var(--highlight-ink);
 }
 .btn-sun:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--highlight) 85%, var(--bistre));
-  border-color: color-mix(in srgb, var(--highlight) 85%, var(--bistre));
+  background: color-mix(in srgb, var(--highlight) 85%, #5a0a10);
+  border-color: color-mix(in srgb, var(--highlight) 85%, #5a0a10);
 }
 .btn-danger-quiet {
   border-color: transparent;
@@ -2660,321 +2673,441 @@ div.card-photo {
   margin: 0 auto;
 }
 
-/* Accents set in Playfair italic (the old handwritten font's places). */
-.hand,
-.brand-sub,
-.hand-note,
-.photo-empty-text,
-.auth-sub {
-  font-style: italic;
-  letter-spacing: 0.01em;
-}
+/* =====================================================================
+   Market restyle: chunky red capitals, papaya colour blocks, cut-paper
+   produce, and calm EB Garamond on the recipe pages.
+   ===================================================================== */
 
-/* Intro panel: an Arsenic colour block with cream type, like the palette cards. */
-.hero {
-  border-radius: var(--radius);
-  background: var(--arsenic);
-  color: #e4e2dc;
-}
-.hero h1 {
-  color: #f4ede4;
-}
-.hero .hand-note {
-  color: #d9c58a;
-}
-.hero .lede {
-  color: #cdd3cf;
-}
-.hero .btn-sun {
-  background: #f4ede4;
-  border-color: #f4ede4;
-  color: var(--bistre);
-}
-.hero .btn-sun:hover:not(:disabled) {
-  background: #e7ddd0;
-  border-color: #e7ddd0;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hero {
-    background: var(--bistre);
-  }
-}
-:root[data-theme="dark"] .hero {
-  background: var(--bistre);
-}
-@media (min-width: 481px) {
-  .brand-name {
-    white-space: nowrap;
-  }
-}
-@media (max-width: 480px) {
-  .brand-name {
-    font-size: 1rem;
-    line-height: 1.15;
-    letter-spacing: 0.05em;
-  }
-}
-.hero .lede strong {
-  color: #f4ede4;
-}
-
-/* ================= Luxury finish =================
-   Generous space, hairline rules, champagne-gold small capitals, an editorial list. */
-body {
-  font-weight: 400;
-  letter-spacing: 0.005em;
-}
-.topbar {
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  border-bottom: 1px solid var(--line);
-}
-.topbar-inner {
-  padding-block: 18px;
-  gap: 28px;
-}
-.brand-text {
-  gap: 4px;
-}
-.brand-name {
-  font-size: 1.3rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-}
-.brand-sub {
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  color: var(--gold);
-  opacity: 1;
-}
-.tabs {
-  gap: 6px;
-}
-.tab {
-  border-radius: 0;
-  padding: 8px 12px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+/* ---- type ---- */
+h1,
+.display,
+.view-head h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 78%;
   text-transform: uppercase;
-}
-.tab:hover {
-  background: none;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
   color: var(--heading);
 }
-.tab.active {
-  background: none;
-  color: var(--heading);
-}
-.tab.active::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 0;
-  height: 1px;
-  background: var(--gold);
-}
-
-/* intro panel: deep colour block, framed with a fine gold rule */
-.hero {
-  padding: clamp(32px, 6vw, 64px) clamp(24px, 5vw, 56px);
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent);
-  outline: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
-  outline-offset: -10px;
-}
-.hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  margin: 6px 0 4px;
-}
-.hero .hand-note {
-  color: var(--gold-soft);
-  font-size: 1rem;
-}
-.hero .lede {
-  font-weight: 300;
-  max-width: 54ch;
-}
-.hero .btn-row {
-  margin-top: 12px;
-}
-
-/* buttons: small tracked capitals */
-.btn {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 11px 20px;
-  border-radius: 2px;
-}
-.btn-small {
-  padding: 7px 12px;
-}
-.btn-primary {
-  box-shadow: none;
-}
-
-/* filters: understated outlined labels */
-.chip {
-  border-radius: 2px;
-  background: transparent;
-  padding: 6px 12px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.chip-count {
-  color: var(--gold);
-  opacity: 1;
-}
-.chip.active .chip-count {
-  color: var(--gold-soft);
+h1 {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
 }
 .eyebrow,
 .cost-label,
-.stat-label {
-  color: var(--gold);
-  letter-spacing: 0.18em;
+.section-title,
+.sub-head,
+.slot-label {
+  font-family: var(--font-display);
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sub-head,
+.section-title {
+  color: var(--heading);
 }
 
-/* recipe list: an editorial index with hairline rules instead of cards */
-.recipe-groups {
-  gap: 48px;
-  margin-top: 12px;
+/* ---- top bar ---- */
+.topbar {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom: 0;
 }
+.topbar-inner {
+  padding-block: 12px;
+}
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.55rem;
+  line-height: 0.9;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--heading);
+}
+.brand-sub {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  opacity: 1;
+}
+.tab {
+  font-family: var(--font-display);
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+.tab.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ---- buttons and chips: soft pills ---- */
+.btn {
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 10px 18px;
+}
+.btn:not(.btn-primary):not(.btn-sun):not(.btn-quiet):not(.btn-danger-quiet) {
+  background: var(--surface);
+  border-color: transparent;
+  box-shadow: 0 1px 2px rgb(90 30 20 / 0.08), 0 2px 8px rgb(90 30 20 / 0.06);
+}
+.btn-sun {
+  background: var(--highlight);
+  border-color: var(--highlight);
+  color: var(--highlight-ink);
+}
+.chip {
+  border-radius: 999px;
+  border-color: transparent;
+  background: var(--surface);
+  font-weight: 500;
+  padding: 6px 14px;
+}
+.chip.active {
+  background: var(--heading);
+  border-color: var(--heading);
+  color: var(--bg);
+}
+.search,
+.input {
+  border-radius: 999px;
+}
+textarea.input,
+select.input {
+  border-radius: var(--radius-sm);
+}
+.search {
+  border-color: transparent;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+/* ---- home hero: giant red capitals with produce spilling off the edge ---- */
+.hero {
+  background: none;
+  padding: 18px 0 8px;
+  border-radius: 0;
+  overflow: visible;
+  align-items: flex-start;
+}
+.hero .hand-note {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: 88%;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--heading);
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 2px;
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: clamp(3rem, 9vw, 6.2rem);
+  font-weight: 900;
+  font-stretch: 72%;
+  max-width: 9ch;
+}
+.hero .lede {
+  margin-top: 14px;
+  max-width: 44ch;
+}
+.hero-art {
+  margin-right: -12px;
+}
+.sticker {
+  filter: none;
+}
+.sticker-cluster {
+  width: 380px;
+  height: 280px;
+}
+.sc-pumpkin { left: 118px; top: 20px; transform: rotate(-6deg); }
+.sc-aubergine { left: 262px; top: 120px; transform: rotate(8deg); }
+.sc-tomato { left: 36px; top: 98px; transform: rotate(-10deg); }
+.sc-pear { left: 128px; top: 160px; transform: rotate(6deg); }
+.sc-flower { left: 0; top: 52px; transform: rotate(14deg); }
+.sc-radish { left: 230px; top: 46px; transform: rotate(-4deg); }
+.sc-lemon { left: 290px; top: 0; transform: rotate(10deg); }
+.sc-fennel { left: 24px; top: 186px; transform: rotate(-24deg); }
+.sc-chilli { left: 238px; top: 214px; transform: rotate(16deg); }
+@media (max-width: 860px) {
+  .hero .hero-art {
+    zoom: 0.62;
+  }
+}
+@media (max-width: 640px) {
+  .hero {
+    padding: 8px 0 0;
+  }
+  .hero .hero-art {
+    position: absolute;
+    top: -6px;
+    right: -18px;
+    height: auto;
+    zoom: 0.4;
+    opacity: 0.95;
+  }
+  .hero-art .sc-lemon,
+  .hero-art .sc-fennel,
+  .hero-art .sc-chilli,
+  .hero-art .sc-flower {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    max-width: 6ch;
+  }
+  .hero .hand-note {
+    max-width: none;
+  }
+}
+
+/* ---- recipe list: grouped, with rounded photos and serif names ---- */
 .recipe-group-title {
-  justify-content: space-between;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  font-weight: 400;
-  font-size: 1.6rem;
-  letter-spacing: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--heading);
 }
 .recipe-group-title .chip-count {
   font-family: var(--font-body);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--muted);
+  opacity: 1;
 }
 .recipe-list {
-  gap: 0;
+  gap: 10px;
 }
 .recipe-row {
   border: 0;
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-  padding-right: 0;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(90 30 20 / 0.05);
+  padding-right: 10px;
 }
 .recipe-row:hover {
-  border-color: var(--line);
-  box-shadow: none;
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  box-shadow: var(--shadow);
 }
 .recipe-row-main {
-  padding: 18px 4px 18px 0;
+  padding: 10px 6px 10px 10px;
+}
+.recipe-row .thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
 }
 .recipe-row-name {
-  font-weight: 400;
-  font-size: 1.22rem;
-  letter-spacing: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.32rem;
+  line-height: 1.15;
+  color: var(--ink);
 }
-.recipe-row-meta {
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-.recipe-row-cost .num {
-  font-family: var(--font-display);
-  font-variant-numeric: lining-nums tabular-nums;
-  font-weight: 400;
-  font-size: 1.2rem;
-}
-.recipe-row-scratch .num {
-  font-size: 0.98rem;
-}
-
-/* surfaces: crisp, flat, hairline-framed */
-.modal {
-  border-radius: 4px;
-  border: 1px solid var(--line);
-}
-.modal-head h2 {
-  font-weight: 400;
-}
-h1 {
-  font-weight: 400;
-}
-.empty {
-  border-radius: 2px;
-}
-.auth-card {
-  border-radius: 2px;
-  padding: 48px 32px 36px;
-}
-.auth-title {
-  font-weight: 400;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-top: 18px;
-}
-.auth-sub {
-  color: var(--gold);
-}
-.auth-rule {
-  display: block;
-  width: 48px;
-  height: 1px;
-  margin: 0 auto;
-  background: var(--gold);
-}
-@media (max-width: 480px) {
-  .brand-name {
-    font-size: 1rem;
-    letter-spacing: 0.14em;
-  }
-  .topbar-inner {
-    padding-block: 12px;
-  }
-}
-.day-card.is-today {
-  border-color: var(--gold);
-  box-shadow: inset 0 2px 0 var(--gold);
-}
-.store-picker .seg,
-.store-picker .seg button {
-  border-radius: 2px;
-}
-@media (max-width: 760px) {
-  .tab {
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-  }
-  .tab.active::after {
-    left: 25%;
-    right: 25%;
-  }
-}
-.search {
-  border-radius: 2px;
-}
-/* headline figures in the serif: prices read like a menu, not a spreadsheet */
+.recipe-row-cost .num,
 .cost-big.num,
 .summary-value.num,
 .hero .lede strong.num {
   font-family: var(--font-display);
-  font-variant-numeric: lining-nums tabular-nums;
-  font-weight: 400;
+  font-weight: 800;
+  font-stretch: 85%;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
-.cost-big.num,
-.summary-value.num {
-  font-size: 1.6rem;
+.recipe-row-cost .num {
+  font-size: 1.2rem;
+  color: var(--heading);
 }
-.hero .hand-note {
-  color: #d8c7a8;
+.thumb {
+  border-radius: 14px;
+}
+
+/* ---- recipe page: calm and editorial ---- */
+.modal {
+  border-radius: 28px;
+  border: 0;
+}
+.modal-head h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+  line-height: 1.1;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.photo-field {
+  border-radius: 22px;
+}
+.detail-notes,
+.line-note {
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  line-height: 1.45;
+}
+.detail-costs > * {
+  border-radius: 18px;
+}
+.cost-big.num {
+  font-size: 1.7rem;
+  color: var(--ink);
+}
+.summary-value.num {
+  font-size: 1.7rem;
+  color: var(--heading);
+}
+.ing-table {
+  border-radius: 18px;
+}
+
+/* ---- meal plan and shopping list ---- */
+.day-card {
+  border-radius: var(--radius);
+  border: 0;
+  background: var(--surface);
+}
+.day-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 78%;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: var(--heading);
+}
+.day-card.is-today {
+  border: 0;
+  box-shadow: 0 0 0 2px var(--highlight);
+}
+.entry-name,
+.pick-name,
+.item-name {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.summary-strip,
+.receipt {
+  border-radius: var(--radius);
+}
+.empty {
+  border-radius: var(--radius);
+  border-style: solid;
+  border-color: transparent;
+  background: var(--surface);
+}
+
+/* ---- sign in: a cream card on burnt orange, produce spilling over the top ---- */
+.auth-page {
+  background: var(--burnt-orange);
+  padding-top: 64px;
+}
+.auth-card {
+  border: 0;
+  border-radius: 40px;
+  background: var(--cream);
+  color: #2a1714;
+  box-shadow: 0 30px 60px rgb(60 20 5 / 0.25);
+}
+.auth-card-signin {
+  position: relative;
+  padding-top: 210px;
+}
+.auth-art {
+  position: absolute;
+  top: -58px;
+  left: 50%;
+  margin-left: -205px;
+  zoom: 1.08;
+}
+.auth-wordmark {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 72%;
+  font-size: 3.6rem;
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--burnt-orange);
+}
+.auth-wordmark span {
+  display: block;
+}
+.auth-card .auth-sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #2a1714;
+  margin: 14px 0 22px;
+}
+.auth-card .input {
+  background: #fff;
+  border-color: transparent;
+  box-shadow: 0 1px 3px rgb(60 20 5 / 0.12);
+  color: #2a1714;
+  text-align: center;
+}
+.auth-card .btn-primary {
+  background: #a0141e;
+  border-color: #a0141e;
+  color: #fff5ea;
+}
+.auth-card .hint,
+.auth-card .field-label {
+  color: #7a5f55;
+}
+.auth-card .field-label {
+  text-align: center;
+}
+.auth-card .btn-link {
+  color: #a0141e;
+}
+@media (max-width: 480px) {
+  .auth-art {
+    zoom: 0.86;
+  }
+  .auth-card-signin {
+    padding-top: 170px;
+  }
+  .auth-wordmark {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 861px) {
+  .hero {
+    align-items: center;
+  }
+  .hero .hero-art {
+    zoom: 1.3;
+    margin-right: -40px;
+  }
+}
+@media (max-width: 760px) {
+  .tab {
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+}
+.auth-card .auth-form .hint {
+  text-align: center;
 }

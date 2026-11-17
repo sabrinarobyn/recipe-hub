@@ -6,6 +6,7 @@ import { productMacros } from "../lib/nutrition";
 import { NutritionPanel } from "./Nutrition";
 import type { IngredientLine } from "../types";
 import { ConfirmButton, Icon, Modal } from "./ui";
+import { PhotoField, photoError } from "./Photo";
 
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
   const { catalog, data, actions, photos, canEditBook } = useApp();
@@ -74,6 +75,20 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
         </>
       }
     >
+      <PhotoField
+        recipe={recipe}
+        readOnly={!canEditBook}
+        url={photos[id]}
+        notify={open.notify}
+        onChange={async (url) => {
+          try {
+            await actions.setPhoto(id, url);
+            open.notify(url ? "Photo saved" : "Photo removed");
+          } catch (e) {
+            open.notify(photoError(e));
+          }
+        }}
+      />
       <div className="detail-meta">
         <span className="eyebrow">{recipe.category}</span>
         {recipe.yield && <span className="pill">{recipe.yield}</span>}

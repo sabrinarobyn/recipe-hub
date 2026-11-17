@@ -7,7 +7,7 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
 
 ## What it does
 
-- **Recipes**: a list grouped by category, with kcal and cost on each row. Search by
+- **Recipes**: a list grouped by category, with a small photo, kcal and cost on each row. Search by
   recipe or ingredient, filter by category and sort by cost. Remove a recipe with the bin on its row
   (tap twice); **Removed recipes** at the bottom of the list brings a built-in one back. Each
   recipe shows its **cost per make** (only the share of each pack it uses) and its
@@ -39,8 +39,11 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   column has the matched product, its price (editable) and how close the match is; filter by
   *Cheaper at Checkers* or *No Checkers match*. Products with no Checkers equivalent are costed at
   the Woolworths price and flagged.
-- **No pictures, by design**: the interface is typographic, with no illustrations or recipe photos.
-  Photos saved earlier stay in the data (and in backups), they just aren't shown.
+- **Photos**: add a photo to any recipe from the recipe page or the editor (on a phone this offers
+  the camera or photo library; on a computer you can also drop or paste an image). Photos are shrunk
+  to about 720 px before saving. Until a recipe has a real photo, it shows an **AI mockup** (labelled
+  as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces it, and removing that
+  photo brings the mockup back. New recipes without a photo show an illustration tile.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
@@ -67,24 +70,22 @@ reset.
 
 ## Brand
 
-A quiet, grown-up kitchen palette: *good food for everyday*, kept simple and organised.
+A lively market: bold and playful on the main screens, calm and editorial on recipe pages.
 
-- **Colour**: five brand colours, with tokens at the top of `src/styles.css`:
-
-  | Name | Hex | Used for |
-  | --- | --- | --- |
-  | Arsenic | `#354242` | ink, headings, primary buttons, the intro panel |
-  | Morning Blue | `#8b9b93` | cool mid-tone, soft tints, dark-mode accent |
-  | American Silver | `#cfcfcd` | the ground (lightened to `#f1f0ec`) and lines |
-  | Liver Chestnut | `#55453a` | secondary actions and highlights |
-  | Bistre | `#362419` | warm dark accent, the intro panel in dark mode |
-
-  Dark mode is built on Arsenic.
-- **Type**: Playfair Display, a high-contrast serif, for headings, with its italic for small accents.
-  The wordmark is set in spaced capitals. DM Sans is the body text and prices stay in DM Mono.
-- **Finish**: no illustrations or photos. Space, hairline rules and champagne gold (`#a1855a`) for
-  small capitals, the active tab and the frame around the intro panel. Corners are nearly square,
-  buttons and filters are set in tracked capitals, and headline prices are set in the serif.
+- **Colour**: cream paper (`#fbf1e6`) with deep tomato red (`#a0141e`) for headings and main actions,
+  papaya orange (`#e8622a`) for highlights and burnt orange (`#b04e1f`) behind the sign-in page. The
+  illustrations add leaf green, cobalt, lemon, pumpkin and radish pink. Tokens are at the top of
+  `src/styles.css`; dark mode is a deep plum-brown with papaya headings.
+- **Type**: Archivo, heavy and condensed, in capitals for headings, tabs, labels and buttons. EB
+  Garamond for recipe names and recipe pages. DM Sans for reading, DM Mono for small figures.
+- **Illustrations**: flat, cut-paper style produce (tomato, lemon, radish, pumpkin, aubergine, pear,
+  papaya, chilli, fennel, flower), drawn as inline SVG in `src/components/Brand.tsx`. They spill
+  beside the big home heading and over the top of the sign-in card, and fill the tile for recipes
+  without a photo. The logo is a papaya half and a tomato.
+- **Shapes**: soft pills for buttons, chips and inputs, and generously rounded cards.
+- **Mockups**: the stand-in photos were generated with Canva's AI image tool in October 2026.
+  `data/mockups.csv` maps each recipe to its Canva media id. They're small (about 200 × 150 px), so swap
+  in real photos, or drop a bigger file with the same name into `src/assets/mockups/`.
 
 ## Running it
 
@@ -144,13 +145,15 @@ the app are kept on top of the new data.
 ## Project layout
 
 ```
-data/                 the source spreadsheet, nutrition, servings and Checkers equivalents (checkers.csv)
+data/                 the source spreadsheet, nutrition, servings, Checkers equivalents (checkers.csv)
+                      and the Canva source of each mockup photo (mockups.csv)
+src/assets/mockups/   AI mockup photo for each built-in recipe
 supabase/migrations/  database schema and access rules for the Supabase-hosted version
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits
 src/lib/storage.ts    browser storage, Claude account storage, file downloads
 src/lib/supabase.ts   sign-in, invite list and data for the Supabase-hosted version
-src/components/       the screens
+src/components/       the screens (Brand.tsx: logo and illustrations)
 docs/brand/           the original brand board (superseded by the palette in this README)
 ```

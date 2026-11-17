@@ -9,6 +9,8 @@ import { kcal, MacroLine } from "./Nutrition";
 import type { PlanEntry } from "../types";
 import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
+import { Thumb } from "./Photo";
+import { Sticker } from "./Brand";
 
 export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: string) => void }) {
   const current = weekStart(today());
@@ -112,6 +114,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
 
       {entries.length === 0 && (
         <div className="empty empty-inline">
+          <Sticker name="radish" size={56} />
           <p>
             Nothing planned for {weekLabel(week)} yet. Tap <strong>Add meal</strong> on a day, or pick from{" "}
             <button className="text-link" onClick={() => open.goTo("recipes")}>
@@ -225,6 +228,7 @@ export function RecipePicker({ title, onClose, onPick }: { title: string; onClos
         {shown.map((r) => (
           <li key={r.id}>
             <button onClick={() => onPick(r.id)}>
+              <Thumb recipe={r} />
               <span className="pick-text">
                 <span className="pick-name">{r.name}</span>
                 <span className="pick-cat">
