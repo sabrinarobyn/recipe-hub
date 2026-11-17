@@ -1,5 +1,5 @@
 /**
- * Recipe Hub brand artwork: the logo and the hand-drawn ingredient stickers from the brand
+ * Recipe Hub brand artwork: the logo and the hand-drawn ingredient stickers, originally from the brand
  * board (docs/brand/recipe-hub-brand-board.webp). Every piece is inline SVG on a 64 × 64 grid
  * and takes its colours from the --c-* brand tokens in styles.css.
  */

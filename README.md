@@ -71,15 +71,22 @@ reset.
 
 ## Brand
 
-The look follows the brand board in [`docs/brand/recipe-hub-brand-board.webp`](docs/brand/recipe-hub-brand-board.webp):
-*good food for everyday*, meaning simple, joyful and organised.
+A quiet, grown-up kitchen palette: *good food for everyday*, kept simple and organised.
 
-- **Colour**: forest green `#0d3f37` for ink and primary actions on a warm cream ground `#fdf7ee`,
-  with sunshine yellow `#f4bf2b` as the highlight. Olive, lime, blush pink, tomato, lavender and sage
-  tint the recipe tiles and stickers. The tokens are at the top of `src/styles.css` (with a deep-green
-  dark mode).
-- **Type**: Recoleta for headings (Fraunces with its soft axis stands in where Recoleta isn't
-  installed), Kalam for handwritten accents and DM Sans for body text. Prices stay in DM Mono.
+- **Colour**: five brand colours, with tokens at the top of `src/styles.css`:
+
+  | Name | Hex | Used for |
+  | --- | --- | --- |
+  | Arsenic | `#354242` | ink, headings, primary buttons, the intro panel |
+  | Morning Blue | `#8b9b93` | cool mid-tone, soft tints, dark-mode accent |
+  | American Silver | `#cfcfcd` | the ground (lightened to `#f1f0ec`) and lines |
+  | Liver Chestnut | `#55453a` | secondary actions and highlights |
+  | Bistre | `#362419` | warm dark accent, the intro panel in dark mode |
+
+  The stickers and logo use muted versions of their colours (terracotta tomato, soft gold lemon,
+  sage leaves) to sit with the palette. Dark mode is built on Arsenic.
+- **Type**: Playfair Display, a high-contrast serif, for headings, with its italic for small accents.
+  The wordmark is set in spaced capitals. DM Sans is the body text and prices stay in DM Mono.
 - **Imagery**: the logo mark (a lemon and a leafy radish) and the hand-drawn ingredient stickers are
   inline SVG in `src/components/Brand.tsx`. Recipes without a photo show a sticker on a category
   tint. For recipe photos, use bright, natural light and seasonal, real food.
