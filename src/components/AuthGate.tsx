@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { BrandMark, Sticker } from "./Brand";
 import { clearLocal } from "../lib/storage";
 import { currentAccount, onAuthChange, sendSignInLink, signOut, supabaseConfigured, type Account } from "../lib/supabase";
 
@@ -93,7 +92,7 @@ function Splash({ children }: { children: ReactNode }) {
   return (
     <main className="auth-page">
       <div className="auth-card">
-        <BrandMark size={64} />
+        <span className="auth-rule" aria-hidden="true" />
         <h1 className="auth-title">Recipe Hub</h1>
         <div className="auth-text">{children}</div>
       </div>
@@ -115,7 +114,7 @@ function SignIn() {
   return (
     <main className="auth-page">
       <div className="auth-card">
-        <BrandMark size={64} />
+        <span className="auth-rule" aria-hidden="true" />
         <h1 className="auth-title">Recipe Hub</h1>
         <p className="auth-sub">good food for everyday</p>
         {status === "sent" ? (
@@ -165,12 +164,6 @@ function SignIn() {
             <p className="hint">Recipe Hub is invite only. No password needed: we email you a link each time you sign in on a new device.</p>
           </form>
         )}
-        <div className="auth-stickers" aria-hidden="true">
-          <Sticker name="tomato" size={40} />
-          <Sticker name="lemon" size={40} />
-          <Sticker name="sprig" size={40} />
-          <Sticker name="avocado" size={40} />
-        </div>
       </div>
     </main>
   );

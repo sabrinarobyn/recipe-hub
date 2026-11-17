@@ -5,8 +5,6 @@ import { STORE_NAMES } from "../lib/costing";
 import { editState, seed, seedRecipeIds, useApp, useNutrition, useSummaries } from "../lib/store";
 import { MacroLine } from "./Nutrition";
 import { ConfirmButton, Icon } from "./ui";
-import { Thumb } from "./Photo";
-import { Sticker, StickerCluster } from "./Brand";
 
 type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein";
 
@@ -89,7 +87,6 @@ export function RecipesView({ open }: { open: Open }) {
             </div>
           )}
         </div>
-        <StickerCluster className="hero-art" />
       </div>
 
       <div className="toolbar">
@@ -127,7 +124,6 @@ export function RecipesView({ open }: { open: Open }) {
 
       {recipes.length === 0 ? (
         <div className="empty">
-          <Sticker name="lemon" size={64} />
           <p>No recipes match “{query}”.</p>
           <button className="btn" onClick={() => (setQuery(""), setCategory("All"))}>
             Clear filters
@@ -149,7 +145,6 @@ export function RecipesView({ open }: { open: Open }) {
                   return (
                     <li key={r.id} className="recipe-row">
                       <button className="recipe-row-main" onClick={() => open.recipe(r.id)}>
-                        <Thumb recipe={r} />
                         <span className="recipe-row-text">
                           <span className="recipe-row-name">
                             {r.name}

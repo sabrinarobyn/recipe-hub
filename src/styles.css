@@ -10,6 +10,9 @@
   --american-silver: #cfcfcd;
   --liver-chestnut: #55453a;
   --bistre: #362419;
+  /* champagne gold: hairlines, small labels, the active tab */
+  --gold: #a1855a;
+  --gold-soft: #d8c7a8;
 
   /* sticker and logo colours: muted to sit with the palette */
   --c-forest: #354242;
@@ -27,7 +30,7 @@
   --c-olive-leaf: #7f8f80;
   --c-pit: #55453a;
 
-  --bg: #f1f0ec;
+  --bg: #f3f1ed;
   --surface: #fbfaf8;
   --surface-2: #e6e5e1;
   --ink: #2b2420;
@@ -67,13 +70,15 @@
   --step-1: 1.125rem;
   --step-2: 1.45rem;
   --step-3: 2.1rem;
-  --radius: 12px;
-  --radius-sm: 6px;
+  --radius: 4px;
+  --radius-sm: 2px;
   --gutter: clamp(16px, 3vw, 28px);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --gold: #c9ad7f;
+    --gold-soft: #5a4c37;
     --bg: #1c2424;
     --surface: #232d2d;
     --surface-2: #2b3636;
@@ -107,6 +112,8 @@
   }
 }
 :root[data-theme="dark"] {
+  --gold: #c9ad7f;
+  --gold-soft: #5a4c37;
   --bg: #1c2424;
   --surface: #232d2d;
   --surface-2: #2b3636;
@@ -2709,4 +2716,265 @@ div.card-photo {
 }
 .hero .lede strong {
   color: #f4ede4;
+}
+
+/* ================= Luxury finish =================
+   Generous space, hairline rules, champagne-gold small capitals, an editorial list. */
+body {
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+.topbar {
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  padding-block: 18px;
+  gap: 28px;
+}
+.brand-text {
+  gap: 4px;
+}
+.brand-name {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+}
+.brand-sub {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  opacity: 1;
+}
+.tabs {
+  gap: 6px;
+}
+.tab {
+  border-radius: 0;
+  padding: 8px 12px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.tab:hover {
+  background: none;
+  color: var(--heading);
+}
+.tab.active {
+  background: none;
+  color: var(--heading);
+}
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* intro panel: deep colour block, framed with a fine gold rule */
+.hero {
+  padding: clamp(32px, 6vw, 64px) clamp(24px, 5vw, 56px);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  outline-offset: -10px;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 6px 0 4px;
+}
+.hero .hand-note {
+  color: var(--gold-soft);
+  font-size: 1rem;
+}
+.hero .lede {
+  font-weight: 300;
+  max-width: 54ch;
+}
+.hero .btn-row {
+  margin-top: 12px;
+}
+
+/* buttons: small tracked capitals */
+.btn {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 2px;
+}
+.btn-small {
+  padding: 7px 12px;
+}
+.btn-primary {
+  box-shadow: none;
+}
+
+/* filters: understated outlined labels */
+.chip {
+  border-radius: 2px;
+  background: transparent;
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chip-count {
+  color: var(--gold);
+  opacity: 1;
+}
+.chip.active .chip-count {
+  color: var(--gold-soft);
+}
+.eyebrow,
+.cost-label,
+.stat-label {
+  color: var(--gold);
+  letter-spacing: 0.18em;
+}
+
+/* recipe list: an editorial index with hairline rules instead of cards */
+.recipe-groups {
+  gap: 48px;
+  margin-top: 12px;
+}
+.recipe-group-title {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: 0;
+}
+.recipe-group-title .chip-count {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+}
+.recipe-list {
+  gap: 0;
+}
+.recipe-row {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding-right: 0;
+}
+.recipe-row:hover {
+  border-color: var(--line);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.recipe-row-main {
+  padding: 18px 4px 18px 0;
+}
+.recipe-row-name {
+  font-weight: 400;
+  font-size: 1.22rem;
+  letter-spacing: 0;
+}
+.recipe-row-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.recipe-row-cost .num {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+.recipe-row-scratch .num {
+  font-size: 0.98rem;
+}
+
+/* surfaces: crisp, flat, hairline-framed */
+.modal {
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+.modal-head h2 {
+  font-weight: 400;
+}
+h1 {
+  font-weight: 400;
+}
+.empty {
+  border-radius: 2px;
+}
+.auth-card {
+  border-radius: 2px;
+  padding: 48px 32px 36px;
+}
+.auth-title {
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 18px;
+}
+.auth-sub {
+  color: var(--gold);
+}
+.auth-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 0 auto;
+  background: var(--gold);
+}
+@media (max-width: 480px) {
+  .brand-name {
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+  }
+  .topbar-inner {
+    padding-block: 12px;
+  }
+}
+.day-card.is-today {
+  border-color: var(--gold);
+  box-shadow: inset 0 2px 0 var(--gold);
+}
+.store-picker .seg,
+.store-picker .seg button {
+  border-radius: 2px;
+}
+@media (max-width: 760px) {
+  .tab {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .tab.active::after {
+    left: 25%;
+    right: 25%;
+  }
+}
+.search {
+  border-radius: 2px;
+}
+/* headline figures in the serif: prices read like a menu, not a spreadsheet */
+.cost-big.num,
+.summary-value.num,
+.hero .lede strong.num {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.cost-big.num,
+.summary-value.num {
+  font-size: 1.6rem;
+}
+.hero .hand-note {
+  color: #d8c7a8;
 }
