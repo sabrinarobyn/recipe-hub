@@ -4,6 +4,7 @@ import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } fr
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
+import { connectSupabase, type Account } from "./supabase";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
 
 export const seed = seedJson as Seed;
@@ -54,7 +55,7 @@ export type SyncState = {
 
 type Kind = "book" | "personal" | "both";
 
-function useAppDataInternal() {
+function useAppDataInternal(account: Account | null) {
   const [data, setData] = useState<UserData>(() => loadLocal() ?? emptyUserData());
   const [sync, setSync] = useState<SyncState>({ book: "connecting", personal: "browser" });
   const [canEditBook, setCanEditBook] = useState(true);
@@ -87,7 +88,7 @@ function useAppDataInternal() {
       const localPhotos = await loadLocalPhotos();
       if (cancelled) return;
       setPhotos((p) => ({ ...localPhotos, ...p }));
-      const conn = await connectRemote();
+      const conn = account ? ({ kind: "ok", store: await connectSupabase(account) } as const) : await connectRemote();
       if (cancelled) return;
       if (conn.kind === "none") return setSync({ book: "local", personal: "browser" });
       if (conn.kind === "signed-out") {
@@ -151,11 +152,13 @@ function useAppDataInternal() {
       cancelled = true;
       unsubs.forEach((u) => u());
     };
-  }, [applyBook]);
+  }, [applyBook, account]);
 
   const blocked = useCallback(() => {
-    notifier.current("Only the owner can change recipes, prices and photos. Your plan and shopping list are yours to change.");
-  }, []);
+    notifier.current(account
+      ? "Only admins and editors can change recipes, prices and photos. Your plan and shopping list are yours to change."
+      : "Only the owner can change recipes, prices and photos. Your plan and shopping list are yours to change.");
+  }, [account]);
 
   const setPhoto = useCallback(
     async (recipeId: string, dataUrl: string | null) => {
@@ -304,14 +307,14 @@ function useAppDataInternal() {
     notifier.current = fn;
   }, []);
 
-  return { data, catalog, sync, actions, photos, canEditBook, setNotifier };
+  return { data, catalog, sync, actions, photos, canEditBook, setNotifier, account };
 }
 
 type AppData = ReturnType<typeof useAppDataInternal>;
 const Ctx = createContext<AppData | null>(null);
 
-export function AppDataProvider({ children }: { children: ReactNode }) {
-  const value = useAppDataInternal();
+export function AppDataProvider({ account = null, children }: { account?: Account | null; children: ReactNode }) {
+  const value = useAppDataInternal(account);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

@@ -39,18 +39,25 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   column has the matched product, its price (editable) and how close the match is; filter by
   *Cheaper at Checkers* or *No Checkers match*. Products with no Checkers equivalent are costed at
   the Woolworths price and flagged.
-- **Photos**: add a photo to any recipe from the card, the recipe page or the editor (on a phone
-  this offers the camera or photo library; on a computer you can also drop or paste an image).
-  Photos are shrunk to about 720 px before saving. Until a recipe has a real photo, it shows an
-  **AI mockup** (labelled as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces
-  it, and removing that photo brings the mockup back. New recipes without a photo show a brand
-  sticker tile.
+- **Photos**: add a photo to any recipe from the recipe page or the editor (on a phone this offers
+  the camera or photo library; on a computer you can also drop or paste an image). Photos are shrunk
+  to about 720 px before saving. Until a recipe has a real photo, it shows an **AI mockup** (labelled
+  as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces it, and removing that
+  photo brings the mockup back. New recipes without a photo show an illustration tile.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
 reset.
 
 ### Where data is saved
+
+- **On Vercel with Supabase (the main site)**: Recipe Hub is invite only. People sign in with an
+  emailed link (no passwords). Admins manage the invite list under **Settings → People** and give
+  each person a role: *viewer* (sees the recipe book, plans their own meals), *editor* (also changes
+  recipes, prices and photos) or *admin* (also manages who's invited). The recipe book and photos are
+  one shared copy that updates live; each person's plan, shopping lists and store choice are private
+  to their account. The database refuses sign-ups from emails that aren't on the list, and row-level
+  security enforces the roles. Schema: `supabase/migrations/`.
 
 - Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
   IndexedDB). Use **Settings → Download backup / Restore from backup** to move it to another device.
@@ -63,22 +70,22 @@ reset.
 
 ## Brand
 
-The look follows the brand board in [`docs/brand/recipe-hub-brand-board.webp`](docs/brand/recipe-hub-brand-board.webp):
-*good food for everyday*, meaning simple, joyful and organised.
+A lively market: bold and playful on the main screens, calm and editorial on recipe pages.
 
-- **Colour**: forest green `#0d3f37` for ink and primary actions on a warm cream ground `#fdf7ee`,
-  with sunshine yellow `#f4bf2b` as the highlight. Olive, lime, blush pink, tomato, lavender and sage
-  tint the recipe tiles and stickers. The tokens are at the top of `src/styles.css` (with a deep-green
-  dark mode).
-- **Type**: Recoleta for headings (Fraunces with its soft axis stands in where Recoleta isn't
-  installed), Kalam for handwritten accents and DM Sans for body text. Prices stay in DM Mono.
-- **Imagery**: the logo mark (a lemon and a leafy radish) and the hand-drawn ingredient stickers are
-  inline SVG in `src/components/Brand.tsx`. Recipes without a photo show a sticker on a category
-  tint. For recipe photos, use bright, natural light and seasonal, real food.
-- **Mockups**: the stand-in photos were generated with Canva's AI image tool in October 2026 to that
-  same brief (natural daylight, cream linen, everyday home cooking). `data/mockups.csv` maps each
-  recipe to its Canva media id. They're small (about 200 × 150 px), so swap in real photos, or drop
-  a bigger file with the same name into `src/assets/mockups/`, whenever you have one.
+- **Colour**: cream paper (`#fbf1e6`) with deep tomato red (`#a0141e`) for headings and main actions,
+  papaya orange (`#e8622a`) for highlights and burnt orange (`#b04e1f`) behind the sign-in page. The
+  illustrations add leaf green, cobalt, lemon, pumpkin and radish pink. Tokens are at the top of
+  `src/styles.css`; dark mode is a deep plum-brown with papaya headings.
+- **Type**: Archivo, heavy and condensed, in capitals for headings, tabs, labels and buttons. EB
+  Garamond for recipe names and recipe pages. DM Sans for reading, DM Mono for small figures.
+- **Illustrations**: flat, cut-paper style produce (tomato, lemon, radish, pumpkin, aubergine, pear,
+  papaya, chilli, fennel, flower), drawn as inline SVG in `src/components/Brand.tsx`. They spill
+  beside the big home heading and over the top of the sign-in card, and fill the tile for recipes
+  without a photo. The logo is a papaya half and a tomato.
+- **Shapes**: soft pills for buttons, chips and inputs, and generously rounded cards.
+- **Mockups**: the stand-in photos were generated with Canva's AI image tool in October 2026.
+  `data/mockups.csv` maps each recipe to its Canva media id. They're small (about 200 × 150 px), so swap
+  in real photos, or drop a bigger file with the same name into `src/assets/mockups/`.
 
 ## Running it
 
@@ -89,6 +96,20 @@ npm test           # costing tests, including a check against every recipe total
 npm run build      # static site in dist/
 npm run build:single  # one self-contained HTML page in dist-single/
 ```
+
+### Publishing on Vercel with Supabase
+
+1. Create a Supabase project and run the files in `supabase/migrations/` in order (SQL editor), then
+   add yourself as the first admin (`supabase/seed-admin.example.sql`).
+2. In Supabase, **Authentication → URL Configuration**: set **Site URL** to the Vercel address and add
+   it under **Redirect URLs**.
+3. In Supabase, **Authentication → Emails → SMTP Settings**: add your own email sender. Supabase's
+   built-in sender only emails members of your Supabase team, so invited people get no sign-in link
+   without it. A Gmail account with an app password works (host `smtp.gmail.com`, port 465).
+4. In Vercel, import the repository and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` (see
+   `.env.example`). Every push to `main` deploys.
+
+Without those two variables the app builds exactly as before, saving to the browser.
 
 ### Publishing on GitHub Pages
 
@@ -127,10 +148,12 @@ the app are kept on top of the new data.
 data/                 the source spreadsheet, nutrition, servings, Checkers equivalents (checkers.csv)
                       and the Canva source of each mockup photo (mockups.csv)
 src/assets/mockups/   AI mockup photo for each built-in recipe
+supabase/migrations/  database schema and access rules for the Supabase-hosted version
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits
 src/lib/storage.ts    browser storage, Claude account storage, file downloads
-src/components/       the screens (Brand.tsx: logo and sticker artwork)
-docs/brand/           the brand board
+src/lib/supabase.ts   sign-in, invite list and data for the Supabase-hosted version
+src/components/       the screens (Brand.tsx: logo and illustrations)
+docs/brand/           the original brand board (superseded by the palette in this README)
 ```

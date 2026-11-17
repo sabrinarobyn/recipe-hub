@@ -31,6 +31,14 @@ export function loadLocal(): UserData | null {
   }
 }
 
+export function clearLocal(): void {
+  try {
+    localStorage.removeItem(LOCAL_KEY);
+  } catch {
+    /* storage blocked */
+  }
+}
+
 export function saveLocal(data: UserData): void {
   try {
     localStorage.setItem(LOCAL_KEY, JSON.stringify(data));
