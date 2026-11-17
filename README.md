@@ -52,6 +52,14 @@ reset.
 
 ### Where data is saved
 
+- **On Vercel with Supabase (the main site)**: Recipe Hub is invite only. People sign in with an
+  emailed link (no passwords). Admins manage the invite list under **Settings → People** and give
+  each person a role: *viewer* (sees the recipe book, plans their own meals), *editor* (also changes
+  recipes, prices and photos) or *admin* (also manages who's invited). The recipe book and photos are
+  one shared copy that updates live; each person's plan, shopping lists and store choice are private
+  to their account. The database refuses sign-ups from emails that aren't on the list, and row-level
+  security enforces the roles. Schema: `supabase/migrations/`.
+
 - Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
   IndexedDB). Use **Settings → Download backup / Restore from backup** to move it to another device.
 - Hosted as a Claude artifact, the **recipe book** (recipes, prices, categories, photos) is one
@@ -89,6 +97,20 @@ npm test           # costing tests, including a check against every recipe total
 npm run build      # static site in dist/
 npm run build:single  # one self-contained HTML page in dist-single/
 ```
+
+### Publishing on Vercel with Supabase
+
+1. Create a Supabase project and run the files in `supabase/migrations/` in order (SQL editor), then
+   add yourself as the first admin (`supabase/seed-admin.example.sql`).
+2. In Supabase, **Authentication → URL Configuration**: set **Site URL** to the Vercel address and add
+   it under **Redirect URLs**.
+3. In Supabase, **Authentication → Emails → SMTP Settings**: add your own email sender. Supabase's
+   built-in sender only emails members of your Supabase team, so invited people get no sign-in link
+   without it. A Gmail account with an app password works (host `smtp.gmail.com`, port 465).
+4. In Vercel, import the repository and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` (see
+   `.env.example`). Every push to `main` deploys.
+
+Without those two variables the app builds exactly as before, saving to the browser.
 
 ### Publishing on GitHub Pages
 

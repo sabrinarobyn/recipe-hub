@@ -118,7 +118,7 @@ export default function App() {
         )}
         {sync.book === "live" && !canEditBook && (
           <p className="banner">
-            This recipe book is shared with you and stays up to date with the owner's changes. Your meal plan and shopping list are
+            This recipe book is shared with you and stays up to date with everyone's changes. Your meal plan and shopping list are
             your own.
           </p>
         )}
