@@ -51,8 +51,8 @@ reset.
 
 ### Where data is saved
 
-- **On Vercel with Supabase (the main site)**: Recipe Hub is invite only. People sign in with an
-  emailed link (no passwords). Admins manage the invite list under **Settings → People** and give
+- **On Vercel with Supabase (the main site)**: Recipe Hub is invite only. People sign in with a
+  6-digit code emailed to them (no passwords); the email also has a sign-in link. Admins manage the invite list under **Settings → People** and give
   each person a role: *viewer* (sees the recipe book, plans their own meals), *editor* (also changes
   recipes, prices and photos) or *admin* (also manages who's invited). The recipe book and photos are
   one shared copy that updates live; each person's plan, shopping lists and store choice are private
@@ -106,7 +106,10 @@ npm run build:single  # one self-contained HTML page in dist-single/
 3. In Supabase, **Authentication → Emails → SMTP Settings**: add your own email sender. Supabase's
    built-in sender only emails members of your Supabase team, so invited people get no sign-in link
    without it. A Gmail account with an app password works (host `smtp.gmail.com`, port 465).
-4. In Vercel, import the repository and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` (see
+4. In Supabase, **Authentication → Emails**: paste `supabase/email-templates/magic-link.html` into the
+   **Magic Link** template and `confirm-signup.html` into **Confirm signup** (first sign-in uses that
+   one). They include the `{{ .Token }}` code; the subject line to use is at the top of each file.
+5. In Vercel, import the repository and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` (see
    `.env.example`). Every push to `main` deploys.
 
 Without those two variables the app builds exactly as before, saving to the browser.

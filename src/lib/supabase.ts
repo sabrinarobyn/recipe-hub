@@ -51,6 +51,16 @@ export async function sendSignInLink(email: string): Promise<"sent" | "not-invit
   return "error";
 }
 
+/** Sign in with the 6-digit code from the email. */
+export async function verifySignInCode(email: string, code: string): Promise<"ok" | "wrong" | "error"> {
+  const sb = await getClient();
+  const { error } = await sb.auth.verifyOtp({ email: email.trim().toLowerCase(), token: code.replace(/\s/g, ""), type: "email" });
+  if (!error) return "ok";
+  // Supabase answers "Token has expired or is invalid" for both cases.
+  if (error.status === 400 || error.status === 403 || /expired|invalid|token/i.test(error.message)) return "wrong";
+  return "error";
+}
+
 export async function signOut(): Promise<void> {
   const sb = await getClient();
   await sb.auth.signOut();

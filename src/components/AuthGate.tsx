@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { BrandMark, StickerCluster } from "./Brand";
 import { clearLocal } from "../lib/storage";
-import { currentAccount, onAuthChange, sendSignInLink, signOut, supabaseConfigured, type Account } from "../lib/supabase";
+import { currentAccount, onAuthChange, sendSignInLink, signOut, supabaseConfigured, verifySignInCode, type Account } from "../lib/supabase";
 
 const AccountCtx = createContext<Account | null>(null);
 
@@ -112,6 +112,25 @@ function SignIn() {
     setStatus(await sendSignInLink(email).catch(() => "error" as const));
   };
 
+  const [code, setCode] = useState("");
+  const [codeStatus, setCodeStatus] = useState<"idle" | "checking" | "wrong" | "error">("idle");
+
+  const check = async (e: FormEvent) => {
+    e.preventDefault();
+    if (code.replace(/\D/g, "").length < 6) return setCodeStatus("wrong");
+    setCodeStatus("checking");
+    const result = await verifySignInCode(email, code).catch(() => "error" as const);
+    // On success the auth listener in AuthGate opens the app.
+    setCodeStatus(result === "ok" ? "idle" : result);
+  };
+
+  const resend = async () => {
+    setCode("");
+    setCodeStatus("idle");
+    setStatus("sending");
+    setStatus(await sendSignInLink(email).catch(() => "error" as const));
+  };
+
   return (
     <main className="auth-page">
       <div className="auth-card auth-card-signin">
@@ -121,15 +140,53 @@ function SignIn() {
         </h1>
         <p className="auth-sub">Good food for everyday. Let's get cooking!</p>
         {status === "sent" ? (
-          <div className="auth-text" role="status">
-            <p>
-              We've sent a sign-in link to <strong>{email.trim()}</strong>. Open it on this device to start planning.
+          <form className="auth-form" onSubmit={check} role="status">
+            <p className="auth-text-center">
+              We've emailed a 6-digit code to <strong>{email.trim()}</strong>.
             </p>
-            <p className="hint">Nothing there? Check your spam folder, or wait a minute and send another.</p>
-            <button className="btn-link" onClick={() => setStatus("idle")}>
-              Use a different email
+            <label className="field-label" htmlFor="auth-code">
+              Your code
+            </label>
+            <input
+              id="auth-code"
+              className="input auth-code"
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              pattern="[0-9 ]*"
+              maxLength={12}
+              required
+              autoFocus
+              value={code}
+              onChange={(e) => {
+                setCode(e.target.value);
+                setCodeStatus("idle");
+              }}
+              placeholder="123456"
+            />
+            <button className="btn btn-primary" type="submit" disabled={codeStatus === "checking"}>
+              {codeStatus === "checking" ? "Checking…" : "Sign in"}
             </button>
-          </div>
+            {codeStatus === "wrong" && (
+              <p className="auth-error" role="alert">
+                That code is wrong or has expired. Check the latest email, or send a new code.
+              </p>
+            )}
+            {codeStatus === "error" && (
+              <p className="auth-error" role="alert">
+                Couldn't check the code. Check your connection and try again.
+              </p>
+            )}
+            <p className="hint">Nothing there? Check your spam folder. The email also has a link you can tap instead.</p>
+            <div className="auth-links">
+              <button type="button" className="btn-link" onClick={resend}>
+                Send a new code
+              </button>
+              <button type="button" className="btn-link" onClick={() => (setStatus("idle"), setCode(""))}>
+                Use a different email
+              </button>
+            </div>
+          </form>
         ) : (
           <form className="auth-form" onSubmit={submit}>
             <label className="field-label" htmlFor="auth-email">
@@ -147,7 +204,7 @@ function SignIn() {
               placeholder="you@example.com"
             />
             <button className="btn btn-primary" type="submit" disabled={status === "sending"}>
-              {status === "sending" ? "Sending…" : "Email me a sign-in link"}
+              {status === "sending" ? "Sending…" : "Email me a sign-in code"}
             </button>
             {status === "not-invited" && (
               <p className="auth-error" role="alert">
@@ -161,10 +218,10 @@ function SignIn() {
             )}
             {status === "error" && (
               <p className="auth-error" role="alert">
-                Couldn't send the link. Check your connection and try again.
+                Couldn't send the code. Check your connection and try again.
               </p>
             )}
-            <p className="hint">Recipe Hub is invite only. No password needed: we email you a link each time you sign in on a new device.</p>
+            <p className="hint">Recipe Hub is invite only. No password needed: we email you a code each time you sign in on a new device.</p>
           </form>
         )}
       </div>
