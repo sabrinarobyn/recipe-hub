@@ -66,3 +66,7 @@ _Avoid_: Inventory, stock list, cupboard
 
 **Pantry Item**:
 A Product in a Pantry together with the amount remaining.
+
+**Correction**:
+A Member's hand change to a Pantry Item's amount, for food thrown out, used outside the Plan, or miscounted.
+_Avoid_: Adjustment, edit
