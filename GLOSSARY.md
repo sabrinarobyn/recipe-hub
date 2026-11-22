@@ -39,6 +39,14 @@ _Avoid_: Ingredient (an ingredient is a line in a Recipe; a Product is what you 
 
 ## Planning and shopping
 
+**Price Update**:
+An Editor's import of a CSV of researched Woolworths and Checkers prices into the Product catalogue, reviewed in a preview before it applies. Done about once a week.
+_Avoid_: Price sync, refresh, scrape
+
+**Price Checked**:
+The date a Product's price was last confirmed. A price not checked in the last 14 days is shown as out of date.
+_Avoid_: Last updated, as-of date
+
 **Plan**:
 One Member's private week of Planned Meals.
 _Avoid_: Meal plan, schedule
