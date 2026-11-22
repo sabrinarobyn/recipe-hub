@@ -4,6 +4,7 @@ import { emptyUserData, normalize, saveFile } from "../lib/storage";
 import { seed, useApp } from "../lib/store";
 import { ConfirmButton, Icon, Modal } from "./ui";
 import type { SyncState } from "../lib/store";
+import { AccountSection, PeopleSection } from "./PeopleSection";
 
 export function bookDot(book: SyncState["book"]): string {
   if (book === "live") return "sync-account";
@@ -13,7 +14,7 @@ export function bookDot(book: SyncState["book"]): string {
 }
 
 export function SettingsModal({ onClose, notify }: { onClose: () => void; notify: (m: string) => void }) {
-  const { data, sync, actions, photos, canEditBook } = useApp();
+  const { data, sync, actions, photos, canEditBook, account } = useApp();
   const photoCount = Object.keys(photos).length;
   const fileRef = useRef<HTMLInputElement>(null);
   const recipeCount = Object.keys(data.recipeEdits).length;
@@ -40,6 +41,8 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
 
   return (
     <Modal title="Settings & backup" onClose={onClose}>
+      {account && <AccountSection account={account} />}
+      {account?.role === "admin" && <PeopleSection account={account} notify={notify} />}
       <section className="settings-block">
         <h3 className="sub-head">Where your changes are saved</h3>
         <p className="sync-line">
@@ -47,9 +50,13 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
           <span>
             <strong>Recipes, prices &amp; photos: </strong>
             {sync.book === "live" &&
-              (canEditBook
-                ? "shared. Everyone you share this page with sees your changes within seconds."
-                : "shared by the owner and kept up to date for you. Only the owner can change them.")}
+              (account
+                ? canEditBook
+                  ? "shared. Everyone who's invited sees your changes within seconds."
+                  : "shared with you and kept up to date. Only admins and editors can change them."
+                : canEditBook
+                  ? "shared. Everyone you share this page with sees your changes within seconds."
+                  : "shared by the owner and kept up to date for you. Only the owner can change them.")}
             {sync.book === "local" && "saved in this browser on this device."}
             {sync.book === "connecting" && "connecting…"}
             {sync.book === "signed-out" && "sign in to Claude to see the owner's latest recipes and prices. You're seeing the original spreadsheet."}
@@ -61,7 +68,7 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
           <span>
             <strong>Your meal plan &amp; shopping list: </strong>
             {sync.personal === "account"
-              ? "private to you, saved to your Claude account so they follow you between devices."
+              ? `private to you, saved to your ${account ? "Recipe Hub" : "Claude"} account so they follow you between devices.`
               : "private to you, saved in this browser. Use a backup file to move them to another device."}
           </span>
         </p>
@@ -95,7 +102,7 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
         <h3 className="sub-head">Start over</h3>
         <p className="hint">
           {canEditBook
-            ? "Puts every recipe and price back to the original spreadsheet, removes the photos, and empties your plans and lists. If you've shared this page, everyone sees the reset."
+            ? `Puts every recipe and price back to the original spreadsheet, removes the photos, and empties your plans and lists. ${account ? "Everyone who's invited sees the reset." : "If you've shared this page, everyone sees the reset."}`
             : "Empties your meal plans and shopping lists. The owner's recipes and prices stay as they are."}
         </p>
         <ConfirmButton
