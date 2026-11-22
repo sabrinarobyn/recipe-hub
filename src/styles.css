@@ -2171,97 +2171,25 @@ select.input {
 }
 
 /* ---------- photos ---------- */
-.card-photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  max-width: 100%;
-  padding: 0;
-  border: 0;
-  background: var(--surface-2);
-  overflow: hidden;
-  cursor: pointer;
-}
-div.card-photo {
-  cursor: default;
-}
-.card-photo img,
 .thumb img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.photo-placeholder {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background-color: var(--tint-bg);
-  /* hand-drawn speckle, like the brand board's dotted graphic elements */
-  background-image: radial-gradient(color-mix(in srgb, var(--c-forest) 10%, transparent) 1.4px, transparent 1.6px);
-  background-size: 18px 18px;
-  background-position: 4px 6px;
-}
-.tint-0 {
-  --tint-bg: var(--tint-pink);
-}
-.tint-1 {
-  --tint-bg: var(--tint-lime);
-}
-.tint-2 {
-  --tint-bg: var(--tint-sun);
-}
-.tint-3 {
-  --tint-bg: var(--tint-lavender);
-}
-.tint-4 {
-  --tint-bg: var(--tint-sage);
-}
-.photo-sticker {
-  width: 42%;
-  height: auto;
-  max-height: 72%;
-  transform: rotate(var(--tilt, -6deg));
-}
-.photo-field .photo-sticker {
-  width: auto;
-  height: 66%;
-}
-.thumb .photo-sticker {
-  width: 76%;
-  max-height: 76%;
-}
-.photo-add {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--heading);
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
-  opacity: 0.85;
-  transition: opacity 0.15s;
-}
-.recipe-card:hover .photo-add,
-.photo-add:focus-visible {
-  opacity: 1;
-}
 .photo-field {
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   flex: none;
+}
+.photo-field.is-empty {
+  padding: 10px;
+  border: 2px dashed var(--line);
+}
+.photo-field.is-empty .photo-actions {
+  position: static;
+  justify-content: flex-start;
 }
 .photo-field.is-over {
   outline: 3px dashed var(--accent);
@@ -2274,50 +2202,6 @@ div.card-photo {
   aspect-ratio: 16 / 9;
   max-height: 320px;
   object-fit: cover;
-}
-.photo-field .photo-placeholder {
-  height: 150px;
-}
-.photo-mockup {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.photo-mockup img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-}
-.photo-mockup.is-hero img {
-  aspect-ratio: 16 / 9;
-  max-height: 320px;
-  cursor: default;
-}
-.mockup-badge {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  color: var(--heading);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
-  pointer-events: none;
-}
-.photo-empty-text {
-  position: absolute;
-  left: 14px;
-  bottom: 14px;
-  max-width: calc(100% - 180px);
-  font-family: var(--font-hand);
-  font-size: var(--step-0);
-  color: var(--heading);
-  opacity: 0.85;
 }
 .photo-actions {
   position: absolute;
@@ -2332,11 +2216,6 @@ div.card-photo {
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   border-color: transparent;
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
-}
-@media (max-width: 600px) {
-  .photo-empty-text {
-    display: none;
-  }
 }
 .thumb {
   flex: none;

@@ -41,9 +41,7 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   the Woolworths price and flagged.
 - **Photos**: add a photo to any recipe from the recipe page or the editor (on a phone this offers
   the camera or photo library; on a computer you can also drop or paste an image). Photos are shrunk
-  to about 720 px before saving. Until a recipe has a real photo, it shows an **AI mockup** (labelled
-  as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces it, and removing that
-  photo brings the mockup back. New recipes without a photo show an illustration tile.
+  to about 720 px before saving. A recipe without a photo shows no image.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
@@ -80,12 +78,8 @@ A lively market: bold and playful on the main screens, calm and editorial on rec
   Garamond for recipe names and recipe pages. DM Sans for reading, DM Mono for small figures.
 - **Illustrations**: flat, cut-paper style produce (tomato, lemon, radish, pumpkin, aubergine, pear,
   papaya, chilli, fennel, flower), drawn as inline SVG in `src/components/Brand.tsx`. They spill
-  beside the big home heading and over the top of the sign-in card, and fill the tile for recipes
-  without a photo. The logo is a papaya half and a tomato.
+  beside the big home heading and over the top of the sign-in card. The logo is a papaya half and a tomato.
 - **Shapes**: soft pills for buttons, chips and inputs, and generously rounded cards.
-- **Mockups**: the stand-in photos were generated with Canva's AI image tool in October 2026.
-  `data/mockups.csv` maps each recipe to its Canva media id. They're small (about 200 × 150 px), so swap
-  in real photos, or drop a bigger file with the same name into `src/assets/mockups/`.
 
 ## Running it
 
@@ -149,8 +143,6 @@ the app are kept on top of the new data.
 
 ```
 data/                 the source spreadsheet, nutrition, servings, Checkers equivalents (checkers.csv)
-                      and the Canva source of each mockup photo (mockups.csv)
-src/assets/mockups/   AI mockup photo for each built-in recipe
 supabase/migrations/  database schema and access rules for the Supabase-hosted version
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)

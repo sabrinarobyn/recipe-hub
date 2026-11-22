@@ -142,10 +142,3 @@ export function StickerCluster({ className = "" }: { className?: string }) {
     </div>
   );
 }
-
-/** Pick an illustration for anything with a stable id, so the same recipe always gets the same one. */
-export function doodleFor(key: string): Doodle {
-  let h = 0;
-  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) | 0;
-  return DOODLES[Math.abs(h) % DOODLES.length];
-}
