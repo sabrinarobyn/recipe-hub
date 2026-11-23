@@ -2,12 +2,12 @@ import { beforeEach, describe, expect, it } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { service, signInAs, type Role } from "./members";
 
-/** The Recipe Book is stored in two parts, as the app keeps it. */
-const BOOK = [
-  { part: "catalog", body: { productEdits: {}, categories: ["Mains"] } },
-  { part: "recipes", body: { recipeEdits: { "r-1": { name: "Spinach pie" } } } },
-];
-const EDITED = { recipeEdits: { "r-1": { name: "Spinach and feta pie" } } };
+/**
+ * The Recipe Book's shared block holds the Product catalogue edits and categories. Its recipes are
+ * one record per Recipe (recipes.test.ts).
+ */
+const BOOK = [{ part: "catalog", body: { productEdits: {}, categories: ["Mains"] } }];
+const EDITED = { productEdits: {}, categories: ["Mains", "Soups"] };
 
 const PHOTO = { recipe_id: "r-1", data_url: "data:image/jpeg;base64,AAAA" };
 
@@ -48,7 +48,7 @@ describe("Recipe Book", () => {
 
   it("a Viewer can't change it", async () => {
     const { client } = await signInAs("viewer");
-    const { error } = await client.from("book_parts").upsert({ part: "recipes", body: EDITED });
+    const { error } = await client.from("book_parts").upsert({ part: "catalog", body: EDITED });
     expect(error?.code).toBe("42501");
     expect(await bookAfterwards()).toEqual(BOOK);
   });
@@ -57,9 +57,15 @@ describe("Recipe Book", () => {
     const { client, userId } = await signInAs(role);
     const { error } = await client
       .from("book_parts")
-      .upsert({ part: "recipes", body: EDITED, updated_by: userId });
+      .upsert({ part: "catalog", body: EDITED, updated_by: userId });
     expect(error).toBeNull();
-    expect(await bookAfterwards()).toEqual([BOOK[0], { part: "recipes", body: EDITED }]);
+    expect(await bookAfterwards()).toEqual([{ part: "catalog", body: EDITED }]);
+  });
+
+  it("no longer keeps recipes in the shared block", async () => {
+    const { client } = await signInAs("admin");
+    const { error } = await client.from("book_parts").upsert({ part: "recipes", body: { recipeEdits: {} } });
+    expect(error?.code).toBe("23514");
   });
 });
 

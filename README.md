@@ -57,7 +57,8 @@ reset.
   recipes, prices and photos) or *admin* (also manages who's invited). The recipe book and photos are
   one shared copy that updates live; each person's plan, shopping lists and store choice are private
   to their account. The database refuses sign-ups from emails that aren't on the list, and row-level
-  security enforces the roles. Schema: `supabase/migrations/`.
+  security enforces the roles. Each Recipe is its own record (`docs/adr/0001-one-record-per-recipe.md`).
+  Schema: `supabase/migrations/`.
 
 - Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
   IndexedDB). Use **Settings → Download backup / Restore from backup** to move it to another device.
@@ -127,7 +128,8 @@ invite list. To add a case, write a `*.test.ts` file in `supabase/tests/` and us
   signed-in Member, not through `service`.
 
 Test files run one at a time against the same database, so a file that relies on shared rows (like
-the two Recipe Book parts) sets them up in `beforeEach` or `beforeAll`.
+the Recipe records) sets them up in `beforeEach` or `beforeAll`. `recipe-records-migration.test.ts`
+resets the database to an earlier migration to check the move to records, then migrates it again.
 
 ### Publishing on Vercel with Supabase
 

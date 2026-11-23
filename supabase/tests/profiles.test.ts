@@ -79,7 +79,8 @@ describe("Profiles", () => {
         .channel(`profiles-${owner.userId}`)
         .on("postgres_changes", { event: "*", schema: "public", table: "profiles" }, (payload) => {
           const row = payload.new as { user_id?: string; display_name?: string };
-          if (row.user_id === owner.userId) resolve(row.display_name);
+          // The earlier save ("Thandi") can still arrive first; wait for the change made here.
+          if (row.user_id === owner.userId && row.display_name === "Thandi M") resolve(row.display_name);
         })
         .subscribe((status) => {
           if (status !== "SUBSCRIBED") return;

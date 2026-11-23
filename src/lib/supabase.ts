@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
 import type { Profile } from "./profiles";
+import { editsFromRecords, recordChanges, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
 
 /**
  * Supabase hosting: invite-only accounts, one shared recipe book, private plans.
@@ -152,24 +153,55 @@ export async function onProfiles(cb: (profile: Profile) => void): Promise<() => 
 
 /* ---------- the app's data ---------- */
 
-type Part = "catalog" | "recipes";
+/**
+ * The Recipe Book is stored in two places:
+ * - the shared `book_parts` 'catalog' block: Product catalogue edits and categories;
+ * - the `recipes` table: one record per Recipe (see lib/recipeRecords).
+ */
 const catalogBody = (b: Book) => ({ productEdits: b.productEdits, categories: b.categories });
-const recipesBody = (b: Book) => ({ recipeEdits: b.recipeEdits });
 
-function bookFromParts(parts: Partial<Record<Part, Record<string, unknown>>>): Book {
-  const c = parts.catalog ?? {};
-  const r = parts.recipes ?? {};
+function bookFrom(catalog: Record<string, unknown> | undefined, recipeEdits: RecipeEdits): Book {
+  const c = catalog ?? {};
   return {
     productEdits: (c.productEdits as Book["productEdits"]) ?? {},
     categories: Array.isArray(c.categories) ? (c.categories as string[]) : [],
-    recipeEdits: (r.recipeEdits as Book["recipeEdits"]) ?? {},
+    recipeEdits,
   };
+}
+
+/** Every Recipe record, as the app reads them. */
+export async function loadRecipeRecords(sb: SupabaseClient): Promise<RecipeRecord[]> {
+  const { data, error } = await sb.from("recipes").select("id, body, deleted");
+  if (error) throw error;
+  return data as RecipeRecord[];
+}
+
+/**
+ * Saves Recipe records and removes others. Saving leaves a record's Author as it is; `updated_by`
+ * is the Member saving. Removing a record brings back the original Recipe ("Undo my changes").
+ */
+export async function writeRecipeRecords(
+  sb: SupabaseClient,
+  userId: string,
+  { save, remove }: { save: RecipeRecord[]; remove: string[] },
+): Promise<void> {
+  if (save.length) {
+    const { error } = await sb.from("recipes").upsert(save.map((r) => ({ ...r, updated_by: userId })));
+    if (error) throw error;
+  }
+  if (remove.length) {
+    const { error } = await sb.from("recipes").delete().in("id", remove);
+    if (error) throw error;
+  }
 }
 
 export async function connectSupabase(account: Account): Promise<RemoteStore> {
   const sb = await getClient();
   const canEdit = account.role === "admin" || account.role === "editor";
-  const parts: Partial<Record<Part, Record<string, unknown>>> = {};
+  let catalog: Record<string, unknown> | undefined;
+  /** The recipe records as last saved or heard about, as edits. */
+  let stored: RecipeEdits = {};
+  let recipeQueue: Promise<void> = Promise.resolve();
   const written: Record<string, string> = {};
   const queue: Record<string, Promise<void>> = {};
 
@@ -187,11 +219,30 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
     return next;
   }
 
-  function savePart(part: Part, body: Record<string, unknown>) {
-    parts[part] = body;
-    return write(part, stableStringify(body), () =>
-      sb.from("book_parts").upsert({ part, body, updated_at: new Date().toISOString(), updated_by: account.userId }),
+  function saveCatalog(body: Record<string, unknown>) {
+    catalog = body;
+    return write("catalog", stableStringify(body), () =>
+      sb.from("book_parts").upsert({ part: "catalog", body, updated_at: new Date().toISOString(), updated_by: account.userId }),
     );
+  }
+
+  /** Save only the Recipes that changed; one write at a time. */
+  function saveRecipes(edits: RecipeEdits): Promise<void> {
+    const before = stored;
+    const changes = recordChanges(before, edits);
+    if (!changes.save.length && !changes.remove.length) return Promise.resolve();
+    stored = edits;
+    const next = recipeQueue.then(() => writeRecipeRecords(sb, account.userId, changes));
+    recipeQueue = next.catch(() => {
+      // Forget these Recipes were saved, so the next save tries them again.
+      const retry = { ...stored };
+      for (const id of [...changes.save.map((r) => r.id), ...changes.remove]) {
+        if (id in before) retry[id] = before[id];
+        else delete retry[id];
+      }
+      stored = retry;
+    });
+    return next;
   }
 
   async function loadPhotos(): Promise<Record<string, string>> {
@@ -204,30 +255,50 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
     canEditBook: canEdit,
     isOwner: account.role === "admin",
     async loadBook() {
-      const { data, error } = await sb.from("book_parts").select("part, body");
-      if (error) throw error;
-      if (!data.length) return null;
-      for (const row of data as { part: Part; body: Record<string, unknown> }[]) {
-        parts[row.part] = row.body;
-        written[row.part] = stableStringify(row.body);
+      const [parts, records] = await Promise.all([
+        sb.from("book_parts").select("body").eq("part", "catalog").maybeSingle(),
+        loadRecipeRecords(sb),
+      ]);
+      if (parts.error) throw parts.error;
+      if (!parts.data && !records.length) return null;
+      if (parts.data) {
+        catalog = parts.data.body as Record<string, unknown>;
+        written.catalog = stableStringify(catalog);
       }
-      return bookFromParts(parts);
+      stored = editsFromRecords(records);
+      return bookFrom(catalog, stored);
     },
     async saveBook(b) {
-      await Promise.all([savePart("catalog", catalogBody(b)), savePart("recipes", recipesBody(b))]);
+      await Promise.all([saveCatalog(catalogBody(b)), saveRecipes(b.recipeEdits)]);
     },
     onBook(cb) {
       const channel = sb
         .channel("book")
         .on("postgres_changes", { event: "*", schema: "public", table: "book_parts" }, (payload) => {
-          const row = payload.new as { part?: Part; body?: Record<string, unknown> };
-          if (!row?.part || !row.body) return;
+          const row = payload.new as { part?: string; body?: Record<string, unknown> };
+          if (row?.part !== "catalog" || !row.body) return;
           const json = stableStringify(row.body);
           // Unchanged means it's our own write coming back.
-          if (written[row.part] === json) return;
-          written[row.part] = json;
-          parts[row.part] = row.body;
-          cb(bookFromParts(parts));
+          if (written.catalog === json) return;
+          written.catalog = json;
+          catalog = row.body;
+          cb(bookFrom(catalog, stored));
+        })
+        .on("postgres_changes", { event: "*", schema: "public", table: "recipes" }, (payload) => {
+          const next = { ...stored };
+          if (payload.eventType === "DELETE") {
+            const id = (payload.old as { id?: string }).id;
+            if (!id || !(id in next)) return;
+            delete next[id];
+          } else {
+            const record = payload.new as RecipeRecord;
+            const edit = editsFromRecords([record])[record.id];
+            // Unchanged means it's our own write coming back.
+            if (record.id in next && stableStringify(next[record.id]) === stableStringify(edit)) return;
+            next[record.id] = edit;
+          }
+          stored = next;
+          cb(bookFrom(catalog, stored));
         })
         .subscribe();
       return () => void sb.removeChannel(channel);
