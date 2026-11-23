@@ -3185,3 +3185,42 @@ select.input {
   text-decoration: line-through;
   text-decoration-color: color-mix(in srgb, var(--c-leaf) 60%, transparent);
 }
+
+/* ---------- pantry suggestions (Plan) ---------- */
+.pantry-suggestions {
+  margin-top: 28px;
+}
+.pantry-suggestions h2 {
+  margin: 0 0 4px;
+}
+.suggestion-list {
+  max-height: none;
+  margin-top: 12px;
+}
+.suggestion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 12px;
+}
+.suggestion > button:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.suggestion .pick-text {
+  flex: 1;
+  min-width: 0;
+}
+.suggestion-match {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.suggestion-add {
+  flex: none;
+}
+@media (max-width: 560px) {
+  .suggestion-match {
+    display: none;
+  }
+}
