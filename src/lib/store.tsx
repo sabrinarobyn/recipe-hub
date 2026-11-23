@@ -45,7 +45,7 @@ export function buildCatalog(data: UserData): Catalog & { productList: Product[]
 
 export type AppCatalog = ReturnType<typeof buildCatalog>;
 
-export const emptyList = (): WeekList => ({ have: [], got: [], extras: [] });
+export const emptyList = (): WeekList => ({ got: [], extras: [], buyAnyway: [] });
 
 export type SyncState = {
   /** Where the recipe book lives: this browser, live shared copy, or unreachable. */

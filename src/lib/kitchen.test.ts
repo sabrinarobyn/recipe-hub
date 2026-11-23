@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, clearPantryItem, correctPantry, tickGot, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, clearPantryItem, cookMeal, correctPantry, isCooked, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
 const catalog = (store: Catalog["store"] = "woolworths"): Catalog => ({
@@ -109,5 +110,108 @@ describe("Added and Correction", () => {
     history = correctPantry(history, "baby_marrows", 250, "2026-11-26");
     history = untickGot(history, WEEK, "baby_marrows");
     expect(buildPantry(history).get("baby_marrows")).toEqual({ productKey: "baby_marrows", amount: 250, lastGot: null });
+  });
+});
+
+describe("Cooked", () => {
+  const meal = (recipeId: string, batches = 1, id = "meal-1"): PlanEntry => ({ id, date: "2026-11-25", slot: "dinner", recipeId, batches });
+
+  it("takes the Recipe's Product amounts out of the Pantry", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = addToPantry(history, "baby_marrows", 700, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    const pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(500);
+    expect(pantry.get("baby_marrows")?.amount).toBe(385);
+  });
+
+  it("un-marking Cooked restores exactly those amounts, and the meal is no longer Cooked", () => {
+    let history = tickGot([], WEEK, vegMince(), "baby_marrows", "2026-11-24");
+    history = addToPantry(history, "lean_mince", 1000, "2026-11-24");
+    const before = buildPantry(history);
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    expect(isCooked(history, "meal-1")).toBe(true);
+    history = uncookMeal(history, "meal-1");
+    expect(isCooked(history, "meal-1")).toBe(false);
+    expect(buildPantry(history)).toEqual(before);
+  });
+
+  it("scales by batches and takes out what sub-recipes use", () => {
+    // Mince in Gems uses 1 × 5 Veg Mince (500 g lean mince) plus 6 gem squash and 80 g cheddar.
+    let history = addToPantry([], "lean_mince", 1500, "2026-11-20");
+    history = addToPantry(history, "gem_squash", 20, "2026-11-20");
+    history = addToPantry(history, "cheddar_grated", 400, "2026-11-20");
+    history = cookMeal(history, meal("mince-in-gems", 2), catalog(), "2026-11-25");
+    const pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(500);
+    expect(pantry.get("gem_squash")?.amount).toBe(8);
+    expect(pantry.get("cheddar_grated")?.amount).toBe(240);
+  });
+
+  it("cooking what the Pantry doesn't have leaves it at zero, never negative", () => {
+    let history = addToPantry([], "cheddar_grated", 100, "2026-11-20");
+    history = cookMeal(history, meal("mince-in-gems", 2), catalog(), "2026-11-25");
+    let pantry = buildPantry(history);
+    expect(pantry.has("cheddar_grated")).toBe(false);
+    expect(pantry.has("lean_mince")).toBe(false);
+    history = addToPantry(history, "lean_mince", 200, "2026-11-26");
+    history = addToPantry(history, "cheddar_grated", 50, "2026-11-26");
+    pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(200);
+    expect(pantry.get("cheddar_grated")?.amount).toBe(50);
+  });
+
+  it("marking the same meal Cooked twice takes its amounts out once", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-26");
+    expect(buildPantry(history).get("lean_mince")?.amount).toBe(500);
+  });
+
+  it("only the Cooked meal uses up the Pantry; other Planned Meals change nothing", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base", 1, "monday"), catalog(), "2026-11-25");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base", 1, "tuesday"), catalog(), "2026-11-26");
+    history = uncookMeal(history, "tuesday");
+    expect(buildPantry(history).get("lean_mince")?.amount).toBe(500);
+    expect(isCooked(history, "monday")).toBe(true);
+    expect(isCooked(history, "wednesday")).toBe(false);
+  });
+});
+
+describe("Suggestions", () => {
+  const stock = (items: [string, number][]) => buildPantry(items.reduce<PantryEvent[]>((h, [k, a]) => addToPantry(h, k, a, "2026-11-20"), []));
+
+  it("an empty Pantry suggests nothing", () => {
+    expect(suggestRecipes(buildPantry([]), catalog())).toEqual([]);
+  });
+
+  it("a Recipe the Pantry fully covers ranks above one it partly covers", () => {
+    // Hot choccie needs 250 ml milk, 7 g cocoa and 4 g sugar: all in the Pantry.
+    // White sauce needs milk too, but also butter, flour and mustard.
+    const ids = suggestRecipes(stock([["milk", 1000], ["cocoa", 250], ["white_sugar", 500]]), catalog()).map((s) => s.recipeId);
+    expect(ids[0]).toBe("homemade-hot-choccie");
+    expect(ids).toContain("microwave-white-sauce");
+    expect(ids.indexOf("homemade-hot-choccie")).toBeLessThan(ids.indexOf("microwave-white-sauce"));
+  });
+
+  it("each suggestion lists the Pantry Items it would use, and how much", () => {
+    const pantry = stock([["milk", 1000], ["butter", 10], ["feta", 200]]);
+    const sauce = suggestRecipes(pantry, catalog()).find((s) => s.recipeId === "microwave-white-sauce");
+    // White sauce needs 250 ml milk and 21 g butter; only 10 g butter is left.
+    expect(sauce?.uses).toEqual([
+      { productKey: "butter", amount: 10 },
+      { productKey: "milk", amount: 250 },
+    ]);
+    expect(sauce!.coverage).toBeGreaterThan(0);
+    expect(sauce!.coverage).toBeLessThan(1);
+  });
+
+  it("basics don't count against a match", () => {
+    // The filo tart has a basic line; every Product it needs is in the Pantry.
+    const tart = [["filo", 100], ["olive_oil_spray", 3], ["spinach", 500], ["eggs", 2], ["feta", 100], ["onions", 150], ["lemons", 1], ["sesame_seeds", 9]] as [string, number][];
+    const best = suggestRecipes(stock(tart), catalog()).find((s) => s.recipeId === "spinach-feta-filo-tart");
+    expect(best?.coverage).toBeCloseTo(1);
+    expect(best?.uses).toHaveLength(8);
   });
 });
