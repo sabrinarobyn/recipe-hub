@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, clearPantryItem, correctPantry, tickGot, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, clearPantryItem, cookMeal, correctPantry, isCooked, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
 const catalog = (store: Catalog["store"] = "woolworths"): Catalog => ({
@@ -109,5 +110,71 @@ describe("Added and Correction", () => {
     history = correctPantry(history, "baby_marrows", 250, "2026-11-26");
     history = untickGot(history, WEEK, "baby_marrows");
     expect(buildPantry(history).get("baby_marrows")).toEqual({ productKey: "baby_marrows", amount: 250, lastGot: null });
+  });
+});
+
+describe("Cooked", () => {
+  const meal = (recipeId: string, batches = 1, id = "meal-1"): PlanEntry => ({ id, date: "2026-11-25", slot: "dinner", recipeId, batches });
+
+  it("takes the Recipe's Product amounts out of the Pantry", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = addToPantry(history, "baby_marrows", 700, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    const pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(500);
+    expect(pantry.get("baby_marrows")?.amount).toBe(385);
+  });
+
+  it("un-marking Cooked restores exactly those amounts, and the meal is no longer Cooked", () => {
+    let history = tickGot([], WEEK, vegMince(), "baby_marrows", "2026-11-24");
+    history = addToPantry(history, "lean_mince", 1000, "2026-11-24");
+    const before = buildPantry(history);
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    expect(isCooked(history, "meal-1")).toBe(true);
+    history = uncookMeal(history, "meal-1");
+    expect(isCooked(history, "meal-1")).toBe(false);
+    expect(buildPantry(history)).toEqual(before);
+  });
+
+  it("scales by batches and takes out what sub-recipes use", () => {
+    // Mince in Gems uses 1 × 5 Veg Mince (500 g lean mince) plus 6 gem squash and 80 g cheddar.
+    let history = addToPantry([], "lean_mince", 1500, "2026-11-20");
+    history = addToPantry(history, "gem_squash", 20, "2026-11-20");
+    history = addToPantry(history, "cheddar_grated", 400, "2026-11-20");
+    history = cookMeal(history, meal("mince-in-gems", 2), catalog(), "2026-11-25");
+    const pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(500);
+    expect(pantry.get("gem_squash")?.amount).toBe(8);
+    expect(pantry.get("cheddar_grated")?.amount).toBe(240);
+  });
+
+  it("cooking what the Pantry doesn't have leaves it at zero, never negative", () => {
+    let history = addToPantry([], "cheddar_grated", 100, "2026-11-20");
+    history = cookMeal(history, meal("mince-in-gems", 2), catalog(), "2026-11-25");
+    let pantry = buildPantry(history);
+    expect(pantry.has("cheddar_grated")).toBe(false);
+    expect(pantry.has("lean_mince")).toBe(false);
+    history = addToPantry(history, "lean_mince", 200, "2026-11-26");
+    history = addToPantry(history, "cheddar_grated", 50, "2026-11-26");
+    pantry = buildPantry(history);
+    expect(pantry.get("lean_mince")?.amount).toBe(200);
+    expect(pantry.get("cheddar_grated")?.amount).toBe(50);
+  });
+
+  it("marking the same meal Cooked twice takes its amounts out once", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-25");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base"), catalog(), "2026-11-26");
+    expect(buildPantry(history).get("lean_mince")?.amount).toBe(500);
+  });
+
+  it("only the Cooked meal uses up the Pantry; other Planned Meals change nothing", () => {
+    let history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base", 1, "monday"), catalog(), "2026-11-25");
+    history = cookMeal(history, meal("5-veg-mince-freezer-base", 1, "tuesday"), catalog(), "2026-11-26");
+    history = uncookMeal(history, "tuesday");
+    expect(buildPantry(history).get("lean_mince")?.amount).toBe(500);
+    expect(isCooked(history, "monday")).toBe(true);
+    expect(isCooked(history, "wednesday")).toBe(false);
   });
 });
