@@ -88,6 +88,14 @@ export function pantryAmount(pantry: Pantry, productKey: string): number {
 }
 
 /**
+ * The Pantry a week's Shopping List takes off: everything except that week's
+ * own Got, so ticking an item Got doesn't then cover it on the same list.
+ */
+export function pantryForList(history: readonly PantryEvent[], week: string): Pantry {
+  return buildPantry(history.filter((e) => !(e.kind === "got" && e.week === week)));
+}
+
+/**
  * Tick a Shopping List item Got. `list` is the week's Shopping List, for the
  * packs and pack size of the store it's costed at. Ticking again replaces the
  * week's earlier Got for that item.
@@ -96,7 +104,7 @@ export function tickGot(history: readonly PantryEvent[], week: string, list: Sho
   const item = list.items.find((i) => i.product.key === productKey);
   // Extras and basics aren't Products on the list, so they never enter the Pantry.
   if (!item) return [...history];
-  const amount = item.offer.packSize ? item.packs * item.offer.packSize : item.qty;
+  const amount = item.offer.packSize ? item.packs * item.offer.packSize : item.toBuy;
   const id = gotId(week, productKey);
   return [...history.filter((e) => e.id !== id), { kind: "got", id, at, productKey, amount, week }];
 }
