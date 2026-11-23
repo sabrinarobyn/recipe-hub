@@ -73,7 +73,7 @@ export function Mockup({ src, hero, onClick, children }: { src: string; hero?: b
 
 /** Photo on a recipe card: the picture, or its mockup or a sticker tile, with an "Add photo" button. */
 export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: () => void; notify: (m: string) => void }) {
-  const { photos, actions, canEditBook } = useApp();
+  const { photos, actions, canSetMainPhoto } = useApp();
   const url = photos[recipe.id];
   const picker = usePhotoPicker((u) => actions.setPhoto(recipe.id, u), notify);
   const mockup = mockupFor(recipe.id);
@@ -84,7 +84,7 @@ export function CardPhoto({ recipe, onOpen, notify }: { recipe: Recipe; onOpen: 
       </button>
     );
   }
-  const add = canEditBook && (
+  const add = canSetMainPhoto(recipe.id) && (
     <button className="photo-add" onClick={picker.open} disabled={picker.busy} aria-label={`Add a photo of ${recipe.name}`}>
       <Icon name="camera" size={16} /> {picker.busy ? "Adding…" : "Add photo"}
     </button>

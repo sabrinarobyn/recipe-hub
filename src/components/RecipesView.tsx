@@ -13,7 +13,7 @@ import { byRating } from "../lib/kitchen";
 type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein" | "rating";
 
 export function RecipesView({ open }: { open: Open }) {
-  const { catalog, data, actions, canEditBook } = useApp();
+  const { catalog, data, actions, canEditBook, canAddRecipes, canEditRecipe } = useApp();
   const summaries = useSummaries();
   const nutrition = useNutrition();
   const reviews = useReviews();
@@ -86,7 +86,7 @@ export function RecipesView({ open }: { open: Open }) {
             {catalog.recipeList.length} recipes, each costed against {STORE_NAMES[catalog.store ?? "woolworths"]} prices. Average cost per make{" "}
             <strong className="num">{rand(avg)}</strong>.
           </p>
-          {canEditBook && (
+          {canAddRecipes && (
             <div className="btn-row">
               <button className="btn btn-sun" onClick={() => open.editRecipe("new")}>
                 <Icon name="plus" /> New recipe
@@ -182,7 +182,7 @@ export function RecipesView({ open }: { open: Open }) {
                       <button className="btn btn-quiet btn-small row-add" onClick={() => open.addToPlan(r.id)} aria-label={`Add ${r.name} to plan`}>
                         <Icon name="plus" /> <span className="row-add-text">Plan</span>
                       </button>
-                      {canEditBook && (
+                      {canEditRecipe(r.id) && (
                         <ConfirmButton
                           className="btn btn-danger-quiet btn-small row-remove"
                           confirmLabel="Remove?"

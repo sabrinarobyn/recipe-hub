@@ -285,3 +285,21 @@ export function byRating(summaries: ReadonlyMap<string, ReviewSummary>): (a: str
     return y.average - x.average || y.count - x.count;
   };
 }
+
+// ── Recipe permissions ──────────────────────────────────────────────────────
+
+/**
+ * Whether a Member may edit, duplicate or delete a Recipe. Editors and Admins may change any
+ * Recipe, including the originals (no Author); any other Member only the Recipes they authored.
+ * Nobody signed in, or someone taken off the invite list, may change none. The database's
+ * row-level security enforces the same rule. `member` is who is acting, as for Reviews.
+ */
+export function canEditRecipe(member: ReviewActor, recipe: { authorId: string | null }): boolean {
+  if (member?.role === "editor" || member?.role === "admin") return true;
+  return member?.role != null && recipe.authorId != null && recipe.authorId === member.userId;
+}
+
+/** Whether a Member may set or remove a Recipe's Main Photo: whoever may edit the Recipe. */
+export function canSetMainPhoto(member: ReviewActor, recipe: { authorId: string | null }): boolean {
+  return canEditRecipe(member, recipe);
+}

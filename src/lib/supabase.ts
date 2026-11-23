@@ -3,7 +3,13 @@ import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
 import type { Profile } from "./profiles";
 import type { Review } from "./kitchen";
-import { editsFromRecords, recordChanges, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
+import { authorsFromRecords, editsFromRecords, recordChanges, type RecipeAuthors, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
+import { catalogProductEdits, newProducts, productEditsWithAdded, type AddedProducts } from "./productRecords";
+import seedJson from "../data/seed.json";
+import type { Product, Seed } from "../types";
+
+const originalRecipes = new Set((seedJson as Seed).recipes.map((r) => r.id));
+const originalProducts = new Set((seedJson as Seed).products.map((p) => p.key));
 
 /**
  * Supabase hosting: invite-only accounts, one shared recipe book, private plans.
@@ -225,37 +231,59 @@ export function onReviews(sb: SupabaseClient, cb: (change: ReviewChange) => void
 /**
  * The Recipe Book is stored in two places:
  * - the shared `book_parts` 'catalog' block: Product catalogue edits and categories;
- * - the `recipes` table: one record per Recipe (see lib/recipeRecords).
+ * - the `recipes` table: one record per Recipe (see lib/recipeRecords);
+ * - the `products` table: Products any Member added, under the catalogue's edits (see lib/productRecords).
  */
-const catalogBody = (b: Book) => ({ productEdits: b.productEdits, categories: b.categories });
+const catalogBody = (b: Book, added: AddedProducts) => ({ productEdits: catalogProductEdits(b.productEdits, added), categories: b.categories });
 
-function bookFrom(catalog: Record<string, unknown> | undefined, recipeEdits: RecipeEdits): Book {
+function bookFrom(catalog: Record<string, unknown> | undefined, recipeEdits: RecipeEdits, added: AddedProducts, recipeAuthors: RecipeAuthors): Book {
   const c = catalog ?? {};
   return {
-    productEdits: (c.productEdits as Book["productEdits"]) ?? {},
+    productEdits: productEditsWithAdded((c.productEdits as Book["productEdits"]) ?? {}, added),
     categories: Array.isArray(c.categories) ? (c.categories as string[]) : [],
     recipeEdits,
+    recipeAuthors,
   };
+}
+
+/** Every Product a Member added, by key. */
+export async function loadAddedProducts(sb: SupabaseClient): Promise<AddedProducts> {
+  const { data, error } = await sb.from("products").select("key, body");
+  if (error) throw error;
+  return Object.fromEntries((data as { key: string; body: Product }[]).map((r) => [r.key, r.body]));
+}
+
+/** Adds Products new to the catalogue, with the Member adding them as their Author. */
+export async function addProducts(sb: SupabaseClient, userId: string, products: Product[]): Promise<void> {
+  if (!products.length) return;
+  const { error } = await sb.from("products").insert(products.map((p) => ({ key: p.key, body: p, author_id: userId })));
+  if (error) throw error;
 }
 
 /** Every Recipe record, as the app reads them. */
 export async function loadRecipeRecords(sb: SupabaseClient): Promise<RecipeRecord[]> {
-  const { data, error } = await sb.from("recipes").select("id, body, deleted");
+  const { data, error } = await sb.from("recipes").select("id, body, deleted, author_id");
   if (error) throw error;
   return data as RecipeRecord[];
 }
 
 /**
- * Saves Recipe records and removes others. Saving leaves a record's Author as it is; `updated_by`
- * is the Member saving. Removing a record brings back the original Recipe ("Undo my changes").
+ * Saves Recipe records and removes others. An `added` Recipe is saved with the Member saving it
+ * as its Author; saving any other record leaves its Author as it is. `updated_by` is the Member
+ * saving. Removing a record brings back the original Recipe ("Undo my changes").
  */
 export async function writeRecipeRecords(
   sb: SupabaseClient,
   userId: string,
   { save, remove }: { save: RecipeRecord[]; remove: string[] },
 ): Promise<void> {
-  if (save.length) {
-    const { error } = await sb.from("recipes").upsert(save.map((r) => ({ ...r, updated_by: userId })));
+  const row = ({ id, body, deleted }: RecipeRecord) => ({ id, body, deleted, updated_by: userId });
+  // Separate calls, so records saved without an Author never have theirs cleared.
+  const added = save.filter((r) => r.added).map((r) => ({ ...row(r), author_id: userId }));
+  const changed = save.filter((r) => !r.added).map(row);
+  for (const rows of [added, changed]) {
+    if (!rows.length) continue;
+    const { error } = await sb.from("recipes").upsert(rows);
     if (error) throw error;
   }
   if (remove.length) {
@@ -268,8 +296,12 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
   const sb = await getClient();
   const canEdit = account.role === "admin" || account.role === "editor";
   let catalog: Record<string, unknown> | undefined;
-  /** The recipe records as last saved or heard about, as edits. */
+  /** The recipe records as last saved or heard about, as edits, and their Authors. */
   let stored: RecipeEdits = {};
+  let authors: RecipeAuthors = {};
+  /** Products Members added. */
+  let added: AddedProducts = {};
+  const book = () => bookFrom(catalog, stored, added, authors);
   let recipeQueue: Promise<void> = Promise.resolve();
   const written: Record<string, string> = {};
   const queue: Record<string, Promise<void>> = {};
@@ -298,9 +330,10 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
   /** Save only the Recipes that changed; one write at a time. */
   function saveRecipes(edits: RecipeEdits): Promise<void> {
     const before = stored;
-    const changes = recordChanges(before, edits);
+    const changes = recordChanges(before, edits, originalRecipes);
     if (!changes.save.length && !changes.remove.length) return Promise.resolve();
     stored = edits;
+    for (const r of changes.save) if (r.added) authors = { ...authors, [r.id]: account.userId };
     const next = recipeQueue.then(() => writeRecipeRecords(sb, account.userId, changes));
     recipeQueue = next.catch(() => {
       // Forget these Recipes were saved, so the next save tries them again.
@@ -320,14 +353,31 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
     return Object.fromEntries((data as { recipe_id: string; data_url: string }[]).map((r) => [r.recipe_id, r.data_url]));
   }
 
+  /** A Member who can't change the catalogue adds new Products to the `products` table. */
+  function saveAddedProducts(b: Book): Promise<void> {
+    const current = productEditsWithAdded((catalog?.productEdits as Book["productEdits"]) ?? {}, added);
+    const fresh = newProducts(current, b.productEdits, originalProducts);
+    if (!fresh.length) return Promise.resolve();
+    const before = added;
+    added = { ...added, ...Object.fromEntries(fresh.map((p) => [p.key, p])) };
+    return addProducts(sb, account.userId, fresh).catch((e) => {
+      // Forget they were added, so the next save tries again.
+      added = before;
+      throw e;
+    });
+  }
+
   return {
     canEditBook: canEdit,
+    canAddRecipes: account.role != null,
     isOwner: account.role === "admin",
     async loadBook() {
-      const [parts, records] = await Promise.all([
+      const [parts, records, products] = await Promise.all([
         sb.from("book_parts").select("body").eq("part", "catalog").maybeSingle(),
         loadRecipeRecords(sb),
+        loadAddedProducts(sb),
       ]);
+      added = products;
       if (parts.error) throw parts.error;
       if (!parts.data && !records.length) return null;
       if (parts.data) {
@@ -335,10 +385,11 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
         written.catalog = stableStringify(catalog);
       }
       stored = editsFromRecords(records);
-      return bookFrom(catalog, stored);
+      authors = authorsFromRecords(records);
+      return book();
     },
     async saveBook(b) {
-      await Promise.all([saveCatalog(catalogBody(b)), saveRecipes(b.recipeEdits)]);
+      await Promise.all([canEdit ? saveCatalog(catalogBody(b, added)) : saveAddedProducts(b), saveRecipes(b.recipeEdits)]);
     },
     onBook(cb) {
       const channel = sb
@@ -351,7 +402,7 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
           if (written.catalog === json) return;
           written.catalog = json;
           catalog = row.body;
-          cb(bookFrom(catalog, stored));
+          cb(book());
         })
         .on("postgres_changes", { event: "*", schema: "public", table: "recipes" }, (payload) => {
           const next = { ...stored };
@@ -361,13 +412,20 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
             delete next[id];
           } else {
             const record = payload.new as RecipeRecord;
+            if (record.author_id) authors = { ...authors, [record.id]: record.author_id };
             const edit = editsFromRecords([record])[record.id];
             // Unchanged means it's our own write coming back.
             if (record.id in next && stableStringify(next[record.id]) === stableStringify(edit)) return;
             next[record.id] = edit;
           }
           stored = next;
-          cb(bookFrom(catalog, stored));
+          cb(book());
+        })
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "products" }, (payload) => {
+          const row = payload.new as { key?: string; body?: Product };
+          if (!row?.key || !row.body || stableStringify(added[row.key]) === stableStringify(row.body)) return;
+          added = { ...added, [row.key]: row.body };
+          cb(book());
         })
         .subscribe();
       return () => void sb.removeChannel(channel);

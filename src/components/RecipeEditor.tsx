@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { buildShoppingList, lineCost } from "../lib/costing";
 import { packLabel, rand, slugify, uid } from "../lib/format";
 import { guessQty } from "../lib/guess";
-import { buildCatalog, useApp } from "../lib/store";
+import { buildCatalog, seedRecipeIds, useApp } from "../lib/store";
 import type { IngredientLine, LineKind, Product, Recipe } from "../types";
 import { ProductEditor } from "./PricesView";
 import { Icon, Modal, NumberField } from "./ui";
@@ -30,7 +30,7 @@ export function RecipeEditor({
   onSaved: (r: Recipe) => void;
   notify: (m: string) => void;
 }) {
-  const { catalog, data, actions, photos } = useApp();
+  const { catalog, data, actions, photos, canEditBook } = useApp();
   /** undefined = photo unchanged; null = remove it. */
   const [photo, setPhoto] = useState<string | null | undefined>(undefined);
   const isNew = !recipe;
@@ -93,14 +93,16 @@ export function RecipeEditor({
     if (category === NEW_CATEGORY) {
       category = newCategory.trim();
       if (!category) return setError("Type a name for the new category.");
-      actions.addCategory(category);
+      // The category list is the catalogue's (Editors); a Recipe's own category shows either way.
+      if (canEditBook) actions.addCategory(category);
     }
     let id = draft.id;
     if (isNew) {
       const base = slugify(name) || "recipe";
       id = base;
       let n = 2;
-      while (catalog.recipes.has(id)) id = `${base}-${n++}`;
+      // Not the id of any Recipe, even a removed one, so a new Recipe never lands on someone else's record.
+      while (catalog.recipes.has(id) || id in data.recipeEdits || seedRecipeIds.has(id)) id = `${base}-${n++}`;
     }
     const lines = draft.lines
       .filter((l) => l.text.trim() || l.productKey || l.recipeId)

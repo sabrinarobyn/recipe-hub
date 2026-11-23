@@ -26,7 +26,7 @@ The Member who added a Recipe. An Author can edit their own Recipes; Editors can
 _Avoid_: Owner, creator
 
 **Main Photo**:
-The one photo that represents a Recipe in the Recipe Book, chosen by Editors.
+The one photo that represents a Recipe in the Recipe Book, chosen by its Author or by Editors.
 _Avoid_: Cover, thumbnail
 
 **Review**:

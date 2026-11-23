@@ -24,7 +24,7 @@ describe("Recipe records", () => {
     expect(recordChanges(before, after)).toEqual({
       save: [
         { id: "r-2", body: recipe("r-2", "Beef stew"), deleted: false },
-        { id: "u-1", body: recipe("u-1", "Soup"), deleted: false },
+        { id: "u-1", body: recipe("u-1", "Soup"), deleted: false, added: true },
       ],
       remove: [],
     });
@@ -34,6 +34,23 @@ describe("Recipe records", () => {
     const pie = recipe("r-1", "Pie");
     const reordered = Object.fromEntries(Object.entries(pie).reverse()) as unknown as Recipe;
     expect(recordChanges({ "r-1": pie }, { "r-1": reordered })).toEqual({ save: [], remove: [] });
+  });
+
+  it("mark a Recipe new to the Recipe Book as added, so it is saved with its Author", () => {
+    const originals = new Set(["r-1", "r-2"]);
+    const before = { "u-1": recipe("u-1", "Soup") };
+    const after = {
+      "u-1": recipe("u-1", "Lentil soup"),
+      "u-2": recipe("u-2", "Toast"),
+      "r-1": recipe("r-1", "Pie, my way"),
+      "r-2": null,
+    };
+    expect(recordChanges(before, after, originals).save).toEqual([
+      { id: "u-1", body: recipe("u-1", "Lentil soup"), deleted: false },
+      { id: "u-2", body: recipe("u-2", "Toast"), deleted: false, added: true },
+      { id: "r-1", body: recipe("r-1", "Pie, my way"), deleted: false },
+      { id: "r-2", body: null, deleted: true },
+    ]);
   });
 
   it("mark a deleted Recipe removed, and drop the record on Undo my changes", () => {
