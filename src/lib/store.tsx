@@ -3,7 +3,7 @@ import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
-import { buildPantry, type PantryEvent } from "./kitchen";
+import { buildPantry, canEditRecipe as memberCanEditRecipe, canSetMainPhoto as memberCanSetMainPhoto, type PantryEvent } from "./kitchen";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
 import { connectSupabase, type Account } from "./supabase";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
@@ -60,6 +60,10 @@ function useAppDataInternal(account: Account | null) {
   const [data, setData] = useState<UserData>(() => loadLocal() ?? emptyUserData());
   const [sync, setSync] = useState<SyncState>({ book: "connecting", personal: "browser" });
   const [canEditBook, setCanEditBook] = useState(true);
+  /** Any Member may add Recipes and change their own (Supabase); elsewhere only those who edit the book. */
+  const [canAddRecipes, setCanAddRecipes] = useState(false);
+  /** Recipe id → its Author's user id. */
+  const [authors, setAuthors] = useState<Record<string, string>>({});
   const [photos, setPhotos] = useState<Photos>({});
   const remote = useRef<RemoteStore | null>(null);
   const personalRemote = useRef(false);
@@ -68,13 +72,20 @@ function useAppDataInternal(account: Account | null) {
   const bookDirty = useRef(false);
   const canEditRef = useRef(true);
   canEditRef.current = canEditBook;
+  const canAddRef = useRef(false);
+  canAddRef.current = canAddRecipes || canEditBook;
+  const authorsRef = useRef(authors);
+  authorsRef.current = authors;
+  /** Waiting for the next book save (a new Recipe's Main Photo waits for its record). */
+  const bookSaveWaiters = useRef<(() => void)[]>([]);
   const notifier = useRef<(m: string) => void>(() => {});
   const latest = useRef(data);
   latest.current = data;
   const photosRef = useRef(photos);
   photosRef.current = photos;
 
-  const applyBook = useCallback((book: Book) => {
+  const applyBook = useCallback(({ recipeAuthors, ...book }: Book) => {
+    if (recipeAuthors) setAuthors(recipeAuthors);
     setData((d) => {
       const next = { ...d, ...book };
       saveLocal(next);
@@ -98,6 +109,7 @@ function useAppDataInternal(account: Account | null) {
       }
       const store = conn.store;
       setCanEditBook(store.canEditBook);
+      setCanAddRecipes(Boolean(store.canAddRecipes));
       let [book, personal, sharedPhotos] = await Promise.all([store.loadBook(), store.loadPersonal(), store.loadPhotos()]);
       const savedPersonal = personal != null;
 
@@ -157,13 +169,27 @@ function useAppDataInternal(account: Account | null) {
 
   const blocked = useCallback(() => {
     notifier.current(account
-      ? "Only admins and editors can change recipes, prices and photos. Your plan and shopping list are yours to change."
+      ? "You can change the recipes you added. Only admins and editors can change other recipes and prices. Your plan and shopping list are yours to change."
       : "Only the owner can change recipes, prices and photos. Your plan and shopping list are yours to change.");
   }, [account]);
 
+  /** Whether the signed-in Member may edit this Recipe; without accounts, whoever edits the book. */
+  const canEditRecipe = useCallback(
+    (id: string) =>
+      account ? memberCanEditRecipe(account, { authorId: authorsRef.current[id] ?? null }) : canEditRef.current,
+    [account],
+  );
+  const canSetMainPhoto = useCallback(
+    (id: string) =>
+      account ? memberCanSetMainPhoto(account, { authorId: authorsRef.current[id] ?? null }) : canEditRef.current,
+    [account],
+  );
+
   const setPhoto = useCallback(
     async (recipeId: string, dataUrl: string | null) => {
-      if (!canEditRef.current) return blocked();
+      if (!canSetMainPhoto(recipeId)) return blocked();
+      // A Recipe just added has no record yet: its Main Photo waits until it's saved.
+      if (remote.current && bookDirty.current) await new Promise<void>((resolve) => bookSaveWaiters.current.push(resolve));
       setPhotos((p) => {
         const next = { ...p };
         if (dataUrl) next[recipeId] = dataUrl;
@@ -173,7 +199,7 @@ function useAppDataInternal(account: Account | null) {
       await saveLocalPhoto(recipeId, dataUrl);
       await remote.current?.setPhoto(recipeId, dataUrl);
     },
-    [blocked],
+    [blocked, canSetMainPhoto],
   );
 
   const replacePhotos = useCallback(
@@ -201,12 +227,13 @@ function useAppDataInternal(account: Account | null) {
     timer.current = window.setTimeout(async () => {
       const d = latest.current;
       try {
-        if (canEditRef.current) await store.saveBook(pickBook(d));
+        if (canAddRef.current && changed.current.book) await store.saveBook(pickBook(d));
         bookDirty.current = false;
         setSync((s) => ({ ...s, book: "live" }));
       } catch {
         setSync((s) => ({ ...s, book: "error" }));
       }
+      for (const resolve of bookSaveWaiters.current.splice(0)) resolve();
       if (personalRemote.current) {
         await store.savePersonal(pickPersonal(d)).catch(() => {
           personalRemote.current = false;
@@ -217,8 +244,9 @@ function useAppDataInternal(account: Account | null) {
   }, [data]);
 
   const update = useCallback(
-    (fn: (d: UserData) => UserData, kind: Kind = "personal") => {
-      if (kind !== "personal" && !canEditRef.current) return blocked();
+    /** `allowed` lets a Member who can't edit the book change what's theirs (their Recipes, new Products). */
+    (fn: (d: UserData) => UserData, kind: Kind = "personal", allowed = canEditRef.current) => {
+      if (kind !== "personal" && !allowed) return blocked();
       if (kind !== "personal") {
         changed.current.book = true;
         bookDirty.current = true;
@@ -246,12 +274,17 @@ function useAppDataInternal(account: Account | null) {
       setPriceBasis: (priceBasis: UserData["settings"]["priceBasis"]) =>
         update((d) => ({ ...d, settings: { ...d.settings, priceBasis } })),
       setStore: (store: StoreId) => update((d) => ({ ...d, settings: { ...d.settings, store } })),
+      /** Editors change any Product; any Member can add a new one (while writing a Recipe). */
       saveProduct: (p: Product, previousKey?: string) =>
-        update((d) => {
-          const productEdits = { ...d.productEdits, [p.key]: p };
-          if (previousKey && previousKey !== p.key) productEdits[previousKey] = null;
-          return { ...d, productEdits };
-        }, "book"),
+        update(
+          (d) => {
+            const productEdits = { ...d.productEdits, [p.key]: p };
+            if (previousKey && previousKey !== p.key) productEdits[previousKey] = null;
+            return { ...d, productEdits };
+          },
+          "book",
+          canEditRef.current || (canAddRef.current && !previousKey && !buildCatalog(latest.current).products.has(p.key)),
+        ),
       updatePrice: (key: string, field: "today" | "regular", value: number | null, date: string) =>
         update((d) => {
           const current = buildCatalog(d).products.get(key);
@@ -272,15 +305,24 @@ function useAppDataInternal(account: Account | null) {
           delete productEdits[key];
           return { ...d, productEdits };
         }, "book"),
-      saveRecipe: (r: Recipe) => update((d) => ({ ...d, recipeEdits: { ...d.recipeEdits, [r.id]: r } }), "book"),
+      /** Saves a Recipe its Member may edit, or adds a new one with the signed-in Member as its Author. */
+      saveRecipe: (r: Recipe) => {
+        const isNew = !(r.id in latest.current.recipeEdits) && !seedRecipeIds.has(r.id);
+        if (isNew && canAddRef.current && account) setAuthors((a) => ({ ...a, [r.id]: account.userId }));
+        update(
+          (d) => ({ ...d, recipeEdits: { ...d.recipeEdits, [r.id]: r } }),
+          "book",
+          isNew ? canAddRef.current : canEditRecipe(r.id),
+        );
+      },
       deleteRecipe: (id: string) => {
-        if (!canEditRef.current) return blocked();
+        if (!canEditRecipe(id)) return blocked();
         if (photosRef.current[id]) setPhoto(id, null).catch(() => {});
         update((d) => ({
           ...d,
           recipeEdits: { ...d.recipeEdits, [id]: null },
           plan: d.plan.filter((e) => e.recipeId !== id),
-        }), "both");
+        }), "both", true);
       },
       resetRecipe: (id: string) =>
         update((d) => {
@@ -308,14 +350,26 @@ function useAppDataInternal(account: Account | null) {
       setPhoto,
       replacePhotos,
     }),
-    [update, replaceAll, setPhoto, replacePhotos, blocked],
+    [update, replaceAll, setPhoto, replacePhotos, blocked, canEditRecipe, account],
   );
 
   const setNotifier = useCallback((fn: (m: string) => void) => {
     notifier.current = fn;
   }, []);
 
-  return { data, catalog, sync, actions, photos, canEditBook, setNotifier, account };
+  /** Who may change what in the Recipe Book; re-made when Authors or roles change, so views re-render. */
+  const permissions = useMemo(
+    () => ({
+      /** Any Member (or whoever edits the book, without accounts) may add a Recipe. */
+      canAddRecipes: canAddRecipes || canEditBook,
+      authorOf: (id: string): string | null => authors[id] ?? null,
+      canEditRecipe,
+      canSetMainPhoto,
+    }),
+    [canAddRecipes, canEditBook, authors, canEditRecipe, canSetMainPhoto],
+  );
+
+  return { data, catalog, sync, actions, photos, canEditBook, setNotifier, account, ...permissions };
 }
 
 type AppData = ReturnType<typeof useAppDataInternal>;

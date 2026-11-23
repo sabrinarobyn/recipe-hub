@@ -55,6 +55,8 @@ export interface Book {
   productEdits: UserData["productEdits"];
   recipeEdits: UserData["recipeEdits"];
   categories: string[];
+  /** Recipe id → its Author's user id (Supabase only; the originals have none). */
+  recipeAuthors?: Record<string, string>;
 }
 /** Each person's own plan, lists, Pantry history and settings. */
 export type Personal = Pick<UserData, "v" | "settings" | "plan" | "lists" | "pantry">;
@@ -128,6 +130,8 @@ interface ClaudeRuntime {
 export interface RemoteStore {
   /** Owner and Editors change the shared book; everyone else reads it. */
   canEditBook: boolean;
+  /** Any Member may add Recipes (and Products for them) and change the Recipes they authored. */
+  canAddRecipes?: boolean;
   isOwner: boolean;
   loadBook(): Promise<Book | null>;
   saveBook(b: Book): Promise<void>;

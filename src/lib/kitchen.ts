@@ -218,3 +218,26 @@ export function suggestRecipes(pantry: Pantry, catalog: Catalog): Suggestion[] {
   }
   return out.sort((a, b) => b.coverage - a.coverage);
 }
+
+// ── Recipe permissions ──────────────────────────────────────────────────────
+
+/** Who is asking: a Member's id and role, or a role of null once they're taken off the invite list. */
+export interface RecipeActor {
+  userId: string;
+  role: "admin" | "editor" | "viewer" | null;
+}
+
+/**
+ * Whether a Member may edit, duplicate or delete a Recipe. Editors and Admins may change any
+ * Recipe, including the originals (no Author); any other Member only the Recipes they authored.
+ * The database's row-level security enforces the same rule.
+ */
+export function canEditRecipe(member: RecipeActor, recipe: { authorId: string | null }): boolean {
+  if (member.role === "editor" || member.role === "admin") return true;
+  return member.role != null && recipe.authorId != null && recipe.authorId === member.userId;
+}
+
+/** Whether a Member may set or remove a Recipe's Main Photo: whoever may edit the Recipe. */
+export function canSetMainPhoto(member: RecipeActor, recipe: { authorId: string | null }): boolean {
+  return canEditRecipe(member, recipe);
+}

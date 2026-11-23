@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, clearPantryItem, cookMeal, correctPantry, isCooked, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
 import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
@@ -213,5 +213,40 @@ describe("Suggestions", () => {
     const best = suggestRecipes(stock(tart), catalog()).find((s) => s.recipeId === "spinach-feta-filo-tart");
     expect(best?.coverage).toBeCloseTo(1);
     expect(best?.uses).toHaveLength(8);
+  });
+});
+
+describe("Recipe permissions", () => {
+  const viewer = { userId: "v-1", role: "viewer" as const };
+  const otherViewer = { userId: "v-2", role: "viewer" as const };
+  const editor = { userId: "e-1", role: "editor" as const };
+  const admin = { userId: "a-1", role: "admin" as const };
+  const takenOffList = { userId: "v-1", role: null };
+  const byViewer = { authorId: "v-1" };
+  const original = { authorId: null };
+
+  it("an Author can edit and set the Main Photo of their own Recipe", () => {
+    expect(canEditRecipe(viewer, byViewer)).toBe(true);
+    expect(canSetMainPhoto(viewer, byViewer)).toBe(true);
+  });
+
+  it("a Viewer can't change another Member's Recipe or an original one", () => {
+    expect(canEditRecipe(otherViewer, byViewer)).toBe(false);
+    expect(canSetMainPhoto(otherViewer, byViewer)).toBe(false);
+    expect(canEditRecipe(viewer, original)).toBe(false);
+    expect(canSetMainPhoto(viewer, original)).toBe(false);
+  });
+
+  it.each([editor, admin])("a Member with role $role can change any Recipe, as Author or not", (member) => {
+    expect(canEditRecipe(member, byViewer)).toBe(true);
+    expect(canSetMainPhoto(member, byViewer)).toBe(true);
+    expect(canEditRecipe(member, original)).toBe(true);
+    expect(canSetMainPhoto(member, original)).toBe(true);
+    expect(canEditRecipe(member, { authorId: member.userId })).toBe(true);
+  });
+
+  it("someone taken off the invite list can't change even their own Recipes", () => {
+    expect(canEditRecipe(takenOffList, byViewer)).toBe(false);
+    expect(canSetMainPhoto(takenOffList, byViewer)).toBe(false);
   });
 });

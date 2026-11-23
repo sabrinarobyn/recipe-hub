@@ -44,12 +44,10 @@ describe("Recipe records", () => {
     expect(Date.parse(data?.updated_at)).not.toBeNaN();
   });
 
-  it("a Viewer can't add, change or remove one", async () => {
+  it("a Viewer can't change or remove one they didn't author (recipe-authors.test.ts covers their own)", async () => {
     const { client } = await signInAs("viewer");
-    const added = await client.from("recipes").insert({ id: "u-2", body: { id: "u-2", name: "Toast" } });
     const changed = await client.from("recipes").update({ body: { id: "r-1", name: "Mine now" } }).eq("id", "r-1");
     const removed = await client.from("recipes").delete().eq("id", "u-1");
-    expect(added.error?.code).toBe("42501");
     // Row-level security hides rows from update and delete rather than raising an error.
     expect(changed.error).toBeNull();
     expect(removed.error).toBeNull();

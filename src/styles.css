@@ -1113,6 +1113,11 @@ select.input {
   align-items: center;
   gap: 10px;
 }
+.recipe-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 .ext-link {
   display: inline-flex;
   align-items: center;
