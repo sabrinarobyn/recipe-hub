@@ -219,25 +219,87 @@ export function suggestRecipes(pantry: Pantry, catalog: Catalog): Suggestion[] {
   return out.sort((a, b) => b.coverage - a.coverage);
 }
 
-// ── Recipe permissions ──────────────────────────────────────────────────────
+// ── Reviews ─────────────────────────────────────────────────────────────────
 
-/** Who is asking: a Member's id and role, or a role of null once they're taken off the invite list. */
-export interface RecipeActor {
+/** One Member's Review of a Recipe: 1 to 5 stars and an optional comment. At most one per Member and Recipe. */
+export interface Review {
+  id: string;
+  /** The Recipe's id; original spreadsheet Recipes have no record, so this needn't match one. */
+  recipeId: string;
+  /** The reviewer's account. */
   userId: string;
-  role: "admin" | "editor" | "viewer" | null;
+  /** Whole stars, 1 to 5. */
+  stars: number;
+  comment: string | null;
+  /** ISO timestamps. */
+  createdAt: string;
+  updatedAt: string;
 }
+
+/** A Recipe's average stars and number of Reviews. */
+export interface ReviewSummary {
+  average: number;
+  count: number;
+}
+
+/** Recipe id → its review summary. Recipes with no Reviews aren't in it. */
+export function reviewSummaries(reviews: readonly Review[]): Map<string, ReviewSummary> {
+  const totals = new Map<string, { stars: number; count: number }>();
+  for (const r of reviews) {
+    const t = totals.get(r.recipeId) ?? { stars: 0, count: 0 };
+    totals.set(r.recipeId, { stars: t.stars + r.stars, count: t.count + 1 });
+  }
+  return new Map([...totals].map(([id, t]) => [id, { average: t.stars / t.count, count: t.count }]));
+}
+
+/** A Recipe's Reviews, newest first (by when each was first written). */
+export function recipeReviews(reviews: readonly Review[], recipeId: string): Review[] {
+  return reviews.filter((r) => r.recipeId === recipeId).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/**
+ * Who is acting, for review permissions: the signed-in account (an `Account` fits). `role` is null
+ * when they're no longer on the invite list; the whole thing is null when nobody is signed in.
+ */
+export type ReviewActor = { userId: string; role: "admin" | "editor" | "viewer" | null } | null;
+
+/** Only the reviewer can change their Review (stars and comment). */
+export function canEditReview(member: ReviewActor, review: Pick<Review, "userId">): boolean {
+  return member?.role != null && member.userId === review.userId;
+}
+
+/** The reviewer can delete their Review; Editors and Admins can delete any Review. */
+export function canDeleteReview(member: ReviewActor, review: Pick<Review, "userId">): boolean {
+  return canEditReview(member, review) || member?.role === "editor" || member?.role === "admin";
+}
+
+/**
+ * Compares Recipe ids for sorting by rating: best average first, then more Reviews, then
+ * Recipes with no Reviews. Otherwise equal Recipes keep their order.
+ */
+export function byRating(summaries: ReadonlyMap<string, ReviewSummary>): (a: string, b: string) => number {
+  return (a, b) => {
+    const x = summaries.get(a);
+    const y = summaries.get(b);
+    if (!x || !y) return (x ? 0 : 1) - (y ? 0 : 1);
+    return y.average - x.average || y.count - x.count;
+  };
+}
+
+// ── Recipe permissions ──────────────────────────────────────────────────────
 
 /**
  * Whether a Member may edit, duplicate or delete a Recipe. Editors and Admins may change any
  * Recipe, including the originals (no Author); any other Member only the Recipes they authored.
- * The database's row-level security enforces the same rule.
+ * Nobody signed in, or someone taken off the invite list, may change none. The database's
+ * row-level security enforces the same rule. `member` is who is acting, as for Reviews.
  */
-export function canEditRecipe(member: RecipeActor, recipe: { authorId: string | null }): boolean {
-  if (member.role === "editor" || member.role === "admin") return true;
-  return member.role != null && recipe.authorId != null && recipe.authorId === member.userId;
+export function canEditRecipe(member: ReviewActor, recipe: { authorId: string | null }): boolean {
+  if (member?.role === "editor" || member?.role === "admin") return true;
+  return member?.role != null && recipe.authorId != null && recipe.authorId === member.userId;
 }
 
 /** Whether a Member may set or remove a Recipe's Main Photo: whoever may edit the Recipe. */
-export function canSetMainPhoto(member: RecipeActor, recipe: { authorId: string | null }): boolean {
+export function canSetMainPhoto(member: ReviewActor, recipe: { authorId: string | null }): boolean {
   return canEditRecipe(member, recipe);
 }

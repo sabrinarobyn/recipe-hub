@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
 import type { Profile } from "./profiles";
+import type { Review } from "./kitchen";
 import { authorsFromRecords, editsFromRecords, recordChanges, type RecipeAuthors, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
 import { catalogProductEdits, newProducts, productEditsWithAdded, type AddedProducts } from "./productRecords";
 import seedJson from "../data/seed.json";
@@ -154,6 +155,74 @@ export async function onProfiles(cb: (profile: Profile) => void): Promise<() => 
       if (row?.user_id) cb(profileFromRow(row));
     })
     .subscribe();
+  return () => void sb.removeChannel(channel);
+}
+
+/* ---------- Reviews: one per Member and Recipe, read by every Member ---------- */
+
+type ReviewRow = { id: string; recipe_id: string; user_id: string; stars: number; comment: string | null; created_at: string; updated_at: string };
+const REVIEW_COLUMNS = "id, recipe_id, user_id, stars, comment, created_at, updated_at";
+
+function reviewFromRow(r: ReviewRow): Review {
+  return { id: r.id, recipeId: r.recipe_id, userId: r.user_id, stars: r.stars, comment: r.comment, createdAt: r.created_at, updatedAt: r.updated_at };
+}
+
+/** What a Member writes in their Review. */
+export interface ReviewDraft {
+  recipeId: string;
+  stars: number;
+  comment: string | null;
+}
+
+/** A Review written or changed, or one deleted (by its id). */
+export type ReviewChange = { kind: "saved"; review: Review } | { kind: "deleted"; id: string };
+
+/** Every Review of every Recipe. */
+export async function loadReviews(sb: SupabaseClient): Promise<Review[]> {
+  const { data, error } = await sb.from("reviews").select(REVIEW_COLUMNS);
+  if (error) throw error;
+  return (data as ReviewRow[]).map(reviewFromRow);
+}
+
+/**
+ * Writes the signed-in Member's Review of a Recipe. A Member has one Review per Recipe, so this
+ * replaces theirs if they already have one (keeping its id and when it was first written).
+ */
+export async function saveReview(sb: SupabaseClient, userId: string, draft: ReviewDraft): Promise<Review> {
+  const { data, error } = await sb
+    .from("reviews")
+    .upsert(
+      { recipe_id: draft.recipeId, user_id: userId, stars: draft.stars, comment: draft.comment?.trim() || null },
+      { onConflict: "recipe_id,user_id" },
+    )
+    .select(REVIEW_COLUMNS)
+    .single();
+  if (error) throw error;
+  return reviewFromRow(data as ReviewRow);
+}
+
+/** Deletes a Review: the reviewer's own, or any Review for Editors and Admins (others are left as they are). */
+export async function deleteReview(sb: SupabaseClient, id: string): Promise<void> {
+  const { error } = await sb.from("reviews").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/** Live Review changes from every Member. `onSubscribed` runs once the channel is listening. */
+export function onReviews(sb: SupabaseClient, cb: (change: ReviewChange) => void, onSubscribed?: () => void): () => void {
+  const channel = sb
+    .channel(`reviews-${Math.random().toString(36).slice(2)}`)
+    .on("postgres_changes", { event: "*", schema: "public", table: "reviews" }, (payload) => {
+      if (payload.eventType === "DELETE") {
+        const id = (payload.old as { id?: string }).id;
+        if (id) cb({ kind: "deleted", id });
+      } else {
+        const row = payload.new as ReviewRow;
+        if (row?.id) cb({ kind: "saved", review: reviewFromRow(row) });
+      }
+    })
+    .subscribe((status) => {
+      if (status === "SUBSCRIBED") onSubscribed?.();
+    });
   return () => void sb.removeChannel(channel);
 }
 

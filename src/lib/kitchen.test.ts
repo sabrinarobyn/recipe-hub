@@ -248,5 +248,6 @@ describe("Recipe permissions", () => {
   it("someone taken off the invite list can't change even their own Recipes", () => {
     expect(canEditRecipe(takenOffList, byViewer)).toBe(false);
     expect(canSetMainPhoto(takenOffList, byViewer)).toBe(false);
+    expect(canEditRecipe(null, byViewer)).toBe(false);
   });
 });

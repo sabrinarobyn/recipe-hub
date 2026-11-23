@@ -8,6 +8,7 @@ import type { IngredientLine } from "../types";
 import { ConfirmButton, Icon, Modal } from "./ui";
 import { PhotoField, photoError } from "./Photo";
 import { MemberChip } from "./Profiles";
+import { ReviewsSection } from "./Reviews";
 
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
   const { catalog, data, actions, photos, canEditBook, canEditRecipe, canSetMainPhoto, authorOf, account } = useApp();
@@ -176,6 +177,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           </tfoot>
         </table>
       </div>
+      <ReviewsSection recipeId={id} notify={open.notify} />
       {usedBy.length > 0 && (
         <p className="hint">
           Used as an ingredient in{" "}
