@@ -3147,3 +3147,61 @@ select.input {
 .pantry-end .input-price {
   width: 96px;
 }
+
+/* ---- Profiles: avatars and Member chips ---- */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
+}
+.profile-btn {
+  width: 40px;
+  height: 40px;
+}
+.member-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.member-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.member-chip-small {
+  font-size: 0.92em;
+}
+.member-chip-large {
+  font-weight: 600;
+}
+.profile-form {
+  display: grid;
+  gap: 10px;
+}
+.profile-photo {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-sm);
+}
+.profile-photo.is-over {
+  border-color: var(--accent);
+}
+.profile-photo .btn-row {
+  justify-content: center;
+}
+.btn.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

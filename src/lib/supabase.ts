@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
+import type { Profile } from "./profiles";
 
 /**
  * Supabase hosting: invite-only accounts, one shared recipe book, private plans.
@@ -105,6 +106,48 @@ export async function removeMember(email: string): Promise<void> {
   const sb = await getClient();
   const { error } = await sb.from("members").delete().eq("email", email);
   if (error) throw error;
+}
+
+/* ---------- Profiles: every Member's name and photo, never their email ---------- */
+
+type ProfileRow = { user_id: string; display_name: string | null; photo: string | null; name_asked_at: string | null };
+const PROFILE_COLUMNS = "user_id, display_name, photo, name_asked_at";
+
+function profileFromRow(r: ProfileRow): Profile {
+  return { userId: r.user_id, displayName: r.display_name, photo: r.photo, nameAskedAt: r.name_asked_at };
+}
+
+export async function loadProfiles(): Promise<Record<string, Profile>> {
+  const sb = await getClient();
+  const { data, error } = await sb.from("profiles").select(PROFILE_COLUMNS);
+  if (error) throw error;
+  return Object.fromEntries((data as ProfileRow[]).map((r) => [r.user_id, profileFromRow(r)]));
+}
+
+/** Saves the signed-in Member's own Profile (the database refuses anyone else's). */
+export async function saveProfile(profile: Profile): Promise<void> {
+  const sb = await getClient();
+  const { error } = await sb.from("profiles").upsert({
+    user_id: profile.userId,
+    display_name: profile.displayName?.trim() || null,
+    photo: profile.photo,
+    name_asked_at: profile.nameAskedAt,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw error;
+}
+
+/** Live Profile changes from every device and Member. */
+export async function onProfiles(cb: (profile: Profile) => void): Promise<() => void> {
+  const sb = await getClient();
+  const channel = sb
+    .channel("profiles")
+    .on("postgres_changes", { event: "*", schema: "public", table: "profiles" }, (payload) => {
+      const row = payload.new as ProfileRow;
+      if (row?.user_id) cb(profileFromRow(row));
+    })
+    .subscribe();
+  return () => void sb.removeChannel(channel);
 }
 
 /* ---------- the app's data ---------- */
