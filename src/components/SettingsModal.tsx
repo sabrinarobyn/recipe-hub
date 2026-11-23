@@ -13,7 +13,15 @@ export function bookDot(book: SyncState["book"]): string {
   return "";
 }
 
-export function SettingsModal({ onClose, notify }: { onClose: () => void; notify: (m: string) => void }) {
+export function SettingsModal({
+  onClose,
+  notify,
+  onEditProfile,
+}: {
+  onClose: () => void;
+  notify: (m: string) => void;
+  onEditProfile?: () => void;
+}) {
   const { data, sync, actions, photos, canEditBook, account } = useApp();
   const photoCount = Object.keys(photos).length;
   const fileRef = useRef<HTMLInputElement>(null);
@@ -41,7 +49,7 @@ export function SettingsModal({ onClose, notify }: { onClose: () => void; notify
 
   return (
     <Modal title="Settings & backup" onClose={onClose}>
-      {account && <AccountSection account={account} />}
+      {account && <AccountSection account={account} onEditProfile={onEditProfile} />}
       {account?.role === "admin" && <PeopleSection account={account} notify={notify} />}
       <section className="settings-block">
         <h3 className="sub-head">Where your changes are saved</h3>

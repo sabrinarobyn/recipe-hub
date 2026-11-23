@@ -6,10 +6,10 @@ const MAX_EDGE = 720;
 const MAX_BYTES = 140_000;
 
 /** Shrink a photo from the camera or library to a small JPEG data URL. */
-export async function resizePhoto(file: Blob): Promise<string> {
+export async function resizePhoto(file: Blob, maxEdge = MAX_EDGE): Promise<string> {
   if (!file.type.startsWith("image/")) throw new Error("not-image");
   const bitmap = await createImageBitmap(file);
-  let edge = MAX_EDGE;
+  let edge = maxEdge;
   for (;;) {
     const scale = Math.min(1, edge / Math.max(bitmap.width, bitmap.height));
     const canvas = document.createElement("canvas");
