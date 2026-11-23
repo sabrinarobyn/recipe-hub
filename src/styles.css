@@ -3131,3 +3131,19 @@ select.input {
   gap: 18px;
   flex-wrap: wrap;
 }
+
+/* Pantry */
+.pantry-add {
+  margin: 0 0 22px;
+}
+.pantry-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+.pantry-end {
+  flex-direction: row;
+  align-items: center;
+}
+.pantry-end .input-price {
+  width: 96px;
+}

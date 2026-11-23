@@ -3,7 +3,7 @@ import type { UserData } from "../types";
 const LOCAL_KEY = "recipe-hub:v1";
 
 export function emptyUserData(): UserData {
-  return { v: 1, settings: { priceBasis: "today" }, productEdits: {}, recipeEdits: {}, categories: [], plan: [], lists: {} };
+  return { v: 1, settings: { priceBasis: "today" }, productEdits: {}, recipeEdits: {}, categories: [], plan: [], lists: {}, pantry: [] };
 }
 
 /** Fill in any fields missing from older or hand-edited data. */
@@ -19,6 +19,7 @@ export function normalize(raw: unknown): UserData | null {
     categories: d.categories ?? [],
     plan: Array.isArray(d.plan) ? d.plan : [],
     lists: d.lists ?? {},
+    pantry: Array.isArray(d.pantry) ? d.pantry : [],
   };
 }
 
@@ -55,14 +56,14 @@ export interface Book {
   recipeEdits: UserData["recipeEdits"];
   categories: string[];
 }
-/** Each person's own plan, lists and settings. */
-export type Personal = Pick<UserData, "v" | "settings" | "plan" | "lists">;
+/** Each person's own plan, lists, Pantry history and settings. */
+export type Personal = Pick<UserData, "v" | "settings" | "plan" | "lists" | "pantry">;
 
 export function pickBook(d: UserData): Book {
   return { productEdits: d.productEdits, recipeEdits: d.recipeEdits, categories: d.categories };
 }
 export function pickPersonal(d: UserData): Personal {
-  return { v: 1, settings: d.settings, plan: d.plan, lists: d.lists };
+  return { v: 1, settings: d.settings, plan: d.plan, lists: d.lists, pantry: d.pantry };
 }
 function bookFrom(raw: Record<string, unknown> | undefined): Partial<Book> {
   return {

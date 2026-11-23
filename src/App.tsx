@@ -7,6 +7,7 @@ import { RecipesView } from "./components/RecipesView";
 import { PlanView } from "./components/PlanView";
 import { ShoppingListView } from "./components/ShoppingListView";
 import { PricesView } from "./components/PricesView";
+import { PantryView } from "./components/PantryView";
 import { RecipeDetail } from "./components/RecipeDetail";
 import { RecipeEditor } from "./components/RecipeEditor";
 import { AddToPlan } from "./components/AddToPlan";
@@ -19,6 +20,7 @@ const TABS = [
   { id: "recipes", label: "Recipes", icon: "book" },
   { id: "plan", label: "Plan", icon: "calendar" },
   { id: "list", label: "Shopping list", icon: "cart" },
+  { id: "pantry", label: "Pantry", icon: "home" },
   { id: "prices", label: "Prices", icon: "tag" },
 ] as const;
 type Tab = (typeof TABS)[number]["id"];
@@ -125,6 +127,7 @@ export default function App() {
         {tab === "recipes" && <RecipesView open={open} />}
         {tab === "plan" && <PlanView open={open} week={week} setWeek={setWeek} />}
         {tab === "list" && <ShoppingListView open={open} week={week} setWeek={setWeek} />}
+        {tab === "pantry" && <PantryView open={open} />}
         {tab === "prices" && <PricesView open={open} />}
       </main>
 
