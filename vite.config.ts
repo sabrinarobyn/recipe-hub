@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from "vite";
+import { configDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { viteSingleFile } from "vite-plugin-singlefile";
 
@@ -49,6 +50,7 @@ export default defineConfig(({ mode }) => {
     base: "./",
     plugins: single ? [reactFromCdn(), react(), viteSingleFile()] : [react()],
     build: { outDir: single ? "dist-single" : "dist" },
-    test: { environment: "node" },
+    // The database tests in supabase/tests need a local Supabase stack: `npm run test:db`.
+    test: { environment: "node", exclude: [...configDefaults.exclude, "supabase/tests/**"] },
   };
 });
