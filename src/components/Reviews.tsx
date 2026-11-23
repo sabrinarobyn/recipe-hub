@@ -1,6 +1,30 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { canDeleteReview, canEditReview, recipeReviews, reviewSummaries, type Review, type ReviewActor, type ReviewSummary } from "../lib/kitchen";
-import { deleteReview, getClient, loadReviews, onReviews, saveReview, type Account, type ReviewDraft } from "../lib/supabase";
+import {
+  canDeleteReview,
+  canEditReview,
+  recipeReviews,
+  reviewGallery,
+  reviewSummaries,
+  type Review,
+  type ReviewActor,
+  type ReviewPhoto,
+  type ReviewSummary,
+} from "../lib/kitchen";
+import {
+  addReviewPhoto,
+  deleteReview,
+  deleteReviewPhoto,
+  getClient,
+  loadReviewPhotos,
+  loadReviews,
+  onReviewPhotos,
+  onReviews,
+  saveReview,
+  type Account,
+  type ReviewDraft,
+} from "../lib/supabase";
+import { useApp } from "../lib/store";
+import { usePhotoPicker } from "./Photo";
 import { MemberChip } from "./Profiles";
 import { ConfirmButton, Icon } from "./ui";
 
@@ -16,6 +40,11 @@ interface ReviewsValue {
   /** Writes (or replaces) the signed-in Member's Review of a Recipe. */
   save: (draft: ReviewDraft) => Promise<void>;
   remove: (id: string) => Promise<void>;
+  /** Every photo on every Review. */
+  photos: ReviewPhoto[];
+  /** Attaches a photo (a small JPEG data URL) to the signed-in Member's own Review. */
+  addPhoto: (reviewId: string, dataUrl: string) => Promise<void>;
+  removePhoto: (id: string) => Promise<void>;
 }
 
 const NONE: ReviewsValue = {
@@ -25,6 +54,9 @@ const NONE: ReviewsValue = {
   me: null,
   save: async () => {},
   remove: async () => {},
+  photos: [],
+  addPhoto: async () => {},
+  removePhoto: async () => {},
 };
 const ReviewsCtx = createContext<ReviewsValue>(NONE);
 
@@ -35,6 +67,7 @@ export function useReviews(): ReviewsValue {
 /** Loads every Review and keeps them live. Without an account it provides nothing. */
 export function ReviewsProvider({ account, children }: { account: Account | null; children: ReactNode }) {
   const [byId, setById] = useState<Record<string, Review>>({});
+  const [photosById, setPhotosById] = useState<Record<string, ReviewPhoto>>({});
 
   useEffect(() => {
     if (!account) return;
@@ -42,8 +75,23 @@ export function ReviewsProvider({ account, children }: { account: Account | null
     let unsub = () => {};
     /** Ids deleted while the first load was in flight, so it can't bring them back. */
     const gone = new Set<string>();
+    let unsubPhotos = () => {};
+    const gonePhotos = new Set<string>();
     getClient().then((sb) => {
       if (cancelled) return;
+      unsubPhotos = onReviewPhotos(sb, (change) => {
+        if (change.kind === "deleted") {
+          gonePhotos.add(change.id);
+          setPhotosById(({ [change.id]: _, ...rest }) => rest);
+        } else setPhotosById((all) => ({ ...all, [change.photo.id]: change.photo }));
+      });
+      loadReviewPhotos(sb)
+        .then((all) => {
+          if (cancelled) return;
+          const loaded = Object.fromEntries(all.filter((p) => !gonePhotos.has(p.id)).map((p) => [p.id, p]));
+          setPhotosById((live) => ({ ...loaded, ...live }));
+        })
+        .catch(() => {});
       unsub = onReviews(sb, (change) => {
         if (change.kind === "deleted") {
           gone.add(change.id);
@@ -61,6 +109,7 @@ export function ReviewsProvider({ account, children }: { account: Account | null
     return () => {
       cancelled = true;
       unsub();
+      unsubPhotos();
     };
   }, [account]);
 
@@ -77,11 +126,22 @@ export function ReviewsProvider({ account, children }: { account: Account | null
     setById(({ [id]: _, ...rest }) => rest);
   }, []);
 
+  const addPhoto = useCallback(async (reviewId: string, dataUrl: string) => {
+    const photo = await addReviewPhoto(await getClient(), reviewId, dataUrl);
+    setPhotosById((all) => ({ ...all, [photo.id]: photo }));
+  }, []);
+  const removePhoto = useCallback(async (id: string) => {
+    await deleteReviewPhoto(await getClient(), id);
+    setPhotosById(({ [id]: _, ...rest }) => rest);
+  }, []);
+
   const value = useMemo<ReviewsValue>(() => {
     if (!account) return NONE;
     const reviews = Object.values(byId);
-    return { enabled: true, reviews, summaries: reviewSummaries(reviews), me: account, save, remove };
-  }, [account, byId, save, remove]);
+    // A deleted Review's photos are deleted with it; reviewGallery leaves out any not yet gone here.
+    const photos = Object.values(photosById);
+    return { enabled: true, reviews, summaries: reviewSummaries(reviews), me: account, save, remove, photos, addPhoto, removePhoto };
+  }, [account, byId, photosById, save, remove, addPhoto, removePhoto]);
   return <ReviewsCtx.Provider value={value}>{children}</ReviewsCtx.Provider>;
 }
 
@@ -200,6 +260,7 @@ export function ReviewsSection({ recipeId, notify }: { recipeId: string; notify:
                 <span className="hint">{when(r.createdAt)}</span>
               </div>
               {r.comment && <p className="review-comment">{r.comment}</p>}
+              {canEditReview(me, r) && <ReviewPhotoAdder review={r} notify={notify} />}
               {(canEditReview(me, r) || canDeleteReview(me, r)) && (
                 <div className="btn-row review-actions">
                   {canEditReview(me, r) && !editing && (
@@ -218,7 +279,105 @@ export function ReviewsSection({ recipeId, notify }: { recipeId: string; notify:
           ))}
         </ul>
       )}
+
+      <ReviewGallery recipeId={recipeId} notify={notify} />
     </section>
+  );
+}
+
+const fromTransfer = (dt: DataTransfer | null) => [...(dt?.files ?? [])].find((f) => f.type.startsWith("image/"));
+
+/**
+ * The reviewer's "Add photo" control on their own Review: camera or photo library, or an image
+ * dropped or pasted onto it. Photos are shrunk in the browser like Recipe photos.
+ */
+function ReviewPhotoAdder({ review, notify }: { review: Review; notify: (m: string) => void }) {
+  const { addPhoto } = useReviews();
+  const [over, setOver] = useState(false);
+  const picker = usePhotoPicker(async (dataUrl) => {
+    await addPhoto(review.id, dataUrl);
+    notify("Added your photo");
+  }, notify);
+  return (
+    <div
+      className={`review-photo-drop${over ? " is-over" : ""}`}
+      onDragOver={(e) => {
+        e.preventDefault();
+        setOver(true);
+      }}
+      onDragLeave={() => setOver(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setOver(false);
+        picker.handle(fromTransfer(e.dataTransfer));
+      }}
+      onPaste={(e) => {
+        const f = fromTransfer(e.clipboardData);
+        if (f) picker.handle(f);
+      }}
+    >
+      <button className="btn btn-small btn-quiet" type="button" onClick={picker.open} disabled={picker.busy}>
+        <Icon name="camera" size={16} /> {picker.busy ? "Adding…" : "Add photo"}
+      </button>
+      <span className="hint">or drop or paste an image here</span>
+      {picker.input}
+    </div>
+  );
+}
+
+/**
+ * Every Review photo of a Recipe, newest first, each with its reviewer's chip. The reviewer,
+ * Editors and Admins can delete a photo; Editors and Admins can make one the Recipe's Main Photo.
+ */
+function ReviewGallery({ recipeId, notify }: { recipeId: string; notify: (m: string) => void }) {
+  const { reviews, photos, me, removePhoto } = useReviews();
+  const { actions, canEditBook } = useApp();
+  const gallery = useMemo(() => reviewGallery(reviews, photos, recipeId), [reviews, photos, recipeId]);
+  if (gallery.length === 0) return null;
+
+  const del = async (photo: ReviewPhoto) => {
+    try {
+      await removePhoto(photo.id);
+      notify("Deleted the photo");
+    } catch {
+      notify("Couldn't delete the photo. Try again.");
+    }
+  };
+  const promote = async (photo: ReviewPhoto) => {
+    try {
+      await actions.setPhoto(recipeId, photo.dataUrl);
+      notify("Made it the Main Photo");
+    } catch {
+      notify("Couldn't change the Main Photo. Try again.");
+    }
+  };
+
+  return (
+    <div className="review-gallery">
+      <h4>Photos from reviews</h4>
+      <ul className="review-gallery-grid">
+        {gallery.map(({ photo, review }) => (
+          <li key={photo.id} className="review-gallery-item">
+            <img src={photo.dataUrl} alt="From a review" loading="lazy" />
+            <MemberChip userId={review.userId} />
+            {(canEditBook || canDeleteReview(me, review)) && (
+              <div className="btn-row review-gallery-actions">
+                {canEditBook && (
+                  <button className="btn btn-small btn-quiet" type="button" onClick={() => promote(photo)}>
+                    Make Main Photo
+                  </button>
+                )}
+                {canDeleteReview(me, review) && (
+                  <ConfirmButton className="btn btn-small btn-danger-quiet" confirmLabel="Delete?" ariaLabel="Delete photo" onConfirm={() => del(photo)}>
+                    <Icon name="trash" size={16} />
+                  </ConfirmButton>
+                )}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

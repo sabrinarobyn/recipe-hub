@@ -2,7 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
 import type { Profile } from "./profiles";
-import type { Review } from "./kitchen";
+import type { Review, ReviewPhoto } from "./kitchen";
 import { editsFromRecords, recordChanges, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
 
 /**
@@ -212,6 +212,57 @@ export function onReviews(sb: SupabaseClient, cb: (change: ReviewChange) => void
       } else {
         const row = payload.new as ReviewRow;
         if (row?.id) cb({ kind: "saved", review: reviewFromRow(row) });
+      }
+    })
+    .subscribe((status) => {
+      if (status === "SUBSCRIBED") onSubscribed?.();
+    });
+  return () => void sb.removeChannel(channel);
+}
+
+/* ---------- Review photos: on a Member's own Review, read by every Member ---------- */
+
+type ReviewPhotoRow = { id: string; review_id: string; data_url: string; created_at: string };
+const REVIEW_PHOTO_COLUMNS = "id, review_id, data_url, created_at";
+
+function reviewPhotoFromRow(r: ReviewPhotoRow): ReviewPhoto {
+  return { id: r.id, reviewId: r.review_id, dataUrl: r.data_url, createdAt: r.created_at };
+}
+
+/** A Review photo added, or one deleted (by its id). */
+export type ReviewPhotoChange = { kind: "added"; photo: ReviewPhoto } | { kind: "deleted"; id: string };
+
+/** Every Review photo of every Recipe. */
+export async function loadReviewPhotos(sb: SupabaseClient): Promise<ReviewPhoto[]> {
+  const { data, error } = await sb.from("review_photos").select(REVIEW_PHOTO_COLUMNS);
+  if (error) throw error;
+  return (data as ReviewPhotoRow[]).map(reviewPhotoFromRow);
+}
+
+/** Attaches a photo (a small JPEG data URL) to the signed-in Member's own Review. */
+export async function addReviewPhoto(sb: SupabaseClient, reviewId: string, dataUrl: string): Promise<ReviewPhoto> {
+  const { data, error } = await sb.from("review_photos").insert({ review_id: reviewId, data_url: dataUrl }).select(REVIEW_PHOTO_COLUMNS).single();
+  if (error) throw error;
+  return reviewPhotoFromRow(data as ReviewPhotoRow);
+}
+
+/** Deletes a Review photo: from the reviewer's own Review, or any for Editors and Admins (others are left as they are). */
+export async function deleteReviewPhoto(sb: SupabaseClient, id: string): Promise<void> {
+  const { error } = await sb.from("review_photos").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/** Live Review photo changes from every Member. `onSubscribed` runs once the channel is listening. */
+export function onReviewPhotos(sb: SupabaseClient, cb: (change: ReviewPhotoChange) => void, onSubscribed?: () => void): () => void {
+  const channel = sb
+    .channel(`review-photos-${Math.random().toString(36).slice(2)}`)
+    .on("postgres_changes", { event: "*", schema: "public", table: "review_photos" }, (payload) => {
+      if (payload.eventType === "DELETE") {
+        const id = (payload.old as { id?: string }).id;
+        if (id) cb({ kind: "deleted", id });
+      } else {
+        const row = payload.new as ReviewPhotoRow;
+        if (row?.id) cb({ kind: "added", photo: reviewPhotoFromRow(row) });
       }
     })
     .subscribe((status) => {

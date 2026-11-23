@@ -285,3 +285,33 @@ export function byRating(summaries: ReadonlyMap<string, ReviewSummary>): (a: str
     return y.average - x.average || y.count - x.count;
   };
 }
+
+// ── Review photos ───────────────────────────────────────────────────────────
+
+/**
+ * A photo a Member attached to their own Review, as a small JPEG data URL. The reviewer adds and
+ * removes photos on their Review (canEditReview); Editors and Admins can also delete any of them
+ * (canDeleteReview). Deleting a Review deletes its photos.
+ */
+export interface ReviewPhoto {
+  id: string;
+  reviewId: string;
+  dataUrl: string;
+  /** ISO timestamp. */
+  createdAt: string;
+}
+
+/** A Recipe's Review photos for its gallery, newest first, each with the Review it belongs to. */
+export function reviewGallery(
+  reviews: readonly Review[],
+  photos: readonly ReviewPhoto[],
+  recipeId: string,
+): { photo: ReviewPhoto; review: Review }[] {
+  const byId = new Map(reviews.filter((r) => r.recipeId === recipeId).map((r) => [r.id, r]));
+  return photos
+    .flatMap((photo) => {
+      const review = byId.get(photo.reviewId);
+      return review ? [{ photo, review }] : [];
+    })
+    .sort((a, b) => b.photo.createdAt.localeCompare(a.photo.createdAt));
+}
