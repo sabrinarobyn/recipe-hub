@@ -3,6 +3,7 @@ import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
+import { buildPantry, type PantryEvent } from "./kitchen";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
 import { connectSupabase, type Account } from "./supabase";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
@@ -296,6 +297,13 @@ function useAppDataInternal(account: Account | null) {
       setPlan: (plan: PlanEntry[]) => update((d) => ({ ...d, plan })),
       updateList: (week: string, fn: (l: WeekList) => WeekList) =>
         update((d) => ({ ...d, lists: { ...d.lists, [week]: fn(d.lists[week] ?? emptyList()) } })),
+      /** Change the week's list and the Pantry history together (ticking Got does both). */
+      updateListAndPantry: (week: string, fn: (l: WeekList, history: PantryEvent[]) => [WeekList, PantryEvent[]]) =>
+        update((d) => {
+          const [list, pantry] = fn(d.lists[week] ?? emptyList(), d.pantry);
+          return { ...d, lists: { ...d.lists, [week]: list }, pantry };
+        }),
+      updatePantry: (fn: (history: PantryEvent[]) => PantryEvent[]) => update((d) => ({ ...d, pantry: fn(d.pantry) })),
       replaceAll,
       setPhoto,
       replacePhotos,
@@ -346,4 +354,10 @@ export const seedProductKeys = new Set(seed.products.map((p) => p.key));
 export function useNutrition() {
   const { catalog } = useApp();
   return useMemo(() => new Map(catalog.recipeList.map((r) => [r.id, recipeNutrition(r, catalog)])), [catalog]);
+}
+
+/** The Member's Pantry, worked out from their pantry history. */
+export function usePantry() {
+  const { data } = useApp();
+  return useMemo(() => buildPantry(data.pantry), [data.pantry]);
 }

@@ -1,3 +1,5 @@
+import type { PantryEvent } from "./lib/kitchen";
+
 export type PriceBasis = "today" | "regular";
 
 export type StoreId = "woolworths" | "checkers";
@@ -129,4 +131,6 @@ export interface UserData {
   plan: PlanEntry[];
   /** Keyed by the Monday of the week (ISO date). */
   lists: Record<string, WeekList>;
+  /** Pantry history, oldest first. The Pantry is worked out from it (see lib/kitchen). */
+  pantry: PantryEvent[];
 }
