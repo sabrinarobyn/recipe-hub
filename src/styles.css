@@ -3147,3 +3147,41 @@ select.input {
 .pantry-end .input-price {
   width: 96px;
 }
+
+/* Cooked toggle on the Plan */
+.entry-row {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+.entry-row > .entry {
+  flex: 1;
+  min-width: 0;
+}
+.cook-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  padding: 0;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: transparent;
+  cursor: pointer;
+}
+.cook-toggle:hover {
+  color: var(--muted);
+}
+.cook-toggle[aria-pressed="true"] {
+  border-color: var(--c-leaf);
+  background: var(--c-leaf);
+  color: #fff;
+}
+.entry-row.is-cooked .entry {
+  background: color-mix(in srgb, var(--c-leaf) 12%, var(--surface));
+}
+.entry-row.is-cooked .entry-name {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--c-leaf) 60%, transparent);
+}

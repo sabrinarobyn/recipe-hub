@@ -10,7 +10,8 @@
  * case in `applyEvent`, and add functions that put it in and take it out of a
  * history.
  */
-import type { ShoppingList } from "./costing";
+import type { PlanEntry } from "../types";
+import { expandRecipe, type Catalog, type ShoppingList } from "./costing";
 import { uid } from "./format";
 
 interface EventBase {
@@ -41,7 +42,18 @@ export interface CorrectionEvent extends EventBase {
   amount: number;
 }
 
-export type PantryEvent = GotEvent | AddedEvent | CorrectionEvent;
+/**
+ * One Product a Cooked Planned Meal used: takes the amount out. A Cooked meal
+ * puts one of these in the history per Product it uses, all with its `meal` id.
+ */
+export interface CookedEvent extends EventBase {
+  kind: "cooked";
+  amount: number;
+  /** The Planned Meal's id. */
+  meal: string;
+}
+
+export type PantryEvent = GotEvent | AddedEvent | CorrectionEvent | CookedEvent;
 
 export interface PantryItem {
   productKey: string;
@@ -66,6 +78,8 @@ function applyEvent(item: PantryItem, e: PantryEvent): PantryItem {
       return { ...item, amount: item.amount + e.amount };
     case "correction":
       return { ...item, amount: e.amount };
+    case "cooked":
+      return { ...item, amount: item.amount - e.amount };
   }
 }
 
@@ -126,4 +140,28 @@ export function correctPantry(history: readonly PantryEvent[], productKey: strin
 /** Clear a Pantry Item: a Correction to zero. */
 export function clearPantryItem(history: readonly PantryEvent[], productKey: string, at: string, id = uid()): PantryEvent[] {
   return correctPantry(history, productKey, 0, at, id);
+}
+
+export const cookedId = (mealId: string, productKey: string) => `cooked:${mealId}:${productKey}`;
+
+/**
+ * Mark a Planned Meal Cooked: takes out each Product its Recipe uses, scaled by
+ * its batches and expanded through sub-recipes the way the Shopping List is.
+ * Marking it again replaces the earlier Cooked.
+ */
+export function cookMeal(history: readonly PantryEvent[], meal: PlanEntry, catalog: Catalog, at: string): PantryEvent[] {
+  const used = new Map<string, number>();
+  for (const n of expandRecipe(meal.recipeId, meal.batches, catalog).needs) used.set(n.productKey, (used.get(n.productKey) ?? 0) + n.qty);
+  const cooked: CookedEvent[] = [...used].map(([productKey, amount]) => ({ kind: "cooked", id: cookedId(meal.id, productKey), at, productKey, amount, meal: meal.id }));
+  return [...uncookMeal(history, meal.id), ...cooked];
+}
+
+/** Un-mark a Planned Meal Cooked: puts back exactly what marking it took out. */
+export function uncookMeal(history: readonly PantryEvent[], mealId: string): PantryEvent[] {
+  return history.filter((e) => !(e.kind === "cooked" && e.meal === mealId));
+}
+
+/** Whether a Planned Meal is Cooked. */
+export function isCooked(history: readonly PantryEvent[], mealId: string): boolean {
+  return history.some((e) => e.kind === "cooked" && e.meal === mealId);
 }
