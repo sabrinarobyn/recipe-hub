@@ -106,11 +106,12 @@ export interface ExtraItem {
 }
 
 export interface WeekList {
-  /** Product keys already at home: left off the estimate. */
-  have: string[];
   /** Product keys / extra ids ticked off while shopping. */
   got: string[];
   extras: ExtraItem[];
+  /** Product keys to buy in full, ignoring the Pantry. Missing in lists saved before the Pantry. */
+  buyAnyway?: string[];
+  // Lists saved before the Pantry may still carry a `have` array ("already have"); it's ignored.
 }
 
 export interface Settings {

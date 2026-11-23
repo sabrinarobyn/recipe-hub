@@ -1,4 +1,5 @@
 import type { PriceBasis, Product, Recipe, StoreId } from "../types";
+import type { Pantry } from "./kitchen";
 
 export interface Catalog {
   products: Map<string, Product>;
@@ -122,7 +123,16 @@ export function usedCost(product: Product, qty: number, catalog: Catalog): numbe
 export interface ShoppingItem {
   product: Product;
   offer: Offer;
+  /** Everything the Plan needs, before the Pantry. */
   qty: number;
+  /** Of `qty`, what the Pantry covers (0 with no Pantry, or when bought anyway). */
+  fromPantry: number;
+  /** What's still to buy: `qty` less `fromPantry`. Packs and cost are for this. */
+  toBuy: number;
+  /** The Pantry covers all of it: nothing to buy. */
+  coveredByPantry: boolean;
+  /** The Member chose "buy anyway": bought in full, ignoring the Pantry. */
+  buyAnyway: boolean;
   packs: number;
   /** Full packs × price. null if the product has no price. */
   cost: number | null;
@@ -146,7 +156,15 @@ export interface ShoppingList {
   fallbacks: number;
 }
 
-export function buildShoppingList(entries: { recipeId: string; batches: number }[], catalog: Catalog): ShoppingList {
+/** What the Member already has, to take off the Shopping List. Leave it out to buy everything. */
+export interface Kitchen {
+  pantry?: Pantry;
+  /** Product keys to buy in full whatever the Pantry holds. */
+  buyAnyway?: Iterable<string>;
+}
+
+export function buildShoppingList(entries: { recipeId: string; batches: number }[], catalog: Catalog, kitchen: Kitchen = {}): ShoppingList {
+  const buyAnyway = new Set(kitchen.buyAnyway ?? []);
   const expansion: Expansion = { needs: [], basics: [], missing: [], problems: [] };
   for (const e of entries) expandRecipe(e.recipeId, e.batches, catalog, expansion);
 
@@ -166,15 +184,33 @@ export function buildShoppingList(entries: { recipeId: string; batches: number }
     const product = catalog.products.get(key)!;
     const offer = offerFor(product, catalog.store, catalog.basis);
     const qty = uses.reduce((s, u) => s + u.qty, 0);
+    const anyway = buyAnyway.has(key);
+    const inPantry = anyway ? 0 : (kitchen.pantry?.get(key)?.amount ?? 0);
+    const fromPantry = Math.min(qty, Math.max(0, inPantry));
+    const coveredByPantry = fromPantry > 0 && qty - fromPantry <= 1e-9;
+    const toBuy = coveredByPantry ? 0 : qty - fromPantry;
     const packSize = offer.packSize || 0;
-    const packs = packSize ? packsFor(qty, packSize) : 1;
-    const cost = offer.price == null ? null : packs * offer.price;
+    const packs = coveredByPantry ? 0 : packSize ? packsFor(toBuy, packSize) : 1;
+    const cost = coveredByPantry ? 0 : offer.price == null ? null : packs * offer.price;
     const used = usedCost(product, qty, catalog);
     if (cost == null) unpriced++;
     if (offer.fallback) fallbacks++;
     total += cost ?? 0;
     usedTotal += used ?? 0;
-    items.push({ product, offer, qty, packs, cost, usedCost: used, leftover: packSize ? packs * packSize - qty : 0, uses });
+    items.push({
+      product,
+      offer,
+      qty,
+      fromPantry,
+      toBuy,
+      coveredByPantry,
+      buyAnyway: anyway,
+      packs,
+      cost,
+      usedCost: used,
+      leftover: packSize && packs ? packs * packSize - toBuy : 0,
+      uses,
+    });
   }
   items.sort((a, b) => a.product.section.localeCompare(b.product.section) || a.product.name.localeCompare(b.product.name));
 
@@ -231,9 +267,9 @@ export interface StoreComparison {
 }
 
 /** Cost the same plan at both stores, and work out the cheapest split. */
-export function compareStores(entries: { recipeId: string; batches: number }[], catalog: Catalog): StoreComparison {
-  const woolworths = buildShoppingList(entries, { ...catalog, store: "woolworths" });
-  const checkers = buildShoppingList(entries, { ...catalog, store: "checkers" });
+export function compareStores(entries: { recipeId: string; batches: number }[], catalog: Catalog, kitchen: Kitchen = {}): StoreComparison {
+  const woolworths = buildShoppingList(entries, { ...catalog, store: "woolworths" }, kitchen);
+  const checkers = buildShoppingList(entries, { ...catalog, store: "checkers" }, kitchen);
   const byProduct = new Map<string, { woolworths: number | null; checkers: number | null }>();
   for (const i of woolworths.items) byProduct.set(i.product.key, { woolworths: i.cost, checkers: null });
   for (const i of checkers.items) {

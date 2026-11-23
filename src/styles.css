@@ -1658,7 +1658,7 @@ select.input {
   color: var(--accent);
   font-weight: 600;
 }
-.have-btn {
+.anyway-btn {
   padding: 2px 9px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -1669,23 +1669,23 @@ select.input {
   cursor: pointer;
   white-space: nowrap;
 }
-.have-btn:hover {
+.anyway-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
-.have-btn.active {
+.anyway-btn.active {
   background: var(--accent-soft);
   border-color: transparent;
   color: var(--accent);
 }
 .item.is-got .item-name,
-.item.is-have .item-name {
+.item.is-covered .item-name {
   text-decoration: line-through;
   text-decoration-color: var(--muted);
 }
 .item.is-got .item-main,
 .item.is-got .item-cost,
-.item.is-have .item-main {
+.item.is-covered .item-main {
   opacity: 0.55;
 }
 .extra-form {
