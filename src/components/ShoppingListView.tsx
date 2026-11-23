@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import type { Open } from "../App";
 import { compareStores, STORE_NAMES, type LooseItem, type ShoppingItem } from "../lib/costing";
-import { addDays, weekLabel } from "../lib/dates";
+import { addDays, today, weekLabel } from "../lib/dates";
+import { tickGot, untickGot, untickWeek } from "../lib/kitchen";
 import { packLabel, qty, rand, shortDate, uid } from "../lib/format";
 import { toCsv } from "../lib/csv";
 import { saveFile } from "../lib/storage";
@@ -68,6 +69,14 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
       ...l,
       [field]: l[field].includes(key) ? l[field].filter((k) => k !== key) : [...l[field], key],
     }));
+
+  /** Ticking Got puts a Product into the Pantry; un-ticking takes exactly that back out. Extras stay out. */
+  const toggleGot = (key: string) =>
+    actions.updateListAndPantry(week, (l, history) =>
+      l.got.includes(key)
+        ? [{ ...l, got: l.got.filter((k) => k !== key) }, untickGot(history, week, key)]
+        : [{ ...l, got: [...l.got, key] }, tickGot(history, week, list, key, today())],
+    );
 
   const addExtra = () => {
     const text = extraText.trim();
@@ -188,7 +197,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
             <span>{rand(estimate)}</span>
           </div>
           <p className="receipt-note">
-            The recipes use about {rand(list.usedTotal)} of this. The rest stays in your cupboard for next time.
+            The recipes use about {rand(list.usedTotal)} of this. Whatever you tick Got goes into your Pantry.
           </p>
           <div className="compare">
             <p className="compare-title">Same list at each store</p>
@@ -226,7 +235,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
           <p className="receipt-progress">
             {remaining === 0 ? "All ticked off" : `${remaining} left to pick up`}
             {got.size > 0 && (
-              <button className="text-link" onClick={() => actions.updateList(week, (l) => ({ ...l, got: [] }))}>
+              <button className="text-link" onClick={() => actions.updateListAndPantry(week, (l, history) => [{ ...l, got: [] }, untickWeek(history, week)])}>
                 Untick all
               </button>
             )}
@@ -250,7 +259,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
                   return (
                     <li key={k} className={`item${isHave ? " is-have" : ""}${isGot ? " is-got" : ""}`}>
                       <label className="check">
-                        <input id={`got-${k}`} type="checkbox" checked={isGot} disabled={isHave} onChange={() => toggle("got", k)} />
+                        <input id={`got-${k}`} type="checkbox" checked={isGot} disabled={isHave} onChange={() => toggleGot(k)} />
                         <span className="sr-only">In trolley</span>
                       </label>
                       <div className="item-main">
@@ -302,7 +311,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
               {wl.extras.map((x) => (
                 <li key={x.id} className={`item${got.has(x.id) ? " is-got" : ""}`}>
                   <label className="check">
-                    <input id={`got-${x.id}`} type="checkbox" checked={got.has(x.id)} onChange={() => toggle("got", x.id)} />
+                    <input id={`got-${x.id}`} type="checkbox" checked={got.has(x.id)} onChange={() => toggleGot(x.id)} />
                     <span className="sr-only">In trolley</span>
                   </label>
                   <div className="item-main">
