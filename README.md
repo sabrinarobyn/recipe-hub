@@ -97,6 +97,38 @@ npm run build      # static site in dist/
 npm run build:single  # one self-contained HTML page in dist-single/
 ```
 
+`npm test` needs no database.
+
+### Database tests
+
+The access rules in `supabase/migrations/` are tested against a local copy of the Supabase
+database. You need Docker running; then:
+
+```bash
+npm run test:db              # start local Supabase with the migrations, run supabase/tests, stop it
+npm run test:db -- photos    # extra arguments go to vitest, e.g. only test files matching "photos"
+```
+
+`scripts/test-db.sh` starts only the services the tests use (database, auth, API) and stops them
+afterwards. If a local stack is already running (`npx supabase start`), it is reset to the
+migrations instead, which wipes its data, and left running. The first run downloads the Supabase
+Docker images.
+
+The tests sign in as a fresh Admin, Editor, Viewer or uninvited person and check what each can read
+and change: the Recipe Book, photos, each Member's private data (Plan, Shopping Lists) and the
+invite list. To add a case, write a `*.test.ts` file in `supabase/tests/` and use the helpers in
+`supabase/tests/members.ts`:
+
+- `signInAs("viewer" | "editor" | "admin")`: a new Member with that role, signed in. Returns
+  `{ client, email, userId }`; `client` is a Supabase client acting as them.
+- `signInNotInvited()`: a signed-in person who has been removed from the invite list.
+- `anonymous()`: someone who hasn't signed in.
+- `service`: bypasses row-level security, for arranging data a test needs. Check results as a
+  signed-in Member, not through `service`.
+
+Test files run one at a time against the same database, so a file that relies on shared rows (like
+the two Recipe Book parts) sets them up in `beforeEach` or `beforeAll`.
+
 ### Publishing on Vercel with Supabase
 
 1. Create a Supabase project and run the files in `supabase/migrations/` in order (SQL editor), then
@@ -152,6 +184,7 @@ data/                 the source spreadsheet, nutrition, servings, Checkers equi
                       and the Canva source of each mockup photo (mockups.csv)
 src/assets/mockups/   AI mockup photo for each built-in recipe
 supabase/migrations/  database schema and access rules for the Supabase-hosted version
+supabase/tests/       database tests of those rules (npm run test:db)
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits
