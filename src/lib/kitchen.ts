@@ -10,7 +10,7 @@
  * case in `applyEvent`, and add functions that put it in and take it out of a
  * history.
  */
-import type { ShoppingList } from "./costing";
+import { expandRecipe, usedCost, type Catalog, type ShoppingList } from "./costing";
 import { uid } from "./format";
 
 interface EventBase {
@@ -126,4 +126,49 @@ export function correctPantry(history: readonly PantryEvent[], productKey: strin
 /** Clear a Pantry Item: a Correction to zero. */
 export function clearPantryItem(history: readonly PantryEvent[], productKey: string, at: string, id = uid()): PantryEvent[] {
   return correctPantry(history, productKey, 0, at, id);
+}
+
+// ── Suggestions ─────────────────────────────────────────────────────────────
+
+/** A Recipe suggested from what's in the Pantry. */
+export interface Suggestion {
+  recipeId: string;
+  /** Share of the Recipe's Product need the Pantry covers, 0–1, weighted by cost. */
+  coverage: number;
+  /** Pantry Items it would use, with the amount of each (up to what's left), by Product key. */
+  uses: { productKey: string; amount: number }[];
+}
+
+/**
+ * Recipes that use what's in the Pantry, best match first. A Recipe's match is
+ * the share of its Product need (one batch, by cost) the Pantry covers.
+ * Basics aren't Products, so they don't count. Recipes that use nothing in
+ * the Pantry aren't suggested.
+ */
+export function suggestRecipes(pantry: Pantry, catalog: Catalog): Suggestion[] {
+  if (pantry.size === 0) return [];
+  const out: Suggestion[] = [];
+  for (const recipe of catalog.recipes.values()) {
+    const need = new Map<string, number>();
+    for (const n of expandRecipe(recipe.id, 1, catalog).needs) need.set(n.productKey, (need.get(n.productKey) ?? 0) + n.qty);
+    if (need.size === 0) continue;
+    let total = 0;
+    let covered = 0;
+    let shares = 0;
+    const uses: Suggestion["uses"] = [];
+    for (const [key, qty] of need) {
+      const have = Math.min(qty, pantryAmount(pantry, key));
+      if (have > 0) uses.push({ productKey: key, amount: have });
+      const product = catalog.products.get(key)!;
+      total += usedCost(product, qty, catalog) ?? 0;
+      covered += usedCost(product, have, catalog) ?? 0;
+      shares += have / qty;
+    }
+    if (uses.length === 0) continue;
+    // Unpriced Products can't be weighted by cost; fall back to an even share each.
+    const coverage = total > 0 ? covered / total : shares / need.size;
+    uses.sort((a, b) => a.productKey.localeCompare(b.productKey));
+    out.push({ recipeId: recipe.id, coverage, uses });
+  }
+  return out.sort((a, b) => b.coverage - a.coverage);
 }

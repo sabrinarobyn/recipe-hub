@@ -11,6 +11,7 @@ import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
 import { Thumb } from "./Photo";
 import { Sticker } from "./Brand";
+import { PantrySuggestions } from "./PantrySuggestions";
 
 export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: string) => void }) {
   const current = weekStart(today());
@@ -175,6 +176,8 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
           );
         })}
       </ol>
+
+      <PantrySuggestions open={open} week={week} />
 
       {picking && (
         <RecipePicker
