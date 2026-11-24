@@ -3,7 +3,7 @@ import type { UserData } from "../types";
 const LOCAL_KEY = "recipe-hub:v1";
 
 export function emptyUserData(): UserData {
-  return { v: 1, settings: { priceBasis: "today" }, productEdits: {}, recipeEdits: {}, categories: [], plan: [], lists: {} };
+  return { v: 1, settings: { priceBasis: "today" }, productEdits: {}, recipeEdits: {}, categories: [], plan: [], lists: {}, pantry: [] };
 }
 
 /** Fill in any fields missing from older or hand-edited data. */
@@ -19,6 +19,7 @@ export function normalize(raw: unknown): UserData | null {
     categories: d.categories ?? [],
     plan: Array.isArray(d.plan) ? d.plan : [],
     lists: d.lists ?? {},
+    pantry: Array.isArray(d.pantry) ? d.pantry : [],
   };
 }
 
@@ -54,15 +55,17 @@ export interface Book {
   productEdits: UserData["productEdits"];
   recipeEdits: UserData["recipeEdits"];
   categories: string[];
+  /** Recipe id → its Author's user id (Supabase only; the originals have none). */
+  recipeAuthors?: Record<string, string>;
 }
-/** Each person's own plan, lists and settings. */
-export type Personal = Pick<UserData, "v" | "settings" | "plan" | "lists">;
+/** Each person's own plan, lists, Pantry history and settings. */
+export type Personal = Pick<UserData, "v" | "settings" | "plan" | "lists" | "pantry">;
 
 export function pickBook(d: UserData): Book {
   return { productEdits: d.productEdits, recipeEdits: d.recipeEdits, categories: d.categories };
 }
 export function pickPersonal(d: UserData): Personal {
-  return { v: 1, settings: d.settings, plan: d.plan, lists: d.lists };
+  return { v: 1, settings: d.settings, plan: d.plan, lists: d.lists, pantry: d.pantry };
 }
 function bookFrom(raw: Record<string, unknown> | undefined): Partial<Book> {
   return {
@@ -127,6 +130,8 @@ interface ClaudeRuntime {
 export interface RemoteStore {
   /** Owner and Editors change the shared book; everyone else reads it. */
   canEditBook: boolean;
+  /** Any Member may add Recipes (and Products for them) and change the Recipes they authored. */
+  canAddRecipes?: boolean;
   isOwner: boolean;
   loadBook(): Promise<Book | null>;
   saveBook(b: Book): Promise<void>;

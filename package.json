@@ -9,6 +9,7 @@
     "build:single": "tsc -b && vite build --mode single && node scripts/make-artifact.mjs",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:db": "bash scripts/test-db.sh",
     "typecheck": "tsc -b",
     "import-xlsx": "python3 scripts/import_xlsx.py"
   },
@@ -18,9 +19,11 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
+    "supabase": "^3.2.0",
     "typescript": "~5.8",
     "vite": "^6.4.4",
     "vite-plugin-singlefile": "^2.3.3",

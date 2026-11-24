@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { listMembers, removeMember, saveMember, signOut, type Account, type Member, type Role } from "../lib/supabase";
 import { ConfirmButton } from "./ui";
+import { MemberChip } from "./Profiles";
 
 const ROLE_HELP: Record<Role, string> = {
   admin: "Admin: changes recipes and prices, and manages who's invited",
@@ -8,14 +9,22 @@ const ROLE_HELP: Record<Role, string> = {
   viewer: "Viewer: sees the recipe book, plans their own meals",
 };
 
-export function AccountSection({ account }: { account: Account }) {
+export function AccountSection({ account, onEditProfile }: { account: Account; onEditProfile?: () => void }) {
   return (
     <section className="settings-block">
       <h3 className="sub-head">Your account</h3>
       <p>
+        <MemberChip userId={account.userId} size="large" />
+      </p>
+      <p>
         Signed in as <strong>{account.email}</strong> ({account.role}).
       </p>
       <div className="btn-row">
+        {onEditProfile && (
+          <button className="btn" onClick={onEditProfile}>
+            Edit profile
+          </button>
+        )}
         <button className="btn" onClick={() => signOut()}>
           Sign out
         </button>

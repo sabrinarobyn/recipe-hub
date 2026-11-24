@@ -3,6 +3,7 @@ import type { Open } from "../App";
 import { buildShoppingList, STORE_NAMES } from "../lib/costing";
 import { addDays, dayMonth, dayName, today, weekDays, weekLabel, weekStart } from "../lib/dates";
 import { rand, uid } from "../lib/format";
+import { cookMeal, isCooked, uncookMeal, weekNetting } from "../lib/kitchen";
 import { useApp, useNutrition, useSummaries } from "../lib/store";
 import { addMacros, ZERO } from "../lib/nutrition";
 import { kcal, MacroLine } from "./Nutrition";
@@ -11,6 +12,7 @@ import { defaultSlot, SLOTS } from "./AddToPlan";
 import { BatchStepper, ConfirmButton, Icon, Modal } from "./ui";
 import { Thumb } from "./Photo";
 import { Sticker } from "./Brand";
+import { PantrySuggestions } from "./PantrySuggestions";
 
 export function WeekSwitch({ week, setWeek }: { week: string; setWeek: (w: string) => void }) {
   const current = weekStart(today());
@@ -54,7 +56,9 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     () => data.plan.filter((e) => e.date >= week && e.date <= end && catalog.recipes.has(e.recipeId)),
     [data.plan, week, end, catalog],
   );
-  const list = useMemo(() => buildShoppingList(entries, catalog), [entries, catalog]);
+  // Costs only what's still to buy, netted against the Pantry the same way as the Shopping List.
+  const netting = useMemo(() => weekNetting(data.pantry, week, data.lists[week]), [data.pantry, week, data.lists]);
+  const list = useMemo(() => buildShoppingList(entries, catalog, netting), [entries, catalog, netting]);
   const weekTotal = entries.reduce((acc, e) => addMacros(acc, serving(e.recipeId)), ZERO);
   const plannedDays = new Set(entries.map((e) => e.date)).size;
   const lastWeek = useMemo(() => {
@@ -66,8 +70,18 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     actions.setPlan([...data.plan, ...lastWeek.map((e) => ({ ...e, id: uid(), date: addDays(e.date, 7) }))]);
     open.notify(`Copied ${lastWeek.length} meals from last week`);
   };
+  const toggleCooked = (e: PlanEntry) => {
+    const name = catalog.recipes.get(e.recipeId)?.name ?? "Meal";
+    if (isCooked(data.pantry, e.id)) {
+      actions.updatePantry((h) => uncookMeal(h, e.id));
+      open.notify(`${name} un-marked: its Products are back in the Pantry`);
+    } else {
+      actions.updatePantry((h) => cookMeal(h, e, catalog, today()));
+      open.notify(`${name} Cooked: taken out of the Pantry`);
+    }
+  };
   const clearWeek = () => {
-    actions.setPlan(data.plan.filter((e) => e.date < week || e.date > end));
+    actions.removePlanEntries(data.plan.filter((e) => e.date >= week && e.date <= end).map((e) => e.id));
     open.notify("Cleared this week");
   };
 
@@ -146,17 +160,32 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
                     <span className="slot-label">{slot.label}</span>
                     {items.map((e) => {
                       const r = catalog.recipes.get(e.recipeId)!;
+                      const cooked = isCooked(data.pantry, e.id);
                       return (
-                        <button key={e.id} className="entry" onClick={() => setEditing(e)}>
-                          <span className="entry-text">
-                            <span className="entry-name">{r.name}</span>
-                            <span className="entry-kcal num">{kcal(serving(r.id).kcal)} / serving</span>
-                          </span>
-                          <span className="entry-meta num">
-                            {e.batches !== 1 && <span className="entry-batches">×{e.batches}</span>}
-                            {rand((summaries.get(r.id)?.perMake ?? 0) * e.batches)}
-                          </span>
-                        </button>
+                        <div key={e.id} className={`entry-row${cooked ? " is-cooked" : ""}`}>
+                          <button
+                            className="cook-toggle"
+                            aria-pressed={cooked}
+                            aria-label={`${cooked ? "Un-mark" : "Mark"} ${r.name} Cooked`}
+                            title={cooked ? "Cooked: tap to un-mark" : "Mark Cooked"}
+                            onClick={() => toggleCooked(e)}
+                          >
+                            <Icon name="check" size={14} />
+                          </button>
+                          <button className="entry" onClick={() => setEditing(e)}>
+                            <span className="entry-text">
+                              <span className="entry-name">{r.name}</span>
+                              <span className="entry-kcal num">
+                                {cooked ? "Cooked · " : ""}
+                                {kcal(serving(r.id).kcal)} / serving
+                              </span>
+                            </span>
+                            <span className="entry-meta num">
+                              {e.batches !== 1 && <span className="entry-batches">×{e.batches}</span>}
+                              {rand((summaries.get(r.id)?.perMake ?? 0) * e.batches)}
+                            </span>
+                          </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -175,6 +204,8 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
           );
         })}
       </ol>
+
+      <PantrySuggestions open={open} week={week} />
 
       {picking && (
         <RecipePicker
@@ -262,7 +293,7 @@ function EntryEditor({ entry, onClose, onView }: { entry: PlanEntry; onClose: ()
             <button
               className="btn btn-danger-quiet"
               onClick={() => {
-                actions.removePlanEntry(live.id);
+                actions.removePlanEntries([live.id]);
                 onClose();
               }}
             >
@@ -301,7 +332,14 @@ function EntryEditor({ entry, onClose, onView }: { entry: PlanEntry; onClose: ()
       </div>
       <div className="field field-row">
         <span className="field-label">Batches</span>
-        <BatchStepper value={live.batches} onChange={(batches) => patch({ batches })} />
+        <BatchStepper
+          value={live.batches}
+          onChange={(batches) => {
+            patch({ batches });
+            // A Cooked meal used what its new scale uses.
+            if (isCooked(data.pantry, live.id)) actions.updatePantry((h) => cookMeal(h, { ...live, batches }, catalog, today()));
+          }}
+        />
       </div>
     </Modal>
   );

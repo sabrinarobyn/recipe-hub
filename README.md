@@ -16,8 +16,9 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   ×½, ×2 and so on, move meals between days, copy last week, and see the week's estimate.
 - **Shopping list**: every planned meal merged into one list, grouped by shop section. Packs are
   rounded up across the whole week, so two recipes that each use half a bag of spinach share one
-  bag. Mark items you **already have** to take them off the estimate, tick items off as you shop,
-  add extras, then copy the list (to paste into WhatsApp or Notes) or download a CSV.
+  bag. What your **Pantry** already covers comes off the list and the estimate (see below). Tick
+  items **Got** as you shop, add extras, then copy the list (to paste into WhatsApp or Notes) or
+  download a CSV.
 - **Prices**: edit any shelf or regular price inline and every recipe, plan and list updates
   straight away. Switch between shelf prices (with promotions) and regular prices. Add or edit
   products, or do a bulk update: **Export CSV**, change the prices in Excel, then **Import CSV**.
@@ -45,6 +46,33 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces it, and removing that
   photo brings the mockup back. New recipes without a photo show an illustration tile.
 
+### Pantry
+
+Each Member has a private **Pantry**: the Products they have at home and how much of each is left.
+
+- **Got**: ticking an item Got on the Shopping List puts its packs into the Pantry; un-ticking takes
+  them out again. You can also add a Product by hand on the **Pantry** screen.
+- **Cooked**: marking a Planned Meal Cooked takes the amounts its Recipe uses out of the Pantry
+  (scaled, and through sub-recipes). Un-marking it, or removing the meal from the Plan, puts them
+  back. Meals that aren't Cooked don't use anything up.
+- **Corrections**: set a Pantry Item to what's really there (food thrown out, used outside the Plan or
+  miscounted), or clear it.
+- **Shopping List netting**: the Shopping List, and the Plan's week estimate, cost only what's still
+  to buy: what the Pantry covers comes off, and a part-covered item buys the rest in whole packs.
+  Press **Buy anyway** on an item to buy its full amount whatever the Pantry holds.
+- The Plan suggests Recipes that use what's in your Pantry, best match first.
+
+### Reviews, Recipe Authors and Profiles
+
+- **Reviews**: each Member can give a Recipe 1 to 5 stars, with an optional comment and photos; one
+  Review per Member per Recipe. Recipes show their average stars and can be sorted **Best reviewed
+  first**. Every Member sees all Reviews; you change your own, and Editors and Admins can delete
+  any. A Review stays after its Member leaves the invite list.
+- **Recipe Authors**: any Member can add a Recipe and becomes its Author. Authors edit their own
+  Recipes and choose their Main Photo (also from Review photos); Editors and Admins can edit any.
+- **Profiles**: each Member sets a display name and photo, shown on their Reviews and on the Recipes
+  they authored. Other Members never see their email.
+
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
 reset.
@@ -57,7 +85,8 @@ reset.
   recipes, prices and photos) or *admin* (also manages who's invited). The recipe book and photos are
   one shared copy that updates live; each person's plan, shopping lists and store choice are private
   to their account. The database refuses sign-ups from emails that aren't on the list, and row-level
-  security enforces the roles. Schema: `supabase/migrations/`.
+  security enforces the roles. Each Recipe is its own record (`docs/adr/0001-one-record-per-recipe.md`).
+  Schema: `supabase/migrations/`.
 
 - Run locally or on GitHub Pages, data is saved in the browser (`localStorage`, with photos in
   IndexedDB). Use **Settings → Download backup / Restore from backup** to move it to another device.
@@ -96,6 +125,39 @@ npm test           # costing tests, including a check against every recipe total
 npm run build      # static site in dist/
 npm run build:single  # one self-contained HTML page in dist-single/
 ```
+
+`npm test` needs no database.
+
+### Database tests
+
+The access rules in `supabase/migrations/` are tested against a local copy of the Supabase
+database. You need Docker running; then:
+
+```bash
+npm run test:db              # start local Supabase with the migrations, run supabase/tests, stop it
+npm run test:db -- photos    # extra arguments go to vitest, e.g. only test files matching "photos"
+```
+
+`scripts/test-db.sh` starts only the services the tests use (database, auth, API) and stops them
+afterwards. If a local stack is already running (`npx supabase start`), it is reset to the
+migrations instead, which wipes its data, and left running. The first run downloads the Supabase
+Docker images.
+
+The tests sign in as a fresh Admin, Editor, Viewer or uninvited person and check what each can read
+and change: the Recipe Book, photos, each Member's private data (Plan, Shopping Lists) and the
+invite list. To add a case, write a `*.test.ts` file in `supabase/tests/` and use the helpers in
+`supabase/tests/members.ts`:
+
+- `signInAs("viewer" | "editor" | "admin")`: a new Member with that role, signed in. Returns
+  `{ client, email, userId }`; `client` is a Supabase client acting as them.
+- `signInNotInvited()`: a signed-in person who has been removed from the invite list.
+- `anonymous()`: someone who hasn't signed in.
+- `service`: bypasses row-level security, for arranging data a test needs. Check results as a
+  signed-in Member, not through `service`.
+
+Test files run one at a time against the same database, so a file that relies on shared rows (like
+the Recipe records) sets them up in `beforeEach` or `beforeAll`. `recipe-records-migration.test.ts`
+resets the database to an earlier migration to check the move to records, then migrates it again.
 
 ### Publishing on Vercel with Supabase
 
@@ -152,6 +214,7 @@ data/                 the source spreadsheet, nutrition, servings, Checkers equi
                       and the Canva source of each mockup photo (mockups.csv)
 src/assets/mockups/   AI mockup photo for each built-in recipe
 supabase/migrations/  database schema and access rules for the Supabase-hosted version
+supabase/tests/       database tests of those rules (npm run test:db)
 scripts/import_xlsx.py   spreadsheet → src/data/seed.json
 src/lib/costing.ts    costing and shopping-list maths (unit tested)
 src/lib/store.tsx     app state: seed data + your edits

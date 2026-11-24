@@ -7,10 +7,12 @@ import { RecipesView } from "./components/RecipesView";
 import { PlanView } from "./components/PlanView";
 import { ShoppingListView } from "./components/ShoppingListView";
 import { PricesView } from "./components/PricesView";
+import { PantryView } from "./components/PantryView";
 import { RecipeDetail } from "./components/RecipeDetail";
 import { RecipeEditor } from "./components/RecipeEditor";
 import { AddToPlan } from "./components/AddToPlan";
 import { SettingsModal } from "./components/SettingsModal";
+import { Avatar, NamePrompt, ProfileModal, useProfiles } from "./components/Profiles";
 import { addDays, today, weekStart } from "./lib/dates";
 import { useApp } from "./lib/store";
 import type { Recipe } from "./types";
@@ -19,6 +21,7 @@ const TABS = [
   { id: "recipes", label: "Recipes", icon: "book" },
   { id: "plan", label: "Plan", icon: "calendar" },
   { id: "list", label: "Shopping list", icon: "cart" },
+  { id: "pantry", label: "Pantry", icon: "home" },
   { id: "prices", label: "Prices", icon: "tag" },
 ] as const;
 type Tab = (typeof TABS)[number]["id"];
@@ -44,6 +47,8 @@ export default function App() {
   const [editing, setEditing] = useState<Recipe | "new" | null>(null);
   const [planning, setPlanning] = useState<{ recipeId: string; date?: string } | null>(null);
   const [settings, setSettings] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profiles = useProfiles();
   const [toast, notify] = useToast();
 
   useEffect(() => setNotifier(notify), [setNotifier, notify]);
@@ -103,6 +108,11 @@ export default function App() {
             ))}
           </nav>
           <StorePicker compact />
+          {profiles.enabled && (
+            <button className="icon-btn profile-btn" onClick={() => setProfileOpen(true)} aria-label="Your profile">
+              <Avatar profile={profiles.me} size={30} />
+            </button>
+          )}
           <button className="icon-btn settings-btn" onClick={() => setSettings(true)} aria-label="Settings and backup">
             <Icon name="settings" />
             <span className={`sync-dot ${bookDot(sync.book)}`} aria-hidden="true" />
@@ -125,6 +135,7 @@ export default function App() {
         {tab === "recipes" && <RecipesView open={open} />}
         {tab === "plan" && <PlanView open={open} week={week} setWeek={setWeek} />}
         {tab === "list" && <ShoppingListView open={open} week={week} setWeek={setWeek} />}
+        {tab === "pantry" && <PantryView open={open} />}
         {tab === "prices" && <PricesView open={open} />}
       </main>
 
@@ -153,7 +164,18 @@ export default function App() {
           }}
         />
       )}
-      {settings && <SettingsModal onClose={() => setSettings(false)} notify={notify} />}
+      {settings && (
+        <SettingsModal
+          onClose={() => setSettings(false)}
+          notify={notify}
+          onEditProfile={() => {
+            setSettings(false);
+            setProfileOpen(true);
+          }}
+        />
+      )}
+      {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} notify={notify} />}
+      <NamePrompt notify={notify} />
       {toast}
     </div>
   );

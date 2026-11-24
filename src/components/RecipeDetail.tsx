@@ -7,9 +7,13 @@ import { NutritionPanel } from "./Nutrition";
 import type { IngredientLine } from "../types";
 import { ConfirmButton, Icon, Modal } from "./ui";
 import { PhotoField, photoError } from "./Photo";
+import { MemberChip } from "./Profiles";
+import { ReviewsSection } from "./Reviews";
 
 export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; onClose: () => void }) {
-  const { catalog, data, actions, photos, canEditBook } = useApp();
+  const { catalog, data, actions, photos, canEditBook, canEditRecipe, canSetMainPhoto, authorOf, account } = useApp();
+  const canEdit = canEditRecipe(id);
+  const author = authorOf(id);
   const summaries = useSummaries();
   const nutrition = useNutrition();
   const recipe = catalog.recipes.get(id);
@@ -41,9 +45,9 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
       onClose={onClose}
       footer={
         <>
-          {canEditBook && (
+          {canEdit && (
           <div className="foot-left">
-            {state === "edited" && (
+            {state === "edited" && canEditBook && (
               <ConfirmButton onConfirm={() => (actions.resetRecipe(id), open.notify("Restored the original recipe"))}>
                 Undo my changes
               </ConfirmButton>
@@ -59,7 +63,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
             </ConfirmButton>
           </div>
           )}
-          {canEditBook && (
+          {canEdit && (
             <>
               <button className="btn" onClick={duplicate}>
                 <Icon name="duplicate" /> Duplicate
@@ -77,7 +81,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
     >
       <PhotoField
         recipe={recipe}
-        readOnly={!canEditBook}
+        readOnly={!canSetMainPhoto(id)}
         url={photos[id]}
         notify={open.notify}
         onChange={async (url) => {
@@ -92,7 +96,19 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
       <div className="detail-meta">
         <span className="eyebrow">{recipe.category}</span>
         {recipe.yield && <span className="pill">{recipe.yield}</span>}
-        {state && <span className={`badge badge-${state}`}>{state === "new" ? "Your recipe" : "Edited by you"}</span>}
+        {account ? (
+          <span className="recipe-author">
+            {author ? (
+              <>
+                <span className="hint">Added by</span> <MemberChip userId={author} />
+              </>
+            ) : (
+              <span className="hint">From the original collection</span>
+            )}
+          </span>
+        ) : (
+          state && <span className={`badge badge-${state}`}>{state === "new" ? "Your recipe" : "Edited by you"}</span>
+        )}
         {recipe.link && (
           <a className="ext-link" href={recipe.link} target="_blank" rel="noreferrer">
             <Icon name="link" size={15} /> Original post
@@ -161,6 +177,7 @@ export function RecipeDetail({ id, open, onClose }: { id: string; open: Open; on
           </tfoot>
         </table>
       </div>
+      <ReviewsSection recipeId={id} notify={open.notify} />
       {usedBy.length > 0 && (
         <p className="hint">
           Used as an ingredient in{" "}

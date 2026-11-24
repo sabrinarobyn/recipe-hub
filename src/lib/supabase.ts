@@ -1,6 +1,15 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Book, Personal, RemoteStore } from "./storage";
 import { normalize, pickPersonal, stableStringify } from "./storage";
+import type { Profile } from "./profiles";
+import type { Review, ReviewPhoto } from "./kitchen";
+import { authorsFromRecords, editsFromRecords, recordChanges, type RecipeAuthors, type RecipeEdits, type RecipeRecord } from "./recipeRecords";
+import { catalogProductEdits, newProducts, productEditsWithAdded, type AddedProducts } from "./productRecords";
+import seedJson from "../data/seed.json";
+import type { Product, Seed } from "../types";
+
+const originalRecipes = new Set((seedJson as Seed).recipes.map((r) => r.id));
+const originalProducts = new Set((seedJson as Seed).products.map((p) => p.key));
 
 /**
  * Supabase hosting: invite-only accounts, one shared recipe book, private plans.
@@ -107,26 +116,244 @@ export async function removeMember(email: string): Promise<void> {
   if (error) throw error;
 }
 
+/* ---------- Profiles: every Member's name and photo, never their email ---------- */
+
+type ProfileRow = { user_id: string; display_name: string | null; photo: string | null; name_asked_at: string | null };
+const PROFILE_COLUMNS = "user_id, display_name, photo, name_asked_at";
+
+function profileFromRow(r: ProfileRow): Profile {
+  return { userId: r.user_id, displayName: r.display_name, photo: r.photo, nameAskedAt: r.name_asked_at };
+}
+
+export async function loadProfiles(): Promise<Record<string, Profile>> {
+  const sb = await getClient();
+  const { data, error } = await sb.from("profiles").select(PROFILE_COLUMNS);
+  if (error) throw error;
+  return Object.fromEntries((data as ProfileRow[]).map((r) => [r.user_id, profileFromRow(r)]));
+}
+
+/** Saves the signed-in Member's own Profile (the database refuses anyone else's). */
+export async function saveProfile(profile: Profile): Promise<void> {
+  const sb = await getClient();
+  const { error } = await sb.from("profiles").upsert({
+    user_id: profile.userId,
+    display_name: profile.displayName?.trim() || null,
+    photo: profile.photo,
+    name_asked_at: profile.nameAskedAt,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw error;
+}
+
+/** Live Profile changes from every device and Member. */
+export async function onProfiles(cb: (profile: Profile) => void): Promise<() => void> {
+  const sb = await getClient();
+  const channel = sb
+    .channel("profiles")
+    .on("postgres_changes", { event: "*", schema: "public", table: "profiles" }, (payload) => {
+      const row = payload.new as ProfileRow;
+      if (row?.user_id) cb(profileFromRow(row));
+    })
+    .subscribe();
+  return () => void sb.removeChannel(channel);
+}
+
+/* ---------- Reviews: one per Member and Recipe, read by every Member ---------- */
+
+type ReviewRow = { id: string; recipe_id: string; user_id: string; stars: number; comment: string | null; created_at: string; updated_at: string };
+const REVIEW_COLUMNS = "id, recipe_id, user_id, stars, comment, created_at, updated_at";
+
+function reviewFromRow(r: ReviewRow): Review {
+  return { id: r.id, recipeId: r.recipe_id, userId: r.user_id, stars: r.stars, comment: r.comment, createdAt: r.created_at, updatedAt: r.updated_at };
+}
+
+/** What a Member writes in their Review. */
+export interface ReviewDraft {
+  recipeId: string;
+  stars: number;
+  comment: string | null;
+}
+
+/** A Review written or changed, or one deleted (by its id). */
+export type ReviewChange = { kind: "saved"; review: Review } | { kind: "deleted"; id: string };
+
+/** Every Review of every Recipe. */
+export async function loadReviews(sb: SupabaseClient): Promise<Review[]> {
+  const { data, error } = await sb.from("reviews").select(REVIEW_COLUMNS);
+  if (error) throw error;
+  return (data as ReviewRow[]).map(reviewFromRow);
+}
+
+/**
+ * Writes the signed-in Member's Review of a Recipe. A Member has one Review per Recipe, so this
+ * replaces theirs if they already have one (keeping its id and when it was first written).
+ */
+export async function saveReview(sb: SupabaseClient, userId: string, draft: ReviewDraft): Promise<Review> {
+  const { data, error } = await sb
+    .from("reviews")
+    .upsert(
+      { recipe_id: draft.recipeId, user_id: userId, stars: draft.stars, comment: draft.comment?.trim() || null },
+      { onConflict: "recipe_id,user_id" },
+    )
+    .select(REVIEW_COLUMNS)
+    .single();
+  if (error) throw error;
+  return reviewFromRow(data as ReviewRow);
+}
+
+/** Deletes a Review: the reviewer's own, or any Review for Editors and Admins (others are left as they are). */
+export async function deleteReview(sb: SupabaseClient, id: string): Promise<void> {
+  const { error } = await sb.from("reviews").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/** Live Review changes from every Member. `onSubscribed` runs once the channel is listening. */
+export function onReviews(sb: SupabaseClient, cb: (change: ReviewChange) => void, onSubscribed?: () => void): () => void {
+  const channel = sb
+    .channel(`reviews-${Math.random().toString(36).slice(2)}`)
+    .on("postgres_changes", { event: "*", schema: "public", table: "reviews" }, (payload) => {
+      if (payload.eventType === "DELETE") {
+        const id = (payload.old as { id?: string }).id;
+        if (id) cb({ kind: "deleted", id });
+      } else {
+        const row = payload.new as ReviewRow;
+        if (row?.id) cb({ kind: "saved", review: reviewFromRow(row) });
+      }
+    })
+    .subscribe((status) => {
+      if (status === "SUBSCRIBED") onSubscribed?.();
+    });
+  return () => void sb.removeChannel(channel);
+}
+
+/* ---------- Review photos: on a Member's own Review, read by every Member ---------- */
+
+type ReviewPhotoRow = { id: string; review_id: string; data_url: string; created_at: string };
+const REVIEW_PHOTO_COLUMNS = "id, review_id, data_url, created_at";
+
+function reviewPhotoFromRow(r: ReviewPhotoRow): ReviewPhoto {
+  return { id: r.id, reviewId: r.review_id, dataUrl: r.data_url, createdAt: r.created_at };
+}
+
+/** A Review photo added, or one deleted (by its id). */
+export type ReviewPhotoChange = { kind: "added"; photo: ReviewPhoto } | { kind: "deleted"; id: string };
+
+/** Every Review photo of every Recipe. */
+export async function loadReviewPhotos(sb: SupabaseClient): Promise<ReviewPhoto[]> {
+  const { data, error } = await sb.from("review_photos").select(REVIEW_PHOTO_COLUMNS);
+  if (error) throw error;
+  return (data as ReviewPhotoRow[]).map(reviewPhotoFromRow);
+}
+
+/** Attaches a photo (a small JPEG data URL) to the signed-in Member's own Review. */
+export async function addReviewPhoto(sb: SupabaseClient, reviewId: string, dataUrl: string): Promise<ReviewPhoto> {
+  const { data, error } = await sb.from("review_photos").insert({ review_id: reviewId, data_url: dataUrl }).select(REVIEW_PHOTO_COLUMNS).single();
+  if (error) throw error;
+  return reviewPhotoFromRow(data as ReviewPhotoRow);
+}
+
+/** Deletes a Review photo: from the reviewer's own Review, or any for Editors and Admins (others are left as they are). */
+export async function deleteReviewPhoto(sb: SupabaseClient, id: string): Promise<void> {
+  const { error } = await sb.from("review_photos").delete().eq("id", id);
+  if (error) throw error;
+}
+
+/** Live Review photo changes from every Member. `onSubscribed` runs once the channel is listening. */
+export function onReviewPhotos(sb: SupabaseClient, cb: (change: ReviewPhotoChange) => void, onSubscribed?: () => void): () => void {
+  const channel = sb
+    .channel(`review-photos-${Math.random().toString(36).slice(2)}`)
+    .on("postgres_changes", { event: "*", schema: "public", table: "review_photos" }, (payload) => {
+      if (payload.eventType === "DELETE") {
+        const id = (payload.old as { id?: string }).id;
+        if (id) cb({ kind: "deleted", id });
+      } else {
+        const row = payload.new as ReviewPhotoRow;
+        if (row?.id) cb({ kind: "added", photo: reviewPhotoFromRow(row) });
+      }
+    })
+    .subscribe((status) => {
+      if (status === "SUBSCRIBED") onSubscribed?.();
+    });
+  return () => void sb.removeChannel(channel);
+}
+
 /* ---------- the app's data ---------- */
 
-type Part = "catalog" | "recipes";
-const catalogBody = (b: Book) => ({ productEdits: b.productEdits, categories: b.categories });
-const recipesBody = (b: Book) => ({ recipeEdits: b.recipeEdits });
+/**
+ * The Recipe Book is stored in two places:
+ * - the shared `book_parts` 'catalog' block: Product catalogue edits and categories;
+ * - the `recipes` table: one record per Recipe (see lib/recipeRecords);
+ * - the `products` table: Products any Member added, under the catalogue's edits (see lib/productRecords).
+ */
+const catalogBody = (b: Book, added: AddedProducts) => ({ productEdits: catalogProductEdits(b.productEdits, added), categories: b.categories });
 
-function bookFromParts(parts: Partial<Record<Part, Record<string, unknown>>>): Book {
-  const c = parts.catalog ?? {};
-  const r = parts.recipes ?? {};
+function bookFrom(catalog: Record<string, unknown> | undefined, recipeEdits: RecipeEdits, added: AddedProducts, recipeAuthors: RecipeAuthors): Book {
+  const c = catalog ?? {};
   return {
-    productEdits: (c.productEdits as Book["productEdits"]) ?? {},
+    productEdits: productEditsWithAdded((c.productEdits as Book["productEdits"]) ?? {}, added),
     categories: Array.isArray(c.categories) ? (c.categories as string[]) : [],
-    recipeEdits: (r.recipeEdits as Book["recipeEdits"]) ?? {},
+    recipeEdits,
+    recipeAuthors,
   };
+}
+
+/** Every Product a Member added, by key. */
+export async function loadAddedProducts(sb: SupabaseClient): Promise<AddedProducts> {
+  const { data, error } = await sb.from("products").select("key, body");
+  if (error) throw error;
+  return Object.fromEntries((data as { key: string; body: Product }[]).map((r) => [r.key, r.body]));
+}
+
+/** Adds Products new to the catalogue, with the Member adding them as their Author. */
+export async function addProducts(sb: SupabaseClient, userId: string, products: Product[]): Promise<void> {
+  if (!products.length) return;
+  const { error } = await sb.from("products").insert(products.map((p) => ({ key: p.key, body: p, author_id: userId })));
+  if (error) throw error;
+}
+
+/** Every Recipe record, as the app reads them. */
+export async function loadRecipeRecords(sb: SupabaseClient): Promise<RecipeRecord[]> {
+  const { data, error } = await sb.from("recipes").select("id, body, deleted, author_id");
+  if (error) throw error;
+  return data as RecipeRecord[];
+}
+
+/**
+ * Saves Recipe records and removes others. An `added` Recipe is saved with the Member saving it
+ * as its Author; saving any other record leaves its Author as it is. `updated_by` is the Member
+ * saving. Removing a record brings back the original Recipe ("Undo my changes").
+ */
+export async function writeRecipeRecords(
+  sb: SupabaseClient,
+  userId: string,
+  { save, remove }: { save: RecipeRecord[]; remove: string[] },
+): Promise<void> {
+  const row = ({ id, body, deleted }: RecipeRecord) => ({ id, body, deleted, updated_by: userId });
+  // Separate calls, so records saved without an Author never have theirs cleared.
+  const added = save.filter((r) => r.added).map((r) => ({ ...row(r), author_id: userId }));
+  const changed = save.filter((r) => !r.added).map(row);
+  for (const rows of [added, changed]) {
+    if (!rows.length) continue;
+    const { error } = await sb.from("recipes").upsert(rows);
+    if (error) throw error;
+  }
+  if (remove.length) {
+    const { error } = await sb.from("recipes").delete().in("id", remove);
+    if (error) throw error;
+  }
 }
 
 export async function connectSupabase(account: Account): Promise<RemoteStore> {
   const sb = await getClient();
   const canEdit = account.role === "admin" || account.role === "editor";
-  const parts: Partial<Record<Part, Record<string, unknown>>> = {};
+  let catalog: Record<string, unknown> | undefined;
+  /** The recipe records as last saved or heard about, as edits, and their Authors. */
+  let stored: RecipeEdits = {};
+  let authors: RecipeAuthors = {};
+  /** Products Members added. */
+  let added: AddedProducts = {};
+  const book = () => bookFrom(catalog, stored, added, authors);
+  let recipeQueue: Promise<void> = Promise.resolve();
   const written: Record<string, string> = {};
   const queue: Record<string, Promise<void>> = {};
 
@@ -144,11 +371,31 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
     return next;
   }
 
-  function savePart(part: Part, body: Record<string, unknown>) {
-    parts[part] = body;
-    return write(part, stableStringify(body), () =>
-      sb.from("book_parts").upsert({ part, body, updated_at: new Date().toISOString(), updated_by: account.userId }),
+  function saveCatalog(body: Record<string, unknown>) {
+    catalog = body;
+    return write("catalog", stableStringify(body), () =>
+      sb.from("book_parts").upsert({ part: "catalog", body, updated_at: new Date().toISOString(), updated_by: account.userId }),
     );
+  }
+
+  /** Save only the Recipes that changed; one write at a time. */
+  function saveRecipes(edits: RecipeEdits): Promise<void> {
+    const before = stored;
+    const changes = recordChanges(before, edits, originalRecipes);
+    if (!changes.save.length && !changes.remove.length) return Promise.resolve();
+    stored = edits;
+    for (const r of changes.save) if (r.added) authors = { ...authors, [r.id]: account.userId };
+    const next = recipeQueue.then(() => writeRecipeRecords(sb, account.userId, changes));
+    recipeQueue = next.catch(() => {
+      // Forget these Recipes were saved, so the next save tries them again.
+      const retry = { ...stored };
+      for (const id of [...changes.save.map((r) => r.id), ...changes.remove]) {
+        if (id in before) retry[id] = before[id];
+        else delete retry[id];
+      }
+      stored = retry;
+    });
+    return next;
   }
 
   async function loadPhotos(): Promise<Record<string, string>> {
@@ -157,34 +404,79 @@ export async function connectSupabase(account: Account): Promise<RemoteStore> {
     return Object.fromEntries((data as { recipe_id: string; data_url: string }[]).map((r) => [r.recipe_id, r.data_url]));
   }
 
+  /** A Member who can't change the catalogue adds new Products to the `products` table. */
+  function saveAddedProducts(b: Book): Promise<void> {
+    const current = productEditsWithAdded((catalog?.productEdits as Book["productEdits"]) ?? {}, added);
+    const fresh = newProducts(current, b.productEdits, originalProducts);
+    if (!fresh.length) return Promise.resolve();
+    const before = added;
+    added = { ...added, ...Object.fromEntries(fresh.map((p) => [p.key, p])) };
+    return addProducts(sb, account.userId, fresh).catch((e) => {
+      // Forget they were added, so the next save tries again.
+      added = before;
+      throw e;
+    });
+  }
+
   return {
     canEditBook: canEdit,
+    canAddRecipes: account.role != null,
     isOwner: account.role === "admin",
     async loadBook() {
-      const { data, error } = await sb.from("book_parts").select("part, body");
-      if (error) throw error;
-      if (!data.length) return null;
-      for (const row of data as { part: Part; body: Record<string, unknown> }[]) {
-        parts[row.part] = row.body;
-        written[row.part] = stableStringify(row.body);
+      const [parts, records, products] = await Promise.all([
+        sb.from("book_parts").select("body").eq("part", "catalog").maybeSingle(),
+        loadRecipeRecords(sb),
+        loadAddedProducts(sb),
+      ]);
+      added = products;
+      if (parts.error) throw parts.error;
+      if (!parts.data && !records.length) return null;
+      if (parts.data) {
+        catalog = parts.data.body as Record<string, unknown>;
+        written.catalog = stableStringify(catalog);
       }
-      return bookFromParts(parts);
+      stored = editsFromRecords(records);
+      authors = authorsFromRecords(records);
+      return book();
     },
     async saveBook(b) {
-      await Promise.all([savePart("catalog", catalogBody(b)), savePart("recipes", recipesBody(b))]);
+      await Promise.all([canEdit ? saveCatalog(catalogBody(b, added)) : saveAddedProducts(b), saveRecipes(b.recipeEdits)]);
     },
     onBook(cb) {
       const channel = sb
         .channel("book")
         .on("postgres_changes", { event: "*", schema: "public", table: "book_parts" }, (payload) => {
-          const row = payload.new as { part?: Part; body?: Record<string, unknown> };
-          if (!row?.part || !row.body) return;
+          const row = payload.new as { part?: string; body?: Record<string, unknown> };
+          if (row?.part !== "catalog" || !row.body) return;
           const json = stableStringify(row.body);
           // Unchanged means it's our own write coming back.
-          if (written[row.part] === json) return;
-          written[row.part] = json;
-          parts[row.part] = row.body;
-          cb(bookFromParts(parts));
+          if (written.catalog === json) return;
+          written.catalog = json;
+          catalog = row.body;
+          cb(book());
+        })
+        .on("postgres_changes", { event: "*", schema: "public", table: "recipes" }, (payload) => {
+          const next = { ...stored };
+          if (payload.eventType === "DELETE") {
+            const id = (payload.old as { id?: string }).id;
+            if (!id || !(id in next)) return;
+            delete next[id];
+          } else {
+            const record = payload.new as RecipeRecord;
+            if (record.author_id) authors = { ...authors, [record.id]: record.author_id };
+            const edit = editsFromRecords([record])[record.id];
+            // Unchanged means it's our own write coming back.
+            if (record.id in next && stableStringify(next[record.id]) === stableStringify(edit)) return;
+            next[record.id] = edit;
+          }
+          stored = next;
+          cb(book());
+        })
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "products" }, (payload) => {
+          const row = payload.new as { key?: string; body?: Product };
+          if (!row?.key || !row.body || stableStringify(added[row.key]) === stableStringify(row.body)) return;
+          added = { ...added, [row.key]: row.body };
+          cb(book());
         })
         .subscribe();
       return () => void sb.removeChannel(channel);
