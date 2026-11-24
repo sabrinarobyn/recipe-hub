@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import type { Open } from "../App";
 import { compareStores, STORE_NAMES, type LooseItem, type ShoppingItem } from "../lib/costing";
 import { addDays, today, weekLabel } from "../lib/dates";
-import { pantryForList, tickGot, untickGot, untickWeek } from "../lib/kitchen";
+import { tickGot, untickGot, untickWeek, weekNetting } from "../lib/kitchen";
 import { packLabel, qty, rand, shortDate, uid } from "../lib/format";
 import { toCsv } from "../lib/csv";
 import { saveFile } from "../lib/storage";
@@ -20,9 +20,8 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
   );
   const wl = data.lists[week] ?? emptyList();
   // The Pantry before this week's own Got, so ticking Got doesn't take an item off its own list.
-  const pantry = useMemo(() => pantryForList(data.pantry, week), [data.pantry, week]);
-  const buyAnyway = wl.buyAnyway;
-  const comparison = useMemo(() => compareStores(entries, catalog, { pantry, buyAnyway }), [entries, catalog, pantry, buyAnyway]);
+  const netting = useMemo(() => weekNetting(data.pantry, week, wl), [data.pantry, week, wl]);
+  const comparison = useMemo(() => compareStores(entries, catalog, netting), [entries, catalog, netting]);
   const store = catalog.store ?? "woolworths";
   const other = store === "checkers" ? "woolworths" : "checkers";
   const list = comparison[store];
@@ -258,7 +257,7 @@ export function ShoppingListView({ open, week, setWeek }: { open: Open; week: st
                   const k = item.product.key;
                   const isCovered = item.coveredByPantry;
                   const isGot = got.has(k) && !isCovered;
-                  const inPantry = pantry.get(k)?.amount ?? 0;
+                  const inPantry = netting.pantry.get(k)?.amount ?? 0;
                   const recipes = [...new Set(item.uses.map((u) => u.recipeId))].map((id) => catalog.recipes.get(id)!);
                   const row = comparison.byProduct.get(k);
                   const otherCost = other === "checkers" ? row?.checkers : row?.woolworths;

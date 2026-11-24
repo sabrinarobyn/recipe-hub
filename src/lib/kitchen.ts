@@ -11,7 +11,7 @@
  * history.
  */
 import type { PlanEntry } from "../types";
-import { expandRecipe, usedCost, type Catalog, type ShoppingList } from "./costing";
+import { expandRecipe, usedCost, type Catalog, type Kitchen, type ShoppingList } from "./costing";
 import { uid } from "./format";
 
 interface EventBase {
@@ -107,6 +107,15 @@ export function pantryAmount(pantry: Pantry, productKey: string): number {
  */
 export function pantryForList(history: readonly PantryEvent[], week: string): Pantry {
   return buildPantry(history.filter((e) => !(e.kind === "got" && e.week === week)));
+}
+
+/**
+ * What a week's Products are netted against, on both the Plan and the
+ * Shopping List: the Pantry before that week's own Got, less the items the
+ * Member chose to Buy anyway.
+ */
+export function weekNetting(history: readonly PantryEvent[], week: string, list?: { buyAnyway?: string[] }): Kitchen & { pantry: Pantry } {
+  return { pantry: pantryForList(history, week), buyAnyway: list?.buyAnyway ?? [] };
 }
 
 /**
