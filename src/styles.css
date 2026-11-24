@@ -3393,3 +3393,48 @@ select.input {
 .review-actions {
   justify-content: flex-end;
 }
+.review-photo-drop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--line);
+}
+.review-photo-drop.is-over {
+  outline: 3px dashed var(--accent);
+  outline-offset: -3px;
+}
+.review-gallery {
+  display: grid;
+  gap: 8px;
+}
+.review-gallery h4 {
+  margin: 0;
+}
+.review-gallery-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.review-gallery-item {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  min-width: 0;
+}
+.review-gallery-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+}
+.review-gallery-actions {
+  flex-wrap: wrap;
+  gap: 4px;
+}
