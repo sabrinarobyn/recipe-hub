@@ -1,6 +1,6 @@
 # Store the Recipe Book as one record per Recipe
 
-The Recipe Book's recipe edits used to be saved as one shared block (`book_parts` 'recipes'), which only Editors could write. Authors are coming: any Member will add Recipes and may change only their own, so the database has to tell who may change *which* Recipe. One block can only be allowed or refused as a whole, so we moved recipes to the `recipes` table, one record per Recipe (id, optional Author, body, deleted flag, timestamps), where row-level security can decide per Recipe. The original spreadsheet Recipes stay in the app as the base and records overlay them exactly as edits did: a record with a body is an edited original or an added Recipe, a record marked deleted is a removed Recipe, and no record means the original as it is ("Undo my changes" deletes the record). The migration carried every existing edit into records and retired the 'recipes' block. Product catalogue edits and categories stay in the shared 'catalog' block, since only Editors change them.
+Authors let any Member add Recipes and change only their own, but recipe edits were saved as one shared block (`book_parts` 'recipes') that the database could only allow or refuse as a whole. So each Recipe is now its own record in the `recipes` table (id, optional Author, body, deleted flag, timestamps), where row-level security decides per Recipe; the migration carried every existing edit over and retired the block. Records overlay the original spreadsheet Recipes exactly as edits did, while Product catalogue edits and categories stay in the shared 'catalog' block, since only Editors change them.
 
 ## Considered Options
 
@@ -10,6 +10,7 @@ The Recipe Book's recipe edits used to be saved as one shared block (`book_parts
 
 ## Consequences
 
+- A record with a body is an edited original or an added Recipe, a record marked deleted is a removed Recipe, and no record means the original as it is ("Undo my changes" deletes the record).
 - A deleted record keeps no body (the app's edits only remember that the Recipe was removed).
 - Saving a record never changes its Author; who may write a record is decided by the database, not the client.
 - The Claude-artifact and browser-only builds still keep recipe edits in one block; only the Supabase-hosted version uses records.

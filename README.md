@@ -16,8 +16,9 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   ×½, ×2 and so on, move meals between days, copy last week, and see the week's estimate.
 - **Shopping list**: every planned meal merged into one list, grouped by shop section. Packs are
   rounded up across the whole week, so two recipes that each use half a bag of spinach share one
-  bag. Mark items you **already have** to take them off the estimate, tick items off as you shop,
-  add extras, then copy the list (to paste into WhatsApp or Notes) or download a CSV.
+  bag. What your **Pantry** already covers comes off the list and the estimate (see below). Tick
+  items **Got** as you shop, add extras, then copy the list (to paste into WhatsApp or Notes) or
+  download a CSV.
 - **Prices**: edit any shelf or regular price inline and every recipe, plan and list updates
   straight away. Switch between shelf prices (with promotions) and regular prices. Add or edit
   products, or do a bulk update: **Export CSV**, change the prices in Excel, then **Import CSV**.
@@ -44,6 +45,33 @@ a researched Checkers equivalent (checkers.co.za, 8 October 2026) so you can com
   to about 720 px before saving. Until a recipe has a real photo, it shows an **AI mockup** (labelled
   as such) from `src/assets/mockups/<recipe id>.jpg`; adding a photo replaces it, and removing that
   photo brings the mockup back. New recipes without a photo show an illustration tile.
+
+### Pantry
+
+Each Member has a private **Pantry**: the Products they have at home and how much of each is left.
+
+- **Got**: ticking an item Got on the Shopping List puts its packs into the Pantry; un-ticking takes
+  them out again. You can also add a Product by hand on the **Pantry** screen.
+- **Cooked**: marking a Planned Meal Cooked takes the amounts its Recipe uses out of the Pantry
+  (scaled, and through sub-recipes). Un-marking it, or removing the meal from the Plan, puts them
+  back. Meals that aren't Cooked don't use anything up.
+- **Corrections**: set a Pantry Item to what's really there (food thrown out, used outside the Plan or
+  miscounted), or clear it.
+- **Shopping List netting**: the Shopping List, and the Plan's week estimate, cost only what's still
+  to buy: what the Pantry covers comes off, and a part-covered item buys the rest in whole packs.
+  Press **Buy anyway** on an item to buy its full amount whatever the Pantry holds.
+- The Plan suggests Recipes that use what's in your Pantry, best match first.
+
+### Reviews, Recipe Authors and Profiles
+
+- **Reviews**: each Member can give a Recipe 1 to 5 stars, with an optional comment and photos; one
+  Review per Member per Recipe. Recipes show their average stars and can be sorted **Best reviewed
+  first**. Every Member sees all Reviews; you change your own, and Editors and Admins can delete
+  any. A Review stays after its Member leaves the invite list.
+- **Recipe Authors**: any Member can add a Recipe and becomes its Author. Authors edit their own
+  Recipes and choose their Main Photo (also from Review photos); Editors and Admins can edit any.
+- **Profiles**: each Member sets a display name and photo, shown on their Reviews and on the Recipes
+  they authored. Other Members never see their email.
 
 Your changes are stored as edits on top of the spreadsheet data, so "Undo my changes" can restore
 any recipe or product. **Settings** (the gear icon) has backup download and restore, and a full
