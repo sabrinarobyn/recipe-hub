@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, removePlannedMeals, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
 import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
@@ -176,6 +176,21 @@ describe("Cooked", () => {
     expect(buildPantry(history).get("lean_mince")?.amount).toBe(500);
     expect(isCooked(history, "monday")).toBe(true);
     expect(isCooked(history, "wednesday")).toBe(false);
+  });
+  it("removing a Cooked Planned Meal puts back what it took out of the Pantry", () => {
+    const history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    const before = buildPantry(history);
+    const monday = meal("5-veg-mince-freezer-base", 1, "monday");
+    const tuesday = meal("5-veg-mince-freezer-base", 1, "tuesday");
+    let pantry = cookMeal(history, monday, catalog(), "2026-11-24");
+    pantry = cookMeal(pantry, tuesday, catalog(), "2026-11-25");
+    const after = removePlannedMeals({ plan: [monday, tuesday], pantry }, ["tuesday"]);
+    expect(after.plan).toEqual([monday]);
+    expect(isCooked(after.pantry, "tuesday")).toBe(false);
+    expect(buildPantry(after.pantry).get("lean_mince")?.amount).toBe(500);
+    const none = removePlannedMeals(after, ["monday"]);
+    expect(none.plan).toEqual([]);
+    expect(buildPantry(none.pantry)).toEqual(before);
   });
 });
 

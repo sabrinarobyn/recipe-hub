@@ -3,7 +3,7 @@ import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
-import { buildPantry, canEditRecipe as memberCanEditRecipe, canSetMainPhoto as memberCanSetMainPhoto, type PantryEvent } from "./kitchen";
+import { buildPantry, canEditRecipe as memberCanEditRecipe, canSetMainPhoto as memberCanSetMainPhoto, removePlannedMeals, type PantryEvent } from "./kitchen";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
 import { connectSupabase, type Account } from "./supabase";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
@@ -335,7 +335,8 @@ function useAppDataInternal(account: Account | null) {
       addToPlan: (entry: PlanEntry) => update((d) => ({ ...d, plan: [...d.plan, entry] })),
       updatePlanEntry: (id: string, patch: Partial<PlanEntry>) =>
         update((d) => ({ ...d, plan: d.plan.map((e) => (e.id === id ? { ...e, ...patch } : e)) })),
-      removePlanEntry: (id: string) => update((d) => ({ ...d, plan: d.plan.filter((e) => e.id !== id) })),
+      /** Removes Planned Meals; a Cooked one gives back what it took out of the Pantry. */
+      removePlanEntries: (ids: string[]) => update((d) => removePlannedMeals(d, ids)),
       setPlan: (plan: PlanEntry[]) => update((d) => ({ ...d, plan })),
       updateList: (week: string, fn: (l: WeekList) => WeekList) =>
         update((d) => ({ ...d, lists: { ...d.lists, [week]: fn(d.lists[week] ?? emptyList()) } })),

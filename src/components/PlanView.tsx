@@ -79,7 +79,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     }
   };
   const clearWeek = () => {
-    actions.setPlan(data.plan.filter((e) => e.date < week || e.date > end));
+    actions.removePlanEntries(data.plan.filter((e) => e.date >= week && e.date <= end).map((e) => e.id));
     open.notify("Cleared this week");
   };
 
@@ -291,7 +291,7 @@ function EntryEditor({ entry, onClose, onView }: { entry: PlanEntry; onClose: ()
             <button
               className="btn btn-danger-quiet"
               onClick={() => {
-                actions.removePlanEntry(live.id);
+                actions.removePlanEntries([live.id]);
                 onClose();
               }}
             >

@@ -169,6 +169,19 @@ export function uncookMeal(history: readonly PantryEvent[], mealId: string): Pan
   return history.filter((e) => !(e.kind === "cooked" && e.meal === mealId));
 }
 
+/**
+ * Take Planned Meals out of a Plan. A Cooked one also gives back what it took
+ * out of the Pantry, as un-marking Cooked does.
+ */
+export function removePlannedMeals<S extends { plan: readonly PlanEntry[]; pantry: readonly PantryEvent[] }>(state: S, mealIds: Iterable<string>): S {
+  const gone = new Set(mealIds);
+  return {
+    ...state,
+    plan: state.plan.filter((e) => !gone.has(e.id)),
+    pantry: state.pantry.filter((e) => !(e.kind === "cooked" && gone.has(e.meal))),
+  };
+}
+
 /** Whether a Planned Meal is Cooked. */
 export function isCooked(history: readonly PantryEvent[], mealId: string): boolean {
   return history.some((e) => e.kind === "cooked" && e.meal === mealId);
