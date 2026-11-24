@@ -7,10 +7,10 @@ import { MacroLine } from "./Nutrition";
 import { ConfirmButton, Icon } from "./ui";
 import { Thumb } from "./Photo";
 import { Sticker, StickerCluster } from "./Brand";
-import { RatingBadge, useReviews } from "./Reviews";
-import { byRating } from "../lib/kitchen";
+import { ReviewBadge, useReviews } from "./Reviews";
+import { byReviews } from "../lib/kitchen";
 
-type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein" | "rating";
+type Sort = "name" | "cheap" | "dear" | "shop" | "kcal" | "protein" | "reviews";
 
 export function RecipesView({ open }: { open: Open }) {
   const { catalog, data, actions, canEditBook, canAddRecipes, canEditRecipe } = useApp();
@@ -33,9 +33,9 @@ export function RecipesView({ open }: { open: Open }) {
       );
     });
     const cost = (id: string) => summaries.get(id)!;
-    const rating = byRating(reviews.summaries);
+    const reviewed = byReviews(reviews.summaries);
     return list.sort((a, b) => {
-      if (sort === "rating" && reviews.enabled) return rating(a.id, b.id) || a.name.localeCompare(b.name);
+      if (sort === "reviews" && reviews.enabled) return reviewed(a.id, b.id) || a.name.localeCompare(b.name);
       if (sort === "cheap") return cost(a.id).perMake - cost(b.id).perMake;
       if (sort === "dear") return cost(b.id).perMake - cost(a.id).perMake;
       if (sort === "shop") return cost(a.id).shop - cost(b.id).shop;
@@ -117,7 +117,7 @@ export function RecipesView({ open }: { open: Open }) {
             <option value="shop">Shop-from-scratch: low to high</option>
             <option value="kcal">Calories per serving: low to high</option>
             <option value="protein">Protein per serving: high to low</option>
-            {reviews.enabled && <option value="rating">Rating: best first</option>}
+            {reviews.enabled && <option value="reviews">Best reviewed first</option>}
           </select>
         </label>
       </div>
@@ -162,7 +162,7 @@ export function RecipesView({ open }: { open: Open }) {
                             {state && <span className={`badge badge-${state}`}>{state === "new" ? "Yours" : "Edited"}</span>}
                           </span>
                           <span className="recipe-row-meta">
-                            <RatingBadge recipeId={r.id} />
+                            <ReviewBadge recipeId={r.id} />
                             <MacroLine m={n.perServing ?? n.total} />
                             <span className="cost-label">{n.perServing ? "per serving" : "whole recipe"}</span>
                             {s.substitutes > 0 && <span className="flag flag-warn">{s.substitutes} substitute{s.substitutes > 1 ? "s" : ""}</span>}

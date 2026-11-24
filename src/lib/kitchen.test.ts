@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, removePlannedMeals, removeRecipeFromPlan, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
 import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
@@ -177,10 +177,40 @@ describe("Cooked", () => {
     expect(isCooked(history, "monday")).toBe(true);
     expect(isCooked(history, "wednesday")).toBe(false);
   });
+  it("removing a Cooked Planned Meal puts back what it took out of the Pantry", () => {
+    const history = addToPantry([], "lean_mince", 1000, "2026-11-20");
+    const before = buildPantry(history);
+    const monday = meal("5-veg-mince-freezer-base", 1, "monday");
+    const tuesday = meal("5-veg-mince-freezer-base", 1, "tuesday");
+    let pantry = cookMeal(history, monday, catalog(), "2026-11-24");
+    pantry = cookMeal(pantry, tuesday, catalog(), "2026-11-25");
+    const after = removePlannedMeals({ plan: [monday, tuesday], pantry }, ["tuesday"]);
+    expect(after.plan).toEqual([monday]);
+    expect(isCooked(after.pantry, "tuesday")).toBe(false);
+    expect(buildPantry(after.pantry).get("lean_mince")?.amount).toBe(500);
+    const none = removePlannedMeals(after, ["monday"]);
+    expect(none.plan).toEqual([]);
+    expect(buildPantry(none.pantry)).toEqual(before);
+  });
+  it("deleting a Recipe takes its Planned Meals out and gives back what the Cooked ones took", () => {
+    let pantry = addToPantry([], "lean_mince", 2000, "2026-11-20");
+    const base = meal("5-veg-mince-freezer-base", 1, "base");
+    const gems = meal("mince-in-gems", 1, "gems");
+    const later = meal("5-veg-mince-freezer-base", 1, "later");
+    pantry = cookMeal(pantry, base, catalog(), "2026-11-24");
+    pantry = cookMeal(pantry, gems, catalog(), "2026-11-25");
+    expect(buildPantry(pantry).get("lean_mince")?.amount).toBe(1000);
+    const after = removeRecipeFromPlan({ plan: [base, gems, later], pantry }, "5-veg-mince-freezer-base");
+    expect(after.plan).toEqual([gems]);
+    expect(isCooked(after.pantry, "base")).toBe(false);
+    expect(isCooked(after.pantry, "gems")).toBe(true);
+    // Only the base's 500 g comes back; Mince in Gems is still Cooked.
+    expect(buildPantry(after.pantry).get("lean_mince")?.amount).toBe(1500);
+  });
 });
 
 describe("Suggestions", () => {
-  const stock = (items: [string, number][]) => buildPantry(items.reduce<PantryEvent[]>((h, [k, a]) => addToPantry(h, k, a, "2026-11-20"), []));
+  const pantryOf = (items: [string, number][]) => buildPantry(items.reduce<PantryEvent[]>((h, [k, a]) => addToPantry(h, k, a, "2026-11-20"), []));
 
   it("an empty Pantry suggests nothing", () => {
     expect(suggestRecipes(buildPantry([]), catalog())).toEqual([]);
@@ -189,14 +219,14 @@ describe("Suggestions", () => {
   it("a Recipe the Pantry fully covers ranks above one it partly covers", () => {
     // Hot choccie needs 250 ml milk, 7 g cocoa and 4 g sugar: all in the Pantry.
     // White sauce needs milk too, but also butter, flour and mustard.
-    const ids = suggestRecipes(stock([["milk", 1000], ["cocoa", 250], ["white_sugar", 500]]), catalog()).map((s) => s.recipeId);
+    const ids = suggestRecipes(pantryOf([["milk", 1000], ["cocoa", 250], ["white_sugar", 500]]), catalog()).map((s) => s.recipeId);
     expect(ids[0]).toBe("homemade-hot-choccie");
     expect(ids).toContain("microwave-white-sauce");
     expect(ids.indexOf("homemade-hot-choccie")).toBeLessThan(ids.indexOf("microwave-white-sauce"));
   });
 
   it("each suggestion lists the Pantry Items it would use, and how much", () => {
-    const pantry = stock([["milk", 1000], ["butter", 10], ["feta", 200]]);
+    const pantry = pantryOf([["milk", 1000], ["butter", 10], ["feta", 200]]);
     const sauce = suggestRecipes(pantry, catalog()).find((s) => s.recipeId === "microwave-white-sauce");
     // White sauce needs 250 ml milk and 21 g butter; only 10 g butter is left.
     expect(sauce?.uses).toEqual([
@@ -210,7 +240,7 @@ describe("Suggestions", () => {
   it("basics don't count against a match", () => {
     // The filo tart has a basic line; every Product it needs is in the Pantry.
     const tart = [["filo", 100], ["olive_oil_spray", 3], ["spinach", 500], ["eggs", 2], ["feta", 100], ["onions", 150], ["lemons", 1], ["sesame_seeds", 9]] as [string, number][];
-    const best = suggestRecipes(stock(tart), catalog()).find((s) => s.recipeId === "spinach-feta-filo-tart");
+    const best = suggestRecipes(pantryOf(tart), catalog()).find((s) => s.recipeId === "spinach-feta-filo-tart");
     expect(best?.coverage).toBeCloseTo(1);
     expect(best?.uses).toHaveLength(8);
   });

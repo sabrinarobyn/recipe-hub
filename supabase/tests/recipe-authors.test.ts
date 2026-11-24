@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { service, signInAs, type Role, type SignedIn } from "./members";
 import { recordChanges } from "../../src/lib/recipeRecords";
-import { loadRecipeRecords, writeRecipeRecords } from "../../src/lib/supabase";
+import { addReviewPhoto, loadRecipeRecords, loadReviewPhotos, saveReview, writeRecipeRecords } from "../../src/lib/supabase";
 
 /**
  * Authors: any Member adds Recipes and changes their own; Editors and Admins change any Recipe.
@@ -109,6 +109,16 @@ describe("A Viewer as Author", () => {
     expect(await photo("a-mine")).toBe(PHOTO);
     expect((await viewer.client.from("photos").delete().eq("recipe_id", "a-mine")).error).toBeNull();
     expect(await photo("a-mine")).toBeNull();
+  });
+
+  it("makes another Member's Review photo of their own Recipe its Main Photo", async () => {
+    const viewer = await signInAs("viewer");
+    await addMine(viewer);
+    const review = await saveReview(someone.client, someone.userId, { recipeId: "a-mine", stars: 5, comment: null });
+    await addReviewPhoto(someone.client, review.id, PHOTO);
+    const fromReview = (await loadReviewPhotos(viewer.client)).find((p) => p.reviewId === review.id)!;
+    expect((await viewer.client.from("photos").upsert({ recipe_id: "a-mine", data_url: fromReview.dataUrl })).error).toBeNull();
+    expect(await photo("a-mine")).toBe(PHOTO);
   });
 
   it("can't set the Main Photo of another Member's Recipe or an original one", async () => {

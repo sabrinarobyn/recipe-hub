@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { anonymous, service, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
+import { anonymous, hearLive, service, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
 import { addReviewPhoto, deleteReview, deleteReviewPhoto, loadReviewPhotos, onReviewPhotos, saveReview } from "../../src/lib/supabase";
 
 /**
@@ -34,17 +34,17 @@ describe("Review photos", () => {
   });
 
   it.each<Role>(["viewer", "editor", "admin"])("a Member with role %s can't add photos to someone else's Review", async (role) => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
     const other = await signInAs(role);
     await expect(addReviewPhoto(other.client, review.id, jpeg("not mine"))).rejects.toMatchObject({ code: "42501" });
     expect(await photosAfterwards(review.id)).toEqual([]);
   });
 
   it("someone not on the invite list can't add or read Review photos", async () => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    await addReviewPhoto(owner.client, review.id, jpeg("plated"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    await addReviewPhoto(reviewer.client, review.id, jpeg("plated"));
     const outsider = await signInNotInvited();
     expect((await loadReviewPhotos(outsider.client)).filter((p) => p.reviewId === review.id)).toEqual([]);
     expect((await anonymous().from("review_photos").select("id")).data ?? []).toEqual([]);
@@ -71,17 +71,17 @@ describe("Review photos", () => {
   });
 
   it("a Viewer can't delete someone else's Review photo", async () => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    const photo = await addReviewPhoto(owner.client, review.id, jpeg("plated"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    const photo = await addReviewPhoto(reviewer.client, review.id, jpeg("plated"));
     await deleteReviewPhoto((await signInAs("viewer")).client, photo.id);
     expect(await photosAfterwards(review.id)).toEqual([jpeg("plated")]);
   });
 
   it.each<Role>(["editor", "admin"])("a Member with role %s can delete any Review photo", async (role) => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    const photo = await addReviewPhoto(owner.client, review.id, jpeg("off-topic"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    const photo = await addReviewPhoto(reviewer.client, review.id, jpeg("off-topic"));
     await deleteReviewPhoto((await signInAs(role)).client, photo.id);
     expect(await photosAfterwards(review.id)).toEqual([]);
   });
@@ -119,36 +119,29 @@ describe("Review photos", () => {
     const amy = await signInAs("viewer");
     const ben = await signInAs("editor");
     const review = await reviewOf(amy);
-    let timer: ReturnType<typeof setInterval> | undefined;
+    const events: string[] = [];
     let photoId: string | undefined;
-    const heard = new Promise<string[]>((resolve) => {
-      const events: string[] = [];
-      onReviewPhotos(
-        ben.client,
-        (change) => {
-          if (change.kind === "added" && change.photo.reviewId === review.id && !photoId) {
-            clearInterval(timer);
-            events.push("added");
-            photoId = change.photo.id;
-            void deleteReviewPhoto(amy.client, photoId);
-          } else if (change.kind === "deleted" && photoId && change.id === photoId) {
-            events.push("deleted");
-            resolve(events);
-          }
-        },
-        () => {
-          // Realtime can take a moment to start streaming after it says SUBSCRIBED, so keep adding until one arrives.
-          const add = () => void addReviewPhoto(amy.client, review.id, jpeg("live")).catch(() => {});
-          add();
-          timer = setInterval(add, 1000);
-        },
-      );
+
+    await hearLive<void>({
+      client: ben.client,
+      listen: (on) =>
+        void onReviewPhotos(
+          ben.client,
+          (change) => {
+            if (change.kind === "added" && change.photo.reviewId === review.id && !photoId) {
+              on.stopChanging();
+              events.push("added");
+              photoId = change.photo.id;
+              void deleteReviewPhoto(amy.client, photoId);
+            } else if (change.kind === "deleted" && photoId && change.id === photoId) {
+              events.push("deleted");
+              on.heard();
+            }
+          },
+          on.subscribed,
+        ),
+      change: () => addReviewPhoto(amy.client, review.id, jpeg("live")),
     });
-    try {
-      expect(await heard).toEqual(["added", "deleted"]);
-    } finally {
-      clearInterval(timer);
-      await ben.client.removeAllChannels();
-    }
+    expect(events).toEqual(["added", "deleted"]);
   });
 });

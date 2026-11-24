@@ -79,3 +79,58 @@ export async function signInNotInvited(): Promise<SignedIn> {
   check("remove invite", (await service.from("members").delete().eq("email", email)).error);
   return signIn(email, userId);
 }
+
+/** What a live test's listener calls as its channel reports in. */
+export interface Listening<T> {
+  /** The channel is SUBSCRIBED: start making the change. */
+  subscribed(): void;
+  /** The change was heard: stop repeating it (the test may then make others). */
+  stopChanging(): void;
+  /** The event the test waits for arrived. */
+  heard(value: T): void;
+  /** The channel failed (CHANNEL_ERROR, TIMED_OUT, CLOSED). */
+  failed(why: string): void;
+}
+
+/**
+ * Waits for a change to reach another Member live. Realtime can take a moment to start streaming
+ * after a channel says SUBSCRIBED, so once `listen` reports it subscribed, `change` runs straight
+ * away and then every second until the listener calls `stopChanging` or `heard`. Fails with a
+ * clear message if nothing is heard within `timeoutMs` (kept below the test timeout) or the
+ * channel fails, and always removes `client`'s channels afterwards.
+ */
+export async function hearLive<T>({
+  client,
+  listen,
+  change,
+  timeoutMs = 12_000,
+}: {
+  client: SupabaseClient;
+  listen: (on: Listening<T>) => void;
+  change: () => PromiseLike<unknown>;
+  timeoutMs?: number;
+}): Promise<T> {
+  let repeat: ReturnType<typeof setInterval> | undefined;
+  let deadline: ReturnType<typeof setTimeout> | undefined;
+  const stopChanging = () => clearInterval(repeat);
+  try {
+    return await new Promise<T>((resolve, reject) => {
+      deadline = setTimeout(() => reject(new Error(`Nothing heard live within ${timeoutMs / 1000}s`)), timeoutMs);
+      listen({
+        subscribed() {
+          if (repeat !== undefined) return;
+          const run = () => void Promise.resolve(change()).catch(() => {});
+          run();
+          repeat = setInterval(run, 1000);
+        },
+        stopChanging,
+        heard: resolve,
+        failed: (why) => reject(new Error(`Realtime channel failed: ${why}`)),
+      });
+    });
+  } finally {
+    stopChanging();
+    clearTimeout(deadline);
+    await client.removeAllChannels();
+  }
+}

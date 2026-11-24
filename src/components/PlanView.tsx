@@ -3,7 +3,7 @@ import type { Open } from "../App";
 import { buildShoppingList, STORE_NAMES } from "../lib/costing";
 import { addDays, dayMonth, dayName, today, weekDays, weekLabel, weekStart } from "../lib/dates";
 import { rand, uid } from "../lib/format";
-import { cookMeal, isCooked, uncookMeal } from "../lib/kitchen";
+import { cookMeal, isCooked, uncookMeal, weekNetting } from "../lib/kitchen";
 import { useApp, useNutrition, useSummaries } from "../lib/store";
 import { addMacros, ZERO } from "../lib/nutrition";
 import { kcal, MacroLine } from "./Nutrition";
@@ -56,7 +56,9 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     () => data.plan.filter((e) => e.date >= week && e.date <= end && catalog.recipes.has(e.recipeId)),
     [data.plan, week, end, catalog],
   );
-  const list = useMemo(() => buildShoppingList(entries, catalog), [entries, catalog]);
+  // Costs only what's still to buy, netted against the Pantry the same way as the Shopping List.
+  const netting = useMemo(() => weekNetting(data.pantry, week, data.lists[week]), [data.pantry, week, data.lists]);
+  const list = useMemo(() => buildShoppingList(entries, catalog, netting), [entries, catalog, netting]);
   const weekTotal = entries.reduce((acc, e) => addMacros(acc, serving(e.recipeId)), ZERO);
   const plannedDays = new Set(entries.map((e) => e.date)).size;
   const lastWeek = useMemo(() => {
@@ -79,7 +81,7 @@ export function PlanView({ open, week, setWeek }: { open: Open; week: string; se
     }
   };
   const clearWeek = () => {
-    actions.setPlan(data.plan.filter((e) => e.date < week || e.date > end));
+    actions.removePlanEntries(data.plan.filter((e) => e.date >= week && e.date <= end).map((e) => e.id));
     open.notify("Cleared this week");
   };
 
@@ -291,7 +293,7 @@ function EntryEditor({ entry, onClose, onView }: { entry: PlanEntry; onClose: ()
             <button
               className="btn btn-danger-quiet"
               onClick={() => {
-                actions.removePlanEntry(live.id);
+                actions.removePlanEntries([live.id]);
                 onClose();
               }}
             >

@@ -125,13 +125,13 @@ export interface ShoppingItem {
   offer: Offer;
   /** Everything the Plan needs, before the Pantry. */
   qty: number;
-  /** Of `qty`, what the Pantry covers (0 with no Pantry, or when bought anyway). */
+  /** Of `qty`, what the Pantry covers (0 with no Pantry, or for an item set to Buy anyway). */
   fromPantry: number;
   /** What's still to buy: `qty` less `fromPantry`. Packs and cost are for this. */
   toBuy: number;
   /** The Pantry covers all of it: nothing to buy. */
   coveredByPantry: boolean;
-  /** The Member chose "buy anyway": bought in full, ignoring the Pantry. */
+  /** The Member chose Buy anyway: the full amount is to buy, ignoring the Pantry. */
   buyAnyway: boolean;
   packs: number;
   /** Full packs × price. null if the product has no price. */
@@ -156,15 +156,18 @@ export interface ShoppingList {
   fallbacks: number;
 }
 
-/** What the Member already has, to take off the Shopping List. Leave it out to buy everything. */
-export interface Kitchen {
+/**
+ * What a Shopping List nets against: the Member's Pantry, whose Pantry Items come off what the
+ * Plan needs, and the Products they chose to Buy anyway. Leave it out to buy everything.
+ */
+export interface PantryNetting {
   pantry?: Pantry;
-  /** Product keys to buy in full whatever the Pantry holds. */
+  /** Product keys to Buy anyway: the full amount, whatever the Pantry holds. */
   buyAnyway?: Iterable<string>;
 }
 
-export function buildShoppingList(entries: { recipeId: string; batches: number }[], catalog: Catalog, kitchen: Kitchen = {}): ShoppingList {
-  const buyAnyway = new Set(kitchen.buyAnyway ?? []);
+export function buildShoppingList(entries: { recipeId: string; batches: number }[], catalog: Catalog, netting: PantryNetting = {}): ShoppingList {
+  const buyAnyway = new Set(netting.buyAnyway ?? []);
   const expansion: Expansion = { needs: [], basics: [], missing: [], problems: [] };
   for (const e of entries) expandRecipe(e.recipeId, e.batches, catalog, expansion);
 
@@ -185,7 +188,7 @@ export function buildShoppingList(entries: { recipeId: string; batches: number }
     const offer = offerFor(product, catalog.store, catalog.basis);
     const qty = uses.reduce((s, u) => s + u.qty, 0);
     const anyway = buyAnyway.has(key);
-    const inPantry = anyway ? 0 : (kitchen.pantry?.get(key)?.amount ?? 0);
+    const inPantry = anyway ? 0 : (netting.pantry?.get(key)?.amount ?? 0);
     const fromPantry = Math.min(qty, Math.max(0, inPantry));
     const coveredByPantry = fromPantry > 0 && qty - fromPantry <= 1e-9;
     const toBuy = coveredByPantry ? 0 : qty - fromPantry;
@@ -267,9 +270,9 @@ export interface StoreComparison {
 }
 
 /** Cost the same plan at both stores, and work out the cheapest split. */
-export function compareStores(entries: { recipeId: string; batches: number }[], catalog: Catalog, kitchen: Kitchen = {}): StoreComparison {
-  const woolworths = buildShoppingList(entries, { ...catalog, store: "woolworths" }, kitchen);
-  const checkers = buildShoppingList(entries, { ...catalog, store: "checkers" }, kitchen);
+export function compareStores(entries: { recipeId: string; batches: number }[], catalog: Catalog, netting: PantryNetting = {}): StoreComparison {
+  const woolworths = buildShoppingList(entries, { ...catalog, store: "woolworths" }, netting);
+  const checkers = buildShoppingList(entries, { ...catalog, store: "checkers" }, netting);
   const byProduct = new Map<string, { woolworths: number | null; checkers: number | null }>();
   for (const i of woolworths.items) byProduct.set(i.product.key, { woolworths: i.cost, checkers: null });
   for (const i of checkers.items) {

@@ -11,7 +11,7 @@
  * history.
  */
 import type { PlanEntry } from "../types";
-import { expandRecipe, usedCost, type Catalog, type ShoppingList } from "./costing";
+import { expandRecipe, usedCost, type Catalog, type PantryNetting, type ShoppingList } from "./costing";
 import { uid } from "./format";
 
 interface EventBase {
@@ -110,6 +110,15 @@ export function pantryForList(history: readonly PantryEvent[], week: string): Pa
 }
 
 /**
+ * What a week's Products are netted against, on both the Plan and the
+ * Shopping List: the Pantry before that week's own Got, less the items the
+ * Member chose to Buy anyway.
+ */
+export function weekNetting(history: readonly PantryEvent[], week: string, list?: { buyAnyway?: string[] }): PantryNetting & { pantry: Pantry } {
+  return { pantry: pantryForList(history, week), buyAnyway: list?.buyAnyway ?? [] };
+}
+
+/**
  * Tick a Shopping List item Got. `list` is the week's Shopping List, for the
  * packs and pack size of the store it's costed at. Ticking again replaces the
  * week's earlier Got for that item.
@@ -167,6 +176,24 @@ export function cookMeal(history: readonly PantryEvent[], meal: PlanEntry, catal
 /** Un-mark a Planned Meal Cooked: puts back exactly what marking it took out. */
 export function uncookMeal(history: readonly PantryEvent[], mealId: string): PantryEvent[] {
   return history.filter((e) => !(e.kind === "cooked" && e.meal === mealId));
+}
+
+/**
+ * Take Planned Meals out of a Plan. A Cooked one also gives back what it took
+ * out of the Pantry, as un-marking Cooked does.
+ */
+export function removePlannedMeals<S extends { plan: readonly PlanEntry[]; pantry: readonly PantryEvent[] }>(state: S, mealIds: Iterable<string>): S {
+  const gone = new Set(mealIds);
+  return {
+    ...state,
+    plan: state.plan.filter((e) => !gone.has(e.id)),
+    pantry: state.pantry.filter((e) => !(e.kind === "cooked" && gone.has(e.meal))),
+  };
+}
+
+/** Take every Planned Meal of a deleted Recipe out of a Plan, giving back what the Cooked ones took. */
+export function removeRecipeFromPlan<S extends { plan: readonly PlanEntry[]; pantry: readonly PantryEvent[] }>(state: S, recipeId: string): S {
+  return removePlannedMeals(state, state.plan.filter((e) => e.recipeId === recipeId).map((e) => e.id));
 }
 
 /** Whether a Planned Meal is Cooked. */
@@ -274,10 +301,10 @@ export function canDeleteReview(member: ReviewActor, review: Pick<Review, "userI
 }
 
 /**
- * Compares Recipe ids for sorting by rating: best average first, then more Reviews, then
+ * Compares Recipe ids for sorting by Reviews: best average first, then more Reviews, then
  * Recipes with no Reviews. Otherwise equal Recipes keep their order.
  */
-export function byRating(summaries: ReadonlyMap<string, ReviewSummary>): (a: string, b: string) => number {
+export function byReviews(summaries: ReadonlyMap<string, ReviewSummary>): (a: string, b: string) => number {
   return (a, b) => {
     const x = summaries.get(a);
     const y = summaries.get(b);

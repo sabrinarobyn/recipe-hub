@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, compareStores, type Catalog } from "./costing";
-import { addToPantry, buildPantry, correctPantry, pantryForList, tickGot } from "./kitchen";
+import { addToPantry, buildPantry, correctPantry, pantryForList, tickGot, weekNetting } from "./kitchen";
 
 const seed = seedJson as Seed;
 const catalog = (store: Catalog["store"] = "woolworths"): Catalog => ({
@@ -50,7 +50,7 @@ describe("Shopping List takes off what the Pantry covers", () => {
     expect(list.total).toBeCloseTo(today.total, 6);
   });
 
-  it("Got on a partly covered item without a pack size adds only what was bought", () => {
+  it("Got on a partly covered item without a pack size adds only what was still to buy", () => {
     const products = new Map(seed.products.map((p) => [p.key, p]));
     products.set("eggs_loose", { ...seed.products[0], key: "eggs_loose", packSize: null, checkers: undefined });
     const recipe = { id: "x", name: "x", category: "Mains", notes: "", yield: "", link: "", lines: [{ id: "1", text: "x", kind: "product" as const, productKey: "eggs_loose", qty: 6 }] };
@@ -83,7 +83,7 @@ describe("Shopping List takes off what the Pantry covers", () => {
     expect(c.split).toBeCloseTo(today.split - 32.99, 2);
   });
 
-  it("ticking Got doesn't take the item off the week it was bought for", () => {
+  it("ticking Got doesn't take the item off the Shopping List of the week it was Got for", () => {
     const WEEK = "2026-11-23";
     // Last week's Got is in the Pantry; this week's is what this list is buying.
     let history = tickGot([], "2026-11-16", buildShoppingList(PLAN, catalog()), "baby_marrows", "2026-11-17");
@@ -94,6 +94,19 @@ describe("Shopping List takes off what the Pantry covers", () => {
     expect(marrows(after).packs).toBe(1);
     expect(marrows(after).fromPantry).toBe(300);
     expect(buildPantry(history).get("baby_marrows")?.amount).toBe(650);
+  });
+
+  it("a week's Plan and Shopping List cost the same: only what's still to buy", () => {
+    const WEEK = "2026-11-23";
+    const today = buildShoppingList(PLAN, catalog());
+    // 700 g of baby marrows in the Pantry from last week covers the 630 g the Plan needs.
+    const history = addToPantry([], "baby_marrows", 700, "2026-11-20", "a1");
+    const week = buildShoppingList(PLAN, catalog(), weekNetting(history, WEEK, { buyAnyway: [] }));
+    expect(week.total).toBeCloseTo(today.total - 65.98, 2);
+    const anyway = buildShoppingList(PLAN, catalog(), weekNetting(history, WEEK, { buyAnyway: ["baby_marrows"] }));
+    expect(anyway.total).toBeCloseTo(today.total, 6);
+    // With no list for the week yet, nothing is set to Buy anyway.
+    expect(buildShoppingList(PLAN, catalog(), weekNetting(history, WEEK)).total).toBeCloseTo(week.total, 6);
   });
 
   it("with an empty Pantry the list and totals are today's", () => {

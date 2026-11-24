@@ -23,23 +23,23 @@ describe("Private data (Plan and Shopping Lists)", () => {
   });
 
   it.each<Role>(["viewer", "editor", "admin"])("a Member with role %s can't read someone else's", async (role) => {
-    const owner = await signInAs("viewer");
-    expect((await save(owner, owner.userId, plan("r-1"))).error).toBeNull();
+    const member = await signInAs("viewer");
+    expect((await save(member, member.userId, plan("r-1"))).error).toBeNull();
 
     const other = await signInAs(role);
-    const { data, error } = await read(other, owner.userId);
+    const { data, error } = await read(other, member.userId);
     expect(error).toBeNull();
     expect(data).toEqual([]);
     expect((await other.client.from("personal").select("user_id")).data).toEqual([]);
   });
 
   it.each<Role>(["viewer", "editor", "admin"])("a Member with role %s can't change someone else's", async (role) => {
-    const owner = await signInAs("viewer");
-    expect((await save(owner, owner.userId, plan("r-1"))).error).toBeNull();
+    const member = await signInAs("viewer");
+    expect((await save(member, member.userId, plan("r-1"))).error).toBeNull();
 
     const other = await signInAs(role);
-    expect((await save(other, owner.userId, plan("r-9"))).error?.code).toBe("42501");
-    expect((await other.client.from("personal").delete().eq("user_id", owner.userId)).error).toBeNull();
-    expect((await read(owner, owner.userId)).data).toEqual([{ body: plan("r-1") }]);
+    expect((await save(other, member.userId, plan("r-9"))).error?.code).toBe("42501");
+    expect((await other.client.from("personal").delete().eq("user_id", member.userId)).error).toBeNull();
+    expect((await read(member, member.userId)).data).toEqual([{ body: plan("r-1") }]);
   });
 });

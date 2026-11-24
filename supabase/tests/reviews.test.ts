@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { anonymous, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
+import { anonymous, hearLive, service, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
 import { deleteReview, loadReviews, onReviews, saveReview } from "../../src/lib/supabase";
 import type { Review } from "../../src/lib/kitchen";
 
@@ -53,34 +53,34 @@ describe("Reviews", () => {
   });
 
   it.each<Role>(["viewer", "editor", "admin"])("a Member with role %s can't write a Review as someone else", async (role) => {
-    const owner = await signInAs("viewer");
+    const reviewer = await signInAs("viewer");
     const recipeId = freshRecipe();
-    const review = await saveReview(owner.client, owner.userId, { recipeId, stars: 4, comment: "Lovely" });
+    const review = await saveReview(reviewer.client, reviewer.userId, { recipeId, stars: 4, comment: "Lovely" });
     const other = await signInAs(role);
 
     // Not as another Member, on a Recipe they reviewed or one they didn't.
-    await expect(saveReview(other.client, owner.userId, { recipeId, stars: 1, comment: "Not mine" })).rejects.toMatchObject({ code: "42501" });
-    await expect(saveReview(other.client, owner.userId, { recipeId: freshRecipe(), stars: 1, comment: null })).rejects.toMatchObject({ code: "42501" });
+    await expect(saveReview(other.client, reviewer.userId, { recipeId, stars: 1, comment: "Not mine" })).rejects.toMatchObject({ code: "42501" });
+    await expect(saveReview(other.client, reviewer.userId, { recipeId: freshRecipe(), stars: 1, comment: null })).rejects.toMatchObject({ code: "42501" });
     // Row-level security hides the row from update rather than raising an error.
     await other.client.from("reviews").update({ stars: 1, comment: "Changed" }).eq("id", review.id);
     await other.client.from("reviews").update({ user_id: other.userId }).eq("id", review.id);
 
-    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: owner.userId, stars: 4, comment: "Lovely" }]);
+    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: reviewer.userId, stars: 4, comment: "Lovely" }]);
   });
 
   it("a Viewer can't delete someone else's Review", async () => {
-    const owner = await signInAs("viewer");
+    const reviewer = await signInAs("viewer");
     const recipeId = freshRecipe();
-    const review = await saveReview(owner.client, owner.userId, { recipeId, stars: 4, comment: null });
+    const review = await saveReview(reviewer.client, reviewer.userId, { recipeId, stars: 4, comment: null });
     const other = await signInAs("viewer");
     await deleteReview(other.client, review.id);
-    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: owner.userId, stars: 4, comment: null }]);
+    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: reviewer.userId, stars: 4, comment: null }]);
   });
 
   it.each<Role>(["editor", "admin"])("a Member with role %s can delete any Review", async (role) => {
-    const owner = await signInAs("viewer");
+    const reviewer = await signInAs("viewer");
     const recipeId = freshRecipe();
-    const review = await saveReview(owner.client, owner.userId, { recipeId, stars: 2, comment: "Rude words" });
+    const review = await saveReview(reviewer.client, reviewer.userId, { recipeId, stars: 2, comment: "Rude words" });
     const curator = await signInAs(role);
     await deleteReview(curator.client, review.id);
     expect(await reviewsAfterwards(recipeId)).toEqual([]);
@@ -115,41 +115,45 @@ describe("Reviews", () => {
     expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: amy.userId, stars: 5, comment: null }]);
   });
 
+  it("a Member's Reviews stay after they're taken off the invite list, but they can't change them any more", async () => {
+    const recipeId = freshRecipe();
+    const amy = await signInAs("viewer");
+    const review = await saveReview(amy.client, amy.userId, { recipeId, stars: 4, comment: "Lovely" });
+    expect((await service.from("members").delete().eq("email", amy.email)).error).toBeNull();
+
+    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: amy.userId, stars: 4, comment: "Lovely" }]);
+    await expect(saveReview(amy.client, amy.userId, { recipeId, stars: 1, comment: null })).rejects.toMatchObject({ code: "42501" });
+    await deleteReview(amy.client, review.id);
+    expect(await reviewsAfterwards(recipeId)).toEqual([{ userId: amy.userId, stars: 4, comment: "Lovely" }]);
+  });
+
   it("a Member sees another Member's Review arrive and go, live", async () => {
     const recipeId = freshRecipe();
     const amy = await signInAs("viewer");
     const ben = await signInAs("editor");
-    let timer: ReturnType<typeof setInterval> | undefined;
+    const events: string[] = [];
     let reviewId: string | undefined;
 
-    const heard = new Promise<string[]>((resolve) => {
-      const events: string[] = [];
-      void onReviews(
-        ben.client,
-        (change) => {
-          if (change.kind === "saved" && change.review.recipeId === recipeId && !reviewId) {
-            clearInterval(timer);
-            events.push(`saved ${change.review.stars}`);
-            reviewId = change.review.id;
-            void deleteReview(amy.client, reviewId);
-          } else if (change.kind === "deleted" && reviewId && change.id === reviewId) {
-            events.push("deleted");
-            resolve(events);
-          }
-        },
-        () => {
-          // Realtime can take a moment to start streaming after it says SUBSCRIBED, so keep saving until it arrives.
-          const save = () => void saveReview(amy.client, amy.userId, { recipeId, stars: 4, comment: null }).catch(() => {});
-          save();
-          timer = setInterval(save, 1000);
-        },
-      );
+    await hearLive<void>({
+      client: ben.client,
+      listen: (on) =>
+        void onReviews(
+          ben.client,
+          (change) => {
+            if (change.kind === "saved" && change.review.recipeId === recipeId && !reviewId) {
+              on.stopChanging();
+              events.push(`saved ${change.review.stars}`);
+              reviewId = change.review.id;
+              void deleteReview(amy.client, reviewId);
+            } else if (change.kind === "deleted" && reviewId && change.id === reviewId) {
+              events.push("deleted");
+              on.heard();
+            }
+          },
+          on.subscribed,
+        ),
+      change: () => saveReview(amy.client, amy.userId, { recipeId, stars: 4, comment: null }),
     });
-    try {
-      expect(await heard).toEqual(["saved 4", "deleted"]);
-    } finally {
-      clearInterval(timer);
-      await ben.client.removeAllChannels();
-    }
+    expect(events).toEqual(["saved 4", "deleted"]);
   });
 });

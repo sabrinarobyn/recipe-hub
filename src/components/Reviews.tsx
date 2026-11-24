@@ -162,12 +162,12 @@ export function Stars({ value, size = "small" }: { value: number; size?: "small"
 const formatStars = (v: number) => (Math.round(v * 10) / 10).toLocaleString("en-ZA", { maximumFractionDigits: 1 });
 
 /** A Recipe's average stars and number of Reviews, for the Recipe Book list. Nothing when it has none. */
-export function RatingBadge({ recipeId }: { recipeId: string }) {
+export function ReviewBadge({ recipeId }: { recipeId: string }) {
   const { enabled, summaries } = useReviews();
   const s = summaries.get(recipeId);
   if (!enabled || !s) return null;
   return (
-    <span className="rating-badge" title={`${formatStars(s.average)} stars from ${s.count} review${s.count === 1 ? "" : "s"}`}>
+    <span className="review-badge" title={`${formatStars(s.average)} stars from ${s.count} review${s.count === 1 ? "" : "s"}`}>
       <Stars value={s.average} />
       <span className="num">{formatStars(s.average)}</span>
       <span className="muted">({s.count})</span>
@@ -327,11 +327,13 @@ function ReviewPhotoAdder({ review, notify }: { review: Review; notify: (m: stri
 
 /**
  * Every Review photo of a Recipe, newest first, each with its reviewer's chip. The reviewer,
- * Editors and Admins can delete a photo; Editors and Admins can make one the Recipe's Main Photo.
+ * Editors and Admins can delete a photo; whoever may set the Recipe's Main Photo (its Author,
+ * Editors and Admins) can make one the Main Photo.
  */
 function ReviewGallery({ recipeId, notify }: { recipeId: string; notify: (m: string) => void }) {
   const { reviews, photos, me, removePhoto } = useReviews();
-  const { actions, canEditBook } = useApp();
+  const { actions, canSetMainPhoto } = useApp();
+  const canPromote = canSetMainPhoto(recipeId);
   const gallery = useMemo(() => reviewGallery(reviews, photos, recipeId), [reviews, photos, recipeId]);
   if (gallery.length === 0) return null;
 
@@ -360,9 +362,9 @@ function ReviewGallery({ recipeId, notify }: { recipeId: string; notify: (m: str
           <li key={photo.id} className="review-gallery-item">
             <img src={photo.dataUrl} alt="From a review" loading="lazy" />
             <MemberChip userId={review.userId} />
-            {(canEditBook || canDeleteReview(me, review)) && (
+            {(canPromote || canDeleteReview(me, review)) && (
               <div className="btn-row review-gallery-actions">
-                {canEditBook && (
+                {canPromote && (
                   <button className="btn btn-small btn-quiet" type="button" onClick={() => promote(photo)}>
                     Make Main Photo
                   </button>
