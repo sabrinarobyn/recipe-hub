@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { anonymous, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
+import { anonymous, hearLive, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
 
 /** A Member's Profile: display name and photo, one row per Member keyed by their user id. */
 const PHOTO = "data:image/jpeg;base64,AAAA";
@@ -68,32 +68,23 @@ describe("Profiles", () => {
   });
 
   it("a Member sees another Member's Profile change live", async () => {
-    const owner = await signInAs("viewer");
-    expect((await save(owner, owner.userId, { display_name: "Thandi" })).error).toBeNull();
+    const author = await signInAs("viewer");
+    expect((await save(author, author.userId, { display_name: "Thandi" })).error).toBeNull();
     const watcher = await signInAs("viewer");
 
-    // Realtime can take a moment to start streaming after it says SUBSCRIBED, so keep saving until it arrives.
-    let timer: ReturnType<typeof setInterval> | undefined;
-    const seen = new Promise<unknown>((resolve) => {
-      watcher.client
-        .channel(`profiles-${owner.userId}`)
-        .on("postgres_changes", { event: "*", schema: "public", table: "profiles" }, (payload) => {
-          const row = payload.new as { user_id?: string; display_name?: string };
-          // The earlier save ("Thandi") can still arrive first; wait for the change made here.
-          if (row.user_id === owner.userId && row.display_name === "Thandi M") resolve(row.display_name);
-        })
-        .subscribe((status) => {
-          if (status !== "SUBSCRIBED") return;
-          const change = () => void save(owner, owner.userId, { display_name: "Thandi M" });
-          change();
-          timer = setInterval(change, 1000);
-        });
+    const seen = await hearLive<string>({
+      client: watcher.client,
+      listen: (on) =>
+        watcher.client
+          .channel(`profiles-${author.userId}`)
+          .on("postgres_changes", { event: "*", schema: "public", table: "profiles" }, (payload) => {
+            const row = payload.new as { user_id?: string; display_name?: string };
+            // The earlier save ("Thandi") can still arrive first; wait for the change made here.
+            if (row.user_id === author.userId && row.display_name === "Thandi M") on.heard(row.display_name);
+          })
+          .subscribe((status) => (status === "SUBSCRIBED" ? on.subscribed() : status !== "CLOSED" && on.failed(status))),
+      change: () => save(author, author.userId, { display_name: "Thandi M" }),
     });
-    try {
-      expect(await seen).toBe("Thandi M");
-    } finally {
-      clearInterval(timer);
-      await watcher.client.removeAllChannels();
-    }
+    expect(seen).toBe("Thandi M");
   });
 });

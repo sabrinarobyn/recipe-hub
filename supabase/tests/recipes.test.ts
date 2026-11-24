@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { service, signInAs, type Role } from "./members";
+import { hearLive, service, signInAs, type Role } from "./members";
 import { editsFromRecords, recordChanges, type RecipeEdits } from "../../src/lib/recipeRecords";
 import { loadRecipeRecords, writeRecipeRecords } from "../../src/lib/supabase";
 
@@ -98,33 +98,27 @@ describe("Recipe records", () => {
 
   it("changes reach other Members live", async () => {
     const [viewer, editor] = await Promise.all([signInAs("viewer"), signInAs("editor")]);
+    // Marks this test's saves, so a late event from beforeEach's rows can't be taken for one of them.
+    const mark = `Live-${Math.random().toString(36).slice(2)}`;
     let saves = 0;
-    let done = false;
-    const received = new Promise<{ id: string; body: unknown }>((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error("no live update")), 20_000);
-      const channel = viewer.client
-        .channel("recipes-test")
-        .on("postgres_changes", { event: "*", schema: "public", table: "recipes" }, (payload) => {
-          clearTimeout(timer);
-          done = true;
-          void viewer.client.removeChannel(channel);
-          resolve(payload.new as { id: string; body: unknown });
-        })
-        .subscribe(async (status) => {
-          if (status !== "SUBSCRIBED") return;
-          // A fresh local stack takes a moment to start sending changes after subscribing,
-          // so the Editor keeps saving until the Viewer hears about it.
-          while (!done) {
-            const { error } = await editor.client
-              .from("recipes")
-              .upsert({ id: "u-9", body: { id: "u-9", name: `Live ${++saves}` }, deleted: false });
-            if (error) return reject(error);
-            await new Promise((r) => setTimeout(r, 500));
-          }
-        });
+    const row = await hearLive<{ id: string; body: unknown }>({
+      client: viewer.client,
+      listen: (on) =>
+        viewer.client
+          .channel("recipes-test")
+          .on("postgres_changes", { event: "*", schema: "public", table: "recipes" }, (payload) => {
+            const saved = payload.new as { id?: string; body?: { name?: string } | null };
+            if (saved.id === "u-9" && saved.body?.name?.startsWith(mark)) on.heard(saved as { id: string; body: unknown });
+          })
+          .subscribe((status) => (status === "SUBSCRIBED" ? on.subscribed() : status !== "CLOSED" && on.failed(status))),
+      change: async () => {
+        const { error } = await editor.client
+          .from("recipes")
+          .upsert({ id: "u-9", body: { id: "u-9", name: `${mark} ${++saves}` }, deleted: false });
+        if (error) throw error;
+      },
     });
-    const row = await received;
     expect(row.id).toBe("u-9");
-    expect(row.body).toEqual({ id: "u-9", name: expect.stringMatching(/^Live \d+$/) });
+    expect(row.body).toEqual({ id: "u-9", name: expect.stringMatching(new RegExp(`^${mark} \\d+$`)) });
   });
 });

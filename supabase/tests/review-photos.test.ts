@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { anonymous, service, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
+import { anonymous, hearLive, service, signInAs, signInNotInvited, type Role, type SignedIn } from "./members";
 import { addReviewPhoto, deleteReview, deleteReviewPhoto, loadReviewPhotos, onReviewPhotos, saveReview } from "../../src/lib/supabase";
 
 /**
@@ -119,36 +119,29 @@ describe("Review photos", () => {
     const amy = await signInAs("viewer");
     const ben = await signInAs("editor");
     const review = await reviewOf(amy);
-    let timer: ReturnType<typeof setInterval> | undefined;
+    const events: string[] = [];
     let photoId: string | undefined;
-    const heard = new Promise<string[]>((resolve) => {
-      const events: string[] = [];
-      onReviewPhotos(
-        ben.client,
-        (change) => {
-          if (change.kind === "added" && change.photo.reviewId === review.id && !photoId) {
-            clearInterval(timer);
-            events.push("added");
-            photoId = change.photo.id;
-            void deleteReviewPhoto(amy.client, photoId);
-          } else if (change.kind === "deleted" && photoId && change.id === photoId) {
-            events.push("deleted");
-            resolve(events);
-          }
-        },
-        () => {
-          // Realtime can take a moment to start streaming after it says SUBSCRIBED, so keep adding until one arrives.
-          const add = () => void addReviewPhoto(amy.client, review.id, jpeg("live")).catch(() => {});
-          add();
-          timer = setInterval(add, 1000);
-        },
-      );
+
+    await hearLive<void>({
+      client: ben.client,
+      listen: (on) =>
+        void onReviewPhotos(
+          ben.client,
+          (change) => {
+            if (change.kind === "added" && change.photo.reviewId === review.id && !photoId) {
+              on.stopChanging();
+              events.push("added");
+              photoId = change.photo.id;
+              void deleteReviewPhoto(amy.client, photoId);
+            } else if (change.kind === "deleted" && photoId && change.id === photoId) {
+              events.push("deleted");
+              on.heard();
+            }
+          },
+          on.subscribed,
+        ),
+      change: () => addReviewPhoto(amy.client, review.id, jpeg("live")),
     });
-    try {
-      expect(await heard).toEqual(["added", "deleted"]);
-    } finally {
-      clearInterval(timer);
-      await ben.client.removeAllChannels();
-    }
+    expect(events).toEqual(["added", "deleted"]);
   });
 });
