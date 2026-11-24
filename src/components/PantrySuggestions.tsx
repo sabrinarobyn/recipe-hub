@@ -22,7 +22,7 @@ export function PantrySuggestions({ open, week }: { open: Open; week: string }) 
   return (
     <section className="pantry-suggestions" aria-labelledby="pantry-suggestions-title">
       <h2 id="pantry-suggestions-title">Cook from your Pantry</h2>
-      <p className="hint">Recipes that use what you already have, best match first.</p>
+      <p className="hint">Recipes that use what's in your Pantry, best match first.</p>
       <ul className="pick-list suggestion-list">
         {suggestions.map((s) => {
           const r = catalog.recipes.get(s.recipeId)!;

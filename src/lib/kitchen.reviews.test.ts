@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { byRating, canDeleteReview, canEditReview, recipeReviews, reviewSummaries, type Review } from "./kitchen";
+import { byReviews, canDeleteReview, canEditReview, recipeReviews, reviewSummaries, type Review } from "./kitchen";
 
 const AMY = "user-amy";
 const BEN = "user-ben";
@@ -69,7 +69,7 @@ describe("review permissions", () => {
   });
 });
 
-describe("sorting by rating", () => {
+describe("sorting by Reviews", () => {
   it("puts the best average first, more Reviews first on a tie, and unreviewed Recipes last, otherwise keeping the order", () => {
     const summaries = reviewSummaries([
       review("toast", AMY, 3),
@@ -85,7 +85,7 @@ describe("sorting by rating", () => {
       review("toast-2", AMY, 3),
     ]);
     // pancakes 4.67 (3), soup 4.5 (4), shakshuka 4.5 (2), toast and toast-2 3 (1) in their given order, then the unreviewed.
-    const ids = ["unrated-b", "toast-2", "shakshuka", "toast", "soup", "unrated-a", "pancakes"];
-    expect([...ids].sort(byRating(summaries))).toEqual(["pancakes", "soup", "shakshuka", "toast-2", "toast", "unrated-b", "unrated-a"]);
+    const ids = ["unreviewed-b", "toast-2", "shakshuka", "toast", "soup", "unreviewed-a", "pancakes"];
+    expect([...ids].sort(byReviews(summaries))).toEqual(["pancakes", "soup", "shakshuka", "toast-2", "toast", "unreviewed-b", "unreviewed-a"]);
   });
 });

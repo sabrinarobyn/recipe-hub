@@ -34,17 +34,17 @@ describe("Review photos", () => {
   });
 
   it.each<Role>(["viewer", "editor", "admin"])("a Member with role %s can't add photos to someone else's Review", async (role) => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
     const other = await signInAs(role);
     await expect(addReviewPhoto(other.client, review.id, jpeg("not mine"))).rejects.toMatchObject({ code: "42501" });
     expect(await photosAfterwards(review.id)).toEqual([]);
   });
 
   it("someone not on the invite list can't add or read Review photos", async () => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    await addReviewPhoto(owner.client, review.id, jpeg("plated"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    await addReviewPhoto(reviewer.client, review.id, jpeg("plated"));
     const outsider = await signInNotInvited();
     expect((await loadReviewPhotos(outsider.client)).filter((p) => p.reviewId === review.id)).toEqual([]);
     expect((await anonymous().from("review_photos").select("id")).data ?? []).toEqual([]);
@@ -71,17 +71,17 @@ describe("Review photos", () => {
   });
 
   it("a Viewer can't delete someone else's Review photo", async () => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    const photo = await addReviewPhoto(owner.client, review.id, jpeg("plated"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    const photo = await addReviewPhoto(reviewer.client, review.id, jpeg("plated"));
     await deleteReviewPhoto((await signInAs("viewer")).client, photo.id);
     expect(await photosAfterwards(review.id)).toEqual([jpeg("plated")]);
   });
 
   it.each<Role>(["editor", "admin"])("a Member with role %s can delete any Review photo", async (role) => {
-    const owner = await signInAs("viewer");
-    const review = await reviewOf(owner);
-    const photo = await addReviewPhoto(owner.client, review.id, jpeg("off-topic"));
+    const reviewer = await signInAs("viewer");
+    const review = await reviewOf(reviewer);
+    const photo = await addReviewPhoto(reviewer.client, review.id, jpeg("off-topic"));
     await deleteReviewPhoto((await signInAs(role)).client, photo.id);
     expect(await photosAfterwards(review.id)).toEqual([]);
   });

@@ -11,7 +11,7 @@
  * history.
  */
 import type { PlanEntry } from "../types";
-import { expandRecipe, usedCost, type Catalog, type Kitchen, type ShoppingList } from "./costing";
+import { expandRecipe, usedCost, type Catalog, type PantryNetting, type ShoppingList } from "./costing";
 import { uid } from "./format";
 
 interface EventBase {
@@ -114,7 +114,7 @@ export function pantryForList(history: readonly PantryEvent[], week: string): Pa
  * Shopping List: the Pantry before that week's own Got, less the items the
  * Member chose to Buy anyway.
  */
-export function weekNetting(history: readonly PantryEvent[], week: string, list?: { buyAnyway?: string[] }): Kitchen & { pantry: Pantry } {
+export function weekNetting(history: readonly PantryEvent[], week: string, list?: { buyAnyway?: string[] }): PantryNetting & { pantry: Pantry } {
   return { pantry: pantryForList(history, week), buyAnyway: list?.buyAnyway ?? [] };
 }
 
@@ -296,10 +296,10 @@ export function canDeleteReview(member: ReviewActor, review: Pick<Review, "userI
 }
 
 /**
- * Compares Recipe ids for sorting by rating: best average first, then more Reviews, then
+ * Compares Recipe ids for sorting by Reviews: best average first, then more Reviews, then
  * Recipes with no Reviews. Otherwise equal Recipes keep their order.
  */
-export function byRating(summaries: ReadonlyMap<string, ReviewSummary>): (a: string, b: string) => number {
+export function byReviews(summaries: ReadonlyMap<string, ReviewSummary>): (a: string, b: string) => number {
   return (a, b) => {
     const x = summaries.get(a);
     const y = summaries.get(b);

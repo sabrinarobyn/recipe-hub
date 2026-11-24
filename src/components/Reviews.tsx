@@ -162,12 +162,12 @@ export function Stars({ value, size = "small" }: { value: number; size?: "small"
 const formatStars = (v: number) => (Math.round(v * 10) / 10).toLocaleString("en-ZA", { maximumFractionDigits: 1 });
 
 /** A Recipe's average stars and number of Reviews, for the Recipe Book list. Nothing when it has none. */
-export function RatingBadge({ recipeId }: { recipeId: string }) {
+export function ReviewBadge({ recipeId }: { recipeId: string }) {
   const { enabled, summaries } = useReviews();
   const s = summaries.get(recipeId);
   if (!enabled || !s) return null;
   return (
-    <span className="rating-badge" title={`${formatStars(s.average)} stars from ${s.count} review${s.count === 1 ? "" : "s"}`}>
+    <span className="review-badge" title={`${formatStars(s.average)} stars from ${s.count} review${s.count === 1 ? "" : "s"}`}>
       <Stars value={s.average} />
       <span className="num">{formatStars(s.average)}</span>
       <span className="muted">({s.count})</span>
