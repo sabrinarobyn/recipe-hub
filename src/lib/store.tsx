@@ -3,7 +3,7 @@ import seedJson from "../data/seed.json";
 import type { PlanEntry, Product, Recipe, Seed, StoreId, UserData, WeekList } from "../types";
 import { summarizeRecipe, type Catalog } from "./costing";
 import { recipeNutrition } from "./nutrition";
-import { buildPantry, canEditRecipe as memberCanEditRecipe, canSetMainPhoto as memberCanSetMainPhoto, removePlannedMeals, type PantryEvent } from "./kitchen";
+import { buildPantry, canEditRecipe as memberCanEditRecipe, canSetMainPhoto as memberCanSetMainPhoto, removePlannedMeals, removeRecipeFromPlan, type PantryEvent } from "./kitchen";
 import { connectRemote, emptyUserData, loadLocal, pickBook, pickPersonal, saveLocal, type Book, type RemoteStore } from "./storage";
 import { connectSupabase, type Account } from "./supabase";
 import { loadLocalPhotos, replaceLocalPhotos, saveLocalPhoto, type Photos } from "./photos";
@@ -318,11 +318,7 @@ function useAppDataInternal(account: Account | null) {
       deleteRecipe: (id: string) => {
         if (!canEditRecipe(id)) return blocked();
         if (photosRef.current[id]) setPhoto(id, null).catch(() => {});
-        update((d) => ({
-          ...d,
-          recipeEdits: { ...d.recipeEdits, [id]: null },
-          plan: d.plan.filter((e) => e.recipeId !== id),
-        }), "both", true);
+        update((d) => removeRecipeFromPlan({ ...d, recipeEdits: { ...d.recipeEdits, [id]: null } }, id), "both", true);
       },
       resetRecipe: (id: string) =>
         update((d) => {

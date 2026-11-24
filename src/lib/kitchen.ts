@@ -191,6 +191,11 @@ export function removePlannedMeals<S extends { plan: readonly PlanEntry[]; pantr
   };
 }
 
+/** Take every Planned Meal of a deleted Recipe out of a Plan, giving back what the Cooked ones took. */
+export function removeRecipeFromPlan<S extends { plan: readonly PlanEntry[]; pantry: readonly PantryEvent[] }>(state: S, recipeId: string): S {
+  return removePlannedMeals(state, state.plan.filter((e) => e.recipeId === recipeId).map((e) => e.id));
+}
+
 /** Whether a Planned Meal is Cooked. */
 export function isCooked(history: readonly PantryEvent[], mealId: string): boolean {
   return history.some((e) => e.kind === "cooked" && e.meal === mealId);

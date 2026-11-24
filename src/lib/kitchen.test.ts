@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import seedJson from "../data/seed.json";
 import type { Seed } from "../types";
 import { buildShoppingList, type Catalog } from "./costing";
-import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, removePlannedMeals, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
+import { addToPantry, buildPantry, canEditRecipe, canSetMainPhoto, clearPantryItem, cookMeal, correctPantry, isCooked, removePlannedMeals, removeRecipeFromPlan, suggestRecipes, tickGot, uncookMeal, untickGot, untickWeek, type PantryEvent } from "./kitchen";
 import type { PlanEntry } from "../types";
 
 const seed = seedJson as Seed;
@@ -191,6 +191,21 @@ describe("Cooked", () => {
     const none = removePlannedMeals(after, ["monday"]);
     expect(none.plan).toEqual([]);
     expect(buildPantry(none.pantry)).toEqual(before);
+  });
+  it("deleting a Recipe takes its Planned Meals out and gives back what the Cooked ones took", () => {
+    let pantry = addToPantry([], "lean_mince", 2000, "2026-11-20");
+    const base = meal("5-veg-mince-freezer-base", 1, "base");
+    const gems = meal("mince-in-gems", 1, "gems");
+    const later = meal("5-veg-mince-freezer-base", 1, "later");
+    pantry = cookMeal(pantry, base, catalog(), "2026-11-24");
+    pantry = cookMeal(pantry, gems, catalog(), "2026-11-25");
+    expect(buildPantry(pantry).get("lean_mince")?.amount).toBe(1000);
+    const after = removeRecipeFromPlan({ plan: [base, gems, later], pantry }, "5-veg-mince-freezer-base");
+    expect(after.plan).toEqual([gems]);
+    expect(isCooked(after.pantry, "base")).toBe(false);
+    expect(isCooked(after.pantry, "gems")).toBe(true);
+    // Only the base's 500 g comes back; Mince in Gems is still Cooked.
+    expect(buildPantry(after.pantry).get("lean_mince")?.amount).toBe(1500);
   });
 });
 
