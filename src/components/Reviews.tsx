@@ -327,11 +327,13 @@ function ReviewPhotoAdder({ review, notify }: { review: Review; notify: (m: stri
 
 /**
  * Every Review photo of a Recipe, newest first, each with its reviewer's chip. The reviewer,
- * Editors and Admins can delete a photo; Editors and Admins can make one the Recipe's Main Photo.
+ * Editors and Admins can delete a photo; whoever may set the Recipe's Main Photo (its Author,
+ * Editors and Admins) can make one the Main Photo.
  */
 function ReviewGallery({ recipeId, notify }: { recipeId: string; notify: (m: string) => void }) {
   const { reviews, photos, me, removePhoto } = useReviews();
-  const { actions, canEditBook } = useApp();
+  const { actions, canSetMainPhoto } = useApp();
+  const canPromote = canSetMainPhoto(recipeId);
   const gallery = useMemo(() => reviewGallery(reviews, photos, recipeId), [reviews, photos, recipeId]);
   if (gallery.length === 0) return null;
 
@@ -360,9 +362,9 @@ function ReviewGallery({ recipeId, notify }: { recipeId: string; notify: (m: str
           <li key={photo.id} className="review-gallery-item">
             <img src={photo.dataUrl} alt="From a review" loading="lazy" />
             <MemberChip userId={review.userId} />
-            {(canEditBook || canDeleteReview(me, review)) && (
+            {(canPromote || canDeleteReview(me, review)) && (
               <div className="btn-row review-gallery-actions">
-                {canEditBook && (
+                {canPromote && (
                   <button className="btn btn-small btn-quiet" type="button" onClick={() => promote(photo)}>
                     Make Main Photo
                   </button>
